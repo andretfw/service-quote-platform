@@ -50,7 +50,11 @@ export default function LoginPage() {
             />
             {error && <p className="error-message">{error}</p>}
             <div className="action-row">
-              <button className="btn" disabled={pending || !email.trim()} onClick={() => void login()}>
+              <button
+                className="btn"
+                disabled={pending || !email.trim()}
+                onClick={() => void login()}
+              >
                 {pending ? "Sending…" : "Email me a sign-in link"}
               </button>
             </div>

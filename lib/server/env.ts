@@ -19,9 +19,7 @@ export const publicSupabaseConfigured = (): boolean =>
 export const getSupabasePublicEnv = () => {
   const publicKey = publicSupabaseKey();
   if (!publicKey) {
-    throw new Error(
-      "Missing required environment variable: NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY",
-    );
+    throw new Error("Missing required environment variable: NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY");
   }
 
   return {

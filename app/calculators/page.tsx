@@ -15,8 +15,8 @@ export default function CalculatorsPage() {
 
       <h1>Industry templates</h1>
       <p className="muted">
-        Every template uses the same deterministic pricing engine, so new verticals are configuration
-        rather than separate codebases.
+        Every template uses the same deterministic pricing engine, so new verticals are
+        configuration rather than separate codebases.
       </p>
 
       <div className="grid">

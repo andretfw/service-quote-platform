@@ -101,20 +101,20 @@ Open `http://localhost:3000/q/painting` for a no-database demo flow.
 
 ### Environment variables
 
-| Variable | Purpose |
-| --- | --- |
-| `NEXT_PUBLIC_APP_URL` | Canonical application origin |
-| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
-| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Browser-safe Supabase publishable key |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Legacy fallback for older Supabase projects |
-| `SUPABASE_SERVICE_ROLE_KEY` | Server-only administrative database key |
-| `RESEND_API_KEY` | Follow-up email provider key |
-| `RESEND_FROM` | Verified sender identity |
-| `STRIPE_SECRET_KEY` | Server-side Stripe API key |
-| `STRIPE_WEBHOOK_SECRET` | Stripe webhook signing secret |
-| `CRON_SECRET` | Bearer secret for the follow-up worker |
-| `RATE_LIMIT_SECRET` | Salt used when hashing client addresses for API rate-limit keys |
-| `DEPOSIT_PERCENT` | Server-side deposit percentage; defaults to `20` |
+| Variable                               | Purpose                                                         |
+| -------------------------------------- | --------------------------------------------------------------- |
+| `NEXT_PUBLIC_APP_URL`                  | Canonical application origin                                    |
+| `NEXT_PUBLIC_SUPABASE_URL`             | Supabase project URL                                            |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Browser-safe Supabase publishable key                           |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY`        | Legacy fallback for older Supabase projects                     |
+| `SUPABASE_SERVICE_ROLE_KEY`            | Server-only administrative database key                         |
+| `RESEND_API_KEY`                       | Follow-up email provider key                                    |
+| `RESEND_FROM`                          | Verified sender identity                                        |
+| `STRIPE_SECRET_KEY`                    | Server-side Stripe API key                                      |
+| `STRIPE_WEBHOOK_SECRET`                | Stripe webhook signing secret                                   |
+| `CRON_SECRET`                          | Bearer secret for the follow-up worker                          |
+| `RATE_LIMIT_SECRET`                    | Salt used when hashing client addresses for API rate-limit keys |
+| `DEPOSIT_PERCENT`                      | Server-side deposit percentage; defaults to `20`                |
 
 Never expose the service-role key, Stripe secret, webhook secret, cron secret or rate-limit secret with a `NEXT_PUBLIC_` prefix.
 
