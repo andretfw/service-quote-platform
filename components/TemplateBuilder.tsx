@@ -24,7 +24,6 @@ export default function TemplateBuilder({
   const [saveError, setSaveError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
-
   const template = useMemo<QuoteTemplate>(
     () => ({
       ...initial,
