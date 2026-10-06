@@ -21,10 +21,17 @@ jobs:
           node-version: 24.21.0
           package-manager-cache: false
 
-      # The first successful dependency resolution produces the lockfile. Once
-      # that lockfile is committed, this step is replaced with npm ci.
+      # One transparent bootstrap run exposes the generated lockfile in the job
+      # log so the repository connector can commit the plain JSON file.
       - name: Install dependencies
         run: npm install --no-audit --no-fund
+
+      - name: Expose generated lockfile for repository handoff
+        if: hashFiles('package-lock.json') != ''
+        run: |
+          echo '__PACKAGE_LOCK_BEGIN__'
+          cat package-lock.json
+          echo '__PACKAGE_LOCK_END__'
 
       - name: Check formatting
         id: format
