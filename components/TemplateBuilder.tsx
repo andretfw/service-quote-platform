@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import QuoteWidget from "./QuoteWidget";
 import type { PublicQuoteConfig, QuoteTemplate } from "@/lib/types";
 
@@ -9,17 +9,21 @@ type SavedCalculator = {
   publicId: string;
 };
 
-export default function TemplateBuilder({ initial }: { initial: QuoteTemplate }) {
+export default function TemplateBuilder({
+  initial,
+  appOrigin,
+}: {
+  initial: QuoteTemplate;
+  appOrigin: string;
+}) {
   const [basePrice, setBasePrice] = useState(
     () => initial.rules.find((rule) => rule.kind === "base")?.amount ?? 0,
   );
   const [rangePercent, setRangePercent] = useState(initial.rangePct ?? 0.08);
-  const [origin, setOrigin] = useState("https://your-domain.example");
   const [saved, setSaved] = useState<SavedCalculator | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
-  useEffect(() => setOrigin(window.location.origin), []);
 
   const template = useMemo<QuoteTemplate>(
     () => ({
@@ -46,7 +50,7 @@ export default function TemplateBuilder({ initial }: { initial: QuoteTemplate })
   );
 
   const publicId = saved?.publicId ?? initial.slug;
-  const embed = `<script async src="${origin}/embed.js" data-service-quote="${publicId}"></script>`;
+  const embed = `<script async src="${appOrigin}/embed.js" data-service-quote="${publicId}"></script>`;
 
   const save = async () => {
     setSaving(true);

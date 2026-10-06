@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import TemplateBuilder from "@/components/TemplateBuilder";
-import { publicSupabaseConfigured } from "@/lib/server/env";
+import { getAppUrl, publicSupabaseConfigured } from "@/lib/server/env";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getTemplate } from "@/lib/templates";
 
@@ -21,6 +21,8 @@ export default async function BuilderPage({ params }: { params: Promise<{ id: st
   } = await supabase.auth.getUser();
   if (userError || !user) redirect("/login");
 
+  const appOrigin = getAppUrl("http://localhost:3000");
+
   return (
     <main className="shell">
       <div className="nav">
@@ -31,7 +33,7 @@ export default async function BuilderPage({ params }: { params: Promise<{ id: st
       </div>
       <h1>Customize {template.name}</h1>
       <p className="muted">Edit pricing and preview the customer experience side by side.</p>
-      <TemplateBuilder initial={template} />
+      <TemplateBuilder initial={template} appOrigin={appOrigin} />
     </main>
   );
 }
