@@ -61,16 +61,15 @@ const compare = (answer: unknown, condition: Condition): boolean => {
   }
 };
 
-export const conditionsMatch = (
-  conditions: Condition[] | undefined,
-  answers: Answers,
-): boolean =>
-  !conditions?.length || conditions.every((condition) => compare(answers[condition.field], condition));
+export const conditionsMatch = (conditions: Condition[] | undefined, answers: Answers): boolean =>
+  !conditions?.length ||
+  conditions.every((condition) => compare(answers[condition.field], condition));
 
 export const visibleQuestions = (
   template: Pick<QuoteTemplate, "questions">,
   answers: Answers,
-): Question[] => template.questions.filter((question) => conditionsMatch(question.showWhen, answers));
+): Question[] =>
+  template.questions.filter((question) => conditionsMatch(question.showWhen, answers));
 
 export const validateAnswers = (template: QuoteTemplate, answers: Answers): string[] => {
   const errors: string[] = [];
@@ -173,7 +172,8 @@ export const calculateQuote = (template: QuoteTemplate, answers: Answers): Quote
         break;
       }
       case "conditional":
-        if (conditionsMatch(rule.when, effectiveAnswers)) add("Conditional adjustment", rule.amount);
+        if (conditionsMatch(rule.when, effectiveAnswers))
+          add("Conditional adjustment", rule.amount);
         break;
       case "multiplier":
         multipliers.push(rule.map[String(effectiveAnswers[rule.field] ?? "")] ?? 1);

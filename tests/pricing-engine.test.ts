@@ -11,7 +11,8 @@ import { getTemplate, templates } from "../lib/templates";
 const sampleValue = (question: (typeof templates)[number]["questions"][number]) => {
   if (question.type === "number") return Math.max(question.min ?? 1, 10);
   if (question.type === "choice") return question.options?.[0]?.value ?? "x";
-  if (question.type === "multiselect") return question.options?.slice(0, 1).map((o) => o.value) ?? [];
+  if (question.type === "multiselect")
+    return question.options?.slice(0, 1).map((o) => o.value) ?? [];
   if (question.type === "postcode") return "10001";
   return "test";
 };
@@ -54,7 +55,9 @@ test("invalid numeric input is rejected instead of silently becoming zero", () =
   const answers = Object.fromEntries(painting.questions.map((q) => [q.id, sampleValue(q)]));
   answers.area = "not-a-number";
 
-  assert.ok(validateAnswers(painting, answers).some((message) => message.includes("invalid number")));
+  assert.ok(
+    validateAnswers(painting, answers).some((message) => message.includes("invalid number")),
+  );
   assert.throws(() => calculateQuote(painting, answers));
 });
 
@@ -65,7 +68,9 @@ test("unknown choice values are rejected", () => {
   const answers = Object.fromEntries(painting.questions.map((q) => [q.id, sampleValue(q)]));
   answers.scope = "made-up-choice";
 
-  assert.ok(validateAnswers(painting, answers).some((message) => message.includes("invalid option")));
+  assert.ok(
+    validateAnswers(painting, answers).some((message) => message.includes("invalid option")),
+  );
 });
 
 test("text questions reject non-text values and blank required text", () => {

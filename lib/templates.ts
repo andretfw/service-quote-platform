@@ -396,7 +396,11 @@ export const templates: QuoteTemplate[] = [
     rules: [
       { kind: "base", amount: 220 },
       { kind: "number", field: "area", perUnit: 3.4 },
-      { kind: "multiplier", field: "material", map: { laminate: 1, vinyl: 1.05, hardwood: 1.6, tile: 1.45 } },
+      {
+        kind: "multiplier",
+        field: "material",
+        map: { laminate: 1, vinyl: 1.05, hardwood: 1.6, tile: 1.45 },
+      },
       { kind: "choice", field: "remove", map: { no: 0, yes: 350 } },
     ],
   },
@@ -477,7 +481,11 @@ export const templates: QuoteTemplate[] = [
     rules: [
       { kind: "base", amount: 70 },
       { kind: "number", field: "home_size", perUnit: 0.03 },
-      { kind: "choice", field: "pest", map: { ants: 20, rodents: 110, bedbugs: 280, termites: 400 } },
+      {
+        kind: "choice",
+        field: "pest",
+        map: { ants: 20, rodents: 110, bedbugs: 280, termites: 400 },
+      },
       { kind: "multiplier", field: "severity", map: { low: 1, medium: 1.25, high: 1.6 } },
     ],
   },

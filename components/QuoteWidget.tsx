@@ -35,7 +35,9 @@ function questionInput(
         max={question.max}
         step={question.step ?? 1}
         value={typeof value === "number" ? value : ""}
-        onChange={(event) => onChange(event.target.value === "" ? null : Number(event.target.value))}
+        onChange={(event) =>
+          onChange(event.target.value === "" ? null : Number(event.target.value))
+        }
       />
     );
   }
@@ -111,7 +113,11 @@ const formatMoney = (amount: number, currency: string) =>
     maximumFractionDigits: 0,
   }).format(amount);
 
-export default function QuoteWidget({ config, compact = false, previewTemplate }: QuoteWidgetProps) {
+export default function QuoteWidget({
+  config,
+  compact = false,
+  previewTemplate,
+}: QuoteWidgetProps) {
   const [answers, setAnswers] = useState<Answers>({});
   const [index, setIndex] = useState(0);
   const [result, setResult] = useState<PublicQuoteResult | null>(null);
@@ -171,7 +177,9 @@ export default function QuoteWidget({ config, compact = false, previewTemplate }
       if (!response.ok) throw new Error(data.error || "Could not save your request");
       setReceipt(data);
     } catch (requestError) {
-      setError(requestError instanceof Error ? requestError.message : "Could not save your request");
+      setError(
+        requestError instanceof Error ? requestError.message : "Could not save your request",
+      );
     } finally {
       setPending(false);
     }
@@ -186,8 +194,8 @@ export default function QuoteWidget({ config, compact = false, previewTemplate }
           {formatMoney(result.low, result.currency)}–{formatMoney(result.high, result.currency)}
         </div>
         <p className="muted">
-          This is a preliminary estimate. Final pricing can change after the business confirms scope,
-          measurements and site conditions.
+          This is a preliminary estimate. Final pricing can change after the business confirms
+          scope, measurements and site conditions.
         </p>
 
         {error && <p className="error-message">{error}</p>}
@@ -229,7 +237,9 @@ export default function QuoteWidget({ config, compact = false, previewTemplate }
               />
               <button
                 className="btn"
-                disabled={pending || !lead.name.trim() || (!lead.email.trim() && !lead.phone.trim())}
+                disabled={
+                  pending || !lead.name.trim() || (!lead.email.trim() && !lead.phone.trim())
+                }
                 onClick={() => void submit()}
               >
                 {pending ? "Sending…" : "Request exact quote"}

@@ -59,7 +59,10 @@ const conditionSchema = z
     }
 
     if (["gt", "gte", "lt", "lte"].includes(condition.op) && typeof condition.value !== "number") {
-      ctx.addIssue({ code: "custom", message: `${condition.op} conditions require a numeric value` });
+      ctx.addIssue({
+        code: "custom",
+        message: `${condition.op} conditions require a numeric value`,
+      });
     }
 
     if (condition.op === "includes" && typeof condition.value !== "string") {
