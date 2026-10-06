@@ -1,10 +1,4 @@
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json | undefined }
-  | Json[];
+export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 type Table<Row, Insert, Update> = {
   Row: Row;
@@ -132,9 +126,27 @@ export type Database = {
         }
       >;
       bookings: Table<
-        { id: string; submission_id: string; starts_at: string; status: string; created_at: string },
-        { id?: string; submission_id: string; starts_at: string; status?: string; created_at?: string },
-        { id?: string; submission_id?: string; starts_at?: string; status?: string; created_at?: string }
+        {
+          id: string;
+          submission_id: string;
+          starts_at: string;
+          status: string;
+          created_at: string;
+        },
+        {
+          id?: string;
+          submission_id: string;
+          starts_at: string;
+          status?: string;
+          created_at?: string;
+        },
+        {
+          id?: string;
+          submission_id?: string;
+          starts_at?: string;
+          status?: string;
+          created_at?: string;
+        }
       >;
       payments: Table<
         {

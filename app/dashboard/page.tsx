@@ -71,7 +71,10 @@ export default async function DashboardPage() {
   for (const submission of submissions) {
     const quote = quoteSummary(submission.quote);
     if (!quote) continue;
-    totalsByCurrency.set(quote.currency, (totalsByCurrency.get(quote.currency) ?? 0) + quote.subtotal);
+    totalsByCurrency.set(
+      quote.currency,
+      (totalsByCurrency.get(quote.currency) ?? 0) + quote.subtotal,
+    );
   }
 
   const conversion = total ? (booked / total) * 100 : 0;
