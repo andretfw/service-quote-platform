@@ -92,7 +92,7 @@ Requirements:
 
 ```bash
 cp .env.example .env.local
-npm install
+npm ci
 npm run check
 npm run dev
 ```
