@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24.21.0
+          package-manager-cache: false
+
+      # The initial public commit intentionally has no generated lockfile.
+      # After the first CI run we commit the generated package-lock and switch
+      # this step to `npm ci` for fully reproducible installs.
+      - run: npm install --no-audit --no-fund
+      - run: npm run ci
+
+      - name: Preserve generated lockfile
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: package-lock
+          path: package-lock.json
+          if-no-files-found: error
+          retention-days: 1
