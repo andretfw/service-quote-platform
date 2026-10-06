@@ -19,19 +19,11 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 24.21.0
-          package-manager-cache: false
+          cache: npm
+          cache-dependency-path: package-lock.json
 
-      # One transparent bootstrap run exposes the generated lockfile in the job
-      # log so the repository connector can commit the plain JSON file.
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
-
-      - name: Expose generated lockfile for repository handoff
-        if: hashFiles('package-lock.json') != ''
-        run: |
-          echo '__PACKAGE_LOCK_BEGIN__'
-          cat package-lock.json
-          echo '__PACKAGE_LOCK_END__'
+        run: npm ci --no-audit --no-fund
 
       - name: Check formatting
         id: format
@@ -68,19 +60,15 @@ jobs:
         continue-on-error: true
         run: npm test
 
+      - name: Audit production dependencies
+        id: audit
+        continue-on-error: true
+        run: npm audit --omit=dev --audit-level=high
+
       - name: Build
         id: build
         continue-on-error: true
         run: npm run build
-
-      - name: Preserve generated lockfile
-        if: always()
-        uses: actions/upload-artifact@v6
-        with:
-          name: package-lock
-          path: package-lock.json
-          if-no-files-found: error
-          retention-days: 1
 
       - name: Enforce quality gate
         if: always()
@@ -89,12 +77,14 @@ jobs:
           LINT: ${{ steps.lint.outcome }}
           TYPECHECK: ${{ steps.typecheck.outcome }}
           TEST: ${{ steps.test.outcome }}
+          AUDIT: ${{ steps.audit.outcome }}
           BUILD: ${{ steps.build.outcome }}
         run: |
-          printf 'format=%s\nlint=%s\ntypecheck=%s\ntest=%s\nbuild=%s\n' \
-            "$FORMAT" "$LINT" "$TYPECHECK" "$TEST" "$BUILD"
+          printf 'format=%s\nlint=%s\ntypecheck=%s\ntest=%s\naudit=%s\nbuild=%s\n' \
+            "$FORMAT" "$LINT" "$TYPECHECK" "$TEST" "$AUDIT" "$BUILD"
           test "$FORMAT" = success
           test "$LINT" = success
           test "$TYPECHECK" = success
           test "$TEST" = success
+          test "$AUDIT" = success
           test "$BUILD" = success
