@@ -10,10 +10,99 @@ type Table<Row, Insert, Update> = {
 export type Database = {
   public: {
     Tables: {
+      billing_checkout_reservations: Table<
+        {
+          organization_id: string;
+          token: string;
+          plan: string;
+          expires_at: string;
+          stripe_session_id: string | null;
+        },
+        {
+          organization_id: string;
+          token?: string;
+          plan: string;
+          expires_at: string;
+          stripe_session_id?: string | null;
+        },
+        { stripe_session_id?: string | null }
+      >;
+      notification_outbox: Table<
+        {
+          id: string;
+          submission_id: string;
+          recipient: string;
+          sent_at: string | null;
+          retry_at: string;
+        },
+        {
+          id?: string;
+          submission_id: string;
+          recipient: string;
+          sent_at?: string | null;
+          retry_at?: string;
+        },
+        { sent_at?: string | null; retry_at?: string }
+      >;
+      billing_subscriptions: Table<
+        {
+          organization_id: string;
+          stripe_customer_id: string;
+          stripe_subscription_id: string;
+          plan: string;
+          status: string;
+          current_period_end: string;
+          cancel_at_period_end: boolean;
+          observed_at: string;
+        },
+        {
+          organization_id: string;
+          stripe_customer_id: string;
+          stripe_subscription_id: string;
+          plan: string;
+          status: string;
+          current_period_end: string;
+          cancel_at_period_end?: boolean;
+          observed_at?: string;
+        },
+        {
+          plan?: string;
+          status?: string;
+          current_period_end?: string;
+          cancel_at_period_end?: boolean;
+          observed_at?: string;
+        }
+      >;
+      workspace_usage: Table<
+        { organization_id: string; month: string; leads: number },
+        { organization_id: string; month: string; leads?: number },
+        { leads?: number }
+      >;
       organizations: Table<
-        { id: string; name: string; created_at: string },
-        { id?: string; name: string; created_at?: string },
-        { id?: string; name?: string; created_at?: string }
+        {
+          id: string;
+          name: string;
+          created_at: string;
+          trial_ends_at: string;
+          stripe_customer_id: string | null;
+          stripe_account_id: string | null;
+        },
+        {
+          id?: string;
+          name: string;
+          created_at?: string;
+          trial_ends_at?: string;
+          stripe_customer_id?: string | null;
+          stripe_account_id?: string | null;
+        },
+        {
+          id?: string;
+          name?: string;
+          created_at?: string;
+          trial_ends_at?: string;
+          stripe_customer_id?: string | null;
+          stripe_account_id?: string | null;
+        }
       >;
       organization_members: Table<
         { organization_id: string; user_id: string; role: string; created_at: string },
@@ -28,6 +117,7 @@ export type Database = {
           name: string;
           template_slug: string;
           active_version: number;
+          archived_at: string | null;
           created_at: string;
           updated_at: string;
         },
@@ -38,6 +128,7 @@ export type Database = {
           name: string;
           template_slug: string;
           active_version?: number;
+          archived_at?: string | null;
           created_at?: string;
           updated_at?: string;
         },
@@ -48,6 +139,7 @@ export type Database = {
           name?: string;
           template_slug?: string;
           active_version?: number;
+          archived_at?: string | null;
           created_at?: string;
           updated_at?: string;
         }
@@ -91,6 +183,7 @@ export type Database = {
           access_token_hash: string;
           status: string;
           follow_up_count: number;
+          follow_up_consent: boolean;
           next_follow_up_at: string | null;
           created_at: string;
         },
@@ -106,6 +199,7 @@ export type Database = {
           access_token_hash: string;
           status?: string;
           follow_up_count?: number;
+          follow_up_consent?: boolean;
           next_follow_up_at?: string | null;
           created_at?: string;
         },
@@ -121,6 +215,7 @@ export type Database = {
           access_token_hash?: string;
           status?: string;
           follow_up_count?: number;
+          follow_up_consent?: boolean;
           next_follow_up_at?: string | null;
           created_at?: string;
         }
@@ -153,6 +248,7 @@ export type Database = {
           id: string;
           submission_id: string;
           stripe_checkout_session_id: string;
+          stripe_account_id: string | null;
           amount_cents: number;
           currency: string;
           status: string;
@@ -163,6 +259,7 @@ export type Database = {
           id?: string;
           submission_id: string;
           stripe_checkout_session_id: string;
+          stripe_account_id?: string | null;
           amount_cents: number;
           currency: string;
           status?: string;
@@ -173,6 +270,7 @@ export type Database = {
           id?: string;
           submission_id?: string;
           stripe_checkout_session_id?: string;
+          stripe_account_id?: string | null;
           amount_cents?: number;
           currency?: string;
           status?: string;
@@ -188,6 +286,80 @@ export type Database = {
     };
     Views: Record<string, never>;
     Functions: {
+      reserve_deposit_checkout: {
+        Args: {
+          p_submission_id: string;
+          p_account_id: string;
+          p_amount_cents: number;
+          p_currency: string;
+        };
+        Returns: Json;
+      };
+      register_deposit_checkout: {
+        Args: { p_submission_id: string; p_token: string; p_session_id: string };
+        Returns: undefined;
+      };
+      release_expired_deposit_checkout: {
+        Args: { p_submission_id: string; p_token: string };
+        Returns: undefined;
+      };
+      calculator_accepts_leads: { Args: { p_calculator_id: string }; Returns: boolean };
+      set_calculator_archived: {
+        Args: { p_organization_id: string; p_calculator_id: string; p_archived: boolean };
+        Returns: undefined;
+      };
+      reserve_subscription_checkout: {
+        Args: { p_organization_id: string; p_plan: string };
+        Returns: Json;
+      };
+      workspace_plan: { Args: { p_organization_id: string }; Returns: string | null };
+      sync_billing_subscription: {
+        Args: {
+          p_organization_id: string;
+          p_customer_id: string;
+          p_subscription_id: string;
+          p_plan: string;
+          p_status: string;
+          p_period_end: string;
+          p_cancel_at_period_end: boolean;
+          p_observed_at: string;
+        };
+        Returns: undefined;
+      };
+      revise_calculator: {
+        Args: {
+          p_organization_id: string;
+          p_calculator_id: string;
+          p_expected_version: number;
+          p_name: string;
+          p_schema: Json;
+          p_pricing_rules: Json;
+        };
+        Returns: number;
+      };
+      capture_submission: {
+        Args: {
+          p_calculator_id: string;
+          p_template_slug: string;
+          p_answers: Json;
+          p_quote: Json;
+          p_name: string;
+          p_email: string | null;
+          p_phone: string | null;
+          p_token_hash: string;
+          p_follow_up_consent: boolean;
+        };
+        Returns: string;
+      };
+      set_lead_status: {
+        Args: { p_organization_id: string; p_submission_id: string; p_status: string };
+        Returns: undefined;
+      };
+      resolve_booking: {
+        Args: { p_organization_id: string; p_booking_id: string; p_status: string };
+        Returns: undefined;
+      };
+      cleanup_rate_limits: { Args: Record<string, never>; Returns: undefined };
       consume_rate_limit: {
         Args: { p_key: string; p_limit: number; p_window_seconds: number };
         Returns: boolean;

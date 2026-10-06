@@ -1,6 +1,10 @@
+import { unsubscribeToken } from "@/lib/unsubscribe";
+import { getAppUrl } from "@/lib/server/env";
+import { customerCalculator } from "@/lib/server/customer-calculator";
+import { sendLeadNotifications } from "@/lib/server/notifications";
 import { timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import { sendEmail } from "@/lib/server/email";
 import { escapeHtml } from "@/lib/server/security";
 import { createAdminClient } from "@/lib/supabase/admin";
 
@@ -31,19 +35,26 @@ export async function POST(request: Request) {
     );
   }
 
+  const deadline = Date.now() + 18000;
   const db = createAdminClient();
-  const resend = new Resend(resendApiKey);
+  await db.rpc("cleanup_rate_limits", {});
+  const notifications = await sendLeadNotifications(
+    resendApiKey,
+    from,
+    Math.min(deadline, Date.now() + 8000),
+  );
   const now = new Date();
   const nowIso = now.toISOString();
 
   const { data, error } = await db
     .from("submissions")
-    .select("id,lead_name,lead_email,status,follow_up_count,next_follow_up_at")
+    .select("id,calculator_id,lead_name,lead_email,status,follow_up_count,next_follow_up_at")
     .lte("next_follow_up_at", nowIso)
     .not("lead_email", "is", null)
+    .eq("follow_up_consent", true)
     .in("status", ["new", "contacted"])
     .order("next_follow_up_at", { ascending: true })
-    .limit(100);
+    .limit(10);
 
   if (error) return NextResponse.json({ error: "Unable to load follow-ups" }, { status: 500 });
 
@@ -52,6 +63,25 @@ export async function POST(request: Request) {
   let skipped = 0;
 
   for (const lead of data ?? []) {
+    if (Date.now() >= deadline) break;
+    const unsubscribeSecret = process.env.UNSUBSCRIBE_SECRET?.trim();
+    if (!unsubscribeSecret) {
+      skipped += 1;
+      continue;
+    }
+    let calculator;
+    try {
+      calculator = await customerCalculator(lead.calculator_id, "followUps");
+    } catch {
+      skipped += 1;
+      continue;
+    }
+    if (!calculator.template.settings?.followUps) {
+      skipped += 1;
+      continue;
+    }
+    const unsubscribeUrl = `${getAppUrl("http://localhost:3000")}/unsubscribe?token=${encodeURIComponent(unsubscribeToken(lead.id, unsubscribeSecret))}`;
+    const oneClickUrl = unsubscribeUrl.replace("/unsubscribe?", "/api/public/unsubscribe?");
     const email = lead.lead_email;
     if (!email) {
       skipped += 1;
@@ -61,13 +91,12 @@ export async function POST(request: Request) {
     const followUpCount = Number(lead.follow_up_count ?? 0);
     const claimUntil = new Date(Date.now() + CLAIM_MINUTES * 60 * 1000).toISOString();
 
-    // Optimistic claim prevents overlapping cron invocations from sending the
-    // same follow-up. Only one worker can move the exact due row forward.
     const { data: claimed, error: claimError } = await db
       .from("submissions")
       .update({ next_follow_up_at: claimUntil })
       .eq("id", lead.id)
       .eq("follow_up_count", followUpCount)
+      .eq("follow_up_consent", true)
       .lte("next_follow_up_at", nowIso)
       .in("status", ["new", "contacted"])
       .select("id")
@@ -82,27 +111,30 @@ export async function POST(request: Request) {
       continue;
     }
 
-    const result = await resend.emails.send(
-      {
-        from,
-        to: email,
-        subject: "Still interested in your estimate?",
-        html: `<p>Hi ${escapeHtml(String(lead.lead_name))},</p><p>Just checking whether you would like to continue with your estimate request.</p>`,
-      },
-      {
-        // Resend retains idempotency keys for 24 hours, which covers retries
-        // and overlapping workers for the same follow-up sequence.
-        idempotencyKey: `quote-follow-up/${lead.id}/${followUpCount}`,
-      },
-    );
-
-    if (result.error) {
+    try {
+      await sendEmail(
+        resendApiKey,
+        {
+          from,
+          to: email,
+          subject: "Still interested in your estimate?",
+          headers: {
+            "List-Unsubscribe": `<${oneClickUrl}>`,
+            "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+          },
+          html: `<p>Hi ${escapeHtml(String(lead.lead_name))},</p><p>Just checking whether you would like to continue with your estimate request.</p><p><a href="${escapeHtml(unsubscribeUrl)}">Unsubscribe from reminders</a></p>`,
+        },
+        `quote-follow-up/${lead.id}/${followUpCount}`,
+        deadline,
+      );
+    } catch {
       const retryAt = new Date(Date.now() + RETRY_MINUTES * 60 * 1000).toISOString();
       await db
         .from("submissions")
         .update({ next_follow_up_at: retryAt })
         .eq("id", lead.id)
         .eq("follow_up_count", followUpCount)
+        .eq("follow_up_consent", true)
         .in("status", ["new", "contacted"]);
       failed += 1;
       continue;
@@ -122,6 +154,7 @@ export async function POST(request: Request) {
       })
       .eq("id", lead.id)
       .eq("follow_up_count", followUpCount)
+      .eq("follow_up_consent", true)
       .in("status", ["new", "contacted"]);
 
     if (updateError) {
@@ -132,5 +165,5 @@ export async function POST(request: Request) {
     sent += 1;
   }
 
-  return NextResponse.json({ ok: true, sent, failed, skipped });
+  return NextResponse.json({ ok: true, notifications, sent, failed, skipped });
 }

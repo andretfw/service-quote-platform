@@ -1,4 +1,6 @@
 import "server-only";
+import { getEntitlement } from "./workspace";
+import { plans, type PlanId } from "@/lib/plans";
 import { databaseConfigured } from "@/lib/server/env";
 import { quoteTemplateSchema } from "@/lib/server/schemas";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -9,6 +11,9 @@ export type ResolvedCalculator = {
   publicId: string;
   calculatorId: string | null;
   template: QuoteTemplate;
+  organizationId?: string;
+  plan?: PlanId | null;
+  stripeAccountId?: string | null;
 };
 
 export function toPublicQuoteConfig(resolved: ResolvedCalculator): PublicQuoteConfig {
@@ -21,7 +26,23 @@ export function toPublicQuoteConfig(resolved: ResolvedCalculator): PublicQuoteCo
     description: template.description,
     currency: template.currency,
     questions: template.questions,
-    canCaptureLeads: resolved.calculatorId !== null,
+    canCaptureLeads: resolved.calculatorId !== null && Boolean(resolved.plan),
+    businessName:
+      resolved.plan && plans[resolved.plan].branding ? template.settings?.businessName : undefined,
+    accentColor:
+      resolved.plan && plans[resolved.plan].branding ? template.settings?.accentColor : undefined,
+    canRequestBooking: Boolean(
+      resolved.plan && plans[resolved.plan].bookings && template.settings?.bookingRequests,
+    ),
+    canPayDeposit: Boolean(
+      resolved.plan &&
+        plans[resolved.plan].deposits &&
+        template.settings?.deposits &&
+        resolved.stripeAccountId,
+    ),
+    canFollowUp: Boolean(
+      resolved.plan && plans[resolved.plan].followUps && template.settings?.followUps,
+    ),
   };
 }
 
@@ -36,8 +57,9 @@ export async function resolveCalculator(publicId: string): Promise<ResolvedCalcu
   const db = createAdminClient();
   const { data: calculator, error: calculatorError } = await db
     .from("calculators")
-    .select("id,name,template_slug,active_version")
+    .select("id,name,template_slug,active_version,organization_id")
     .eq("public_id", publicId)
+    .is("archived_at", null)
     .maybeSingle();
 
   if (calculatorError) throw calculatorError;
@@ -65,7 +87,16 @@ export async function resolveCalculator(publicId: string): Promise<ResolvedCalcu
     throw new Error(`Calculator ${publicId} has an invalid active configuration`);
   }
 
+  const entitlement = await getEntitlement(calculator.organization_id);
+  const { data: enabled, error: enabledError } = await db.rpc("calculator_accepts_leads", {
+    p_calculator_id: calculator.id,
+  });
+  if (enabledError) throw enabledError;
+  if (entitlement.plan && !enabled) return null;
   return {
+    organizationId: calculator.organization_id,
+    plan: entitlement.plan,
+    stripeAccountId: entitlement.organization.stripe_account_id,
     publicId,
     calculatorId: calculator.id,
     template: parsed.data,

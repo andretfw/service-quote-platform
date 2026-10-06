@@ -25,6 +25,10 @@ export const calculateRequestSchema = z.object({
 export const submitRequestSchema = z.object({
   template: z.string().min(1).max(100),
   answers: answersSchema,
+  contactConsent: z.literal(true, {
+    error: "Please allow the business to contact you about this request",
+  }),
+  followUpConsent: z.boolean().default(false),
   lead: z
     .object({
       name: z.string().trim().min(1).max(120),
@@ -155,11 +159,25 @@ const pricingRuleSchema = z.discriminatedUnion("kind", [
 ]);
 
 const quoteTemplateBaseSchema = z.object({
+  settings: z
+    .object({
+      businessName: z.string().trim().max(160).optional(),
+      accentColor: z
+        .string()
+        .regex(/^#[0-9a-fA-F]{6}$/)
+        .optional(),
+      bookingRequests: z.boolean().optional(),
+      deposits: z.boolean().optional(),
+      followUps: z.boolean().optional(),
+      depositPercent: z.number().min(1).max(100).optional(),
+      taxRatePct: z.number().min(0).max(100).optional(),
+    })
+    .optional(),
   slug: z.string().regex(/^[a-z0-9][a-z0-9-]{1,79}$/),
   name: z.string().min(1).max(160),
   industry: z.string().min(1).max(120),
   description: z.string().min(1).max(500),
-  currency: z.string().regex(/^[A-Z]{3}$/),
+  currency: z.enum(["EUR", "USD", "GBP", "RON", "CAD", "AUD"]),
   minPrice: z.number().nonnegative().finite().optional(),
   rangePct: z.number().min(0).max(0.5).finite().optional(),
   questions: z.array(questionSchema).min(1).max(100),
@@ -361,4 +379,9 @@ export const quoteTemplateSchema = quoteTemplateBaseSchema.superRefine((template
 
 export const createCalculatorRequestSchema = z.object({
   template: quoteTemplateSchema,
+});
+
+export const reviseCalculatorRequestSchema = z.object({
+  template: quoteTemplateSchema,
+  expectedVersion: z.number().int().positive(),
 });

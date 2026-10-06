@@ -1,5 +1,7 @@
 "use client";
 
+import CustomerActions from "./CustomerActions";
+import type { CSSProperties } from "react";
 import { useMemo, useState } from "react";
 import { calculateQuote, toPublicQuoteResult, visibleQuestions } from "@/lib/pricing-engine";
 import type {
@@ -124,6 +126,8 @@ export default function QuoteWidget({
   const [lead, setLead] = useState<Lead>({ name: "", email: "", phone: "" });
   const [receipt, setReceipt] = useState<SubmissionReceipt | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [contactConsent, setContactConsent] = useState(false);
+  const [followUpConsent, setFollowUpConsent] = useState(false);
   const [pending, setPending] = useState(false);
 
   const questions = useMemo(() => visibleQuestions(config, answers), [config, answers]);
@@ -171,7 +175,13 @@ export default function QuoteWidget({
       const response = await fetch("/api/public/submit", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ template: config.publicId, answers, lead }),
+        body: JSON.stringify({
+          template: config.publicId,
+          answers,
+          lead,
+          contactConsent,
+          followUpConsent,
+        }),
       });
       const data = (await response.json()) as SubmissionReceipt & { error?: string };
       if (!response.ok) throw new Error(data.error || "Could not save your request");
@@ -187,7 +197,12 @@ export default function QuoteWidget({
 
   if (result) {
     return (
-      <div className="card" aria-live="polite">
+      <div
+        className="card"
+        style={{ "--brand-color": config.accentColor } as CSSProperties}
+        aria-live="polite"
+      >
+        {config.businessName && <p className="brand">{config.businessName}</p>}
         <span className="pill">Instant estimate</span>
         <h2 className="result-title">Your estimated range</h2>
         <div className="price">
@@ -206,7 +221,7 @@ export default function QuoteWidget({
             <p className="muted">
               {isPreview
                 ? "No lead is created while you preview an unsaved calculator."
-                : "This bundled template is a demo. No contact details are collected or stored."}
+                : "This calculator is currently accepting estimates only. Contact the business directly for a quote request."}
             </p>
           </div>
         ) : !receipt ? (
@@ -214,6 +229,7 @@ export default function QuoteWidget({
             <h3>Get this estimate and request an exact quote</h3>
             <div className="options">
               <input
+                aria-label="Your name"
                 className="field"
                 placeholder="Name"
                 autoComplete="name"
@@ -222,6 +238,7 @@ export default function QuoteWidget({
               />
               <input
                 className="field"
+                aria-label="Your email"
                 placeholder="Email"
                 type="email"
                 autoComplete="email"
@@ -230,15 +247,38 @@ export default function QuoteWidget({
               />
               <input
                 className="field"
+                aria-label="Your phone"
                 placeholder="Phone"
                 autoComplete="tel"
                 value={lead.phone}
                 onChange={(event) => setLead({ ...lead, phone: event.target.value })}
               />
+              <label className="check-label">
+                <input
+                  type="checkbox"
+                  checked={contactConsent}
+                  onChange={(e) => setContactConsent(e.target.checked)}
+                />
+                I agree that this business may contact me about this request.
+              </label>
+              {config.canFollowUp && (
+                <label className="check-label">
+                  <input
+                    type="checkbox"
+                    checked={followUpConsent}
+                    onChange={(e) => setFollowUpConsent(e.target.checked)}
+                  />
+                  Send me optional email reminders about this estimate. I can unsubscribe at any
+                  time.
+                </label>
+              )}
               <button
                 className="btn"
                 disabled={
-                  pending || !lead.name.trim() || (!lead.email.trim() && !lead.phone.trim())
+                  pending ||
+                  !contactConsent ||
+                  !lead.name.trim() ||
+                  (!lead.email.trim() && !lead.phone.trim())
                 }
                 onClick={() => void submit()}
               >
@@ -250,6 +290,14 @@ export default function QuoteWidget({
           <div className="success-panel">
             <strong>Request received.</strong>
             <p className="muted">The business can now review your estimate and follow up.</p>
+            {receipt.submissionId && receipt.accessToken && (
+              <CustomerActions
+                submissionId={receipt.submissionId}
+                accessToken={receipt.accessToken}
+                bookings={config.canRequestBooking}
+                deposits={config.canPayDeposit}
+              />
+            )}
           </div>
         )}
       </div>
@@ -259,7 +307,8 @@ export default function QuoteWidget({
   if (!current) return <div className="card">No questions configured.</div>;
 
   return (
-    <div className="card">
+    <div className="card" style={{ "--brand-color": config.accentColor } as CSSProperties}>
+      {config.businessName && <p className="brand">{config.businessName}</p>}
       {!compact && (
         <>
           <span className="pill">{config.industry}</span>

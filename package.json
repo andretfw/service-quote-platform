@@ -18,12 +18,13 @@
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test tests/**/*.test.ts",
+    "test": "node --conditions=react-server --import tsx --test tests/**/*.test.ts",
     "validate:engine": "tsx scripts/validate-engine.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "npm run format:check && npm run lint && npm run typecheck && npm test",
-    "ci": "npm run check && npm run build"
+    "ci": "npm run check && npm run build",
+    "config:check": "node --env-file-if-exists=.env.local scripts/check-config.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.7",
@@ -31,12 +32,12 @@
     "next": "16.3.8",
     "react": "19.3.0",
     "react-dom": "19.3.0",
-    "resend": "6.32.0",
     "server-only": "0.0.1",
     "stripe": "23.0.0",
     "zod": "4.6.5"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "0.5.8",
     "@types/node": "24.19.1",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",

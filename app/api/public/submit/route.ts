@@ -2,14 +2,12 @@ import { NextResponse } from "next/server";
 import { calculateQuote, toPublicQuoteResult } from "@/lib/pricing-engine";
 import { resolveCalculator } from "@/lib/server/calculator-resolver";
 import { databaseConfigured } from "@/lib/server/env";
-import { parseJson, publicApiError } from "@/lib/server/http";
+import { HttpError, parseJson, publicApiError } from "@/lib/server/http";
 import { submitRequestSchema } from "@/lib/server/schemas";
 import { createAccessToken, hashAccessToken } from "@/lib/server/security";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { assertRateLimit } from "@/lib/server/rate-limit";
 import type { Json } from "@/lib/supabase/database.types";
-
-const firstFollowUpAt = (): string => new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
 
 export async function POST(request: Request) {
   try {
@@ -28,28 +26,26 @@ export async function POST(request: Request) {
 
     const accessToken = createAccessToken();
     const db = createAdminClient();
-    const { data, error } = await db
-      .from("submissions")
-      .insert({
-        calculator_id: resolved.calculatorId,
-        template_slug: resolved.template.slug,
-        answers: body.answers as Json,
-        quote: quote as unknown as Json,
-        lead_name: body.lead.name,
-        lead_email: body.lead.email || null,
-        lead_phone: body.lead.phone || null,
-        status: "new",
-        access_token_hash: hashAccessToken(accessToken),
-        next_follow_up_at: firstFollowUpAt(),
-      })
-      .select("id")
-      .single();
-
-    if (error) throw error;
+    const { data: submissionId, error } = await db.rpc("capture_submission", {
+      p_calculator_id: resolved.calculatorId,
+      p_template_slug: resolved.template.slug,
+      p_answers: body.answers as Json,
+      p_quote: quote as unknown as Json,
+      p_name: body.lead.name,
+      p_email: body.lead.email || null,
+      p_phone: body.lead.phone || null,
+      p_token_hash: hashAccessToken(accessToken),
+      p_follow_up_consent: body.followUpConsent && Boolean(resolved.template.settings?.followUps),
+    });
+    if (error) {
+      if (error.code === "P0001")
+        throw new HttpError(402, "This business cannot accept more enquiries right now");
+      throw error;
+    }
 
     return NextResponse.json({
       ok: true,
-      submissionId: data.id,
+      submissionId,
       accessToken,
       estimate: toPublicQuoteResult(quote),
     });

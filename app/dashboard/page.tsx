@@ -92,6 +92,8 @@ export default async function DashboardPage() {
         <Link className="brand" href="/">
           Service Quote
         </Link>
+        <Link href="/billing">Subscription</Link>
+        <Link href="/workspace">My calculators</Link>
         <Link className="btn" href="/calculators">
           New calculator
         </Link>

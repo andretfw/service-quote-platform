@@ -1,3 +1,4 @@
+import { customerCalculator } from "@/lib/server/customer-calculator";
 import { NextResponse } from "next/server";
 import { databaseConfigured } from "@/lib/server/env";
 import { HttpError, parseJson, publicApiError } from "@/lib/server/http";
@@ -23,6 +24,7 @@ export async function POST(request: Request) {
     const db = createAdminClient();
     const submission = await getAuthorizedSubmission(db, body.submissionId, body.accessToken);
     if (!submission) throw new HttpError(404, "Submission not found");
+    await customerCalculator(submission.calculatorId, "bookings");
     if (["booked", "won", "lost"].includes(submission.status)) {
       throw new HttpError(409, "This submission can no longer be booked");
     }

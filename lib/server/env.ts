@@ -40,13 +40,14 @@ export const getStripeEnv = () => ({
   webhookSecret: process.env.STRIPE_WEBHOOK_SECRET?.trim() || null,
 });
 
-export const getDepositPercent = (): number => {
-  const raw = Number(process.env.DEPOSIT_PERCENT ?? 20);
-  if (!Number.isFinite(raw) || raw <= 0 || raw > 100) {
-    throw new Error("DEPOSIT_PERCENT must be greater than 0 and at most 100");
-  }
-  return raw;
+export const getAppUrl = (fallbackOrigin: string): string => {
+  const configured = process.env.NEXT_PUBLIC_APP_URL?.trim() || process.env.URL?.trim();
+  if (!configured && process.env.NODE_ENV === "production")
+    throw new Error("NEXT_PUBLIC_APP_URL is required in production");
+  const url = new URL(configured || fallbackOrigin);
+  if (!["https:", "http:"].includes(url.protocol) || url.username || url.password)
+    throw new Error("Invalid application URL");
+  if (process.env.NODE_ENV === "production" && url.protocol !== "https:")
+    throw new Error("Production application URL must use HTTPS");
+  return url.origin;
 };
-
-export const getAppUrl = (fallbackOrigin: string): string =>
-  process.env.NEXT_PUBLIC_APP_URL?.trim() || fallbackOrigin;

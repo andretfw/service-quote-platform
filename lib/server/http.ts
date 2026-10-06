@@ -14,18 +14,38 @@ export class HttpError extends Error {
   }
 }
 
+export async function readBody(request: Request, maxBytes = DEFAULT_MAX_BYTES): Promise<string> {
+  const declaredLength = Number(request.headers.get("content-length") ?? 0);
+  if (declaredLength > maxBytes) throw new HttpError(413, "Request body is too large");
+
+  const reader = request.body?.getReader();
+  const chunks: Uint8Array[] = [];
+  let length = 0;
+  if (reader) {
+    try {
+      while (true) {
+        const chunk = await reader.read();
+        if (chunk.done) break;
+        length += chunk.value.byteLength;
+        if (length > maxBytes) {
+          await reader.cancel();
+          throw new HttpError(413, "Request body is too large");
+        }
+        chunks.push(chunk.value);
+      }
+    } finally {
+      reader.releaseLock();
+    }
+  }
+  return Buffer.concat(chunks).toString("utf8");
+}
+
 export async function parseJson<T>(
   request: Request,
   schema: ZodType<T>,
   maxBytes = DEFAULT_MAX_BYTES,
 ): Promise<T> {
-  const declaredLength = Number(request.headers.get("content-length") ?? 0);
-  if (declaredLength > maxBytes) throw new HttpError(413, "Request body is too large");
-
-  const raw = await request.text();
-  if (Buffer.byteLength(raw, "utf8") > maxBytes) {
-    throw new HttpError(413, "Request body is too large");
-  }
+  const raw = await readBody(request, maxBytes);
 
   let value: unknown;
   try {

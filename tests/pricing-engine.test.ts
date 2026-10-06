@@ -1,3 +1,4 @@
+import type { QuoteTemplate } from "../lib/types";
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
@@ -167,4 +168,19 @@ test("bundled template question and option identifiers are unique", () => {
       );
     }
   }
+});
+
+test("configured tax is added once before the deposit quote is stored", () => {
+  const template: QuoteTemplate = {
+    slug: "test-tax",
+    name: "Tax",
+    industry: "Test",
+    description: "Test",
+    currency: "EUR",
+    rangePct: 0,
+    questions: [{ id: "size", label: "Size", type: "number", required: true }],
+    rules: [{ kind: "base", amount: 100 }],
+    settings: { taxRatePct: 19 },
+  };
+  assert.equal(calculateQuote(template, { size: 1 }).subtotal, 119);
 });

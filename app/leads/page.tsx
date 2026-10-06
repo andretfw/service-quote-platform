@@ -1,3 +1,4 @@
+import LeadStatus from "@/components/LeadStatus";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { publicSupabaseConfigured } from "@/lib/server/env";
@@ -32,6 +33,10 @@ export default async function LeadsPage() {
         </Link>
       </div>
       <h1>Lead pipeline</h1>
+      <div className="row">
+        <Link href="/api/leads/export">Export CSV (Premium / Business)</Link>
+        <Link href="/bookings">Booking requests</Link>
+      </div>
       <p className="muted">
         Follow-ups stop automatically when a lead reaches booked, won or lost.
       </p>
@@ -54,7 +59,7 @@ export default async function LeadsPage() {
                 <td>{lead.lead_email || lead.lead_phone || "—"}</td>
                 <td>{lead.template_slug || "Custom"}</td>
                 <td>
-                  <span className="pill">{lead.status}</span>
+                  <LeadStatus id={lead.id} status={lead.status} />
                 </td>
                 <td>{lead.follow_up_count}</td>
               </tr>

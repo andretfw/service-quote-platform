@@ -33,7 +33,18 @@ export type PricingRule =
   | { kind: "conditional"; when: Condition[]; amount: number }
   | { kind: "multiplier"; field: string; map: Record<string, number> };
 
+export type CalculatorSettings = {
+  businessName?: string;
+  accentColor?: string;
+  bookingRequests?: boolean;
+  deposits?: boolean;
+  followUps?: boolean;
+  depositPercent?: number;
+  taxRatePct?: number;
+};
+
 export type QuoteTemplate = {
+  settings?: CalculatorSettings;
   slug: string;
   name: string;
   industry: string;
@@ -54,6 +65,11 @@ export type PublicQuoteConfig = {
   currency: string;
   questions: Question[];
   canCaptureLeads: boolean;
+  businessName?: string;
+  accentColor?: string;
+  canRequestBooking?: boolean;
+  canPayDeposit?: boolean;
+  canFollowUp?: boolean;
 };
 
 export type QuoteResult = {
