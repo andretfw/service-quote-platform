@@ -17,9 +17,9 @@ export default function PricingPage() {
       </p>
       <PlanCards />
       <p className="muted">
-        Prices are in EUR, before any applicable taxes. Lead allowances reset on the first day of
-        each month in UTC. Unused allowances do not roll over. Stripe payment processing fees are
-        separate. Booking requests require business confirmation.
+        Subscription pricing will be announced before paid plans become available. Lead allowances
+        reset on the first day of each month in UTC. Unused allowances do not roll over. Stripe
+        payment processing fees are separate. Booking requests require business confirmation.
       </p>
     </main>
   );

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { effectivePlan, plans, isPlanId } from "../lib/plans";
+import { effectivePlan, plans, isPlanId, pricingApproved } from "../lib/plans";
 import { csvCell } from "../lib/csv";
 import { unsubscribeToken, verifyUnsubscribeToken } from "../lib/unsubscribe";
 
@@ -68,4 +68,9 @@ test("unsubscribe token is scoped, signed and expires", () => {
     null,
   );
   assert.equal(verifyUnsubscribeToken(token, "test-secret", now + 91 * 86400000), null);
+});
+
+test("paid checkout requires approved prices for every tier", () => {
+  assert.equal(pricingApproved(), false);
+  for (const plan of Object.values(plans)) assert.equal(plan.monthlyEur, null);
 });

@@ -1,6 +1,6 @@
 import "server-only";
 import Stripe from "stripe";
-import { isPlanId, planIds, type PlanId } from "@/lib/plans";
+import { isPlanId, planIds, pricingApproved, type PlanId } from "@/lib/plans";
 import { getStripeEnv } from "./env";
 import { HttpError } from "./http";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -13,7 +13,8 @@ export const priceId = (plan: PlanId) => {
 };
 export const billingConfigured = () =>
   Boolean(
-    process.env.STRIPE_SECRET_KEY &&
+    pricingApproved() &&
+      process.env.STRIPE_SECRET_KEY &&
       process.env.STRIPE_BILLING_WEBHOOK_SECRET &&
       planIds.every((plan) => process.env[`STRIPE_PRICE_${plan.toUpperCase()}`]),
   );

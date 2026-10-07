@@ -45,11 +45,14 @@ export async function POST(request: Request) {
     });
     if (subscriptions.data.some((s) => !["canceled", "incomplete_expired"].includes(s.status)))
       throw new HttpError(409, "Manage your existing subscription in the billing portal");
+    const approvedPrice = plans[plan].monthlyEur;
+    if (approvedPrice === null)
+      throw new HttpError(503, "Subscription pricing is not available yet");
     const price = await stripe.prices.retrieve(priceId(plan));
     if (
       !price.active ||
       price.currency !== "eur" ||
-      price.unit_amount !== plans[plan].monthlyEur * 100 ||
+      price.unit_amount !== approvedPrice * 100 ||
       price.recurring?.interval !== "month" ||
       price.recurring.interval_count !== 1
     )

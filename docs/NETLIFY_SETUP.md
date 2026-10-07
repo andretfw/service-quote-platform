@@ -13,7 +13,7 @@ The repository contains the application and Netlify configuration. Production ac
 
 ## 2. Stripe subscriptions
 
-1. Start in Stripe test mode. Create three products with recurring monthly EUR prices: Basic 1900 cents, Premium 4900 cents and Business 9900 cents. Do not use metered, annual or multi-item prices. The server rejects prices that differ from the published plans.
+1. Start in Stripe test mode. After the owner approves subscription pricing, set the approved amounts in `lib/plans.ts` and create matching recurring monthly EUR prices for Basic, Premium and Business. Do not use metered, annual or multi-item prices. The server rejects prices that differ from the published plans.
 2. Set `STRIPE_SECRET_KEY` and the three price IDs in `STRIPE_PRICE_BASIC`, `STRIPE_PRICE_PREMIUM`, `STRIPE_PRICE_BUSINESS`.
 3. Add an account webhook endpoint `https://YOUR_APP.netlify.app/api/billing/webhook`. Subscribe to `customer.subscription.created`, `customer.subscription.updated`, `customer.subscription.deleted`, `customer.subscription.paused`, `customer.subscription.resumed`, `invoice.paid`, `invoice.payment_failed`, and `invoice.payment_action_required`. Set its signing secret as `STRIPE_BILLING_WEBHOOK_SECRET`.
 4. Enable the Stripe billing portal: payment-method changes, invoice history, cancellation at period end, and updates between exactly the three configured products/prices. Configure proration/payment collection deliberately. Enable Stripe's option limiting customers to one subscription and redirect existing subscribers to `/billing` as an additional safeguard.

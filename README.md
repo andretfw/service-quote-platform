@@ -6,20 +6,20 @@ The repository is source-visible for evaluation and authorized collaboration. It
 
 ## Plans
 
-| Feature                                            | Basic — €19/month | Premium — €49/month | Business — €99/month |
-| -------------------------------------------------- | ----------------- | ------------------- | -------------------- |
-| Active calculators                                 | 1                 | 5                   | 25                   |
-| Enquiries per calendar month, UTC                  | 100               | 1,000               | 10,000               |
-| 15 industry templates, question and pricing editor | Included          | Included            | Included             |
-| Hosted calculator and website embed                | Included          | Included            | Included             |
-| Lead pipeline and owner notifications              | Included          | Included            | Included             |
-| Business name and brand color                      | —                 | Included            | Included             |
-| CSV lead exports                                   | —                 | Included            | Included             |
-| Optional customer email follow-ups and unsubscribe | —                 | Included            | Included             |
-| Booking requests and owner confirmation            | —                 | —                   | Included             |
-| Customer deposits through Stripe Connect           | —                 | —                   | Included             |
+| Feature                                            | Basic    | Premium  | Business |
+| -------------------------------------------------- | -------- | -------- | -------- |
+| Active calculators                                 | 1        | 5        | 25       |
+| Enquiries per calendar month, UTC                  | 100      | 1,000    | 10,000   |
+| 15 industry templates, question and pricing editor | Included | Included | Included |
+| Hosted calculator and website embed                | Included | Included | Included |
+| Lead pipeline and owner notifications              | Included | Included | Included |
+| Business name and brand color                      | —        | Included | Included |
+| CSV lead exports                                   | —        | Included | Included |
+| Optional customer email follow-ups and unsubscribe | —        | Included | Included |
+| Booking requests and owner confirmation            | —        | —        | Included |
+| Customer deposits through Stripe Connect           | —        | —        | Included |
 
-New accounts receive a 14-day Basic trial without a card. Subscription prices are centralized in `lib/plans.ts`; calculator and enquiry limits are also enforced transactionally in the database. Changes to limits must update the database functions as well. Changing prices requires new matching Stripe prices and environment IDs. No setup fee or platform deposit commission is configured; provider fees apply.
+New accounts receive a 14-day Basic trial without a card. Subscription prices are centralized in `lib/plans.ts`; calculator and enquiry limits are also enforced transactionally in the database. Changes to limits must update the database functions as well. Changing prices requires new matching Stripe prices and environment IDs. Subscription prices are unset and paid checkout is disabled pending owner approval. Provider fees apply.
 
 Archives retain historical leads while freeing calculator slots. Following a downgrade, the oldest unarchived calculators remain publicly available within the new limit. Inactive subscriptions cannot capture enquiries or use paid customer actions; historical leads remain accessible to their workspace owner.
 

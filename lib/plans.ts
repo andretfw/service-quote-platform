@@ -1,7 +1,7 @@
 export const plans = {
   basic: {
     name: "Basic",
-    monthlyEur: 19,
+    monthlyEur: null as number | null,
     calculators: 1,
     monthlyLeads: 100,
     branding: false,
@@ -12,7 +12,7 @@ export const plans = {
   },
   premium: {
     name: "Premium",
-    monthlyEur: 49,
+    monthlyEur: null as number | null,
     calculators: 5,
     monthlyLeads: 1000,
     branding: true,
@@ -23,7 +23,7 @@ export const plans = {
   },
   business: {
     name: "Business",
-    monthlyEur: 99,
+    monthlyEur: null as number | null,
     calculators: 25,
     monthlyLeads: 10000,
     branding: true,
@@ -62,3 +62,11 @@ export function effectivePlan(
   }
   return Date.parse(trialEndsAt) > now ? "basic" : null;
 }
+
+export const pricingApproved = () =>
+  planIds.every(
+    (id) =>
+      typeof plans[id].monthlyEur === "number" &&
+      Number.isFinite(plans[id].monthlyEur) &&
+      plans[id].monthlyEur! > 0,
+  );

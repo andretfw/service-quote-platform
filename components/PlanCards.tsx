@@ -16,8 +16,14 @@ export default function PlanCards({
           <div className="card" key={id}>
             <span className="pill">{plan.name}</span>
             <h2>
-              €{plan.monthlyEur}
-              <small className="muted"> / month</small>
+              {plan.monthlyEur === null ? (
+                "Pricing coming soon"
+              ) : (
+                <>
+                  €{plan.monthlyEur}
+                  <small className="muted"> / month</small>
+                </>
+              )}
             </h2>
             <ul className="feature-list">
               <li>
