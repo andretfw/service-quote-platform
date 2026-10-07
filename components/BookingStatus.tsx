@@ -1,4 +1,6 @@
 "use client";
+import { Text } from "@/components/Language";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -26,15 +28,17 @@ export default function BookingStatus({ id, status }: { id: string; status: stri
   }
   return (
     <div>
-      <span>{status}</span>
+      <span className="status-badge">
+        <Text>{status}</Text>
+      </span>
       {status === "requested" && (
         <button className="btn" disabled={pending} onClick={() => void update("confirmed")}>
-          Confirm
+          <Text>{"Confirm"}</Text>
         </button>
       )}
       {status === "confirmed" && (
         <button className="btn" disabled={pending} onClick={() => void update("completed")}>
-          Mark completed
+          <Text>{"Mark completed"}</Text>
         </button>
       )}
       {["requested", "confirmed"].includes(status) && (
@@ -43,12 +47,12 @@ export default function BookingStatus({ id, status }: { id: string; status: stri
           disabled={pending}
           onClick={() => void update("cancelled")}
         >
-          Cancel
+          <Text>{"Cancel"}</Text>
         </button>
       )}
       {error && (
         <p className="error-message" role="alert">
-          {error}
+          <Text>{error}</Text>
         </p>
       )}
     </div>

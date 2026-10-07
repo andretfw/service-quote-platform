@@ -27,6 +27,9 @@ Painting, cleaning, tiling, landscaping, roofing, HVAC, moving, pressure washing
 
 ## What is implemented
 
+- A five-step calculator editor with live desktop/mobile preview, language-specific wording and clear example-rate guidance.
+- English, Spanish and Romanian interfaces, customer questions and emails; per-calculator language selection.
+- Metric and imperial units with dimension-safe conversions of rates, bounds and conditional thresholds. Currency changes do not apply exchange rates.
 - Configurable questions, option labels, conditional visibility, numeric rates, option adjustments, multipliers, fixed and conditional charges.
 - Immutable calculator revisions and optimistic edit conflicts.
 - Validated server-side estimates; private pricing rules never reach the public widget.

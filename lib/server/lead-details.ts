@@ -1,4 +1,6 @@
 import "server-only";
+import { validLocale, type Locale } from "@/lib/i18n";
+import { localizeQuestion } from "@/lib/localization";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/lib/supabase/database.types";
 import { answersSchema, quoteTemplateSchema } from "./schemas";
@@ -13,6 +15,7 @@ export const leadColumns =
 export async function leadPresentation(
   db: SupabaseClient<Database>,
   lead: Pick<LeadRecord, "calculator_id" | "template_slug" | "answers" | "quote" | "created_at">,
+  displayLocale?: Locale,
 ) {
   const { data: version, error } = await db
     .from("calculator_versions")
@@ -30,10 +33,15 @@ export async function leadPresentation(
       : null;
   const template = parsed?.success ? parsed.data : getTemplate(lead.template_slug);
   const answers = answersSchema.safeParse(lead.answers);
+  const locale = displayLocale ?? validLocale(template?.settings?.locale);
   return {
-    name: template?.name ?? "Quote request",
-    estimate: formatEstimate(lead.quote),
-    answers: answerSummary(template?.questions ?? [], answers.success ? answers.data : {}),
+    locale,
+    name: template?.translations?.[locale]?.name ?? template?.name ?? "Quote request",
+    estimate: formatEstimate(lead.quote, locale),
+    answers: answerSummary(
+      template?.questions.map((q) => localizeQuestion(q, locale)) ?? [],
+      answers.success ? answers.data : {},
+    ),
   };
 }
 

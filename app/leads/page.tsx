@@ -1,3 +1,7 @@
+import { uiLocale } from "@/lib/server/locale";
+import { getTemplate } from "@/lib/templates";
+import { Text } from "@/components/Language";
+import AppShell from "@/components/AppShell";
 import { emailAlertsConfigured } from "@/lib/server/notifications";
 import { formatEstimate } from "@/lib/lead-summary";
 import LeadStatus from "@/components/LeadStatus";
@@ -9,6 +13,7 @@ export const dynamic = "force-dynamic";
 
 export default async function LeadsPage() {
   const workspace = await pageWorkspace();
+  const locale = await uiLocale();
   const supabase = await createSupabaseServerClient();
   const { data: calculators, error: calculatorError } = await workspace.db
     .from("calculators")
@@ -32,64 +37,86 @@ export default async function LeadsPage() {
   const leads = data ?? [];
 
   return (
-    <main className="shell">
-      <div className="nav">
-        <Link className="brand" href="/dashboard">
-          ← Dashboard
-        </Link>
-      </div>
-      <h1>Lead pipeline</h1>
-      {!emailAlertsConfigured() && (
-        <p className="notice">
-          Email alerts are not configured yet. Enquiries are saved here; open a lead to review the
-          full request.
+    <AppShell>
+      <main className="shell app-page">
+        <h1>
+          <Text>{"Lead pipeline"}</Text>
+        </h1>
+        {!emailAlertsConfigured() && (
+          <p className="notice">
+            <Text>
+              {
+                "Email alerts are not configured yet. Enquiries are saved here; open a lead to review the full request."
+              }
+            </Text>
+          </p>
+        )}
+        <div className="row">
+          <Link href="/api/leads/export">
+            <Text>{"Export CSV (Premium / Business)"}</Text>
+          </Link>
+          <Link href="/bookings">
+            <Text>{"Booking requests"}</Text>
+          </Link>
+        </div>
+        <p className="muted">
+          <Text>{"Follow-ups stop automatically when a lead reaches booked, won or lost."}</Text>
         </p>
-      )}
-      <div className="row">
-        <Link href="/api/leads/export">Export CSV (Premium / Business)</Link>
-        <Link href="/bookings">Booking requests</Link>
-      </div>
-      <p className="muted">
-        Follow-ups stop automatically when a lead reaches booked, won or lost.
-      </p>
 
-      <div className="card">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Lead</th>
-              <th>Contact</th>
-              <th>Template</th>
-              <th>Estimate</th>
-              <th>Status</th>
-              <th>Follow-ups</th>
-            </tr>
-          </thead>
-          <tbody>
-            {leads.map((lead) => (
-              <tr key={lead.id}>
-                <td>
-                  <Link href={`/leads/${lead.id}`}>{lead.lead_name}</Link>
-                </td>
-                <td>{lead.lead_email || lead.lead_phone || "—"}</td>
-                <td>{lead.template_slug || "Custom"}</td>
-                <td>{formatEstimate(lead.quote)}</td>
-                <td>
-                  <LeadStatus id={lead.id} status={lead.status} />
-                </td>
-                <td>{lead.follow_up_count}</td>
-              </tr>
-            ))}
-            {!leads.length && (
-              <tr>
-                <td colSpan={6} className="muted">
-                  No leads yet.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-    </main>
+        <div className="card">
+          <div className="table-wrap">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>
+                    <Text>{"Lead"}</Text>
+                  </th>
+                  <th>
+                    <Text>{"Contact"}</Text>
+                  </th>
+                  <th>
+                    <Text>{"Template"}</Text>
+                  </th>
+                  <th>
+                    <Text>{"Estimate"}</Text>
+                  </th>
+                  <th>
+                    <Text>{"Status"}</Text>
+                  </th>
+                  <th>
+                    <Text>{"Follow-ups"}</Text>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {leads.map((lead) => (
+                  <tr key={lead.id}>
+                    <td>
+                      <Link href={`/leads/${lead.id}`}>{lead.lead_name}</Link>
+                    </td>
+                    <td>{lead.lead_email || lead.lead_phone || "—"}</td>
+                    <td>
+                      <Text>{getTemplate(lead.template_slug)?.industry ?? "Custom"}</Text>
+                    </td>
+                    <td>{formatEstimate(lead.quote, locale)}</td>
+                    <td>
+                      <LeadStatus id={lead.id} status={lead.status} />
+                    </td>
+                    <td>{lead.follow_up_count}</td>
+                  </tr>
+                ))}
+                {!leads.length && (
+                  <tr>
+                    <td colSpan={6} className="muted">
+                      <Text>{"No leads yet."}</Text>
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </AppShell>
   );
 }

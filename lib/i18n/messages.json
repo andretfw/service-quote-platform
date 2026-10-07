@@ -1,0 +1,2638 @@
+{
+  "Dashboard": {
+    "es": "Panel de control",
+    "ro": "Panou de control"
+  },
+  "My calculators": {
+    "es": "Mis calculadoras",
+    "ro": "Calculatoarele mele"
+  },
+  "Subscription": {
+    "es": "Suscripción",
+    "ro": "Abonament"
+  },
+  "Templates": {
+    "es": "Plantillas",
+    "ro": "Șabloane"
+  },
+  "New calculator": {
+    "es": "Nueva calculadora",
+    "ro": "Calculator nou"
+  },
+  "Lead pipeline": {
+    "es": "Solicitudes",
+    "ro": "Solicitări"
+  },
+  "Booking requests": {
+    "es": "Solicitudes de reserva",
+    "ro": "Cereri de programare"
+  },
+  "Pricing": {
+    "es": "Precios",
+    "ro": "Prețuri"
+  },
+  "Sign in": {
+    "es": "Iniciar sesión",
+    "ro": "Autentificare"
+  },
+  "Business & region": {
+    "es": "Empresa y región",
+    "ro": "Afacere și regiune"
+  },
+  "Services & prices": {
+    "es": "Servicios y precios",
+    "ro": "Servicii și prețuri"
+  },
+  "Questions": {
+    "es": "Preguntas",
+    "ro": "Întrebări"
+  },
+  "Appearance": {
+    "es": "Diseño",
+    "ro": "Aspect"
+  },
+  "Test & share": {
+    "es": "Probar y compartir",
+    "ro": "Testează și distribuie"
+  },
+  "Advanced settings": {
+    "es": "Configuración avanzada",
+    "ro": "Setări avansate"
+  },
+  "Language": {
+    "es": "Idioma",
+    "ro": "Limbă"
+  },
+  "Currency": {
+    "es": "Moneda",
+    "ro": "Monedă"
+  },
+  "Measurement system": {
+    "es": "Sistema de medidas",
+    "ro": "Sistem de măsurare"
+  },
+  "Metric": {
+    "es": "Métrico",
+    "ro": "Metric"
+  },
+  "Imperial": {
+    "es": "Imperial",
+    "ro": "Imperial"
+  },
+  "Business name": {
+    "es": "Nombre de la empresa",
+    "ro": "Numele afacerii"
+  },
+  "Calculator name": {
+    "es": "Nombre de la calculadora",
+    "ro": "Numele calculatorului"
+  },
+  "Description": {
+    "es": "Descripción",
+    "ro": "Descriere"
+  },
+  "Save changes": {
+    "es": "Guardar cambios",
+    "ro": "Salvează modificările"
+  },
+  "Create calculator": {
+    "es": "Crear calculadora",
+    "ro": "Creează calculatorul"
+  },
+  "Saving…": {
+    "es": "Guardando…",
+    "ro": "Se salvează…"
+  },
+  "Continue": {
+    "es": "Continuar",
+    "ro": "Continuă"
+  },
+  "Back": {
+    "es": "Atrás",
+    "ro": "Înapoi"
+  },
+  "Preview": {
+    "es": "Vista previa",
+    "ro": "Previzualizare"
+  },
+  "Desktop": {
+    "es": "Escritorio",
+    "ro": "Desktop"
+  },
+  "Mobile": {
+    "es": "Móvil",
+    "ro": "Mobil"
+  },
+  "Live preview": {
+    "es": "Vista previa en directo",
+    "ro": "Previzualizare live"
+  },
+  "Minimum price before tax": {
+    "es": "Precio mínimo antes de impuestos",
+    "ro": "Preț minim fără taxe"
+  },
+  "Tax added to estimate (%)": {
+    "es": "Impuesto añadido (%)",
+    "ro": "Taxă adăugată (%)"
+  },
+  "Estimate range ± %": {
+    "es": "Margen de estimación ± %",
+    "ro": "Marjă estimare ± %"
+  },
+  "Question": {
+    "es": "Pregunta",
+    "ro": "Întrebare"
+  },
+  "Question text": {
+    "es": "Texto de la pregunta",
+    "ro": "Textul întrebării"
+  },
+  "Help text": {
+    "es": "Texto de ayuda",
+    "ro": "Text de ajutor"
+  },
+  "Required": {
+    "es": "Obligatoria",
+    "ro": "Obligatorie"
+  },
+  "Minimum": {
+    "es": "Mínimo",
+    "ro": "Minim"
+  },
+  "Maximum": {
+    "es": "Máximo",
+    "ro": "Maxim"
+  },
+  "Step": {
+    "es": "Incremento",
+    "ro": "Pas"
+  },
+  "Option": {
+    "es": "Opción",
+    "ro": "Opțiune"
+  },
+  "Remove": {
+    "es": "Eliminar",
+    "ro": "Elimină"
+  },
+  "Add option": {
+    "es": "Añadir opción",
+    "ro": "Adaugă opțiune"
+  },
+  "Remove question": {
+    "es": "Eliminar pregunta",
+    "ro": "Elimină întrebarea"
+  },
+  "Move up": {
+    "es": "Subir",
+    "ro": "Mută în sus"
+  },
+  "Move down": {
+    "es": "Bajar",
+    "ro": "Mută în jos"
+  },
+  "Add question": {
+    "es": "Añadir pregunta",
+    "ro": "Adaugă întrebare"
+  },
+  "Add question type": {
+    "es": "Tipo de pregunta",
+    "ro": "Tip de întrebare"
+  },
+  "Number": {
+    "es": "Número",
+    "ro": "Număr"
+  },
+  "Single choice": {
+    "es": "Una opción",
+    "ro": "O singură opțiune"
+  },
+  "Multiple choice": {
+    "es": "Varias opciones",
+    "ro": "Mai multe opțiuni"
+  },
+  "Text": {
+    "es": "Texto",
+    "ro": "Text"
+  },
+  "Postcode": {
+    "es": "Código postal",
+    "ro": "Cod poștal"
+  },
+  "Only show when": {
+    "es": "Mostrar solo cuando",
+    "ro": "Afișează doar când"
+  },
+  "Only apply this rate when": {
+    "es": "Aplicar solo cuando",
+    "ro": "Aplică doar când"
+  },
+  "Has an answer": {
+    "es": "Tiene una respuesta",
+    "ro": "Are un răspuns"
+  },
+  "Includes": {
+    "es": "Incluye",
+    "ro": "Include"
+  },
+  "Equals": {
+    "es": "Es igual a",
+    "ro": "Este egal cu"
+  },
+  "Does not equal": {
+    "es": "No es igual a",
+    "ro": "Nu este egal cu"
+  },
+  "Greater than": {
+    "es": "Mayor que",
+    "ro": "Mai mare decât"
+  },
+  "At least": {
+    "es": "Como mínimo",
+    "ro": "Cel puțin"
+  },
+  "Less than": {
+    "es": "Menor que",
+    "ro": "Mai mic decât"
+  },
+  "At most": {
+    "es": "Como máximo",
+    "ro": "Cel mult"
+  },
+  "Match": {
+    "es": "Condición",
+    "ro": "Condiție"
+  },
+  "Value": {
+    "es": "Valor",
+    "ro": "Valoare"
+  },
+  "Add condition": {
+    "es": "Añadir condición",
+    "ro": "Adaugă condiție"
+  },
+  "Remove condition": {
+    "es": "Eliminar condición",
+    "ro": "Elimină condiția"
+  },
+  "Pricing question": {
+    "es": "Pregunta de precio",
+    "ro": "Întrebare pentru preț"
+  },
+  "Base price": {
+    "es": "Precio base",
+    "ro": "Preț de bază"
+  },
+  "Conditional adjustment": {
+    "es": "Ajuste condicional",
+    "ro": "Ajustare condiționată"
+  },
+  "Add quantity rate": {
+    "es": "Añadir tarifa por cantidad",
+    "ro": "Adaugă tarif pe cantitate"
+  },
+  "Add fixed adjustment": {
+    "es": "Añadir importe fijo",
+    "ro": "Adaugă sumă fixă"
+  },
+  "Add conditional adjustment": {
+    "es": "Añadir ajuste condicional",
+    "ro": "Adaugă ajustare condițională"
+  },
+  "Add multiplier": {
+    "es": "Añadir multiplicador",
+    "ro": "Adaugă multiplicator"
+  },
+  "Remove adjustment": {
+    "es": "Eliminar ajuste",
+    "ro": "Elimină ajustarea"
+  },
+  "Price per unit": {
+    "es": "Precio por unidad",
+    "ro": "Preț pe unitate"
+  },
+  "Additional price": {
+    "es": "Precio adicional",
+    "ro": "Preț suplimentar"
+  },
+  "Price multiplier": {
+    "es": "Multiplicador de precio",
+    "ro": "Multiplicator de preț"
+  },
+  "Minimum billable units (optional)": {
+    "es": "Unidades mínimas facturables (opcional)",
+    "ro": "Unități minime facturabile (opțional)"
+  },
+  "Maximum billable units (optional)": {
+    "es": "Unidades máximas facturables (opcional)",
+    "ro": "Unități maxime facturabile (opțional)"
+  },
+  "Measurement unit": {
+    "es": "Unidad de medida",
+    "ro": "Unitate de măsură"
+  },
+  "Convert unit": {
+    "es": "Convertir unidad",
+    "ro": "Convertește unitatea"
+  },
+  "No measurement unit": {
+    "es": "Sin unidad de medida",
+    "ro": "Fără unitate de măsură"
+  },
+  "Unit conversion preserves the price for the same physical quantity.": {
+    "es": "La conversión mantiene el precio para la misma cantidad física.",
+    "ro": "Conversia păstrează prețul pentru aceeași cantitate fizică."
+  },
+  "Changing currency does not exchange prices. Review every rate before publishing.": {
+    "es": "Cambiar la moneda no convierte los precios. Revisa las tarifas antes de publicar.",
+    "ro": "Schimbarea monedei nu convertește prețurile. Verifică tarifele înainte de publicare."
+  },
+  "Example rates — replace them with your own prices before sharing.": {
+    "es": "Tarifas de ejemplo: introduce tus precios antes de compartir.",
+    "ro": "Tarife demonstrative — introdu propriile prețuri înainte de distribuire."
+  },
+  "Your prices stay private; customers see only the estimated range.": {
+    "es": "Tus tarifas son privadas; los clientes solo ven el rango estimado.",
+    "ro": "Tarifele tale sunt private; clienții văd doar intervalul estimat."
+  },
+  "Business features": {
+    "es": "Funciones de la empresa",
+    "ro": "Funcții pentru afacere"
+  },
+  "Business logo": {
+    "es": "Logotipo",
+    "ro": "Sigla afacerii"
+  },
+  "Brand color": {
+    "es": "Color de marca",
+    "ro": "Culoarea mărcii"
+  },
+  "Remove logo": {
+    "es": "Eliminar logotipo",
+    "ro": "Elimină sigla"
+  },
+  "Preparing logo…": {
+    "es": "Preparando logotipo…",
+    "ro": "Se pregătește sigla…"
+  },
+  "PNG, JPEG or WebP, up to 2 MB. Your logo appears on the hosted calculator and website embed. Save your calculator to publish it.": {
+    "es": "PNG, JPEG o WebP, hasta 2 MB. Guarda la calculadora para publicar el logotipo.",
+    "ro": "PNG, JPEG sau WebP, maximum 2 MB. Salvează calculatorul pentru a publica sigla."
+  },
+  "Offer optional customer email follow-ups": {
+    "es": "Ofrecer recordatorios opcionales por email",
+    "ro": "Oferă mementouri opționale prin email"
+  },
+  "Allow customers to request a preferred booking time": {
+    "es": "Permitir solicitudes de horario",
+    "ro": "Permite solicitarea unei ore preferate"
+  },
+  "Accept service deposits after connecting Stripe": {
+    "es": "Aceptar anticipos tras conectar Stripe",
+    "ro": "Acceptă avansuri după conectarea Stripe"
+  },
+  "Deposit percentage": {
+    "es": "Porcentaje de anticipo",
+    "ro": "Procent avans"
+  },
+  "Refresh preview": {
+    "es": "Reiniciar vista previa",
+    "ro": "Repornește previzualizarea"
+  },
+  "Website embed": {
+    "es": "Integración en la web",
+    "ro": "Integrare pe site"
+  },
+  "Share link": {
+    "es": "Enlace para compartir",
+    "ro": "Link de distribuire"
+  },
+  "Copy link": {
+    "es": "Copiar enlace",
+    "ro": "Copiază linkul"
+  },
+  "Copied": {
+    "es": "Copiado",
+    "ro": "Copiat"
+  },
+  "Open calculator": {
+    "es": "Abrir calculadora",
+    "ro": "Deschide calculatorul"
+  },
+  "No website? Share the calculator link directly.": {
+    "es": "¿Sin web? Comparte el enlace directamente.",
+    "ro": "Nu ai site? Distribuie linkul direct."
+  },
+  "Choose a subscription": {
+    "es": "Elegir suscripción",
+    "ro": "Alege un abonament"
+  },
+  "Choose a plan": {
+    "es": "Elegir plan",
+    "ro": "Alege un plan"
+  },
+  "to save calculators.": {
+    "es": "para guardar calculadoras.",
+    "ro": "pentru a salva calculatoare."
+  },
+  "Saved revision": {
+    "es": "Versión guardada",
+    "ro": "Versiune salvată"
+  },
+  "Revision": {
+    "es": "Versión",
+    "ro": "Versiune"
+  },
+  "Industry templates": {
+    "es": "Plantillas por sector",
+    "ro": "Șabloane pe domenii"
+  },
+  "Choose your trade. Add your prices. Start receiving enquiries.": {
+    "es": "Elige tu sector, añade tus precios y recibe solicitudes.",
+    "ro": "Alege domeniul, adaugă prețurile și primește solicitări."
+  },
+  "Customize": {
+    "es": "Personalizar",
+    "ro": "Personalizează"
+  },
+  "Edit": {
+    "es": "Editar",
+    "ro": "Editează"
+  },
+  "Archive": {
+    "es": "Archivar",
+    "ro": "Arhivează"
+  },
+  "Restore": {
+    "es": "Restaurar",
+    "ro": "Restaurează"
+  },
+  "Archived": {
+    "es": "Archivada",
+    "ro": "Arhivat"
+  },
+  "Active": {
+    "es": "Activa",
+    "ro": "Activ"
+  },
+  "Your subscription is inactive.": {
+    "es": "Tu suscripción está inactiva.",
+    "ro": "Abonamentul tău este inactiv."
+  },
+  "to accept new enquiries.": {
+    "es": "para recibir nuevas solicitudes.",
+    "ro": "pentru a primi solicitări noi."
+  },
+  "Create your first calculator from one of the 15 templates.": {
+    "es": "Crea tu primera calculadora con una de las 15 plantillas.",
+    "ro": "Creează primul calculator folosind unul dintre cele 15 șabloane."
+  },
+  "Leads": {
+    "es": "Solicitudes",
+    "ro": "Solicitări"
+  },
+  "New enquiries": {
+    "es": "Nuevas solicitudes",
+    "ro": "Solicitări noi"
+  },
+  "Estimated opportunities": {
+    "es": "Oportunidades estimadas",
+    "ro": "Oportunități estimate"
+  },
+  "Booked / won": {
+    "es": "Reservadas / ganadas",
+    "ro": "Programate / câștigate"
+  },
+  "Conversion": {
+    "es": "Conversión",
+    "ro": "Conversie"
+  },
+  "Recent leads": {
+    "es": "Solicitudes recientes",
+    "ro": "Solicitări recente"
+  },
+  "View all": {
+    "es": "Ver todas",
+    "ro": "Vezi toate"
+  },
+  "Lead": {
+    "es": "Cliente potencial",
+    "ro": "Client potențial"
+  },
+  "Contact": {
+    "es": "Contacto",
+    "ro": "Contact"
+  },
+  "Template": {
+    "es": "Plantilla",
+    "ro": "Șablon"
+  },
+  "Estimate": {
+    "es": "Estimación",
+    "ro": "Estimare"
+  },
+  "Status": {
+    "es": "Estado",
+    "ro": "Stare"
+  },
+  "Follow-ups": {
+    "es": "Recordatorios",
+    "ro": "Mementouri"
+  },
+  "No leads yet.": {
+    "es": "Aún no hay solicitudes.",
+    "ro": "Nu există solicitări încă."
+  },
+  "Start receiving quote requests": {
+    "es": "Empieza a recibir solicitudes",
+    "ro": "Începe să primești solicitări"
+  },
+  "Create your first calculator": {
+    "es": "Crear tu primera calculadora",
+    "ro": "Creează primul calculator"
+  },
+  "Customer": {
+    "es": "Cliente",
+    "ro": "Client"
+  },
+  "Email": {
+    "es": "Email",
+    "ro": "Email"
+  },
+  "Phone": {
+    "es": "Teléfono",
+    "ro": "Telefon"
+  },
+  "Name": {
+    "es": "Nombre",
+    "ro": "Nume"
+  },
+  "Lead status": {
+    "es": "Estado de la solicitud",
+    "ro": "Starea solicitării"
+  },
+  "new": {
+    "es": "Nueva",
+    "ro": "Nouă"
+  },
+  "contacted": {
+    "es": "Contactada",
+    "ro": "Contactat"
+  },
+  "booked": {
+    "es": "Reservada",
+    "ro": "Programat"
+  },
+  "won": {
+    "es": "Ganada",
+    "ro": "Câștigat"
+  },
+  "lost": {
+    "es": "Perdida",
+    "ro": "Pierdut"
+  },
+  "requested": {
+    "es": "Solicitada",
+    "ro": "Solicitată"
+  },
+  "confirmed": {
+    "es": "Confirmada",
+    "ro": "Confirmată"
+  },
+  "cancelled": {
+    "es": "Cancelada",
+    "ro": "Anulată"
+  },
+  "completed": {
+    "es": "Completada",
+    "ro": "Finalizată"
+  },
+  "Email alerts are not configured yet. Enquiries are saved here; open a lead to review the full request.": {
+    "es": "Las alertas no están configuradas. Las solicitudes se guardan aquí.",
+    "ro": "Alertele nu sunt configurate. Solicitările sunt salvate aici."
+  },
+  "Export CSV (Premium / Business)": {
+    "es": "Exportar CSV (Premium / Business)",
+    "ro": "Exportă CSV (Premium / Business)"
+  },
+  "Follow-ups stop automatically when a lead reaches booked, won or lost.": {
+    "es": "Los recordatorios se detienen al reservar, ganar o perder la solicitud.",
+    "ro": "Mementourile se opresc când solicitarea este programată, câștigată sau pierdută."
+  },
+  "Enquiry details": {
+    "es": "Detalles de la solicitud",
+    "ro": "Detaliile solicitării"
+  },
+  "Received": {
+    "es": "Recibida",
+    "ro": "Primit"
+  },
+  "Estimated range:": {
+    "es": "Rango estimado:",
+    "ro": "Interval estimat:"
+  },
+  "Estimated range": {
+    "es": "Rango estimado",
+    "ro": "Interval estimat"
+  },
+  "Preliminary estimate. Confirm the scope and final price with the customer.": {
+    "es": "Estimación preliminar. Confirma el trabajo y el precio con el cliente.",
+    "ro": "Estimare preliminară. Confirmă lucrarea și prețul final cu clientul."
+  },
+  "Business email alert": {
+    "es": "Alerta por email",
+    "ro": "Alertă email pentru afacere"
+  },
+  "No project answers were recorded.": {
+    "es": "No se registraron respuestas.",
+    "ro": "Nu au fost înregistrate răspunsuri."
+  },
+  "← Leads": {
+    "es": "← Solicitudes",
+    "ro": "← Solicitări"
+  },
+  "← Dashboard": {
+    "es": "← Panel",
+    "ro": "← Panou"
+  },
+  "Subscription and usage": {
+    "es": "Suscripción y uso",
+    "ro": "Abonament și utilizare"
+  },
+  "Subscription required": {
+    "es": "Se necesita suscripción",
+    "ro": "Este necesar un abonament"
+  },
+  "Choose the plan that fits your business.": {
+    "es": "Elige el plan adecuado para tu empresa.",
+    "ro": "Alege abonamentul potrivit afacerii tale."
+  },
+  "Start with a 14-day Basic trial. No card required. Upgrade when you need more calculators or features.": {
+    "es": "Prueba Basic durante 14 días sin tarjeta. Amplía cuando lo necesites.",
+    "ro": "Încearcă Basic 14 zile fără card. Treci la un plan superior când ai nevoie."
+  },
+  "Pricing coming soon": {
+    "es": "Precios próximamente",
+    "ro": "Prețurile vor fi anunțate"
+  },
+  "/ month": {
+    "es": "/ mes",
+    "ro": "/ lună"
+  },
+  "For independent businesses getting started": {
+    "es": "Para negocios que empiezan",
+    "ro": "Pentru afaceri la început"
+  },
+  "For growing businesses building their brand": {
+    "es": "Para empresas que desarrollan su marca",
+    "ro": "Pentru afaceri care își dezvoltă marca"
+  },
+  "For businesses managing bookings and deposits": {
+    "es": "Para empresas con reservas y anticipos",
+    "ro": "Pentru afaceri cu programări și avansuri"
+  },
+  "Most popular": {
+    "es": "Más popular",
+    "ro": "Cel mai popular"
+  },
+  "calculator": {
+    "es": "calculadora",
+    "ro": "calculator"
+  },
+  "calculators": {
+    "es": "calculadoras",
+    "ro": "calculatoare"
+  },
+  "enquiries per calendar month": {
+    "es": "solicitudes por mes natural",
+    "ro": "solicitări pe lună calendaristică"
+  },
+  "All 15 templates": {
+    "es": "Las 15 plantillas",
+    "ro": "Toate cele 15 șabloane"
+  },
+  "English, Spanish and Romanian": {
+    "es": "Inglés, español y rumano",
+    "ro": "Engleză, spaniolă și română"
+  },
+  "Metric and imperial units": {
+    "es": "Unidades métricas e imperiales",
+    "ro": "Unități metrice și imperiale"
+  },
+  "Website embeds and hosted links": {
+    "es": "Integración web y enlaces",
+    "ro": "Integrare pe site și linkuri"
+  },
+  "Lead dashboard and configurable tax rate": {
+    "es": "Panel de solicitudes e impuestos configurables",
+    "ro": "Panou de solicitări și taxe configurabile"
+  },
+  "Business logo, name and colour": {
+    "es": "Logotipo, nombre y color",
+    "ro": "Siglă, nume și culoare"
+  },
+  "CSV exports": {
+    "es": "Exportación CSV",
+    "ro": "Export CSV"
+  },
+  "Optional customer reminders": {
+    "es": "Recordatorios opcionales",
+    "ro": "Reamintiri opționale pentru clienți"
+  },
+  "Booking requests with business confirmation": {
+    "es": "Reservas con confirmación de la empresa",
+    "ro": "Programări confirmate de afacere"
+  },
+  "Deposits through your connected Stripe account": {
+    "es": "Anticipos mediante tu cuenta Stripe",
+    "ro": "Avansuri prin contul Stripe conectat"
+  },
+  "Subscription checkout will be available after the platform owner completes payment setup.": {
+    "es": "Los pagos estarán disponibles tras completar la configuración.",
+    "ro": "Plățile vor fi disponibile după finalizarea configurării."
+  },
+  "Contact your workspace owner to change the subscription.": {
+    "es": "Contacta al propietario para cambiar la suscripción.",
+    "ro": "Contactează proprietarul pentru schimbarea abonamentului."
+  },
+  "Manage plan, invoices and cancellation": {
+    "es": "Gestionar plan, facturas y cancelación",
+    "ro": "Gestionează planul, facturile și anularea"
+  },
+  "Cancellation is scheduled. Access continues until the paid period ends.": {
+    "es": "Cancelación programada. El acceso continúa hasta finalizar el periodo pagado.",
+    "ro": "Anularea este programată. Accesul continuă până la finalul perioadei plătite."
+  },
+  "Instant estimate": {
+    "es": "Estimación inmediata",
+    "ro": "Estimare instantanee"
+  },
+  "Your estimated range": {
+    "es": "Tu rango estimado",
+    "ro": "Intervalul tău estimat"
+  },
+  "This is a preliminary estimate. Final pricing can change after the business confirms scope, measurements and site conditions.": {
+    "es": "Es una estimación preliminar. El precio final puede cambiar tras confirmar el alcance, las medidas y las condiciones.",
+    "ro": "Aceasta este o estimare preliminară. Prețul final poate varia după confirmarea lucrării, măsurătorilor și condițiilor."
+  },
+  "Preview mode": {
+    "es": "Modo de vista previa",
+    "ro": "Mod previzualizare"
+  },
+  "Template demo": {
+    "es": "Demostración",
+    "ro": "Demonstrație"
+  },
+  "No lead is created while you preview an unsaved calculator.": {
+    "es": "La vista previa no crea solicitudes.",
+    "ro": "Previzualizarea nu creează solicitări."
+  },
+  "This calculator is currently accepting estimates only. Contact the business directly for a quote request.": {
+    "es": "Esta calculadora solo ofrece estimaciones. Contacta a la empresa para solicitar un presupuesto.",
+    "ro": "Acest calculator oferă doar estimări. Contactează afacerea pentru o ofertă."
+  },
+  "Get this estimate and request an exact quote": {
+    "es": "Solicita un presupuesto exacto",
+    "ro": "Solicită o ofertă exactă"
+  },
+  "Your name": {
+    "es": "Tu nombre",
+    "ro": "Numele tău"
+  },
+  "Your email": {
+    "es": "Tu email",
+    "ro": "Emailul tău"
+  },
+  "Your phone": {
+    "es": "Tu teléfono",
+    "ro": "Telefonul tău"
+  },
+  "I agree that this business may contact me about this request.": {
+    "es": "Acepto que esta empresa me contacte sobre esta solicitud.",
+    "ro": "Sunt de acord ca această afacere să mă contacteze despre această solicitare."
+  },
+  "Send me optional email reminders about this estimate. I can unsubscribe at any time.": {
+    "es": "Quiero recordatorios opcionales sobre esta estimación. Puedo darme de baja cuando quiera.",
+    "ro": "Doresc mementouri opționale despre această estimare. Mă pot dezabona oricând."
+  },
+  "Sending…": {
+    "es": "Enviando…",
+    "ro": "Se trimite…"
+  },
+  "Request exact quote": {
+    "es": "Solicitar presupuesto exacto",
+    "ro": "Solicită ofertă exactă"
+  },
+  "Request received.": {
+    "es": "Solicitud recibida.",
+    "ro": "Solicitare primită."
+  },
+  "The business can now review your estimate and follow up.": {
+    "es": "La empresa puede revisar tu solicitud y contactarte.",
+    "ro": "Afacerea poate verifica estimarea și te poate contacta."
+  },
+  "No questions configured.": {
+    "es": "No hay preguntas configuradas.",
+    "ro": "Nu există întrebări configurate."
+  },
+  "Calculating…": {
+    "es": "Calculando…",
+    "ro": "Se calculează…"
+  },
+  "See estimate": {
+    "es": "Ver estimación",
+    "ro": "Vezi estimarea"
+  },
+  "Type here": {
+    "es": "Escribe aquí",
+    "ro": "Scrie aici"
+  },
+  "Question {current} of {total}": {
+    "es": "Pregunta {current} de {total}",
+    "ro": "Întrebarea {current} din {total}"
+  },
+  "Could not calculate this estimate": {
+    "es": "No se pudo calcular la estimación",
+    "ro": "Estimarea nu a putut fi calculată"
+  },
+  "Could not save your request": {
+    "es": "No se pudo guardar tu solicitud",
+    "ro": "Solicitarea nu a putut fi salvată"
+  },
+  "Please check your answers and try again.": {
+    "es": "Revisa tus respuestas e inténtalo de nuevo.",
+    "ro": "Verifică răspunsurile și încearcă din nou."
+  },
+  "Request a preferred time": {
+    "es": "Solicitar horario preferido",
+    "ro": "Solicită o oră preferată"
+  },
+  "Your local date and time": {
+    "es": "Tu fecha y hora local",
+    "ro": "Data și ora locală"
+  },
+  "Request booking": {
+    "es": "Solicitar reserva",
+    "ro": "Solicită programare"
+  },
+  "This is a request, subject to the business availability. You can leave this blank and let the business contact you.": {
+    "es": "Es una solicitud sujeta a disponibilidad. Puedes dejarlo en blanco.",
+    "ro": "Aceasta este o solicitare în funcție de disponibilitate. Poți lăsa câmpul gol."
+  },
+  "Pay a service deposit": {
+    "es": "Pagar anticipo",
+    "ro": "Plătește un avans"
+  },
+  "Review deposit": {
+    "es": "Revisar anticipo",
+    "ro": "Verifică avansul"
+  },
+  "Review the deposit amount on Stripe before paying. A deposit does not confirm a booking.": {
+    "es": "Revisa el anticipo en Stripe. Pagar no confirma una reserva.",
+    "ro": "Verifică avansul în Stripe. Plata nu confirmă o programare."
+  },
+  "Preferred time sent. Your booking is confirmed only when the business accepts it.": {
+    "es": "Horario enviado. La reserva se confirma cuando la empresa lo acepta.",
+    "ro": "Ora preferată a fost trimisă. Programarea este confirmată doar când afacerea o acceptă."
+  },
+  "Request failed": {
+    "es": "La solicitud falló",
+    "ro": "Solicitarea a eșuat"
+  },
+  "Email preferences": {
+    "es": "Preferencias de email",
+    "ro": "Preferințe email"
+  },
+  "Stop optional follow-up emails for this estimate request.": {
+    "es": "Dejar de recibir recordatorios sobre esta solicitud.",
+    "ro": "Oprește mementourile opționale pentru această solicitare."
+  },
+  "Unsubscribe": {
+    "es": "Darse de baja",
+    "ro": "Dezabonare"
+  },
+  "Return to Service Quote": {
+    "es": "Volver a Service Quote",
+    "ro": "Înapoi la Service Quote"
+  },
+  "Business email": {
+    "es": "Email de la empresa",
+    "ro": "Emailul afacerii"
+  },
+  "Sign in or create your business account": {
+    "es": "Accede o crea tu cuenta de empresa",
+    "ro": "Autentifică-te sau creează contul afacerii"
+  },
+  "Use your business email. We will send you a secure sign-in link; no password needed.": {
+    "es": "Recibe un enlace seguro en tu email. No necesitas contraseña.",
+    "ro": "Primești un link securizat pe email. Nu ai nevoie de parolă."
+  },
+  "Check your inbox and spam folder. Open the sign-in link in this browser to continue.": {
+    "es": "Revisa tu bandeja y spam. Abre el enlace en este navegador.",
+    "ro": "Verifică inboxul și spamul. Deschide linkul în acest browser."
+  },
+  "Send sign-in link": {
+    "es": "Enviar enlace de acceso",
+    "ro": "Trimite link de autentificare"
+  },
+  "Confirm": {
+    "es": "Confirmar",
+    "ro": "Confirmă"
+  },
+  "Cancel": {
+    "es": "Cancelar",
+    "ro": "Anulează"
+  },
+  "Mark completed": {
+    "es": "Marcar completada",
+    "ro": "Marchează finalizat"
+  },
+  "No booking requests yet.": {
+    "es": "Aún no hay solicitudes de reserva.",
+    "ro": "Nu există cereri de programare încă."
+  },
+  "Times below are shown in UTC. Confirm availability with the customer before accepting.": {
+    "es": "Las horas están en UTC. Confirma disponibilidad antes de aceptar.",
+    "ro": "Orele sunt în UTC. Confirmă disponibilitatea înainte de acceptare."
+  },
+  "Receive service deposits": {
+    "es": "Recibir anticipos",
+    "ro": "Primește avansuri"
+  },
+  "Connect Stripe account": {
+    "es": "Conectar cuenta Stripe",
+    "ro": "Conectează contul Stripe"
+  },
+  "Update Stripe account": {
+    "es": "Actualizar cuenta Stripe",
+    "ro": "Actualizează contul Stripe"
+  },
+  "Connect your own Stripe account so customer deposits are collected by your business. Stripe will ask you for business verification details.": {
+    "es": "Conecta Stripe para recibir anticipos. Stripe verificará tu empresa.",
+    "ro": "Conectează Stripe pentru a primi avansuri. Stripe îți va verifica afacerea."
+  },
+  "Review enquiry": {
+    "es": "Revisar solicitud",
+    "ro": "Verifică solicitarea"
+  },
+  "New enquiry": {
+    "es": "Nueva solicitud",
+    "ro": "Solicitare nouă"
+  },
+  "A customer has requested a quote. Review their details and reply to confirm the scope and price.": {
+    "es": "Un cliente ha solicitado un presupuesto. Revisa sus datos y confirma el trabajo y el precio.",
+    "ro": "Un client a solicitat o ofertă. Verifică detaliile și confirmă lucrarea și prețul."
+  },
+  "This is a preliminary estimate, not a confirmed booking or payment.": {
+    "es": "Es una estimación, no una reserva ni un pago confirmado.",
+    "ro": "Aceasta este o estimare, nu o programare sau o plată confirmată."
+  },
+  "Still interested in your estimate?": {
+    "es": "¿Sigues interesado en tu estimación?",
+    "ro": "Te mai interesează estimarea?"
+  },
+  "Just checking whether you would like to continue with your estimate request.": {
+    "es": "Queríamos saber si quieres continuar con tu solicitud.",
+    "ro": "Dorim să știm dacă vrei să continui cu solicitarea ta."
+  },
+  "Unsubscribe from reminders": {
+    "es": "Dejar de recibir recordatorios",
+    "ro": "Dezabonare de la mementouri"
+  },
+  "Hi": {
+    "es": "Hola",
+    "ro": "Bună"
+  },
+  "Language content": {
+    "es": "Contenido por idioma",
+    "ro": "Conținut pe limbi"
+  },
+  "Customer languages": {
+    "es": "Idiomas de los clientes",
+    "ro": "Limbile clienților"
+  },
+  "Edit your own wording for each language. Prices and conditions are shared.": {
+    "es": "Edita el texto de cada idioma. Los precios y condiciones son comunes.",
+    "ro": "Editează textele în fiecare limbă. Prețurile și condițiile sunt comune."
+  },
+  "Appearance is included in Premium and Business.": {
+    "es": "El diseño de marca está incluido en Premium y Business.",
+    "ro": "Personalizarea mărcii este inclusă în Premium și Business."
+  },
+  "Your next steps": {
+    "es": "Tus próximos pasos",
+    "ro": "Pașii următori"
+  },
+  "Review new enquiries, contact customers and keep your pipeline up to date.": {
+    "es": "Revisa solicitudes, contacta clientes y actualiza su estado.",
+    "ro": "Verifică solicitările, contactează clienții și actualizează starea."
+  },
+  "Estimated value is not revenue. Figures below cover the latest 100 enquiries.": {
+    "es": "El valor estimado no es ingreso. Se muestran las últimas 100 solicitudes.",
+    "ro": "Valoarea estimată nu este venit. Sunt afișate ultimele 100 de solicitări."
+  },
+  "Recent 100 enquiries": {
+    "es": "Últimas 100 solicitudes",
+    "ro": "Ultimele 100 de solicitări"
+  },
+  "Ready to share": {
+    "es": "Lista para compartir",
+    "ro": "Gata de distribuit"
+  },
+  "Test your rates in the preview before sharing your calculator.": {
+    "es": "Prueba tus tarifas antes de compartir la calculadora.",
+    "ro": "Testează tarifele înainte de distribuirea calculatorului."
+  },
+  "Changes not saved": {
+    "es": "Cambios sin guardar",
+    "ro": "Modificări nesalvate"
+  },
+  "All changes saved": {
+    "es": "Cambios guardados",
+    "ro": "Modificări salvate"
+  },
+  "Retry email alert": {
+    "es": "Reintentar alerta",
+    "ro": "Reîncearcă alerta email"
+  },
+  "Painting": {
+    "es": "Pintura",
+    "ro": "Zugrăveli"
+  },
+  "Cleaning": {
+    "es": "Limpieza",
+    "ro": "Curățenie"
+  },
+  "Tiling": {
+    "es": "Alicatado",
+    "ro": "Montaj gresie și faianță"
+  },
+  "Landscaping": {
+    "es": "Jardinería",
+    "ro": "Amenajări grădini"
+  },
+  "Roofing": {
+    "es": "Tejados",
+    "ro": "Acoperișuri"
+  },
+  "HVAC": {
+    "es": "Climatización",
+    "ro": "Climatizare"
+  },
+  "Moving": {
+    "es": "Mudanzas",
+    "ro": "Mutări"
+  },
+  "Pressure Washing": {
+    "es": "Limpieza a presión",
+    "ro": "Spălare cu presiune"
+  },
+  "Auto Detailing": {
+    "es": "Detallado de vehículos",
+    "ro": "Detailing auto"
+  },
+  "Handyman": {
+    "es": "Pequeñas reparaciones",
+    "ro": "Reparații și montaj"
+  },
+  "Flooring": {
+    "es": "Suelos",
+    "ro": "Pardoseli"
+  },
+  "Windows": {
+    "es": "Ventanas",
+    "ro": "Ferestre"
+  },
+  "Fencing": {
+    "es": "Vallas",
+    "ro": "Garduri"
+  },
+  "Pest Control": {
+    "es": "Control de plagas",
+    "ro": "Combaterea dăunătorilor"
+  },
+  "Photography": {
+    "es": "Fotografía",
+    "ro": "Fotografie"
+  },
+  "What are you painting?": {
+    "es": "¿Qué quieres pintar?",
+    "ro": "Ce vrei să zugrăvești?"
+  },
+  "Interior": {
+    "es": "Interior",
+    "ro": "Interior"
+  },
+  "Exterior": {
+    "es": "Exterior",
+    "ro": "Exterior"
+  },
+  "Both": {
+    "es": "Ambos",
+    "ro": "Ambele"
+  },
+  "Interior paintable wall area": {
+    "es": "Superficie de paredes interiores",
+    "ro": "Suprafața pereților interiori"
+  },
+  "Measure the actual surface, not the property floor area. Your business can change the unit and its matching rate.": {
+    "es": "Mide la superficie real, no la superficie del inmueble.",
+    "ro": "Măsoară suprafața efectivă, nu suprafața utilă a locuinței."
+  },
+  "Number of stories": {
+    "es": "Número de plantas",
+    "ro": "Numărul de etaje"
+  },
+  "Current condition": {
+    "es": "Estado actual",
+    "ro": "Starea actuală"
+  },
+  "Good": {
+    "es": "Bueno",
+    "ro": "Bună"
+  },
+  "Average": {
+    "es": "Normal",
+    "ro": "Medie"
+  },
+  "Heavy prep": {
+    "es": "Preparación intensiva",
+    "ro": "Pregătire complexă"
+  },
+  "Include": {
+    "es": "Incluir",
+    "ro": "Include"
+  },
+  "Ceilings": {
+    "es": "Techos",
+    "ro": "Tavane"
+  },
+  "Trim": {
+    "es": "Molduras",
+    "ro": "Plinte și profile"
+  },
+  "Doors": {
+    "es": "Puertas",
+    "ro": "Uși"
+  },
+  "ZIP / postcode": {
+    "es": "Código postal",
+    "ro": "Cod poștal"
+  },
+  "Used to check the business service area; this is not automatic travel pricing.": {
+    "es": "Sirve para comprobar la zona de servicio, no calcula desplazamientos.",
+    "ro": "Folosit pentru verificarea zonei de servicii; nu calculează deplasarea automat."
+  },
+  "Exterior paintable wall area": {
+    "es": "Superficie de paredes exteriores",
+    "ro": "Suprafața pereților exteriori"
+  },
+  "Ceiling area": {
+    "es": "Superficie del techo",
+    "ro": "Suprafața tavanului"
+  },
+  "Trim length": {
+    "es": "Longitud de molduras",
+    "ro": "Lungimea plintelor și profilelor"
+  },
+  "Number of door faces": {
+    "es": "Número de caras de puertas",
+    "ro": "Numărul de fețe de uși"
+  },
+  "Number of finish coats": {
+    "es": "Número de capas finales",
+    "ro": "Numărul de straturi finale"
+  },
+  "Two coats": {
+    "es": "Dos capas",
+    "ro": "Două straturi"
+  },
+  "One coat": {
+    "es": "Una capa",
+    "ro": "Un strat"
+  },
+  "Three coats": {
+    "es": "Tres capas",
+    "ro": "Trei straturi"
+  },
+  "Who supplies the paint?": {
+    "es": "¿Quién aporta la pintura?",
+    "ro": "Cine furnizează vopseaua?"
+  },
+  "Business": {
+    "es": "Empresa",
+    "ro": "Afacere"
+  },
+  "Access and furniture": {
+    "es": "Acceso y muebles",
+    "ro": "Acces și mobilier"
+  },
+  "Clear rooms / easy access": {
+    "es": "Habitaciones despejadas / acceso fácil",
+    "ro": "Camere libere / acces ușor"
+  },
+  "Furniture to move": {
+    "es": "Muebles que mover",
+    "ro": "Mobilier de mutat"
+  },
+  "Scaffolding or lift needed": {
+    "es": "Se necesita andamio o elevador",
+    "ro": "Necesită schelă sau nacelă"
+  },
+  "Preferred date or timeframe": {
+    "es": "Fecha o plazo preferido",
+    "ro": "Data sau perioada preferată"
+  },
+  "Other requirements or access restrictions": {
+    "es": "Otros requisitos o restricciones de acceso",
+    "ro": "Alte cerințe sau restricții de acces"
+  },
+  "Cleaning type": {
+    "es": "Tipo de limpieza",
+    "ro": "Tip de curățenie"
+  },
+  "Standard": {
+    "es": "Estándar",
+    "ro": "Standard"
+  },
+  "Deep": {
+    "es": "Profunda",
+    "ro": "Generală"
+  },
+  "Move out": {
+    "es": "Fin de alquiler / mudanza",
+    "ro": "După eliberarea locuinței"
+  },
+  "Bedrooms": {
+    "es": "Dormitorios",
+    "ro": "Dormitoare"
+  },
+  "Bathrooms": {
+    "es": "Baños",
+    "ro": "Băi"
+  },
+  "Frequency": {
+    "es": "Frecuencia",
+    "ro": "Frecvență"
+  },
+  "One time": {
+    "es": "Una vez",
+    "ro": "O singură dată"
+  },
+  "Weekly": {
+    "es": "Semanal",
+    "ro": "Săptămânal"
+  },
+  "Biweekly": {
+    "es": "Cada dos semanas",
+    "ro": "La două săptămâni"
+  },
+  "Extras": {
+    "es": "Extras",
+    "ro": "Servicii suplimentare"
+  },
+  "Inside oven": {
+    "es": "Interior del horno",
+    "ro": "Interiorul cuptorului"
+  },
+  "Inside fridge": {
+    "es": "Interior de la nevera",
+    "ro": "Interiorul frigiderului"
+  },
+  "Floor area to clean": {
+    "es": "Superficie para limpiar",
+    "ro": "Suprafața de curățat"
+  },
+  "Property type": {
+    "es": "Tipo de inmueble",
+    "ro": "Tip de proprietate"
+  },
+  "House": {
+    "es": "Casa",
+    "ro": "Casă"
+  },
+  "Apartment": {
+    "es": "Apartamento",
+    "ro": "Apartament"
+  },
+  "Office": {
+    "es": "Oficina",
+    "ro": "Birou"
+  },
+  "Condition": {
+    "es": "Estado",
+    "ro": "Stare"
+  },
+  "Maintained": {
+    "es": "Cuidado",
+    "ro": "Întreținută"
+  },
+  "Very dirty": {
+    "es": "Muy sucio",
+    "ro": "Foarte murdară"
+  },
+  "Post-construction": {
+    "es": "Después de obras",
+    "ro": "După constructor"
+  },
+  "Pets at the property": {
+    "es": "Mascotas en el inmueble",
+    "ro": "Animale de companie"
+  },
+  "No": {
+    "es": "No",
+    "ro": "Nu"
+  },
+  "Yes": {
+    "es": "Sí",
+    "ro": "Da"
+  },
+  "Surface area to be worked on": {
+    "es": "Superficie de trabajo",
+    "ro": "Suprafața de lucru"
+  },
+  "Surface": {
+    "es": "Superficie",
+    "ro": "Suprafață"
+  },
+  "Floor": {
+    "es": "Suelo",
+    "ro": "Podea"
+  },
+  "Wall": {
+    "es": "Pared",
+    "ro": "Perete"
+  },
+  "Existing tile removal?": {
+    "es": "¿Retirar azulejos existentes?",
+    "ro": "Se îndepărtează plăcile existente?"
+  },
+  "Tile format": {
+    "es": "Formato de baldosa",
+    "ro": "Formatul plăcilor"
+  },
+  "Large format": {
+    "es": "Gran formato",
+    "ro": "Format mare"
+  },
+  "Mosaic": {
+    "es": "Mosaico",
+    "ro": "Mozaic"
+  },
+  "Existing tile area to remove": {
+    "es": "Superficie de azulejos a retirar",
+    "ro": "Suprafața plăcilor de îndepărtat"
+  },
+  "Tile supply": {
+    "es": "Suministro de baldosas",
+    "ro": "Furnizarea plăcilor"
+  },
+  "Customer supplies tiles": {
+    "es": "El cliente aporta las baldosas",
+    "ro": "Clientul furnizează plăcile"
+  },
+  "Business supplies tiles": {
+    "es": "La empresa aporta las baldosas",
+    "ro": "Afacerea furnizează plăcile"
+  },
+  "Surface preparation": {
+    "es": "Preparación de superficie",
+    "ro": "Pregătirea suprafeței"
+  },
+  "Ready for tiling": {
+    "es": "Lista para alicatar",
+    "ro": "Pregătită pentru montaj"
+  },
+  "Leveling required": {
+    "es": "Se necesita nivelación",
+    "ro": "Necesită nivelare"
+  },
+  "Waterproofing required": {
+    "es": "Se necesita impermeabilización",
+    "ro": "Necesită hidroizolație"
+  },
+  "Area requiring waterproofing": {
+    "es": "Superficie para impermeabilizar",
+    "ro": "Suprafața pentru hidroizolație"
+  },
+  "Area requiring leveling": {
+    "es": "Superficie para nivelar",
+    "ro": "Suprafața pentru nivelare"
+  },
+  "Tile dimensions, layout and material preference": {
+    "es": "Dimensiones, distribución y material de baldosas",
+    "ro": "Dimensiunile, așezarea și materialul plăcilor"
+  },
+  "Business confirms tile supply costs after checking the selected product.": {
+    "es": "La empresa confirma el coste tras comprobar el producto.",
+    "ro": "Afacerea confirmă costul plăcilor după verificarea produsului."
+  },
+  "Service": {
+    "es": "Servicio",
+    "ro": "Serviciu"
+  },
+  "Maintenance": {
+    "es": "Mantenimiento",
+    "ro": "Întreținere"
+  },
+  "New planting": {
+    "es": "Nueva plantación",
+    "ro": "Plantări noi"
+  },
+  "Full redesign": {
+    "es": "Rediseño completo",
+    "ro": "Reamenajare completă"
+  },
+  "Site access": {
+    "es": "Acceso al lugar",
+    "ro": "Acces la locație"
+  },
+  "Easy": {
+    "es": "Fácil",
+    "ro": "Ușor"
+  },
+  "Restricted": {
+    "es": "Limitado",
+    "ro": "Restricționat"
+  },
+  "Visit frequency": {
+    "es": "Frecuencia de visitas",
+    "ro": "Frecvența vizitelor"
+  },
+  "One visit": {
+    "es": "Una visita",
+    "ro": "O vizită"
+  },
+  "Fortnightly": {
+    "es": "Cada dos semanas",
+    "ro": "La două săptămâni"
+  },
+  "Monthly": {
+    "es": "Mensual",
+    "ro": "Lunar"
+  },
+  "Number of plants to supply and plant": {
+    "es": "Número de plantas a suministrar y plantar",
+    "ro": "Numărul de plante de furnizat și plantat"
+  },
+  "Garden waste to remove": {
+    "es": "Residuos de jardín a retirar",
+    "ro": "Deșeuri vegetale de îndepărtat"
+  },
+  "Planting or redesign brief": {
+    "es": "Descripción de plantación o rediseño",
+    "ro": "Descrierea plantării sau reamenajării"
+  },
+  "Describe planting, paving, irrigation or drainage needs. A site visit may be needed.": {
+    "es": "Describe plantación, pavimento, riego o drenaje. Puede necesitarse una visita.",
+    "ro": "Descrie plantarea, pavajul, irigația sau drenajul. Poate fi necesară o vizită."
+  },
+  "Job type": {
+    "es": "Tipo de trabajo",
+    "ro": "Tipul lucrării"
+  },
+  "Repair": {
+    "es": "Reparación",
+    "ro": "Reparație"
+  },
+  "Replacement": {
+    "es": "Sustitución",
+    "ro": "Înlocuire"
+  },
+  "Material": {
+    "es": "Material",
+    "ro": "Material"
+  },
+  "Asphalt": {
+    "es": "Asfalto",
+    "ro": "Șindrilă bituminoasă"
+  },
+  "Metal": {
+    "es": "Metal",
+    "ro": "Metal"
+  },
+  "Tile": {
+    "es": "Teja",
+    "ro": "Țiglă"
+  },
+  "Roof pitch": {
+    "es": "Pendiente del tejado",
+    "ro": "Panta acoperișului"
+  },
+  "Low": {
+    "es": "Baja",
+    "ro": "Mică"
+  },
+  "Medium": {
+    "es": "Media",
+    "ro": "Medie"
+  },
+  "Steep": {
+    "es": "Pronunciada",
+    "ro": "Abruptă"
+  },
+  "Old roofing area to remove": {
+    "es": "Cubierta antigua a retirar",
+    "ro": "Suprafața învelitorii de îndepărtat"
+  },
+  "Describe leaks, damage or replacement needs": {
+    "es": "Describe filtraciones, daños o sustitución",
+    "ro": "Descrie infiltrațiile, deteriorările sau înlocuirea"
+  },
+  "Repair estimate is an inspection / call-out fee only. Repairs, decking and structural work are quoted after inspection.": {
+    "es": "La estimación solo cubre la visita. Las reparaciones se presupuestan tras inspección.",
+    "ro": "Estimarea acoperă doar inspecția/deplasarea. Reparațiile se ofertează după inspecție."
+  },
+  "What do you need?": {
+    "es": "¿Qué necesitas?",
+    "ro": "De ce ai nevoie?"
+  },
+  "Replace system": {
+    "es": "Sustituir sistema",
+    "ro": "Înlocuire sistem"
+  },
+  "New install": {
+    "es": "Nueva instalación",
+    "ro": "Instalare nouă"
+  },
+  "Property floor area": {
+    "es": "Superficie del inmueble",
+    "ro": "Suprafața utilă a proprietății"
+  },
+  "System": {
+    "es": "Sistema",
+    "ro": "Sistem"
+  },
+  "AC": {
+    "es": "Aire acondicionado",
+    "ro": "Aer condiționat"
+  },
+  "Heat pump": {
+    "es": "Bomba de calor",
+    "ro": "Pompă de căldură"
+  },
+  "Furnace + AC": {
+    "es": "Calefacción y aire acondicionado",
+    "ro": "Încălzire și aer condiționat"
+  },
+  "Ductwork condition": {
+    "es": "Estado de conductos",
+    "ro": "Starea tubulaturii"
+  },
+  "Existing ducts usable": {
+    "es": "Conductos existentes utilizables",
+    "ro": "Tubulatura existentă este utilizabilă"
+  },
+  "New ducts required": {
+    "es": "Se necesitan conductos nuevos",
+    "ro": "Necesită tubulatură nouă"
+  },
+  "Not sure": {
+    "es": "No lo sé",
+    "ro": "Nu știu"
+  },
+  "Fault, equipment age or installation requirements": {
+    "es": "Avería, antigüedad o requisitos de instalación",
+    "ro": "Defecțiune, vechimea echipamentului sau cerințe de instalare"
+  },
+  "Repair estimate is the diagnostic visit fee. Equipment sizing, repair parts, permits and ductwork need professional assessment.": {
+    "es": "La estimación cubre el diagnóstico. Equipos, piezas y conductos requieren evaluación profesional.",
+    "ro": "Estimarea acoperă vizita de diagnostic. Dimensionarea, piesele și tubulatura necesită evaluare profesională."
+  },
+  "Rooms": {
+    "es": "Habitaciones",
+    "ro": "Camere"
+  },
+  "Distance": {
+    "es": "Distancia",
+    "ro": "Distanță"
+  },
+  "Stairs?": {
+    "es": "¿Escaleras?",
+    "ro": "Există scări?"
+  },
+  "Packing help?": {
+    "es": "¿Ayuda para embalar?",
+    "ro": "Ajutor pentru împachetare?"
+  },
+  "Destination ZIP / postcode": {
+    "es": "Código postal de destino",
+    "ro": "Cod poștal destinație"
+  },
+  "Collection access": {
+    "es": "Acceso en recogida",
+    "ro": "Acces la preluare"
+  },
+  "Ground floor": {
+    "es": "Planta baja",
+    "ro": "Parter"
+  },
+  "Elevator": {
+    "es": "Ascensor",
+    "ro": "Lift"
+  },
+  "Stairs": {
+    "es": "Escaleras",
+    "ro": "Scări"
+  },
+  "Delivery access": {
+    "es": "Acceso en entrega",
+    "ro": "Acces la livrare"
+  },
+  "Boxes to pack": {
+    "es": "Cajas para embalar",
+    "ro": "Cutii de împachetat"
+  },
+  "Bulky or fragile items": {
+    "es": "Objetos voluminosos o frágiles",
+    "ro": "Obiecte voluminoase sau fragile"
+  },
+  "Furniture inventory and special handling": {
+    "es": "Inventario de muebles y manipulación especial",
+    "ro": "Inventar mobilier și manipulare specială"
+  },
+  "Include pianos, safes, disassembly, parking restrictions and storage. Long-distance work needs a confirmed inventory.": {
+    "es": "Indica pianos, cajas fuertes, desmontaje y estacionamiento. Las mudanzas lejanas necesitan inventario confirmado.",
+    "ro": "Include piane, seifuri, demontare și restricții de parcare. Mutările la distanță necesită inventar confirmat."
+  },
+  "Driveway": {
+    "es": "Entrada de vehículos",
+    "ro": "Alee auto"
+  },
+  "Siding": {
+    "es": "Fachada",
+    "ro": "Fațadă"
+  },
+  "Deck/patio": {
+    "es": "Terraza/patio",
+    "ro": "Terasă/curte"
+  },
+  "Normal": {
+    "es": "Normal",
+    "ro": "Normală"
+  },
+  "Heavy staining": {
+    "es": "Manchas intensas",
+    "ro": "Pete dificile"
+  },
+  "Working height": {
+    "es": "Altura de trabajo",
+    "ro": "Înălțimea de lucru"
+  },
+  "Ground level": {
+    "es": "A nivel del suelo",
+    "ro": "La sol"
+  },
+  "Two stories": {
+    "es": "Dos plantas",
+    "ro": "Două etaje"
+  },
+  "Three stories": {
+    "es": "Tres plantas",
+    "ro": "Trei etaje"
+  },
+  "Water supply on site": {
+    "es": "Agua en el lugar",
+    "ro": "Apă disponibilă la locație"
+  },
+  "Available": {
+    "es": "Disponible",
+    "ro": "Disponibilă"
+  },
+  "Unavailable": {
+    "es": "No disponible",
+    "ro": "Indisponibilă"
+  },
+  "Oil, rust or heavy stain area": {
+    "es": "Superficie con aceite, óxido o manchas",
+    "ro": "Suprafața cu ulei, rugină sau pete dificile"
+  },
+  "Vehicle": {
+    "es": "Vehículo",
+    "ro": "Vehicul"
+  },
+  "Sedan": {
+    "es": "Sedán",
+    "ro": "Sedan"
+  },
+  "SUV": {
+    "es": "SUV",
+    "ro": "SUV"
+  },
+  "Truck/van": {
+    "es": "Camioneta/furgoneta",
+    "ro": "Camionetă/dubă"
+  },
+  "Package": {
+    "es": "Paquete",
+    "ro": "Pachet"
+  },
+  "Full detail": {
+    "es": "Detallado completo",
+    "ro": "Detailing complet"
+  },
+  "Heavy": {
+    "es": "Intenso",
+    "ro": "Dificilă"
+  },
+  "Pet hair": {
+    "es": "Pelo de mascotas",
+    "ro": "Păr de animale"
+  },
+  "Engine bay": {
+    "es": "Compartimento del motor",
+    "ro": "Compartiment motor"
+  },
+  "Headlights": {
+    "es": "Faros",
+    "ro": "Faruri"
+  },
+  "Service location": {
+    "es": "Lugar del servicio",
+    "ro": "Locația serviciului"
+  },
+  "At detailing shop": {
+    "es": "En el taller",
+    "ro": "La atelier"
+  },
+  "Mobile at customer address": {
+    "es": "En la dirección del cliente",
+    "ro": "La adresa clientului"
+  },
+  "Paint protection": {
+    "es": "Protección de pintura",
+    "ro": "Protecția vopselei"
+  },
+  "None": {
+    "es": "Ninguna",
+    "ro": "Niciuna"
+  },
+  "Wax": {
+    "es": "Cera",
+    "ro": "Ceară"
+  },
+  "Sealant": {
+    "es": "Sellador",
+    "ro": "Protecție sintetică"
+  },
+  "ZIP / postcode and vehicle details": {
+    "es": "Código postal y datos del vehículo",
+    "ro": "Cod poștal și detalii vehicul"
+  },
+  "Give make, model and access to water / power for mobile visits.": {
+    "es": "Indica marca, modelo y acceso a agua/electricidad.",
+    "ro": "Indică marca, modelul și accesul la apă/curent pentru deplasări."
+  },
+  "Estimated labor hours (if known)": {
+    "es": "Horas de trabajo estimadas (si se conocen)",
+    "ro": "Ore de lucru estimate (dacă sunt cunoscute)"
+  },
+  "Materials allowance": {
+    "es": "Presupuesto de materiales",
+    "ro": "Buget materiale"
+  },
+  "Small": {
+    "es": "Pequeño",
+    "ro": "Mic"
+  },
+  "Large": {
+    "es": "Grande",
+    "ro": "Mare"
+  },
+  "Urgent / same-day?": {
+    "es": "¿Urgente / mismo día?",
+    "ro": "Urgent / în aceeași zi?"
+  },
+  "Work required": {
+    "es": "Trabajo necesario",
+    "ro": "Lucrarea necesară"
+  },
+  "Furniture assembly": {
+    "es": "Montaje de muebles",
+    "ro": "Montaj mobilier"
+  },
+  "Wall mounting": {
+    "es": "Montaje en pared",
+    "ro": "Montaj pe perete"
+  },
+  "Minor repair": {
+    "es": "Reparación menor",
+    "ro": "Reparație minoră"
+  },
+  "Several small tasks": {
+    "es": "Varias tareas pequeñas",
+    "ro": "Mai multe lucrări mici"
+  },
+  "Describe tasks and quantities": {
+    "es": "Describe tareas y cantidades",
+    "ro": "Descrie lucrările și cantitățile"
+  },
+  "A business confirms labor hours, materials and suitability before starting. Specialist licensed work is assessed separately.": {
+    "es": "La empresa confirma horas y materiales antes de empezar. Los trabajos especializados se evalúan aparte.",
+    "ro": "Afacerea confirmă orele și materialele înainte de începere. Lucrările autorizate se evaluează separat."
+  },
+  "Laminate": {
+    "es": "Laminado",
+    "ro": "Parchet laminat"
+  },
+  "Vinyl": {
+    "es": "Vinilo",
+    "ro": "Vinil"
+  },
+  "Hardwood": {
+    "es": "Madera maciza",
+    "ro": "Lemn masiv"
+  },
+  "Remove old floor?": {
+    "es": "¿Retirar suelo antiguo?",
+    "ro": "Se îndepărtează pardoseala veche?"
+  },
+  "Old flooring to remove": {
+    "es": "Suelo antiguo a retirar",
+    "ro": "Pardoseala veche de îndepărtat"
+  },
+  "Skirting / baseboard length": {
+    "es": "Longitud de rodapiés",
+    "ro": "Lungimea plintelor"
+  },
+  "Stair treads to cover": {
+    "es": "Peldaños a revestir",
+    "ro": "Trepte de placat"
+  },
+  "Flooring supply": {
+    "es": "Suministro de suelo",
+    "ro": "Furnizarea pardoselii"
+  },
+  "Customer supplies flooring": {
+    "es": "El cliente aporta el suelo",
+    "ro": "Clientul furnizează pardoseala"
+  },
+  "Business supplies flooring": {
+    "es": "La empresa aporta el suelo",
+    "ro": "Afacerea furnizează pardoseala"
+  },
+  "Subfloor condition": {
+    "es": "Estado de la base",
+    "ro": "Starea stratului suport"
+  },
+  "Ready": {
+    "es": "Listo",
+    "ro": "Pregătit"
+  },
+  "Leveling needed": {
+    "es": "Se necesita nivelación",
+    "ro": "Necesită nivelare"
+  },
+  "Damage / damp suspected": {
+    "es": "Posibles daños / humedad",
+    "ro": "Posibile deteriorări / umezeală"
+  },
+  "Flooring product and subfloor details": {
+    "es": "Producto de suelo y detalles de la base",
+    "ro": "Produsul de pardoseală și stratul suport"
+  },
+  "Material supply, moisture issues and repairs are confirmed after inspection.": {
+    "es": "Los materiales, la humedad y las reparaciones se confirman tras inspección.",
+    "ro": "Materialele, umezeala și reparațiile se confirmă după inspecție."
+  },
+  "Number of windows": {
+    "es": "Número de ventanas",
+    "ro": "Numărul de ferestre"
+  },
+  "Window type": {
+    "es": "Tipo de ventana",
+    "ro": "Tip de fereastră"
+  },
+  "Large/picture": {
+    "es": "Grande/panorámica",
+    "ro": "Mare/panoramică"
+  },
+  "Custom": {
+    "es": "A medida",
+    "ro": "La comandă"
+  },
+  "Stories": {
+    "es": "Plantas",
+    "ro": "Etaje"
+  },
+  "Frame material": {
+    "es": "Material del marco",
+    "ro": "Materialul ramei"
+  },
+  "Aluminum": {
+    "es": "Aluminio",
+    "ro": "Aluminiu"
+  },
+  "Wood": {
+    "es": "Madera",
+    "ro": "Lemn"
+  },
+  "Installation scope": {
+    "es": "Tipo de instalación",
+    "ro": "Tip de instalare"
+  },
+  "Replacement in existing opening": {
+    "es": "Sustitución en hueco existente",
+    "ro": "Înlocuire în golul existent"
+  },
+  "New opening / structural work": {
+    "es": "Nuevo hueco / obra estructural",
+    "ro": "Gol nou / lucrări structurale"
+  },
+  "Glass requirement": {
+    "es": "Requisitos de vidrio",
+    "ro": "Cerințe pentru sticlă"
+  },
+  "Double glazing": {
+    "es": "Doble acristalamiento",
+    "ro": "Geam dublu"
+  },
+  "Triple glazing": {
+    "es": "Triple acristalamiento",
+    "ro": "Geam triplu"
+  },
+  "Specialist / safety glass": {
+    "es": "Vidrio especial / de seguridad",
+    "ro": "Sticlă specială / de siguranță"
+  },
+  "Window dimensions and room locations": {
+    "es": "Dimensiones y ubicación de ventanas",
+    "ro": "Dimensiunile și amplasarea ferestrelor"
+  },
+  "Custom sizes, structural openings and specialist glass require a measured site survey.": {
+    "es": "Las medidas especiales y el vidrio especializado requieren visita y medición.",
+    "ro": "Dimensiunile speciale, golurile structurale și sticla specială necesită măsurători la locație."
+  },
+  "Fence length": {
+    "es": "Longitud de valla",
+    "ro": "Lungimea gardului"
+  },
+  "Gates": {
+    "es": "Puertas de acceso",
+    "ro": "Porți"
+  },
+  "Existing fence to remove": {
+    "es": "Valla existente a retirar",
+    "ro": "Gard existent de îndepărtat"
+  },
+  "Fence height": {
+    "es": "Altura de valla",
+    "ro": "Înălțimea gardului"
+  },
+  "Four feet": {
+    "es": "1,22 m",
+    "ro": "1,22 m"
+  },
+  "Six feet": {
+    "es": "1,83 m",
+    "ro": "1,83 m"
+  },
+  "Eight feet": {
+    "es": "2,44 m",
+    "ro": "2,44 m"
+  },
+  "Ground conditions": {
+    "es": "Estado del terreno",
+    "ro": "Condițiile terenului"
+  },
+  "Level / easy access": {
+    "es": "Llano / acceso fácil",
+    "ro": "Plat / acces ușor"
+  },
+  "Sloped": {
+    "es": "En pendiente",
+    "ro": "În pantă"
+  },
+  "Rocky / restricted access": {
+    "es": "Rocoso / acceso limitado",
+    "ro": "Pietros / acces limitat"
+  },
+  "Gate widths and requirements": {
+    "es": "Anchura y requisitos de puertas",
+    "ro": "Lățimea porților și cerințe"
+  },
+  "Describe single, double or automated gates. Boundaries, utilities and permits must be checked.": {
+    "es": "Describe puertas simples, dobles o automáticas. Hay que verificar límites, servicios y permisos.",
+    "ro": "Descrie porțile simple, duble sau automate. Limitele, utilitățile și autorizațiile trebuie verificate."
+  },
+  "Pest": {
+    "es": "Plaga",
+    "ro": "Dăunător"
+  },
+  "Ants": {
+    "es": "Hormigas",
+    "ro": "Furnici"
+  },
+  "Rodents": {
+    "es": "Roedores",
+    "ro": "Rozătoare"
+  },
+  "Bed bugs": {
+    "es": "Chinches",
+    "ro": "Ploșnițe"
+  },
+  "Termites": {
+    "es": "Termitas",
+    "ro": "Termite"
+  },
+  "Severity": {
+    "es": "Gravedad",
+    "ro": "Severitate"
+  },
+  "High": {
+    "es": "Alta",
+    "ro": "Mare"
+  },
+  "Commercial": {
+    "es": "Comercial",
+    "ro": "Comercial"
+  },
+  "Service required": {
+    "es": "Servicio necesario",
+    "ro": "Serviciu necesar"
+  },
+  "Initial visit": {
+    "es": "Visita inicial",
+    "ro": "Vizită inițială"
+  },
+  "Recurring prevention": {
+    "es": "Prevención periódica",
+    "ro": "Prevenție periodică"
+  },
+  "Number of affected rooms": {
+    "es": "Número de habitaciones afectadas",
+    "ro": "Numărul de camere afectate"
+  },
+  "Where and when have you seen pest activity?": {
+    "es": "¿Dónde y cuándo has visto actividad?",
+    "ro": "Unde și când ai observat dăunători?"
+  },
+  "Species, infestation extent and treatment suitability are confirmed at inspection; follow-up treatment is not automatically included.": {
+    "es": "La especie y el tratamiento se confirman tras inspección; las revisitas no se incluyen automáticamente.",
+    "ro": "Specia și tratamentul se confirmă la inspecție; tratamentele ulterioare nu sunt incluse automat."
+  },
+  "Shoot type": {
+    "es": "Tipo de sesión",
+    "ro": "Tip de ședință"
+  },
+  "Portrait": {
+    "es": "Retrato",
+    "ro": "Portret"
+  },
+  "Event": {
+    "es": "Evento",
+    "ro": "Eveniment"
+  },
+  "Hours": {
+    "es": "Horas",
+    "ro": "Ore"
+  },
+  "Second photographer": {
+    "es": "Segundo fotógrafo",
+    "ro": "Al doilea fotograf"
+  },
+  "Rush delivery": {
+    "es": "Entrega urgente",
+    "ro": "Livrare urgentă"
+  },
+  "Album": {
+    "es": "Álbum",
+    "ro": "Album"
+  },
+  "Intended image use": {
+    "es": "Uso previsto de imágenes",
+    "ro": "Utilizarea imaginilor"
+  },
+  "Personal use": {
+    "es": "Uso personal",
+    "ro": "Uz personal"
+  },
+  "Business website / social": {
+    "es": "Web / redes de la empresa",
+    "ro": "Site / rețele sociale ale afacerii"
+  },
+  "Advertising campaign": {
+    "es": "Campaña publicitaria",
+    "ro": "Campanie publicitară"
+  },
+  "Travel distance": {
+    "es": "Distancia de desplazamiento",
+    "ro": "Distanța deplasării"
+  },
+  "Date, location and photography brief": {
+    "es": "Fecha, lugar y descripción de la sesión",
+    "ro": "Data, locația și descrierea ședinței"
+  },
+  "Specify edited image count, delivery deadline and usage needs. Commercial licensing, venue costs and availability require confirmation.": {
+    "es": "Indica fotos editadas, plazo y uso. Licencias, costes del lugar y disponibilidad requieren confirmación.",
+    "ro": "Indică numărul de imagini, termenul și utilizarea. Licențele, costurile locației și disponibilitatea necesită confirmare."
+  },
+  "Painting estimate": {
+    "es": "Estimación: Pintura",
+    "ro": "Estimare: Zugrăveli"
+  },
+  "Residential interior/exterior painting with prep, stories and scope adjustments. Budget estimate only; final scope and price are confirmed by the business.": {
+    "es": "Pintura interior y exterior. Estimación orientativa; la empresa confirma el trabajo y el precio final.",
+    "ro": "Zugrăveli interioare și exterioare. Estimare orientativă; afacerea confirmă lucrarea și prețul final."
+  },
+  "Cleaning estimate": {
+    "es": "Estimación: Limpieza",
+    "ro": "Estimare: Curățenie"
+  },
+  "Standard, deep and move-out cleaning with room-level pricing. Budget estimate only; final scope and price are confirmed by the business.": {
+    "es": "Limpieza habitual, profunda o tras una mudanza. Estimación orientativa; la empresa confirma el trabajo y el precio final.",
+    "ro": "Curățenie obișnuită, generală sau după mutare. Estimare orientativă; afacerea confirmă lucrarea și prețul final."
+  },
+  "Tiling estimate": {
+    "es": "Estimación: Alicatado",
+    "ro": "Estimare: Montaj gresie și faianță"
+  },
+  "Tile installation quote with demolition, prep and tile-size complexity. Budget estimate only; final scope and price are confirmed by the business.": {
+    "es": "Instalación de baldosas y preparación de superficies. Estimación orientativa; la empresa confirma el trabajo y el precio final.",
+    "ro": "Montaj plăci și pregătirea suprafețelor. Estimare orientativă; afacerea confirmă lucrarea și prețul final."
+  },
+  "Landscaping estimate": {
+    "es": "Estimación: Jardinería",
+    "ro": "Estimare: Amenajări grădini"
+  },
+  "Yard projects priced by area, service and access. Budget estimate only; final scope and price are confirmed by the business.": {
+    "es": "Mantenimiento y diseño de jardines. Estimación orientativa; la empresa confirma el trabajo y el precio final.",
+    "ro": "Întreținere și amenajare grădini. Estimare orientativă; afacerea confirmă lucrarea și prețul final."
+  },
+  "Roofing estimate": {
+    "es": "Estimación: Tejados",
+    "ro": "Estimare: Acoperișuri"
+  },
+  "Roof replacement/repair estimator with pitch and material adjustments. Budget estimate only; final scope and price are confirmed by the business.": {
+    "es": "Reparación y sustitución de tejados. Estimación orientativa; la empresa confirma el trabajo y el precio final.",
+    "ro": "Reparații și înlocuire acoperișuri. Estimare orientativă; afacerea confirmă lucrarea și prețul final."
+  },
+  "HVAC estimate": {
+    "es": "Estimación: Climatización",
+    "ro": "Estimare: Climatizare"
+  },
+  "HVAC repair/replacement pre-qualification and budget estimate. Budget estimate only; final scope and price are confirmed by the business.": {
+    "es": "Diagnóstico e instalación de climatización. Estimación orientativa; la empresa confirma el trabajo y el precio final.",
+    "ro": "Diagnostic și instalare climatizare. Estimare orientativă; afacerea confirmă lucrarea și prețul final."
+  },
+  "Moving estimate": {
+    "es": "Estimación: Mudanzas",
+    "ro": "Estimare: Mutări"
+  },
+  "Local moving estimate by home size, distance and access. Budget estimate only; final scope and price are confirmed by the business.": {
+    "es": "Mudanzas con distancia y acceso. Estimación orientativa; la empresa confirma el trabajo y el precio final.",
+    "ro": "Mutări în funcție de distanță și acces. Estimare orientativă; afacerea confirmă lucrarea și prețul final."
+  },
+  "Pressure washing estimate": {
+    "es": "Estimación: Limpieza a presión",
+    "ro": "Estimare: Spălare cu presiune"
+  },
+  "Driveway, siding, deck and patio instant estimate. Budget estimate only; final scope and price are confirmed by the business.": {
+    "es": "Limpieza de superficies a presión. Estimación orientativa; la empresa confirma el trabajo y el precio final.",
+    "ro": "Curățarea suprafețelor cu presiune. Estimare orientativă; afacerea confirmă lucrarea și prețul final."
+  },
+  "Auto detailing estimate": {
+    "es": "Estimación: Detallado de vehículos",
+    "ro": "Estimare: Detailing auto"
+  },
+  "Vehicle detailing estimate by vehicle size, package and condition. Budget estimate only; final scope and price are confirmed by the business.": {
+    "es": "Limpieza y protección del vehículo. Estimación orientativa; la empresa confirma el trabajo y el precio final.",
+    "ro": "Curățare și protecție vehicul. Estimare orientativă; afacerea confirmă lucrarea și prețul final."
+  },
+  "Handyman estimate": {
+    "es": "Estimación: Pequeñas reparaciones",
+    "ro": "Estimare: Reparații și montaj"
+  },
+  "Small-job estimate using expected hours and materials. Budget estimate only; final scope and price are confirmed by the business.": {
+    "es": "Reparaciones y montaje por horas. Estimación orientativa; la empresa confirma el trabajo y el precio final.",
+    "ro": "Reparații și montaj cu tarif orar. Estimare orientativă; afacerea confirmă lucrarea și prețul final."
+  },
+  "Flooring estimate": {
+    "es": "Estimación: Suelos",
+    "ro": "Estimare: Pardoseli"
+  },
+  "Floor installation with removal and material complexity. Budget estimate only; final scope and price are confirmed by the business.": {
+    "es": "Instalación de suelos y preparación. Estimación orientativa; la empresa confirma el trabajo y el precio final.",
+    "ro": "Montaj pardoseli și pregătire. Estimare orientativă; afacerea confirmă lucrarea și prețul final."
+  },
+  "Window estimate": {
+    "es": "Estimación: Ventanas",
+    "ro": "Estimare: Ferestre"
+  },
+  "Window replacement estimate by count, type and stories. Budget estimate only; final scope and price are confirmed by the business.": {
+    "es": "Sustitución e instalación de ventanas. Estimación orientativa; la empresa confirma el trabajo y el precio final.",
+    "ro": "Înlocuire și instalare ferestre. Estimare orientativă; afacerea confirmă lucrarea și prețul final."
+  },
+  "Fencing estimate": {
+    "es": "Estimación: Vallas",
+    "ro": "Estimare: Garduri"
+  },
+  "Fence installation by length, material and gate count. Budget estimate only; final scope and price are confirmed by the business.": {
+    "es": "Instalación de vallas y puertas. Estimación orientativa; la empresa confirma el trabajo y el precio final.",
+    "ro": "Instalare garduri și porți. Estimare orientativă; afacerea confirmă lucrarea și prețul final."
+  },
+  "Pest control estimate": {
+    "es": "Estimación: Control de plagas",
+    "ro": "Estimare: Combaterea dăunătorilor"
+  },
+  "Treatment estimate by property size, pest type and severity. Budget estimate only; final scope and price are confirmed by the business.": {
+    "es": "Inspección y control de plagas. Estimación orientativa; la empresa confirma el trabajo y el precio final.",
+    "ro": "Inspecție și combaterea dăunătorilor. Estimare orientativă; afacerea confirmă lucrarea și prețul final."
+  },
+  "Photography estimate": {
+    "es": "Estimación: Fotografía",
+    "ro": "Estimare: Fotografie"
+  },
+  "Event and commercial photography estimate by hours and deliverables. Budget estimate only; final scope and price are confirmed by the business.": {
+    "es": "Sesiones de fotografía y entregables. Estimación orientativa; la empresa confirma el trabajo y el precio final.",
+    "ro": "Ședințe foto și livrabile. Estimare orientativă; afacerea confirmă lucrarea și prețul final."
+  },
+  "Your business": {
+    "es": "Tu empresa",
+    "ro": "Afacerea ta"
+  },
+  "Your calculator": {
+    "es": "Tu calculadora",
+    "ro": "Calculatorul tău"
+  },
+  "Calculator setup": {
+    "es": "Configurar calculadora",
+    "ro": "Configurarea calculatorului"
+  },
+  "Choose": {
+    "es": "Elegir",
+    "ro": "Alege"
+  },
+  "Opening…": {
+    "es": "Abriendo…",
+    "ro": "Se deschide…"
+  },
+  "Edit pricing and preview the customer experience side by side.": {
+    "es": "Configura tu calculadora y prueba la experiencia del cliente.",
+    "ro": "Configurează calculatorul și testează experiența clientului."
+  },
+  "Choose an industry template, enter your prices and save your calculator. Share its link with customers or add it to your website. Customer requests appear here and in your leads list.": {
+    "es": "Elige una plantilla, introduce tus precios y guarda la calculadora. Comparte el enlace y recibe solicitudes.",
+    "ro": "Alege un șablon, introdu prețurile și salvează calculatorul. Distribuie linkul și primește solicitări."
+  },
+  "Archive calculators to free a plan slot while keeping their leads. After a downgrade, the oldest active calculators remain available within the new plan limit.": {
+    "es": "Archiva calculadoras sin perder solicitudes. Tras cambiar a un plan inferior, las más antiguas siguen activas dentro del límite.",
+    "ro": "Arhivează calculatoare fără să pierzi solicitările. La trecerea la un plan inferior, cele mai vechi rămân active în limita planului."
+  },
+  "Browse 15 templates": {
+    "es": "Ver las 15 plantillas",
+    "ro": "Vezi cele 15 șabloane"
+  },
+  "Built for service businesses": {
+    "es": "Para empresas de servicios",
+    "ro": "Pentru afaceri de servicii"
+  },
+  "Explore the calculator demos": {
+    "es": "Explorar demostraciones",
+    "ro": "Explorează demonstrațiile"
+  },
+  "For example: area in square metres": {
+    "es": "Por ejemplo: superficie en metros cuadrados",
+    "ro": "De exemplu: suprafața în metri pătrați"
+  },
+  "Incompatible measurement units": {
+    "es": "Unidades de medida incompatibles",
+    "ro": "Unități de măsură incompatibile"
+  },
+  "Launch an industry-ready instant quote flow, capture qualified leads and turn estimates into booked work.": {
+    "es": "Crea una calculadora para tu sector, recibe solicitudes y consigue nuevos trabajos.",
+    "ro": "Creează un calculator pentru domeniul tău, primește solicitări și obține lucrări noi."
+  },
+  "No formula language and no CRM migration. Pick an industry, adjust pricing and embed the flow into a website.": {
+    "es": "Elige tu sector, personaliza tus tarifas e integra la calculadora en tu web.",
+    "ro": "Alege domeniul, personalizează tarifele și integrează calculatorul pe site."
+  },
+  "Quote → Qualify → Follow up → Book → Pay": {
+    "es": "Estimar → Contactar → Confirmar",
+    "ro": "Estimează → Contactează → Confirmă"
+  },
+  "Ready-made flows": {
+    "es": "Plantillas listas para usar",
+    "ro": "Șabloane gata de folosit"
+  },
+  "Try painting demo": {
+    "es": "Probar demo de pintura",
+    "ro": "Încearcă demonstrația pentru zugrăveli"
+  },
+  "Turn your website into a quoting machine.": {
+    "es": "Convierte visitas en solicitudes de presupuesto.",
+    "ro": "Transformă vizitatorii în solicitări de ofertă."
+  },
+  "Subscription pricing will be announced before paid plans become available. Lead allowances reset on the first day of each month in UTC. Unused allowances do not roll over. Stripe payment processing fees are separate. Booking requests require business confirmation.": {
+    "es": "Los precios se anunciarán antes del lanzamiento de pagos. Los límites se reinician cada mes en UTC y no se acumulan. Las comisiones de Stripe son aparte. Las reservas requieren confirmación.",
+    "ro": "Prețurile vor fi anunțate înainte de lansarea plăților. Limitele se resetează lunar în UTC și nu se reportează. Comisioanele Stripe sunt separate. Programările necesită confirmare."
+  },
+  "Email me a sign-in link": {
+    "es": "Enviarme un enlace de acceso",
+    "ro": "Trimite-mi un link de autentificare"
+  },
+  "calculators ·": {
+    "es": "calculadoras ·",
+    "ro": "calculatoare ·"
+  },
+  "enquiries this month": {
+    "es": "solicitudes este mes",
+    "ro": "solicitări luna aceasta"
+  },
+  "No quotes yet": {
+    "es": "Sin estimaciones aún",
+    "ro": "Fără estimări încă"
+  },
+  "Current pipeline": {
+    "es": "Estado actual",
+    "ro": "Situația curentă"
+  },
+  "Booked or won / leads": {
+    "es": "Reservadas o ganadas / solicitudes",
+    "ro": "Programate sau câștigate / solicitări"
+  },
+  " · Archived": {
+    "es": " · Archivada",
+    "ro": " · Arhivat"
+  },
+  "of": {
+    "es": "de",
+    "ro": "din"
+  },
+  "Checkout cancelled": {
+    "es": "Pago cancelado",
+    "ro": "Plată anulată"
+  },
+  "Checkout complete": {
+    "es": "Proceso de pago completado",
+    "ro": "Proces de plată finalizat"
+  },
+  "You can return to your quote and reopen the deposit checkout when you are ready.": {
+    "es": "Puedes volver a tu estimación y pagar el anticipo cuando quieras.",
+    "ro": "Poți reveni la estimare și redeschide plata avansului când ești pregătit."
+  },
+  "Your business will confirm your deposit and booking details. Paying a deposit does not confirm a booking.": {
+    "es": "La empresa confirmará el anticipo y la reserva. El pago no confirma la reserva.",
+    "ro": "Afacerea va confirma avansul și programarea. Plata avansului nu confirmă programarea."
+  },
+  "Billing status": {
+    "es": "Estado de facturación",
+    "ro": "Starea abonamentului"
+  },
+  "Current period ends": {
+    "es": "El periodo actual finaliza",
+    "ro": "Perioada curentă se încheie"
+  },
+  "Basic trial ends": {
+    "es": "La prueba Basic finaliza",
+    "ro": "Perioada de test Basic se încheie"
+  },
+  "Could not save calculator": {
+    "es": "No se pudo guardar la calculadora",
+    "ro": "Calculatorul nu a putut fi salvat"
+  },
+  "Could not update status": {
+    "es": "No se pudo actualizar el estado",
+    "ro": "Starea nu a putut fi actualizată"
+  },
+  "Could not complete request": {
+    "es": "No se pudo completar la solicitud",
+    "ro": "Solicitarea nu a putut fi finalizată"
+  },
+  "Email alert is queued. If it was attempted recently, allow up to 15 minutes for the next retry.": {
+    "es": "La alerta está en cola. Espera hasta 15 minutos para el siguiente intento.",
+    "ro": "Alerta este în așteptare. Așteaptă până la 15 minute pentru reîncercare."
+  },
+  "Email provider accepted the alert. Check the owner's inbox and spam folder.": {
+    "es": "El proveedor aceptó la alerta. Revisa la bandeja de entrada y spam del propietario.",
+    "ro": "Furnizorul a acceptat alerta. Verifică inboxul și spamul proprietarului."
+  },
+  "Your reply goes to the customer.": {
+    "es": "Tu respuesta llega al cliente.",
+    "ro": "Răspunsul tău ajunge la client."
+  },
+  "No business email recipient was available when this enquiry arrived.": {
+    "es": "No había un destinatario disponible para esta alerta.",
+    "ro": "Nu exista un destinatar pentru alerta acestei solicitări."
+  },
+  "Email alerts are not configured. This enquiry is safely saved in your dashboard.": {
+    "es": "Las alertas no están configuradas. La solicitud está guardada.",
+    "ro": "Alertele nu sunt configurate. Solicitarea este salvată în panou."
+  },
+  "Email alert is queued for sending. Automatic retries run every 15 minutes when scheduling is configured.": {
+    "es": "Alerta en cola. Los reintentos se ejecutan cada 15 minutos si están configurados.",
+    "ro": "Alerta este în așteptare. Reîncercările rulează la 15 minute dacă sunt configurate."
+  },
+  "Email alert accepted by the email provider. Inbox delivery is not guaranteed; check spam if it is missing.": {
+    "es": "Alerta aceptada por el proveedor. Revisa spam si no llega.",
+    "ro": "Alerta a fost acceptată de furnizor. Verifică spamul dacă nu a ajuns."
+  },
+  "Email accepted for sending.": {
+    "es": "Email aceptado para envío.",
+    "ro": "Email acceptat pentru trimitere."
+  },
+  "Email remains queued. Check the sending configuration and try again later.": {
+    "es": "Email en cola. Revisa la configuración e inténtalo más tarde.",
+    "ro": "Emailul este în așteptare. Verifică configurarea și încearcă mai târziu."
+  },
+  "Could not retry email delivery.": {
+    "es": "No se pudo reintentar el envío.",
+    "ro": "Trimiterea nu a putut fi reîncercată."
+  },
+  "Business accounts are temporarily unavailable. Please try again later.": {
+    "es": "Las cuentas no están disponibles temporalmente. Inténtalo más tarde.",
+    "ro": "Conturile sunt temporar indisponibile. Încearcă mai târziu."
+  },
+  "This sign-in link is invalid or expired. Request a new link below.": {
+    "es": "El enlace no es válido o ha caducado. Solicita uno nuevo.",
+    "ro": "Linkul este invalid sau a expirat. Solicită unul nou."
+  },
+  "Could not send sign-in link": {
+    "es": "No se pudo enviar el enlace de acceso",
+    "ro": "Linkul de autentificare nu a putut fi trimis"
+  },
+  "Request could not be completed": {
+    "es": "No se pudo completar la solicitud",
+    "ro": "Solicitarea nu a putut fi finalizată"
+  },
+  "First option": {
+    "es": "Primera opción",
+    "ro": "Prima opțiune"
+  },
+  "New option": {
+    "es": "Nueva opción",
+    "ro": "Opțiune nouă"
+  },
+  "New question": {
+    "es": "Nueva pregunta",
+    "ro": "Întrebare nouă"
+  },
+  "active": {
+    "es": "Activo",
+    "ro": "Activ"
+  },
+  "trialing": {
+    "es": "En prueba",
+    "ro": "În perioada de test"
+  },
+  "past_due": {
+    "es": "Pago pendiente",
+    "ro": "Plată restantă"
+  },
+  "canceled": {
+    "es": "Cancelado",
+    "ro": "Anulat"
+  },
+  "Calculator limit reached; upgrade your plan": {
+    "es": "Límite de calculadoras alcanzado; amplía tu plan",
+    "ro": "Limita de calculatoare a fost atinsă; alege un plan superior"
+  },
+  "Another edit was saved. Reload before saving again.": {
+    "es": "Se guardó otra versión. Recarga antes de guardar.",
+    "ro": "A fost salvată o altă modificare. Reîncarcă înainte de salvare."
+  },
+  "Your follow-up email preferences have been saved.": {
+    "es": "Se han guardado tus preferencias de email.",
+    "ro": "Preferințele pentru mementouri au fost salvate."
+  },
+  "Language selection does not change your prices.": {
+    "es": "El idioma no cambia tus precios.",
+    "ro": "Limba nu modifică prețurile."
+  },
+  "More customization": {
+    "es": "Más personalización",
+    "ro": "Mai multă personalizare"
+  },
+  "Not published": {
+    "es": "Sin publicar",
+    "ro": "Nepublicat"
+  },
+  "1 = unchanged; 1.2 = 20% more.": {
+    "es": "1 = sin cambio; 1,2 = un 20 % más.",
+    "ro": "1 = neschimbat; 1,2 = cu 20% mai mult."
+  },
+  "Add price multiplier": {
+    "es": "Añadir multiplicador de precio",
+    "ro": "Adaugă multiplicator de preț"
+  },
+  "Short text": {
+    "es": "Texto corto",
+    "ro": "Text scurt"
+  },
+  "Postal code": {
+    "es": "Código postal",
+    "ro": "Cod poștal"
+  },
+  "Choose a PNG, JPEG or WebP image under 2 MB.": {
+    "es": "Elige una imagen PNG, JPEG o WebP de menos de 2 MB.",
+    "ro": "Alege o imagine PNG, JPEG sau WebP mai mică de 2 MB."
+  },
+  "Logo dimensions must be at most 4096 × 4096 pixels.": {
+    "es": "El logotipo debe medir como máximo 4096 × 4096 píxeles.",
+    "ro": "Sigla trebuie să aibă cel mult 4096 × 4096 pixeli."
+  },
+  "Your browser could not process this image.": {
+    "es": "El navegador no pudo procesar esta imagen.",
+    "ro": "Browserul nu a putut procesa această imagine."
+  },
+  "Choose a simpler or smaller logo.": {
+    "es": "Elige un logotipo más sencillo o pequeño.",
+    "ro": "Alege o siglă mai simplă sau mai mică."
+  },
+  "Could not read the logo image.": {
+    "es": "No se pudo leer la imagen del logotipo.",
+    "ro": "Imaginea siglei nu a putut fi citită."
+  },
+  "Your business logo preview": {
+    "es": "Vista previa del logotipo de tu empresa",
+    "ro": "Previzualizarea siglei afacerii"
+  },
+  "Optional estimate reminders have been stopped.": {
+    "es": "Se han desactivado los recordatorios opcionales.",
+    "ro": "Reamintirile opționale despre estimare au fost oprite."
+  },
+  "Could not update preferences": {
+    "es": "No se pudieron actualizar las preferencias",
+    "ro": "Preferințele nu au putut fi actualizate"
+  },
+  "Could not update preferences. Please try again.": {
+    "es": "No se pudieron actualizar las preferencias. Inténtalo de nuevo.",
+    "ro": "Preferințele nu au putut fi actualizate. Încearcă din nou."
+  },
+  "Could not update booking": {
+    "es": "No se pudo actualizar la reserva",
+    "ro": "Programarea nu a putut fi actualizată"
+  },
+  "Too many requests. Please try again shortly.": {
+    "es": "Demasiadas solicitudes. Inténtalo de nuevo en unos momentos.",
+    "ro": "Prea multe solicitări. Încearcă din nou în câteva momente."
+  },
+  "This business cannot accept more enquiries right now": {
+    "es": "Esta empresa no puede aceptar más solicitudes por el momento",
+    "ro": "Această afacere nu poate primi solicitări noi momentan"
+  },
+  "Unknown calculator": {
+    "es": "Calculadora no encontrada",
+    "ro": "Calculatorul nu a fost găsit"
+  },
+  "Booking time must be in the future": {
+    "es": "Elige una fecha futura",
+    "ro": "Alege o dată viitoare"
+  },
+  "Booking time is too far in the future": {
+    "es": "Elige una fecha dentro del próximo año",
+    "ro": "Alege o dată în următorul an"
+  },
+  "An active booking already exists": {
+    "es": "Ya existe una reserva activa",
+    "ro": "Există deja o programare activă"
+  },
+  "This submission can no longer be booked": {
+    "es": "Esta solicitud ya no admite reservas",
+    "ro": "Această solicitare nu mai permite programări"
+  },
+  "Booking requests are disabled": {
+    "es": "Las reservas están desactivadas",
+    "ro": "Cererile de programare sunt dezactivate"
+  },
+  "Deposits are disabled": {
+    "es": "Los depósitos están desactivados",
+    "ro": "Avansurile sunt dezactivate"
+  },
+  "Payments are not configured": {
+    "es": "Los pagos aún no están configurados",
+    "ro": "Plățile nu sunt încă configurate"
+  },
+  "This submission is closed": {
+    "es": "Esta solicitud está cerrada",
+    "ro": "Această solicitare este închisă"
+  },
+  "This deposit has already been paid": {
+    "es": "Este depósito ya se ha pagado",
+    "ro": "Acest avans a fost deja plătit"
+  },
+  "The business has not connected its payment account": {
+    "es": "La empresa no ha conectado su cuenta de pagos",
+    "ro": "Afacerea nu și-a conectat contul de plăți"
+  },
+  "The business's payment account is not ready": {
+    "es": "La cuenta de pagos de la empresa aún no está lista",
+    "ro": "Contul de plăți al afacerii nu este încă pregătit"
+  },
+  "This estimate is too small for a card deposit": {
+    "es": "El importe es demasiado bajo para un depósito con tarjeta",
+    "ro": "Valoarea este prea mică pentru un avans cu cardul"
+  },
+  "Invalid request": {
+    "es": "Revisa los datos e inténtalo de nuevo",
+    "ro": "Verifică datele și încearcă din nou"
+  },
+  "Submission not found": {
+    "es": "Solicitud no encontrada",
+    "ro": "Solicitarea nu a fost găsită"
+  },
+  "Booking is not configured": {
+    "es": "Las reservas aún no están configuradas",
+    "ro": "Programările nu sunt încă configurate"
+  }
+}

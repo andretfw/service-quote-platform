@@ -1,3 +1,4 @@
+import { Text } from "@/components/Language";
 import Link from "next/link";
 import { templates } from "@/lib/templates";
 
@@ -5,44 +6,62 @@ export default function Home() {
   return (
     <main className="shell">
       <nav className="nav">
-        <div className="brand">Service Quote</div>
+        <div className="brand">
+          <Text>{"Service Quote"}</Text>
+        </div>
         <div className="row">
-          <Link href="/pricing">Pricing</Link>
-          <Link href="/calculators">Templates</Link>
+          <Link href="/pricing">
+            <Text>{"Pricing"}</Text>
+          </Link>
+          <Link href="/calculators">
+            <Text>{"Templates"}</Text>
+          </Link>
           <Link className="btn" href="/dashboard">
-            Dashboard
+            <Text>{"Dashboard"}</Text>
           </Link>
         </div>
       </nav>
 
       <section className="hero">
         <div>
-          <span className="pill">Quote → Qualify → Follow up → Book → Pay</span>
-          <h1>Turn your website into a quoting machine.</h1>
+          <span className="pill">
+            <Text>{"Quote → Qualify → Follow up → Book → Pay"}</Text>
+          </span>
+          <h1>
+            <Text>{"Turn your website into a quoting machine."}</Text>
+          </h1>
           <p>
-            Launch an industry-ready instant quote flow, capture qualified leads and turn estimates
-            into booked work.
+            <Text>
+              {
+                "Launch an industry-ready instant quote flow, capture qualified leads and turn estimates into booked work."
+              }
+            </Text>
           </p>
           <div className="row" style={{ justifyContent: "flex-start" }}>
             <Link className="btn" href="/q/painting">
-              Try painting demo
+              <Text>{"Try painting demo"}</Text>
             </Link>
             <Link className="btn secondary" href="/calculators">
-              Browse 15 templates
+              <Text>{"Browse 15 templates"}</Text>
             </Link>
           </div>
         </div>
 
         <div className="card">
-          <h3>Built for service businesses</h3>
+          <h3>
+            <Text>{"Built for service businesses"}</Text>
+          </h3>
           <p className="muted">
-            No formula language and no CRM migration. Pick an industry, adjust pricing and embed the
-            flow into a website.
+            <Text>
+              {
+                "No formula language and no CRM migration. Pick an industry, adjust pricing and embed the flow into a website."
+              }
+            </Text>
           </p>
           <div className="grid" style={{ gridTemplateColumns: "repeat(2, 1fr)" }}>
             {templates.slice(0, 6).map((template) => (
               <Link className="option" key={template.slug} href={`/q/${template.slug}`}>
-                {template.industry}
+                <Text>{template.industry}</Text>
               </Link>
             ))}
           </div>
@@ -50,13 +69,21 @@ export default function Home() {
       </section>
 
       <section>
-        <h2>Ready-made flows</h2>
+        <h2>
+          <Text>{"Ready-made flows"}</Text>
+        </h2>
         <div className="grid">
           {templates.map((template) => (
             <Link className="card" key={template.slug} href={`/q/${template.slug}`}>
-              <span className="pill">{template.industry}</span>
-              <h3>{template.name}</h3>
-              <p className="muted">{template.description}</p>
+              <span className="pill">
+                <Text>{template.industry}</Text>
+              </span>
+              <h3>
+                <Text>{template.name}</Text>
+              </h3>
+              <p className="muted">
+                <Text>{template.description}</Text>
+              </p>
             </Link>
           ))}
         </div>

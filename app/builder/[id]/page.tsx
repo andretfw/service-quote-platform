@@ -1,4 +1,7 @@
-import Link from "next/link";
+import { Text } from "@/components/Language";
+import AppShell from "@/components/AppShell";
+import { prepareTemplate } from "@/lib/localization";
+import { uiLocale } from "@/lib/server/locale";
 import { notFound } from "next/navigation";
 import TemplateBuilder from "@/components/TemplateBuilder";
 import { getAppUrl } from "@/lib/server/env";
@@ -38,24 +41,25 @@ export default async function BuilderPage({ params }: { params: Promise<{ id: st
     existing = { id, publicId: calculator.public_id, version: calculator.active_version };
   }
 
+  if (!existing) template = prepareTemplate(template, await uiLocale());
   const appOrigin = getAppUrl("http://localhost:3000");
 
   return (
-    <main className="shell">
-      <div className="nav">
-        <Link className="brand" href="/">
-          Service Quote
-        </Link>
-        <Link href="/calculators">Templates</Link>
-      </div>
-      <h1>Customize {template.name}</h1>
-      <p className="muted">Edit pricing and preview the customer experience side by side.</p>
-      <TemplateBuilder
-        initial={template}
-        appOrigin={appOrigin}
-        plan={workspace.plan}
-        existing={existing}
-      />
-    </main>
+    <AppShell>
+      <main className="shell app-page">
+        <h1>
+          <Text>{"Customize"}</Text> <Text>{template.name}</Text>
+        </h1>
+        <p className="muted">
+          <Text>{"Edit pricing and preview the customer experience side by side."}</Text>
+        </p>
+        <TemplateBuilder
+          initial={template}
+          appOrigin={appOrigin}
+          plan={workspace.plan}
+          existing={existing}
+        />
+      </main>
+    </AppShell>
   );
 }

@@ -1,4 +1,6 @@
 "use client";
+import { Text } from "@/components/Language";
+
 import { useState } from "react";
 
 export default function Unsubscribe({ token }: { token: string }) {
@@ -24,12 +26,20 @@ export default function Unsubscribe({ token }: { token: string }) {
   }
   return (
     <div className="card">
-      <h1>Email preferences</h1>
-      <p>Stop optional follow-up emails for this estimate request.</p>
+      <h1>
+        <Text>{"Email preferences"}</Text>
+      </h1>
+      <p>
+        <Text>{"Stop optional follow-up emails for this estimate request."}</Text>
+      </p>
       <button className="btn" disabled={pending} onClick={() => void unsubscribe()}>
-        Unsubscribe
+        <Text>{"Unsubscribe"}</Text>
       </button>
-      {message && <p role="status">{message}</p>}
+      {message && (
+        <p role="status">
+          <Text>{message}</Text>
+        </p>
+      )}
     </div>
   );
 }

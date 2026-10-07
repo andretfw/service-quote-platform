@@ -1,5 +1,15 @@
 import "server-only";
 import { z } from "zod";
+import { units } from "@/lib/units";
+const localeSchema = z.enum(["en", "es", "ro"]);
+const textTranslations = z.partialRecord(
+  localeSchema,
+  z.object({
+    label: z.string().min(1).max(240),
+    help: z.string().max(500).optional(),
+    options: z.record(z.string().max(120), z.string().min(1).max(120)).optional(),
+  }),
+);
 
 const answerValue = z.union([
   z.string().max(500),
@@ -23,6 +33,7 @@ export const calculateRequestSchema = z.object({
 });
 
 export const submitRequestSchema = z.object({
+  locale: localeSchema.optional(),
   template: z.string().min(1).max(100),
   answers: answersSchema,
   contactConsent: z.literal(true, {
@@ -93,8 +104,16 @@ const questionSchema = z
     step: z.number().positive().finite().optional(),
     options: z.array(optionSchema).max(100).optional(),
     showWhen: z.array(conditionSchema).max(20).optional(),
+    unit: z.enum(Object.keys(units) as [keyof typeof units, ...(keyof typeof units)[]]).optional(),
+    translations: textTranslations.optional(),
   })
   .superRefine((question, ctx) => {
+    if (question.unit && question.type !== "number")
+      ctx.addIssue({
+        code: "custom",
+        path: ["unit"],
+        message: "Only quantity questions can have units",
+      });
     if (question.min !== undefined && question.max !== undefined && question.min > question.max) {
       ctx.addIssue({ code: "custom", message: "Question minimum cannot exceed maximum" });
     }
@@ -160,8 +179,25 @@ const pricingRuleSchema = z.discriminatedUnion("kind", [
 ]);
 
 const quoteTemplateBaseSchema = z.object({
+  translations: z
+    .partialRecord(
+      localeSchema,
+      z.object({
+        name: z.string().min(1).max(160),
+        description: z.string().min(1).max(500),
+        industry: z.string().min(1).max(120),
+      }),
+    )
+    .optional(),
   settings: z
     .object({
+      locale: localeSchema.optional(),
+      languages: z
+        .array(localeSchema)
+        .min(1)
+        .max(3)
+        .refine((v) => new Set(v).size === v.length, "Duplicate languages")
+        .optional(),
       businessName: z.string().trim().max(160).optional(),
       logoDataUrl: z
         .string()
@@ -191,6 +227,15 @@ const quoteTemplateBaseSchema = z.object({
 });
 
 export const quoteTemplateSchema = quoteTemplateBaseSchema.superRefine((template, ctx) => {
+  if (
+    template.settings?.languages &&
+    !template.settings.languages.includes(template.settings.locale ?? "en")
+  )
+    ctx.addIssue({
+      code: "custom",
+      path: ["settings", "languages"],
+      message: "Default language must be enabled",
+    });
   const questions = new Map<string, (typeof template.questions)[number]>();
 
   template.questions.forEach((question, questionIndex) => {

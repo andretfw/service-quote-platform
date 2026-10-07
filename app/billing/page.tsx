@@ -1,4 +1,7 @@
-import Link from "next/link";
+import { uiLocale } from "@/lib/server/locale";
+import { translate } from "@/lib/i18n";
+import { Text } from "@/components/Language";
+import AppShell from "@/components/AppShell";
 import PlanCards from "@/components/PlanCards";
 import ActionButton from "@/components/ActionButton";
 import { pageWorkspace } from "@/lib/server/page-workspace";
@@ -8,6 +11,8 @@ import { plans } from "@/lib/plans";
 export const dynamic = "force-dynamic";
 
 export default async function BillingPage() {
+  const locale = await uiLocale();
+  const t = (source: string) => translate(source, locale);
   const workspace = await pageWorkspace();
   const month = new Date().toISOString().slice(0, 7) + "-01";
   const [usage, calculators] = await Promise.all([
@@ -26,43 +31,54 @@ export default async function BillingPage() {
   if (usage.error || calculators.error) throw new Error("Unable to load subscription usage");
   const configured = billingConfigured();
   return (
-    <main className="shell">
-      <nav className="nav">
-        <Link className="brand" href="/dashboard">
-          ← Dashboard
-        </Link>
-        <Link href="/workspace">My calculators</Link>
-      </nav>
-      <h1>Subscription and usage</h1>
-      <div className="card">
-        <h2>{workspace.plan ? plans[workspace.plan].name : "Subscription required"}</h2>
-        <p>
-          {workspace.subscription
-            ? `Billing status: ${workspace.subscription.status}. Current period ends ${new Date(workspace.subscription.current_period_end).toLocaleDateString("en")}.`
-            : `Basic trial ends ${new Date(workspace.organization.trial_ends_at).toLocaleDateString("en")}.`}
-        </p>
-        <p>
-          {calculators.count ?? 0} calculators · {usage.data?.leads ?? 0} enquiries this month
-        </p>
-        {workspace.subscription?.cancel_at_period_end && (
-          <p>Cancellation is scheduled. Access continues until the paid period ends.</p>
+    <AppShell>
+      <main className="shell app-page">
+        <h1>
+          <Text>{"Subscription and usage"}</Text>
+        </h1>
+        <div className="card">
+          <h2>
+            <Text>{workspace.plan ? plans[workspace.plan].name : "Subscription required"}</Text>
+          </h2>
+          <p>
+            {workspace.subscription
+              ? `${t("Billing status")}: ${t(workspace.subscription.status)}. ${t("Current period ends")} ${new Date(workspace.subscription.current_period_end).toLocaleDateString(locale)}.`
+              : `${t("Basic trial ends")} ${new Date(workspace.organization.trial_ends_at).toLocaleDateString(locale)}.`}
+          </p>
+          <p>
+            {calculators.count ?? 0} <Text>{"calculators ·"}</Text>
+            {usage.data?.leads ?? 0} <Text>{"enquiries this month"}</Text>
+          </p>
+          {workspace.subscription?.cancel_at_period_end && (
+            <p>
+              <Text>
+                {"Cancellation is scheduled. Access continues until the paid period ends."}
+              </Text>
+            </p>
+          )}
+          {workspace.role === "owner" && workspace.subscription && (
+            <ActionButton endpoint="/api/billing/portal">
+              <Text>{"Manage plan, invoices and cancellation"}</Text>
+            </ActionButton>
+          )}
+        </div>
+        {!configured && (
+          <p className="notice">
+            <Text>
+              {
+                "Subscription checkout will be available after the platform owner completes payment setup."
+              }
+            </Text>
+          </p>
         )}
-        {workspace.role === "owner" && workspace.subscription && (
-          <ActionButton endpoint="/api/billing/portal">
-            Manage plan, invoices and cancellation
-          </ActionButton>
+        {workspace.role === "owner" ? (
+          <PlanCards checkout configured={configured} />
+        ) : (
+          <p>
+            <Text>{"Contact your workspace owner to change the subscription."}</Text>
+          </p>
         )}
-      </div>
-      {!configured && (
-        <p className="notice">
-          Subscription checkout will be available after the platform owner completes payment setup.
-        </p>
-      )}
-      {workspace.role === "owner" ? (
-        <PlanCards checkout configured={configured} />
-      ) : (
-        <p>Contact your workspace owner to change the subscription.</p>
-      )}
-    </main>
+      </main>
+    </AppShell>
   );
 }

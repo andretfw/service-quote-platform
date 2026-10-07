@@ -1,3 +1,4 @@
+import { Text } from "@/components/Language";
 import Link from "next/link";
 import PlanCards from "@/components/PlanCards";
 
@@ -6,20 +7,29 @@ export default function PricingPage() {
     <main className="shell">
       <nav className="nav">
         <Link className="brand" href="/">
-          Service Quote
+          <Text>{"Service Quote"}</Text>
         </Link>
-        <Link href="/login">Sign in</Link>
+        <Link href="/login">
+          <Text>{"Sign in"}</Text>
+        </Link>
       </nav>
-      <h1>Choose the plan that fits your business.</h1>
+      <h1>
+        <Text>{"Choose the plan that fits your business."}</Text>
+      </h1>
       <p className="muted">
-        Start with a 14-day Basic trial. No card required. Upgrade when you need more calculators or
-        features.
+        <Text>
+          {
+            "Start with a 14-day Basic trial. No card required. Upgrade when you need more calculators or features."
+          }
+        </Text>
       </p>
       <PlanCards />
       <p className="muted">
-        Subscription pricing will be announced before paid plans become available. Lead allowances
-        reset on the first day of each month in UTC. Unused allowances do not roll over. Stripe
-        payment processing fees are separate. Booking requests require business confirmation.
+        <Text>
+          {
+            "Subscription pricing will be announced before paid plans become available. Lead allowances reset on the first day of each month in UTC. Unused allowances do not roll over. Stripe payment processing fees are separate. Booking requests require business confirmation."
+          }
+        </Text>
       </p>
     </main>
   );

@@ -68,6 +68,7 @@ export async function sendLeadNotifications(
               answers: presentation.answers,
             },
             getAppUrl("http://localhost:3000"),
+            presentation.locale,
           ),
         },
         `lead-notification/${notification.id}`,

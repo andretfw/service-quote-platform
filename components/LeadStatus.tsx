@@ -1,4 +1,6 @@
 "use client";
+import { Text } from "@/components/Language";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -35,13 +37,13 @@ export default function LeadStatus({ id, status }: { id: string; status: string 
       >
         {["new", "contacted", "booked", "won", "lost"].map((value) => (
           <option key={value} disabled={value === "booked"}>
-            {value}
+            <Text>{value}</Text>
           </option>
         ))}
       </select>
       {error && (
         <small className="error-message" role="alert">
-          {error}
+          <Text>{error}</Text>
         </small>
       )}
     </>

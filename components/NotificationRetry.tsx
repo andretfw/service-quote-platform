@@ -1,4 +1,6 @@
 "use client";
+import { Text } from "@/components/Language";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -33,9 +35,13 @@ export default function NotificationRetry({ id }: { id: string }) {
         disabled={pending}
         onClick={() => void retry()}
       >
-        {pending ? "Sending…" : "Retry email alert"}
+        <Text>{pending ? "Sending…" : "Retry email alert"}</Text>
       </button>
-      {message && <p role="status">{message}</p>}
+      {message && (
+        <p role="status">
+          <Text>{message}</Text>
+        </p>
+      )}
     </div>
   );
 }

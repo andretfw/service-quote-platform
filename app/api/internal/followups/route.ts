@@ -1,3 +1,4 @@
+import { translate, validLocale } from "@/lib/i18n";
 import { unsubscribeToken } from "@/lib/unsubscribe";
 import { getAppUrl } from "@/lib/server/env";
 import { customerCalculator } from "@/lib/server/customer-calculator";
@@ -44,7 +45,7 @@ export async function POST(request: Request) {
 
   const { data, error } = await db
     .from("submissions")
-    .select("id,calculator_id,lead_name,lead_email,status,follow_up_count,next_follow_up_at")
+    .select("id,calculator_id,lead_name,lead_email,status,follow_up_count,next_follow_up_at,quote")
     .lte("next_follow_up_at", nowIso)
     .not("lead_email", "is", null)
     .eq("follow_up_consent", true)
@@ -107,18 +108,22 @@ export async function POST(request: Request) {
       continue;
     }
 
+    const quote = lead.quote as Record<string, unknown> | null;
+    const locale = validLocale(quote?.locale ?? calculator.template.settings?.locale);
+    const t = (text: string) => translate(text, locale);
     try {
       await sendEmail(
         config.apiKey,
         {
           from: config.from,
           to: email,
-          subject: "Still interested in your estimate?",
+          subject: t("Still interested in your estimate?"),
           headers: {
             "List-Unsubscribe": `<${oneClickUrl}>`,
             "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
           },
-          html: `<p>Hi ${escapeHtml(String(lead.lead_name))},</p><p>Just checking whether you would like to continue with your estimate request.</p><p><a href="${escapeHtml(unsubscribeUrl)}">Unsubscribe from reminders</a></p>`,
+          text: `${t("Hi")} ${lead.lead_name},\n\n${t("Just checking whether you would like to continue with your estimate request.")}\n\n${t("Unsubscribe from reminders")}: ${unsubscribeUrl}`,
+          html: `<p>${t("Hi")} ${escapeHtml(String(lead.lead_name))},</p><p>${t("Just checking whether you would like to continue with your estimate request.")}</p><p><a href="${escapeHtml(unsubscribeUrl)}">${t("Unsubscribe from reminders")}</a></p>`,
         },
         `quote-follow-up/${lead.id}/${followUpCount}`,
         deadline,

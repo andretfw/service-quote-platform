@@ -1,4 +1,5 @@
 "use client";
+import { Text, LocalizedInput } from "@/components/Language";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -32,16 +33,28 @@ export default function LoginForm({ initialError }: { initialError: string | nul
   return (
     <main className="shell">
       <div className="quote card">
-        <h1>Sign in or create your business account</h1>
-        <p>Use your business email. We will send you a secure sign-in link; no password needed.</p>
+        <h1>
+          <Text>{"Sign in or create your business account"}</Text>
+        </h1>
+        <p>
+          <Text>
+            {"Use your business email. We will send you a secure sign-in link; no password needed."}
+          </Text>
+        </p>
         {sent ? (
           <p role="status">
-            Check your inbox and spam folder. Open the sign-in link in this browser to continue.
+            <Text>
+              {
+                "Check your inbox and spam folder. Open the sign-in link in this browser to continue."
+              }
+            </Text>
           </p>
         ) : (
           <>
-            <label htmlFor="business-email">Business email</label>
-            <input
+            <label htmlFor="business-email">
+              <Text>{"Business email"}</Text>
+            </label>
+            <LocalizedInput
               id="business-email"
               className="field"
               type="email"
@@ -57,7 +70,7 @@ export default function LoginForm({ initialError }: { initialError: string | nul
             />
             {error && (
               <p className="error-message" role="alert">
-                {error}
+                <Text>{error}</Text>
               </p>
             )}
             <div className="action-row">
@@ -66,13 +79,15 @@ export default function LoginForm({ initialError }: { initialError: string | nul
                 disabled={pending || !email.trim()}
                 onClick={() => void login()}
               >
-                {pending ? "Sending…" : "Email me a sign-in link"}
+                <Text>{pending ? "Sending…" : "Email me a sign-in link"}</Text>
               </button>
             </div>
           </>
         )}
         <p>
-          <Link href="/calculators">Explore the calculator demos</Link>
+          <Link href="/calculators">
+            <Text>{"Explore the calculator demos"}</Text>
+          </Link>
         </p>
       </div>
     </main>

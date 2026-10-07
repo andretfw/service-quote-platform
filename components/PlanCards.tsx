@@ -1,6 +1,7 @@
+"use client";
 import { planIds, plans } from "@/lib/plans";
 import ActionButton from "./ActionButton";
-
+import { useLanguage } from "./Language";
 export default function PlanCards({
   checkout = false,
   configured = false,
@@ -8,37 +9,57 @@ export default function PlanCards({
   checkout?: boolean;
   configured?: boolean;
 }) {
+  const { t, locale } = useLanguage();
+  const descriptions = [
+    "For independent businesses getting started",
+    "For growing businesses building their brand",
+    "For businesses managing bookings and deposits",
+  ];
   return (
-    <div className="grid">
-      {planIds.map((id) => {
+    <div className="plan-grid">
+      {planIds.map((id, index) => {
         const plan = plans[id];
+        const features = [
+          "All 15 templates",
+          "English, Spanish and Romanian",
+          "Metric and imperial units",
+          "Website embeds and hosted links",
+          "Lead dashboard and configurable tax rate",
+          ...(plan.branding ? ["Business logo, name and colour", "CSV exports"] : []),
+          ...(plan.followUps ? ["Optional customer reminders"] : []),
+          ...(plan.bookings ? ["Booking requests with business confirmation"] : []),
+          ...(plan.deposits ? ["Deposits through your connected Stripe account"] : []),
+        ];
         return (
-          <div className="card" key={id}>
-            <span className="pill">{plan.name}</span>
-            <h2>
+          <section className={`card plan-card ${id === "premium" ? "featured" : ""}`} key={id}>
+            {id === "premium" && <span className="plan-badge">{t("More customization")}</span>}
+            <span className="eyebrow">{plan.name}</span>
+            <p className="plan-description">{t(descriptions[index])}</p>
+            <div className="plan-price">
               {plan.monthlyEur === null ? (
-                "Pricing coming soon"
+                <span>{t("Pricing coming soon")}</span>
               ) : (
                 <>
-                  €{plan.monthlyEur}
-                  <small className="muted"> / month</small>
+                  <strong>€{plan.monthlyEur}</strong>
+                  <span>{t("/ month")}</span>
                 </>
               )}
-            </h2>
+            </div>
+            <div className="plan-allowance">
+              <strong>
+                {plan.calculators} {t(plan.calculators === 1 ? "calculator" : "calculators")}
+              </strong>
+              <span>
+                {plan.monthlyLeads.toLocaleString(locale)} {t("enquiries per calendar month")}
+              </span>
+            </div>
             <ul className="feature-list">
-              <li>
-                {plan.calculators} {plan.calculators === 1 ? "calculator" : "calculators"}
-              </li>
-              <li>{plan.monthlyLeads.toLocaleString("en")} enquiries per calendar month</li>
-              <li>All 15 templates and customizable pricing editor</li>
-              <li>Website embeds and hosted links</li>
-              <li>Lead dashboard and configurable tax rate</li>
-              {plan.branding && <li>Business logo, name, brand colour and CSV exports</li>}
-              {plan.followUps && <li>Optional email follow-ups (email setup required)</li>}
-              {plan.bookings && <li>Booking requests with business confirmation</li>}
-              {plan.deposits && (
-                <li>Customer job deposits into your Stripe account (Stripe setup required)</li>
-              )}
+              {features.map((feature) => (
+                <li key={feature}>
+                  <span aria-hidden="true">✓</span>
+                  {t(feature)}
+                </li>
+              ))}
             </ul>
             {checkout ? (
               <ActionButton
@@ -46,14 +67,14 @@ export default function PlanCards({
                 body={{ plan: id }}
                 disabled={!configured}
               >
-                Choose {plan.name}
+                {t("Choose")} {plan.name}
               </ActionButton>
             ) : (
               <a className="btn" href="/billing">
-                Choose {plan.name}
+                {t("Choose")} {plan.name}
               </a>
             )}
-          </div>
+          </section>
         );
       })}
     </div>
