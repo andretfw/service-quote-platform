@@ -1,3 +1,4 @@
+import { attemptLeadNotification } from "@/lib/server/notifications";
 import { NextResponse } from "next/server";
 import { calculateQuote, toPublicQuoteResult } from "@/lib/pricing-engine";
 import { resolveCalculator } from "@/lib/server/calculator-resolver";
@@ -43,6 +44,7 @@ export async function POST(request: Request) {
       throw error;
     }
 
+    await attemptLeadNotification(submissionId);
     return NextResponse.json({
       ok: true,
       submissionId,

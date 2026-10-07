@@ -13,7 +13,9 @@ const groups = {
     "STRIPE_BILLING_WEBHOOK_SECRET",
   ],
   Deposits: ["STRIPE_CONNECT_WEBHOOK_SECRET"],
-  Email: ["RESEND_API_KEY", "RESEND_FROM", "CRON_SECRET", "UNSUBSCRIBE_SECRET"],
+  EmailAlerts: ["RESEND_API_KEY", "RESEND_FROM"],
+  ScheduledDelivery: ["CRON_SECRET"],
+  CustomerReminders: ["UNSUBSCRIBE_SECRET"],
 };
 const errors = [];
 for (const [group, names] of Object.entries(groups)) {

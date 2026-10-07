@@ -1,3 +1,5 @@
+import { emailAlertsConfigured } from "@/lib/server/notifications";
+import { formatEstimate } from "@/lib/lead-summary";
 import LeadStatus from "@/components/LeadStatus";
 import Link from "next/link";
 import { pageWorkspace } from "@/lib/server/page-workspace";
@@ -16,7 +18,9 @@ export default async function LeadsPage() {
 
   const { data, error } = await supabase
     .from("submissions")
-    .select("id,lead_name,lead_email,lead_phone,template_slug,status,follow_up_count,created_at")
+    .select(
+      "id,lead_name,lead_email,lead_phone,template_slug,status,follow_up_count,created_at,quote",
+    )
     .in(
       "calculator_id",
       calculators.map((calculator) => calculator.id),
@@ -35,6 +39,12 @@ export default async function LeadsPage() {
         </Link>
       </div>
       <h1>Lead pipeline</h1>
+      {!emailAlertsConfigured() && (
+        <p className="notice">
+          Email alerts are not configured yet. Enquiries are saved here; open a lead to review the
+          full request.
+        </p>
+      )}
       <div className="row">
         <Link href="/api/leads/export">Export CSV (Premium / Business)</Link>
         <Link href="/bookings">Booking requests</Link>
@@ -50,6 +60,7 @@ export default async function LeadsPage() {
               <th>Lead</th>
               <th>Contact</th>
               <th>Template</th>
+              <th>Estimate</th>
               <th>Status</th>
               <th>Follow-ups</th>
             </tr>
@@ -57,9 +68,12 @@ export default async function LeadsPage() {
           <tbody>
             {leads.map((lead) => (
               <tr key={lead.id}>
-                <td>{lead.lead_name}</td>
+                <td>
+                  <Link href={`/leads/${lead.id}`}>{lead.lead_name}</Link>
+                </td>
                 <td>{lead.lead_email || lead.lead_phone || "—"}</td>
                 <td>{lead.template_slug || "Custom"}</td>
+                <td>{formatEstimate(lead.quote)}</td>
                 <td>
                   <LeadStatus id={lead.id} status={lead.status} />
                 </td>
@@ -68,7 +82,7 @@ export default async function LeadsPage() {
             ))}
             {!leads.length && (
               <tr>
-                <td colSpan={5} className="muted">
+                <td colSpan={6} className="muted">
                   No leads yet.
                 </td>
               </tr>

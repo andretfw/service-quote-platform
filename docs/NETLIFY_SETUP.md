@@ -31,10 +31,11 @@ The repository contains the application and Netlify configuration. Production ac
 
 ## 4. Email and scheduled processing
 
-1. Verify a sender domain in Resend and set `RESEND_API_KEY` plus `RESEND_FROM`, for example `Service Quote <quotes@YOUR_VERIFIED_DOMAIN>`.
+1. For production, verify a sender domain in Resend and set `RESEND_API_KEY` plus `RESEND_FROM`, for example `Service Quote <quotes@YOUR_VERIFIED_DOMAIN>`.
+   For a private first test without a domain, use `Service Quote <onboarding@resend.dev>` as `RESEND_FROM` and sign into Resend with the same email as the app workspace owner. The test sender can send only to that Resend account email, not to other businesses or customers.
 2. Generate separate random secrets of at least 32 characters for `CRON_SECRET`, `RATE_LIMIT_SECRET`, and `UNSUBSCRIBE_SECRET`. Do not reuse the service-role or Stripe keys. Keep the unsubscribe secret stable while issued links should remain valid.
 3. Netlify deploys `netlify/functions/followups.mjs` and runs it every 15 minutes on the published production deploy. Scheduled functions do not run automatically in deploy previews.
-4. The worker calls `/api/internal/followups` with a Bearer secret. It processes a bounded batch of owner notifications and consented reminders, aborts slow email requests, and leaves claimed work retryable. Owner notifications may arrive on the next scheduled run rather than immediately.
+4. The worker calls `/api/internal/followups` with a Bearer secret. It processes a bounded batch of owner notifications and consented reminders, aborts slow email requests, and leaves claimed work retryable. New enquiries attempt an immediate owner notification after persistence. Failures remain in the outbox for a scheduled retry; an authorized workspace member can also retry due alerts from the enquiry details page. Provider acceptance is not proof of inbox delivery.
 5. Premium/Business reminders must be enabled on the calculator and explicitly selected by the visitor. They stop on booking, lead closure, disabled features, inactive subscription or unsubscribe. Unsubscribe links expire after 90 days; later reminders generate fresh links.
 6. Resend quotas cover sign-in emails, owner notifications and reminders if they share one Resend account. Watch both daily and monthly usage. Provider idempotency is an additional duplicate guard; failures after provider acknowledgement can require reconciliation, and email delivery is not an exactly-once guarantee.
 

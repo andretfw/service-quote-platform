@@ -289,3 +289,16 @@ button:disabled {
   object-position: left center;
   margin-bottom: 12px;
 }
+
+.answer-details > div {
+  padding: 14px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+.answer-details dt {
+  font-weight: 600;
+}
+.answer-details dd {
+  margin: 6px 0 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

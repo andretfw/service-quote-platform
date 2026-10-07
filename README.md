@@ -9,11 +9,11 @@ The repository is source-visible for evaluation and authorized collaboration. It
 | Feature                                            | Basic    | Premium  | Business |
 | -------------------------------------------------- | -------- | -------- | -------- |
 | Active calculators                                 | 1        | 5        | 25       |
-| Enquiries per calendar month, UTC                  | 100      | 1,000    | 10,000   |
+| Enquiries per calendar month, UTC                  | 50       | 1,000    | 10,000   |
 | 15 industry templates, question and pricing editor | Included | Included | Included |
 | Hosted calculator and website embed                | Included | Included | Included |
 | Lead pipeline and owner notifications              | Included | Included | Included |
-| Business name and brand color                      | —        | Included | Included |
+| Business logo, name and brand color                | —        | Included | Included |
 | CSV lead exports                                   | —        | Included | Included |
 | Optional customer email follow-ups and unsubscribe | —        | Included | Included |
 | Booking requests and owner confirmation            | —        | —        | Included |

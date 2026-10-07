@@ -146,7 +146,9 @@ export default async function DashboardPage() {
 
               return (
                 <tr key={submission.id}>
-                  <td>{submission.lead_name}</td>
+                  <td>
+                    <Link href={`/leads/${submission.id}`}>{submission.lead_name}</Link>
+                  </td>
                   <td>{submission.template_slug || "Custom"}</td>
                   <td>
                     {quote

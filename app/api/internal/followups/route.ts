@@ -29,10 +29,7 @@ export async function POST(request: Request) {
   const resendApiKey = process.env.RESEND_API_KEY?.trim();
   const from = process.env.RESEND_FROM?.trim();
   if (!resendApiKey || !from || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    return NextResponse.json(
-      { error: "Follow-up integrations are not configured" },
-      { status: 503 },
-    );
+    return NextResponse.json({ error: "Email delivery is not configured" }, { status: 503 });
   }
 
   const deadline = Date.now() + 18000;
@@ -165,5 +162,12 @@ export async function POST(request: Request) {
     sent += 1;
   }
 
-  return NextResponse.json({ ok: true, notifications, sent, failed, skipped });
+  return NextResponse.json({
+    ok: true,
+    notifications: notifications.sent,
+    notificationFailures: notifications.failed,
+    sent,
+    failed,
+    skipped,
+  });
 }

@@ -1,47 +1,75 @@
 import "server-only";
 import { sendEmail } from "./email";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { escapeHtml } from "./security";
 import { getAppUrl } from "./env";
+import { leadColumns, leadPresentation } from "./lead-details";
+import { leadNotificationMessage } from "./notification-message";
 
-export async function sendLeadNotifications(apiKey: string, from: string, deadline: number) {
+export const emailAlertsConfigured = () =>
+  Boolean(process.env.RESEND_API_KEY?.trim() && process.env.RESEND_FROM?.trim());
+
+export async function sendLeadNotifications(
+  apiKey: string,
+  from: string,
+  deadline: number,
+  submissionId?: string,
+) {
   const db = createAdminClient();
   const now = new Date().toISOString();
-  const { data, error } = await db
+  let query = db
     .from("notification_outbox")
     .select("id,submission_id,recipient")
     .is("sent_at", null)
     .lte("retry_at", now)
     .order("retry_at")
     .limit(10);
+  if (submissionId) query = query.eq("submission_id", submissionId);
+  const { data, error } = await query;
   if (error) throw error;
   let sent = 0;
+  let failed = 0;
   for (const notification of data) {
     if (Date.now() >= deadline) break;
+    const claimUntil = new Date(Date.now() + 600000).toISOString();
     const { data: claimed, error: claimError } = await db
       .from("notification_outbox")
-      .update({ retry_at: new Date(Date.now() + 600000).toISOString() })
+      .update({ retry_at: claimUntil })
       .eq("id", notification.id)
       .is("sent_at", null)
       .lte("retry_at", now)
       .select("id")
       .maybeSingle();
-    if (claimError || !claimed) continue;
-    const { data: lead, error: leadError } = await db
-      .from("submissions")
-      .select("lead_name")
-      .eq("id", notification.submission_id)
-      .maybeSingle();
-    if (leadError) throw leadError;
-    if (!lead) continue;
+    if (claimError) {
+      failed += 1;
+      continue;
+    }
+    if (!claimed) continue;
     try {
+      const { data: lead, error: leadError } = await db
+        .from("submissions")
+        .select(leadColumns)
+        .eq("id", notification.submission_id)
+        .maybeSingle();
+      if (leadError) throw leadError;
+      if (!lead) continue;
+      const presentation = await leadPresentation(db, lead);
       await sendEmail(
         apiKey,
         {
           from,
           to: notification.recipient,
-          subject: "New quote request",
-          html: `<p>${escapeHtml(lead.lead_name)} submitted a quote request.</p><p><a href="${escapeHtml(getAppUrl("http://localhost:3000"))}/leads">Open your lead dashboard</a></p>`,
+          ...leadNotificationMessage(
+            {
+              id: lead.id,
+              name: lead.lead_name,
+              email: lead.lead_email,
+              phone: lead.lead_phone,
+              calculatorName: presentation.name,
+              estimate: presentation.estimate,
+              answers: presentation.answers,
+            },
+            getAppUrl("http://localhost:3000"),
+          ),
         },
         `lead-notification/${notification.id}`,
         deadline,
@@ -49,12 +77,27 @@ export async function sendLeadNotifications(apiKey: string, from: string, deadli
       const { error: updateError } = await db
         .from("notification_outbox")
         .update({ sent_at: new Date().toISOString() })
-        .eq("id", notification.id);
+        .eq("id", notification.id)
+        .eq("retry_at", claimUntil);
       if (updateError) throw updateError;
       sent += 1;
     } catch {
-      continue;
+      failed += 1;
     }
   }
-  return sent;
+  return { sent, failed };
+}
+
+export async function attemptLeadNotification(submissionId: string) {
+  if (!emailAlertsConfigured()) return { sent: 0, failed: 0 };
+  try {
+    return await sendLeadNotifications(
+      process.env.RESEND_API_KEY!.trim(),
+      process.env.RESEND_FROM!.trim(),
+      Date.now() + 5000,
+      submissionId,
+    );
+  } catch {
+    return { sent: 0, failed: 1 };
+  }
 }

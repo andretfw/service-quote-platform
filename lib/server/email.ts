@@ -5,6 +5,8 @@ type Email = {
   to: string;
   subject: string;
   html: string;
+  text?: string;
+  reply_to?: string;
   headers?: Record<string, string>;
 };
 
@@ -29,4 +31,5 @@ export async function sendEmail(
   if (!response.ok) throw new Error(`Email provider returned ${response.status}`);
   const result = (await response.json()) as { id?: string };
   if (!result.id) throw new Error("Email provider did not acknowledge the message");
+  return result.id;
 }

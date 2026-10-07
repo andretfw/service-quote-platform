@@ -68,6 +68,6 @@ Subscription checkout reservations serialize conflicting plan checkouts and supp
 
 ## Notification delivery
 
-A database trigger queues owner notifications in a private outbox as part of lead persistence. A Netlify scheduled function invokes the authenticated worker every 15 minutes. Claims are conditional; provider calls have explicit timeouts and stable idempotency keys. Unprocessed claims become retryable. This is retry-oriented delivery, not an exactly-once guarantee.
+A database trigger queues owner notifications in a private outbox as part of lead persistence. A new enquiry attempts immediate delivery after persistence. A Netlify scheduled function invokes the authenticated worker every 15 minutes to retry pending notifications and process consented customer reminders. Claims are conditional; provider calls have explicit timeouts and stable idempotency keys. Unprocessed claims become retryable. This is retry-oriented delivery, not an exactly-once guarantee.
 
 Customer reminder consent is stored separately from permission to answer an enquiry. Signed unsubscribe tokens expire, and unsubscribe atomically clears consent and future scheduling. A message already handed to the provider may still arrive after unsubscribe.
