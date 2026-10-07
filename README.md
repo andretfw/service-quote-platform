@@ -60,9 +60,9 @@ npm run config:check
 
 The test suite executes all migrations against embedded PostgreSQL and verifies account isolation, plan access, lead limits, checkout reservations, archive/downgrade behavior, version conflicts and transactional bookings. External provider operations need separate staging verification. `config:check` reports missing variables without displaying their values; it does not prove that credentials or provider configuration are valid.
 
-## Deployment and costs
+## Deployment
 
-Use [docs/NETLIFY_SETUP.md](./docs/NETLIFY_SETUP.md) for the Netlify, Supabase, Stripe and email setup. Use [docs/COSTS.md](./docs/COSTS.md) for monthly cost arithmetic and free alternatives.
+Use [docs/NETLIFY_SETUP.md](./docs/NETLIFY_SETUP.md) for the Netlify, Supabase, Stripe and email setup.
 
 All migrations in `supabase/migrations` must be applied in filename order. Do not rerun already-applied migrations on an existing database. Keep secrets in provider environment settings, never in GitHub. Supabase browser clients have organization-scoped read access; mutations run through authenticated server routes or signature-verified webhooks.
 
