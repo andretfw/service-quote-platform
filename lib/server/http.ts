@@ -56,7 +56,12 @@ export const assertSameOrigin = (request: Request): void => {
 
   let requestOrigin: string;
   try {
-    requestOrigin = new URL(request.url).origin;
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL?.trim();
+    const url = new URL(appUrl || request.url);
+    if (!["http:", "https:"].includes(url.protocol) || url.username || url.password) {
+      throw new Error("Invalid application origin");
+    }
+    requestOrigin = url.origin;
   } catch {
     throw new HttpError(400, "Invalid request URL");
   }
