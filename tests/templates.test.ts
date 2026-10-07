@@ -53,6 +53,8 @@ test("painting charges separate interior, exterior and selected extra quantities
     extras: [],
   };
   assert.equal(calculateQuote(painting, base).subtotal, 2100);
+  assert.throws(() => calculateQuote(painting, { ...base, extras: ["doors"] }));
+  assert.throws(() => calculateQuote(painting, { ...base, extras: ["doors"], doors_quantity: 0 }));
   assert.equal(
     calculateQuote(painting, { ...base, scope: "exterior", exterior_area: 1000 }).subtotal,
     2750,
