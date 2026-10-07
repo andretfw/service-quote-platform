@@ -1,3 +1,4 @@
+import { normalizeLogo } from "@/lib/server/logo";
 import { NextResponse } from "next/server";
 import { assertSameOrigin, HttpError, parseJson, publicApiError } from "@/lib/server/http";
 import { reviseCalculatorRequestSchema } from "@/lib/server/schemas";
@@ -14,6 +15,9 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     const workspace = await requireCalculator(id);
     const body = await parseJson(request, reviseCalculatorRequestSchema, 256 * 1024);
     assertCalculatorFeatures(body.template, workspace.plan);
+    if (body.template.settings?.logoDataUrl) {
+      body.template.settings.logoDataUrl = await normalizeLogo(body.template.settings.logoDataUrl);
+    }
     const { rules, ...schema } = body.template;
     const { data: version, error } = await workspace.db.rpc("revise_calculator", {
       p_organization_id: workspace.organizationId,

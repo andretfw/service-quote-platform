@@ -43,6 +43,7 @@ export type PricingRule =
 export type CalculatorSettings = {
   businessName?: string;
   accentColor?: string;
+  logoDataUrl?: string;
   bookingRequests?: boolean;
   deposits?: boolean;
   followUps?: boolean;
@@ -74,6 +75,7 @@ export type PublicQuoteConfig = {
   canCaptureLeads: boolean;
   businessName?: string;
   accentColor?: string;
+  logoDataUrl?: string;
   canRequestBooking?: boolean;
   canPayDeposit?: boolean;
   canFollowUp?: boolean;

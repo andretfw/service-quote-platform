@@ -78,10 +78,11 @@ test("migrations enforce workspace isolation, billing access, limits, revision l
     assert.equal((await db.query("select * from public.notification_outbox")).rows.length, 1);
     await capture(other, "b".repeat(64));
     await db.query(
-      "insert into public.workspace_usage values ($1,date_trunc('month',now() at time zone 'UTC')::date,100) on conflict(organization_id,month) do update set leads=100",
+      "insert into public.workspace_usage values ($1,date_trunc('month',now() at time zone 'UTC')::date,49) on conflict(organization_id,month) do update set leads=49",
       [a],
     );
-    await assert.rejects(() => capture(calculator, "c".repeat(64)), /Monthly lead limit/);
+    await capture(calculator, "c".repeat(64));
+    await assert.rejects(() => capture(calculator, "d".repeat(64)), /Monthly lead limit/);
     assert.equal(
       (
         await db.query<{ leads: number }>(
@@ -89,7 +90,7 @@ test("migrations enforce workspace isolation, billing access, limits, revision l
           [a],
         )
       ).rows[0].leads,
-      100,
+      50,
     );
     await db.query("update public.organizations set stripe_customer_id='cus_a' where id=$1", [a]);
     await db.query(
@@ -301,7 +302,7 @@ test("migrations enforce workspace isolation, billing access, limits, revision l
     );
     await db.query("select set_config('request.jwt.claim.sub',$1,false)", [userA]);
     await db.exec("set role authenticated");
-    assert.equal((await db.query("select * from public.submissions")).rows.length, 1);
+    assert.equal((await db.query("select * from public.submissions")).rows.length, 2);
     assert.equal((await db.query("select * from public.billing_subscriptions")).rows.length, 1);
     assert.equal((await db.query("select * from public.notification_outbox")).rows.length, 0);
     await assert.rejects(

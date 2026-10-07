@@ -279,3 +279,13 @@ button:disabled {
     grid-template-columns: 1fr;
   }
 }
+
+.business-logo {
+  display: block;
+  width: 160px;
+  height: 80px;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: left center;
+  margin-bottom: 12px;
+}

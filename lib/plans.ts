@@ -3,7 +3,7 @@ export const plans = {
     name: "Basic",
     monthlyEur: null as number | null,
     calculators: 1,
-    monthlyLeads: 100,
+    monthlyLeads: 50,
     branding: false,
     exports: false,
     followUps: false,

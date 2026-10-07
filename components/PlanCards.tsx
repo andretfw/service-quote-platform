@@ -30,13 +30,15 @@ export default function PlanCards({
                 {plan.calculators} {plan.calculators === 1 ? "calculator" : "calculators"}
               </li>
               <li>{plan.monthlyLeads.toLocaleString("en")} enquiries per calendar month</li>
-              <li>All 15 templates and complete pricing editor</li>
+              <li>All 15 templates and customizable pricing editor</li>
               <li>Website embeds and hosted links</li>
               <li>Lead dashboard and configurable tax rate</li>
-              {plan.branding && <li>Business branding and CSV exports</li>}
-              {plan.followUps && <li>Optional email follow-ups</li>}
+              {plan.branding && <li>Business logo, name, brand colour and CSV exports</li>}
+              {plan.followUps && <li>Optional email follow-ups (email setup required)</li>}
               {plan.bookings && <li>Booking requests with business confirmation</li>}
-              {plan.deposits && <li>Deposits through your connected Stripe account</li>}
+              {plan.deposits && (
+                <li>Customer job deposits into your Stripe account (Stripe setup required)</li>
+              )}
             </ul>
             {checkout ? (
               <ActionButton

@@ -31,6 +31,8 @@ export function toPublicQuoteConfig(resolved: ResolvedCalculator): PublicQuoteCo
       resolved.plan && plans[resolved.plan].branding ? template.settings?.businessName : undefined,
     accentColor:
       resolved.plan && plans[resolved.plan].branding ? template.settings?.accentColor : undefined,
+    logoDataUrl:
+      resolved.plan && plans[resolved.plan].branding ? template.settings?.logoDataUrl : undefined,
     canRequestBooking: Boolean(
       resolved.plan && plans[resolved.plan].bookings && template.settings?.bookingRequests,
     ),

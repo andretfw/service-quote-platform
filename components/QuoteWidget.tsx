@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import CustomerActions from "./CustomerActions";
 import type { CSSProperties } from "react";
 import { useMemo, useState } from "react";
@@ -202,6 +203,16 @@ export default function QuoteWidget({
         style={{ "--brand-color": config.accentColor } as CSSProperties}
         aria-live="polite"
       >
+        {config.logoDataUrl && (
+          <Image
+            src={config.logoDataUrl}
+            alt={config.businessName ? `${config.businessName} logo` : "Business logo"}
+            width={160}
+            height={80}
+            unoptimized
+            className="business-logo"
+          />
+        )}
         {config.businessName && <p className="brand">{config.businessName}</p>}
         <span className="pill">Instant estimate</span>
         <h2 className="result-title">Your estimated range</h2>
@@ -308,6 +319,16 @@ export default function QuoteWidget({
 
   return (
     <div className="card" style={{ "--brand-color": config.accentColor } as CSSProperties}>
+      {config.logoDataUrl && (
+        <Image
+          src={config.logoDataUrl}
+          alt={config.businessName ? `${config.businessName} logo` : "Business logo"}
+          width={160}
+          height={80}
+          unoptimized
+          className="business-logo"
+        />
+      )}
       {config.businessName && <p className="brand">{config.businessName}</p>}
       {!compact && (
         <>

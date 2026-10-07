@@ -1,4 +1,5 @@
 import { randomBytes } from "node:crypto";
+import { normalizeLogo } from "@/lib/server/logo";
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { requireWorkspace, requireFeature } from "@/lib/server/workspace";
@@ -30,6 +31,9 @@ export async function POST(request: Request) {
     requireFeature(workspace.plan);
     const body = await parseJson(request, createCalculatorRequestSchema, 256 * 1024);
     assertCalculatorFeatures(body.template, workspace.plan);
+    if (body.template.settings?.logoDataUrl) {
+      body.template.settings.logoDataUrl = await normalizeLogo(body.template.settings.logoDataUrl);
+    }
     const organizationId = workspace.organizationId;
     const db = createAdminClient();
     const publicId = `${slugify(body.template.name)}-${randomBytes(6).toString("hex")}`;

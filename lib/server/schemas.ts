@@ -163,6 +163,11 @@ const quoteTemplateBaseSchema = z.object({
   settings: z
     .object({
       businessName: z.string().trim().max(160).optional(),
+      logoDataUrl: z
+        .string()
+        .max(90000)
+        .regex(/^data:image\/png;base64,[A-Za-z0-9+/]+={0,2}$/)
+        .optional(),
       accentColor: z
         .string()
         .regex(/^#[0-9a-fA-F]{6}$/)

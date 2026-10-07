@@ -1,5 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
+import LogoUpload from "./LogoUpload";
 import QuoteWidget from "./QuoteWidget";
 import { NumberField, PricingEditor, QuestionEditor } from "./CalculatorFields";
 import { plans, type PlanId } from "@/lib/plans";
@@ -21,6 +22,7 @@ export default function TemplateBuilder({
   const [template, setTemplate] = useState<QuoteTemplate>(initial);
   const [saved, setSaved] = useState<SavedCalculator | null>(existing ?? null);
   const [error, setError] = useState("");
+  const [logoUploading, setLogoUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [newType, setNewType] = useState<Question["type"]>("number");
   const [previewKey, setPreviewKey] = useState(0);
@@ -126,8 +128,16 @@ export default function TemplateBuilder({
       canCaptureLeads: false,
       businessName: settings.businessName,
       accentColor: settings.accentColor,
+      logoDataUrl: settings.logoDataUrl,
     }),
-    [initial.slug, saved?.publicId, template, settings.businessName, settings.accentColor],
+    [
+      initial.slug,
+      saved?.publicId,
+      template,
+      settings.businessName,
+      settings.accentColor,
+      settings.logoDataUrl,
+    ],
   );
   async function save() {
     setSaving(true);
@@ -139,6 +149,7 @@ export default function TemplateBuilder({
           ...settings,
           businessName: features?.branding ? settings.businessName : undefined,
           accentColor: features?.branding ? settings.accentColor : undefined,
+          logoDataUrl: features?.branding ? settings.logoDataUrl : undefined,
           followUps: features?.followUps ? settings.followUps : false,
           bookingRequests: features?.bookings ? settings.bookingRequests : false,
           deposits: features?.deposits ? settings.deposits : false,
@@ -410,6 +421,11 @@ export default function TemplateBuilder({
         <h3>Business features</h3>
         {features?.branding && (
           <>
+            <LogoUpload
+              value={settings.logoDataUrl}
+              onChange={(logoDataUrl) => changeSettings({ logoDataUrl })}
+              onBusyChange={setLogoUploading}
+            />
             <label className="editor-field">
               Business name
               <input
@@ -468,7 +484,11 @@ export default function TemplateBuilder({
           </>
         )}
         <div className="action-row">
-          <button className="btn" disabled={saving || !plan} onClick={() => void save()}>
+          <button
+            className="btn"
+            disabled={saving || logoUploading || !plan}
+            onClick={() => void save()}
+          >
             {saving ? "Saving…" : saved ? "Save changes" : "Create calculator"}
           </button>
           <button className="btn secondary" onClick={() => setPreviewKey((key) => key + 1)}>
