@@ -1,24 +1,26 @@
 import LeadStatus from "@/components/LeadStatus";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { publicSupabaseConfigured } from "@/lib/server/env";
+import { pageWorkspace } from "@/lib/server/page-workspace";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
 
 export default async function LeadsPage() {
-  if (!publicSupabaseConfigured()) redirect("/login");
-
+  const workspace = await pageWorkspace();
   const supabase = await createSupabaseServerClient();
-  const {
-    data: { user },
-    error: userError,
-  } = await supabase.auth.getUser();
-  if (userError || !user) redirect("/login");
+  const { data: calculators, error: calculatorError } = await workspace.db
+    .from("calculators")
+    .select("id")
+    .eq("organization_id", workspace.organizationId);
+  if (calculatorError) throw new Error("Unable to load business calculators");
 
   const { data, error } = await supabase
     .from("submissions")
     .select("id,lead_name,lead_email,lead_phone,template_slug,status,follow_up_count,created_at")
+    .in(
+      "calculator_id",
+      calculators.map((calculator) => calculator.id),
+    )
     .order("created_at", { ascending: false })
     .limit(250);
 
