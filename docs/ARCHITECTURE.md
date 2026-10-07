@@ -60,7 +60,7 @@ The `/embed/*` CSP permits framing. Other application pages set `frame-ancestors
 
 ## Subscriptions and limits
 
-The authenticated workspace is resolved from the verified Supabase session and membership. Billing actions require the owner role. Feature access is computed from the persisted Stripe subscription and paid-period expiry, with a 14-day Basic trial only when no subscription exists.
+The authenticated workspace is resolved from the verified Supabase session and membership. Billing actions require the owner role. Feature access is computed from the persisted Stripe subscription and paid-period expiry. New accounts and inactive paid subscriptions use the permanent Free plan. Free does not need a Stripe price or subscription; monthly usage carries across plan changes.
 
 Canonical Stripe subscriptions are matched against the workspace customer and configured price IDs. The database locks workspace state during synchronization and rejects an older observation. Public calculator lookup applies archive and downgrade limits; submission capture locks the workspace and increments the monthly UTC counter in the same transaction as the lead insert. Failed quota checks roll back the increment.
 

@@ -1,3 +1,4 @@
+import BrandLogo from "@/components/BrandLogo";
 import { Text } from "@/components/Language";
 import Link from "next/link";
 import PlanCards from "@/components/PlanCards";
@@ -7,7 +8,7 @@ export default function PricingPage() {
     <main className="shell">
       <nav className="nav">
         <Link className="brand" href="/">
-          <Text>{"Service Quote"}</Text>
+          <BrandLogo />
         </Link>
         <Link href="/login">
           <Text>{"Sign in"}</Text>
@@ -19,7 +20,7 @@ export default function PricingPage() {
       <p className="muted">
         <Text>
           {
-            "Start with a 14-day Basic trial. No card required. Upgrade when you need more calculators or features."
+            "Start free with one calculator and seven enquiries per month. No card required. Upgrade when you need more calculators or features."
           }
         </Text>
       </p>

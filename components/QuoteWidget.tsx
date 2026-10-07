@@ -1,4 +1,5 @@
 "use client";
+import BrandLogo from "@/components/BrandLogo";
 import { Text, LocalizedInput } from "@/components/Language";
 
 import { LanguageProvider, LanguageSelect, useLanguage } from "./Language";
@@ -199,6 +200,11 @@ function QuoteExperience({ config, compact = false, previewTemplate }: QuoteWidg
         style={{ "--brand-color": config.accentColor } as CSSProperties}
         aria-live="polite"
       >
+        {config.showPlatformBrand && (
+          <div className="platform-brand">
+            <BrandLogo />
+          </div>
+        )}
         {config.logoDataUrl && (
           <Image
             src={config.logoDataUrl}
@@ -354,6 +360,11 @@ function QuoteExperience({ config, compact = false, previewTemplate }: QuoteWidg
 
   return (
     <div className="card" style={{ "--brand-color": config.accentColor } as CSSProperties}>
+      {config.showPlatformBrand && (
+        <div className="platform-brand">
+          <BrandLogo />
+        </div>
+      )}
       {config.logoDataUrl && (
         <Image
           src={config.logoDataUrl}

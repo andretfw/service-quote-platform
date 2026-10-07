@@ -84,6 +84,7 @@ export type PublicQuoteConfig = {
   currency: string;
   questions: Question[];
   canCaptureLeads: boolean;
+  showPlatformBrand?: boolean;
   businessName?: string;
   accentColor?: string;
   logoDataUrl?: string;

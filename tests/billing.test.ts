@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { billingConfigured } from "../lib/server/billing";
+import { priceId, billingConfigured } from "../lib/server/billing";
 import { POST } from "../app/api/billing/checkout/route";
 
 test("unapproved pricing blocks checkout even when Stripe variables are present", async () => {
@@ -20,6 +20,7 @@ test("unapproved pricing blocks checkout even when Stripe variables are present"
       else process.env[name] = value;
     }
     assert.equal(billingConfigured(), false);
+    assert.throws(() => priceId("free" as never), /Free does not require payment/);
     const response = await POST(
       new Request("https://example.netlify.app/api/billing/checkout", {
         method: "POST",

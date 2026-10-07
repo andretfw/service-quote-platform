@@ -1,4 +1,5 @@
 "use client";
+import BrandLogo from "@/components/BrandLogo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
@@ -17,7 +18,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
     <div className="app-layout">
       <aside className="app-sidebar">
         <Link className="brand" href="/dashboard">
-          <span className="brand-icon">S</span> Service Quote
+          <BrandLogo />
         </Link>
         <span className="sidebar-caption">{t("Your business")}</span>
         <nav aria-label={t("Your business")}>

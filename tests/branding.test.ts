@@ -4,7 +4,7 @@ import sharp from "sharp";
 import { normalizeLogo } from "../lib/server/logo";
 import { assertCalculatorFeatures } from "../lib/server/calculator-settings";
 import { toPublicQuoteConfig } from "../lib/server/calculator-resolver";
-import { getTemplate } from "../lib/templates";
+import { getTemplate, templates } from "../lib/templates";
 import { quoteTemplateSchema } from "../lib/server/schemas";
 
 const png = async (width = 128, height = 64) =>
@@ -37,7 +37,8 @@ test("only Premium and Business can save or publicly display business branding",
   const template = structuredClone(getTemplate("painting")!);
   template.settings = { logoDataUrl: await png(), businessName: "Painter", accentColor: "#123456" };
   assert.equal(quoteTemplateSchema.safeParse(template).success, true);
-  assert.throws(() => assertCalculatorFeatures(template, "basic"));
+  for (const plan of ["free", "basic"] as const)
+    assert.throws(() => assertCalculatorFeatures(template, plan));
   for (const plan of ["premium", "business"] as const) {
     assert.doesNotThrow(() => assertCalculatorFeatures(template, plan));
     const config = toPublicQuoteConfig({
@@ -48,8 +49,9 @@ test("only Premium and Business can save or publicly display business branding",
     });
     assert.equal(config.logoDataUrl, template.settings.logoDataUrl);
     assert.equal(config.accentColor, "#123456");
+    assert.equal(config.showPlatformBrand, false);
   }
-  for (const plan of ["basic", null] as const) {
+  for (const plan of ["free", "basic", null] as const) {
     const config = toPublicQuoteConfig({
       publicId: "test",
       calculatorId: "calculator",
@@ -59,6 +61,7 @@ test("only Premium and Business can save or publicly display business branding",
     assert.equal(config.logoDataUrl, undefined);
     assert.equal(config.businessName, undefined);
     assert.equal(config.accentColor, undefined);
+    assert.equal(config.showPlatformBrand, plan === "free");
   }
 });
 
@@ -70,4 +73,21 @@ test("oversized logo dimensions and active content cannot be saved", async () =>
   const template = structuredClone(getTemplate("painting")!);
   template.settings = { logoDataUrl: "data:image/svg+xml;base64,PHN2Zy8+" };
   assert.equal(quoteTemplateSchema.safeParse(template).success, false);
+});
+
+test("Free accepts every template with enquiry capture and platform branding", () => {
+  for (const template of templates) {
+    assert.doesNotThrow(() => assertCalculatorFeatures(template, "free"));
+    const config = toPublicQuoteConfig({
+      publicId: "test",
+      calculatorId: "calculator",
+      template,
+      plan: "free",
+    });
+    assert.equal(config.canCaptureLeads, true);
+    assert.equal(config.showPlatformBrand, true);
+    assert.equal(config.canFollowUp, false);
+    assert.equal(config.canRequestBooking, false);
+    assert.equal(config.canPayDeposit, false);
+  }
 });

@@ -43,23 +43,43 @@ export default async function BillingPage() {
           <p>
             {workspace.subscription
               ? `${t("Billing status")}: ${t(workspace.subscription.status)}. ${t("Current period ends")} ${new Date(workspace.subscription.current_period_end).toLocaleDateString(locale)}.`
-              : `${t("Basic trial ends")} ${new Date(workspace.organization.trial_ends_at).toLocaleDateString(locale)}.`}
+              : t("Free forever. No card required.")}
           </p>
           <p>
-            {calculators.count ?? 0} <Text>{"calculators ·"}</Text>
-            {usage.data?.leads ?? 0} <Text>{"enquiries this month"}</Text>
+            {calculators.count ?? 0} / {plans[workspace.plan].calculators}{" "}
+            <Text>{"calculators ·"}</Text>
+            {usage.data?.leads ?? 0} / {plans[workspace.plan].monthlyLeads}{" "}
+            <Text>{"enquiries this month"}</Text>
           </p>
+          {workspace.plan === "free" && workspace.subscription && (
+            <p>
+              <Text>
+                {"Your workspace is on Free. Paid features require an active subscription."}
+              </Text>
+            </p>
+          )}
           {workspace.subscription?.cancel_at_period_end && (
             <p>
               <Text>
-                {"Cancellation is scheduled. Access continues until the paid period ends."}
+                {
+                  "Cancellation is scheduled. Paid access continues until the period ends, then your workspace returns to Free."
+                }
               </Text>
             </p>
           )}
           {workspace.role === "owner" && workspace.subscription && (
-            <ActionButton endpoint="/api/billing/portal">
-              <Text>{"Manage plan, invoices and cancellation"}</Text>
-            </ActionButton>
+            <div id="billing-management">
+              <ActionButton endpoint="/api/billing/portal">
+                <Text>{"Manage plan, invoices and cancellation"}</Text>
+              </ActionButton>
+              <p className="muted">
+                <Text>
+                  {
+                    "To switch to Free, cancel your paid subscription. Your saved calculators and leads are retained."
+                  }
+                </Text>
+              </p>
+            </div>
           )}
         </div>
         {!configured && (
@@ -72,7 +92,7 @@ export default async function BillingPage() {
           </p>
         )}
         {workspace.role === "owner" ? (
-          <PlanCards checkout configured={configured} />
+          <PlanCards checkout configured={configured} currentPlan={workspace.plan} />
         ) : (
           <p>
             <Text>{"Contact your workspace owner to change the subscription."}</Text>

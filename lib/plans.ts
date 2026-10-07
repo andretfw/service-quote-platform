@@ -1,4 +1,15 @@
 export const plans = {
+  free: {
+    name: "Free",
+    monthlyEur: 0,
+    calculators: 1,
+    monthlyLeads: 7,
+    branding: false,
+    exports: false,
+    followUps: false,
+    bookings: false,
+    deposits: false,
+  },
   basic: {
     name: "Basic",
     monthlyEur: null as number | null,
@@ -35,6 +46,8 @@ export const plans = {
 } as const;
 
 export type PlanId = keyof typeof plans;
+export type PaidPlanId = Exclude<PlanId, "free">;
+export const paidPlanIds = ["basic", "premium", "business"] as const;
 export type Feature = "branding" | "exports" | "followUps" | "bookings" | "deposits";
 export const planIds = Object.keys(plans) as PlanId[];
 export const isPlanId = (value: unknown): value is PlanId =>
@@ -46,25 +59,25 @@ export type SubscriptionState = {
   current_period_end: string | null;
 };
 
-export function effectivePlan(
-  subscription: SubscriptionState | null,
-  trialEndsAt: string,
-  now = Date.now(),
-): PlanId | null {
+export const isPaidPlanId = (value: unknown): value is PaidPlanId =>
+  isPlanId(value) && value !== "free";
+
+export function effectivePlan(subscription: SubscriptionState | null, now = Date.now()): PlanId {
   if (subscription) {
     const expires = Date.parse(subscription.current_period_end ?? "");
-    return isPlanId(subscription.plan) &&
+    if (
+      isPaidPlanId(subscription.plan) &&
       ["active", "trialing"].includes(subscription.status) &&
       Number.isFinite(expires) &&
       expires > now
-      ? subscription.plan
-      : null;
+    )
+      return subscription.plan;
   }
-  return Date.parse(trialEndsAt) > now ? "basic" : null;
+  return "free";
 }
 
 export const pricingApproved = () =>
-  planIds.every(
+  paidPlanIds.every(
     (id) =>
       typeof plans[id].monthlyEur === "number" &&
       Number.isFinite(plans[id].monthlyEur) &&

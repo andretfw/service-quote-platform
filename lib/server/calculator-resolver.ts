@@ -32,6 +32,7 @@ export function toPublicQuoteConfig(resolved: ResolvedCalculator): PublicQuoteCo
     currency: template.currency,
     questions: template.questions,
     canCaptureLeads: resolved.calculatorId !== null && Boolean(resolved.plan),
+    showPlatformBrand: resolved.plan === "free" || resolved.calculatorId === null,
     businessName:
       resolved.plan && plans[resolved.plan].branding ? template.settings?.businessName : undefined,
     accentColor:

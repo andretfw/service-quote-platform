@@ -1,3 +1,4 @@
+import BrandLogo from "@/components/BrandLogo";
 import { Text } from "@/components/Language";
 import Link from "next/link";
 import { templates } from "@/lib/templates";
@@ -6,9 +7,9 @@ export default function Home() {
   return (
     <main className="shell">
       <nav className="nav">
-        <div className="brand">
-          <Text>{"Service Quote"}</Text>
-        </div>
+        <Link className="brand" href="/">
+          <BrandLogo />
+        </Link>
         <div className="row">
           <Link href="/pricing">
             <Text>{"Pricing"}</Text>

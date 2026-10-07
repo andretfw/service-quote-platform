@@ -667,10 +667,6 @@
     "es": "Elige el plan adecuado para tu empresa.",
     "ro": "Alege abonamentul potrivit afacerii tale."
   },
-  "Start with a 14-day Basic trial. No card required. Upgrade when you need more calculators or features.": {
-    "es": "Prueba Basic durante 14 días sin tarjeta. Amplía cuando lo necesites.",
-    "ro": "Încearcă Basic 14 zile fără card. Treci la un plan superior când ai nevoie."
-  },
   "Pricing coming soon": {
     "es": "Precios próximamente",
     "ro": "Prețurile vor fi anunțate"
@@ -758,10 +754,6 @@
   "Manage plan, invoices and cancellation": {
     "es": "Gestionar plan, facturas y cancelación",
     "ro": "Gestionează planul, facturile și anularea"
-  },
-  "Cancellation is scheduled. Access continues until the paid period ends.": {
-    "es": "Cancelación programada. El acceso continúa hasta finalizar el periodo pagado.",
-    "ro": "Anularea este programată. Accesul continuă până la finalul perioadei plătite."
   },
   "Instant estimate": {
     "es": "Estimación inmediata",
@@ -2383,10 +2375,6 @@
     "es": "El periodo actual finaliza",
     "ro": "Perioada curentă se încheie"
   },
-  "Basic trial ends": {
-    "es": "La prueba Basic finaliza",
-    "ro": "Perioada de test Basic se încheie"
-  },
   "Could not save calculator": {
     "es": "No se pudo guardar la calculadora",
     "ro": "Calculatorul nu a putut fi salvat"
@@ -2634,5 +2622,53 @@
   "Booking is not configured": {
     "es": "Las reservas aún no están configuradas",
     "ro": "Programările nu sunt încă configurate"
+  },
+  "Free": {
+    "es": "Gratis",
+    "ro": "Gratuit"
+  },
+  "Try it with real customers, free forever": {
+    "es": "Pruébalo con clientes reales, gratis para siempre",
+    "ro": "Testează cu clienți reali, gratuit fără limită de timp"
+  },
+  "Service Quote logo on your calculator": {
+    "es": "Logotipo de Service Quote en tu calculadora",
+    "ro": "Sigla Service Quote pe calculatorul tău"
+  },
+  "No Service Quote branding": {
+    "es": "Sin la marca Service Quote",
+    "ro": "Fără sigla Service Quote"
+  },
+  "Current plan": {
+    "es": "Plan actual",
+    "ro": "Planul actual"
+  },
+  "Start free": {
+    "es": "Empieza gratis",
+    "ro": "Începe gratuit"
+  },
+  "Manage subscription to switch": {
+    "es": "Gestiona tu suscripción para cambiar",
+    "ro": "Gestionează abonamentul pentru a schimba planul"
+  },
+  "Free forever. No card required.": {
+    "es": "Gratis para siempre. No necesitas tarjeta.",
+    "ro": "Gratuit fără limită de timp. Nu ai nevoie de card."
+  },
+  "Your workspace is on Free. Paid features require an active subscription.": {
+    "es": "Tu espacio usa el plan Gratis. Las funciones de pago requieren una suscripción activa.",
+    "ro": "Spațiul tău folosește planul Gratuit. Funcțiile plătite necesită un abonament activ."
+  },
+  "Cancellation is scheduled. Paid access continues until the period ends, then your workspace returns to Free.": {
+    "es": "La cancelación está programada. El acceso de pago continúa hasta el final del periodo; después volverás al plan Gratis.",
+    "ro": "Anularea este programată. Accesul plătit continuă până la sfârșitul perioadei, apoi spațiul revine la planul Gratuit."
+  },
+  "To switch to Free, cancel your paid subscription. Your saved calculators and leads are retained.": {
+    "es": "Para cambiar a Gratis, cancela tu suscripción de pago. Se conservarán tus calculadoras y consultas.",
+    "ro": "Pentru a trece la Gratuit, anulează abonamentul plătit. Calculatoarele și solicitările salvate se păstrează."
+  },
+  "Start free with one calculator and seven enquiries per month. No card required. Upgrade when you need more calculators or features.": {
+    "es": "Empieza gratis con una calculadora y siete consultas al mes. No necesitas tarjeta. Mejora tu plan cuando necesites más calculadoras o funciones.",
+    "ro": "Începe gratuit cu un calculator și șapte solicitări pe lună. Nu ai nevoie de card. Alege un plan plătit când ai nevoie de mai multe calculatoare sau funcții."
   }
 }

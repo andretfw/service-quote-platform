@@ -1,4 +1,5 @@
 "use client";
+import BrandLogo from "@/components/BrandLogo";
 import { Text, LocalizedInput } from "@/components/Language";
 
 import { useState } from "react";
@@ -33,6 +34,9 @@ export default function LoginForm({ initialError }: { initialError: string | nul
   return (
     <main className="shell">
       <div className="quote card">
+        <Link className="brand" href="/">
+          <BrandLogo />
+        </Link>
         <h1>
           <Text>{"Sign in or create your business account"}</Text>
         </h1>

@@ -400,15 +400,6 @@ summary:focus-visible {
   font-size: 17px;
   white-space: nowrap;
 }
-.brand-icon {
-  display: inline-grid;
-  place-items: center;
-  width: 30px;
-  height: 32px;
-  border-radius: 9px;
-  background: var(--accent);
-  color: #fff;
-}
 .sidebar-caption,
 .eyebrow {
   font-size: 11px;
@@ -738,9 +729,28 @@ summary {
 .table-wrap {
   overflow-x: auto;
 }
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.brand-logo svg {
+  flex: none;
+}
+.platform-brand {
+  margin-bottom: 24px;
+  color: #334155;
+  font-size: 15px;
+}
+.platform-brand svg {
+  width: 28px;
+  height: 28px;
+}
 .plan-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 22px;
   padding-top: 32px;
 }
@@ -856,7 +866,8 @@ summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .plan-grid {
-    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
   }
   .plan-card {
     padding: 20px;

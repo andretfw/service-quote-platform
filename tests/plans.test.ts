@@ -1,53 +1,64 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { effectivePlan, plans, isPlanId, pricingApproved } from "../lib/plans";
+import {
+  effectivePlan,
+  plans,
+  isPlanId,
+  isPaidPlanId,
+  paidPlanIds,
+  pricingApproved,
+} from "../lib/plans";
 import { csvCell } from "../lib/csv";
 import { unsubscribeToken, verifyUnsubscribeToken } from "../lib/unsubscribe";
 
 const now = Date.parse("2026-10-01T00:00:00Z");
 const future = "2026-11-01T00:00:00Z";
 
-test("trial grants Basic until expiry and cannot revive canceled subscriptions", () => {
-  assert.equal(effectivePlan(null, future, now), "basic");
-  assert.equal(effectivePlan(null, "2026-09-01T00:00:00Z", now), null);
+test("new accounts and inactive subscriptions receive permanent Free access", () => {
+  assert.equal(effectivePlan(null, now), "free");
+  assert.equal(effectivePlan(null, now + 365 * 86400000), "free");
+  for (const status of [
+    "canceled",
+    "past_due",
+    "unpaid",
+    "paused",
+    "incomplete",
+    "incomplete_expired",
+  ]) {
+    assert.equal(
+      effectivePlan({ plan: "business", status, current_period_end: future }, now),
+      "free",
+    );
+  }
+  assert.equal(
+    effectivePlan({ plan: "premium", status: "active", current_period_end: "invalid" }, now),
+    "free",
+  );
   assert.equal(
     effectivePlan(
-      { plan: "business", status: "canceled", current_period_end: future },
-      future,
+      { plan: "basic", status: "active", current_period_end: "2026-09-01T00:00:00Z" },
       now,
     ),
-    null,
+    "free",
   );
 });
 
-test("only active, unexpired, known plans grant features", () => {
-  for (const status of ["past_due", "unpaid", "paused", "incomplete", "incomplete_expired"])
-    assert.equal(
-      effectivePlan({ plan: "business", status, current_period_end: future }, future, now),
-      null,
-    );
+test("only known active paid subscriptions grant paid features", () => {
+  for (const status of ["active", "trialing"]) {
+    for (const plan of paidPlanIds)
+      assert.equal(effectivePlan({ plan, status, current_period_end: future }, now), plan);
+  }
   assert.equal(
-    effectivePlan({ plan: "business", status: "active", current_period_end: future }, future, now),
-    "business",
-  );
-  assert.equal(
-    effectivePlan(
-      { plan: "premium", status: "active", current_period_end: "invalid" },
-      future,
-      now,
-    ),
-    null,
-  );
-  assert.equal(
-    effectivePlan(
-      { plan: "enterprise", status: "active", current_period_end: future },
-      future,
-      now,
-    ),
-    null,
+    effectivePlan({ plan: "enterprise", status: "active", current_period_end: future }, now),
+    "free",
   );
   assert.equal(isPlanId("__proto__"), false);
-  assert.equal(plans.basic.deposits, false);
+  assert.equal(isPlanId("free"), true);
+  assert.equal(isPaidPlanId("free"), false);
+  assert.equal(plans.free.monthlyLeads, 7);
+  assert.equal(plans.basic.monthlyLeads, 50);
+  for (const feature of ["branding", "exports", "followUps", "bookings", "deposits"] as const)
+    assert.equal(plans.free[feature], false);
   assert.equal(plans.premium.bookings, false);
   assert.equal(plans.business.deposits, true);
 });
@@ -72,5 +83,6 @@ test("unsubscribe token is scoped, signed and expires", () => {
 
 test("paid checkout requires approved prices for every tier", () => {
   assert.equal(pricingApproved(), false);
-  for (const plan of Object.values(plans)) assert.equal(plan.monthlyEur, null);
+  for (const id of paidPlanIds) assert.equal(plans[id].monthlyEur, null);
+  assert.equal(plans.free.monthlyEur, 0);
 });
