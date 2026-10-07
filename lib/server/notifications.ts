@@ -1,12 +1,11 @@
 import "server-only";
-import { sendEmail } from "./email";
+import { emailConfiguration, sendEmail } from "./email";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getAppUrl } from "./env";
 import { leadColumns, leadPresentation } from "./lead-details";
 import { leadNotificationMessage } from "./notification-message";
 
-export const emailAlertsConfigured = () =>
-  Boolean(process.env.RESEND_API_KEY?.trim() && process.env.RESEND_FROM?.trim());
+export const emailAlertsConfigured = () => Boolean(emailConfiguration());
 
 export async function sendLeadNotifications(
   apiKey: string,
@@ -89,14 +88,10 @@ export async function sendLeadNotifications(
 }
 
 export async function attemptLeadNotification(submissionId: string) {
-  if (!emailAlertsConfigured()) return { sent: 0, failed: 0 };
+  const config = emailConfiguration();
+  if (!config) return { sent: 0, failed: 0 };
   try {
-    return await sendLeadNotifications(
-      process.env.RESEND_API_KEY!.trim(),
-      process.env.RESEND_FROM!.trim(),
-      Date.now() + 5000,
-      submissionId,
-    );
+    return await sendLeadNotifications(config.apiKey, config.from, Date.now() + 5000, submissionId);
   } catch {
     return { sent: 0, failed: 1 };
   }

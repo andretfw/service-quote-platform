@@ -13,7 +13,10 @@ const groups = {
     "STRIPE_BILLING_WEBHOOK_SECRET",
   ],
   Deposits: ["STRIPE_CONNECT_WEBHOOK_SECRET"],
-  EmailAlerts: ["RESEND_API_KEY", "RESEND_FROM"],
+  EmailAlerts:
+    process.env.EMAIL_PROVIDER === "gmail"
+      ? ["GMAIL_USER", "GMAIL_APP_PASSWORD"]
+      : ["RESEND_API_KEY", "RESEND_FROM"],
   ScheduledDelivery: ["CRON_SECRET"],
   CustomerReminders: ["UNSUBSCRIBE_SECRET"],
 };

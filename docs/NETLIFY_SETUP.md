@@ -59,3 +59,9 @@ The repository contains the application and Netlify configuration. Production ac
 - Switch to matching live prices, live webhook secrets and live Connect configuration only after staging tests pass.
 
 These account-level checks have not been performed merely by committing the code.
+
+### Gmail delivery
+
+Set `EMAIL_PROVIDER=gmail`, `GMAIL_USER` to a dedicated Gmail address, and `GMAIL_APP_PASSWORD` to that account’s app password. Store the password as a secret in Netlify’s production Functions environment. Keep `CRON_SECRET` for queued delivery; customer reminders also require `UNSUBSCRIBE_SECRET`. Redeploy after changing variables. The sender is the connected Gmail account, and Resend is bypassed. Test alerts to a different recipient before launch.
+
+Gmail has account sending limits and may temporarily block sending. SMTP does not offer Resend’s idempotency guarantee: a provider acceptance followed by a lost connection or database update failure can result in a duplicate on retry. The outbox lease prevents concurrent workers from sending the same alert. This transport does not change Supabase login email configuration.

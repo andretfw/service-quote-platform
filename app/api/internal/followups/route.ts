@@ -4,7 +4,7 @@ import { customerCalculator } from "@/lib/server/customer-calculator";
 import { sendLeadNotifications } from "@/lib/server/notifications";
 import { timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
-import { sendEmail } from "@/lib/server/email";
+import { emailConfiguration, sendEmail } from "@/lib/server/email";
 import { escapeHtml } from "@/lib/server/security";
 import { createAdminClient } from "@/lib/supabase/admin";
 
@@ -26,9 +26,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const resendApiKey = process.env.RESEND_API_KEY?.trim();
-  const from = process.env.RESEND_FROM?.trim();
-  if (!resendApiKey || !from || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+  const config = emailConfiguration();
+  if (!config || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
     return NextResponse.json({ error: "Email delivery is not configured" }, { status: 503 });
   }
 
@@ -36,8 +35,8 @@ export async function POST(request: Request) {
   const db = createAdminClient();
   await db.rpc("cleanup_rate_limits", {});
   const notifications = await sendLeadNotifications(
-    resendApiKey,
-    from,
+    config.apiKey,
+    config.from,
     Math.min(deadline, Date.now() + 8000),
   );
   const now = new Date();
@@ -110,9 +109,9 @@ export async function POST(request: Request) {
 
     try {
       await sendEmail(
-        resendApiKey,
+        config.apiKey,
         {
-          from,
+          from: config.from,
           to: email,
           subject: "Still interested in your estimate?",
           headers: {

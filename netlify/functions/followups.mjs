@@ -3,7 +3,11 @@ export const config = { schedule: "*/15 * * * *" };
 export default async function followups() {
   const origin = process.env.NEXT_PUBLIC_APP_URL || process.env.URL;
   const secret = process.env.CRON_SECRET;
-  if (!origin || !secret || !process.env.RESEND_API_KEY || !process.env.RESEND_FROM) return;
+  const gmail = process.env.EMAIL_PROVIDER === "gmail";
+  const configured = gmail
+    ? process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD
+    : process.env.RESEND_API_KEY && process.env.RESEND_FROM;
+  if (!origin || !secret || !configured) return;
   const response = await fetch(new URL("/api/internal/followups", origin), {
     method: "POST",
     headers: { authorization: `Bearer ${secret}` },
