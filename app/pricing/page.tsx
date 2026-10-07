@@ -28,7 +28,7 @@ export default function PricingPage() {
       <p className="muted">
         <Text>
           {
-            "Subscription pricing will be announced before paid plans become available. Lead allowances reset on the first day of each month in UTC. Unused allowances do not roll over. Stripe payment processing fees are separate. Booking requests require business confirmation."
+            "Prices are in EUR and billed monthly. Lead allowances reset on the first day of each month in UTC. Unused allowances do not roll over. Stripe payment processing fees are separate. Booking requests require business confirmation."
           }
         </Text>
       </p>

@@ -1,13 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import {
-  effectivePlan,
-  plans,
-  isPlanId,
-  isPaidPlanId,
-  paidPlanIds,
-  pricingApproved,
-} from "../lib/plans";
+import { effectivePlan, plans, isPlanId, isPaidPlanId, paidPlanIds } from "../lib/plans";
 import { csvCell } from "../lib/csv";
 import { unsubscribeToken, verifyUnsubscribeToken } from "../lib/unsubscribe";
 
@@ -56,7 +49,7 @@ test("only known active paid subscriptions grant paid features", () => {
   assert.equal(isPlanId("free"), true);
   assert.equal(isPaidPlanId("free"), false);
   assert.equal(plans.free.monthlyLeads, 7);
-  assert.equal(plans.basic.monthlyLeads, 50);
+  assert.equal(plans.basic.monthlyLeads, 100);
   for (const feature of ["branding", "exports", "followUps", "bookings", "deposits"] as const)
     assert.equal(plans.free[feature], false);
   assert.equal(plans.premium.bookings, false);
@@ -81,8 +74,10 @@ test("unsubscribe token is scoped, signed and expires", () => {
   assert.equal(verifyUnsubscribeToken(token, "test-secret", now + 91 * 86400000), null);
 });
 
-test("paid checkout requires approved prices for every tier", () => {
-  assert.equal(pricingApproved(), false);
-  for (const id of paidPlanIds) assert.equal(plans[id].monthlyEur, null);
+test("published monthly plans use the selected EUR prices", () => {
+  assert.deepEqual(
+    paidPlanIds.map((id) => plans[id].monthlyEur),
+    [19, 39, 99],
+  );
   assert.equal(plans.free.monthlyEur, 0);
 });

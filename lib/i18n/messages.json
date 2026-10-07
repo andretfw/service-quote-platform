@@ -667,10 +667,6 @@
     "es": "Elige el plan adecuado para tu empresa.",
     "ro": "Alege abonamentul potrivit afacerii tale."
   },
-  "Pricing coming soon": {
-    "es": "Precios próximamente",
-    "ro": "Prețurile vor fi anunțate"
-  },
   "/ month": {
     "es": "/ mes",
     "ro": "/ lună"
@@ -2315,10 +2311,6 @@
     "es": "Convierte visitas en solicitudes de presupuesto.",
     "ro": "Transformă vizitatorii în solicitări de ofertă."
   },
-  "Subscription pricing will be announced before paid plans become available. Lead allowances reset on the first day of each month in UTC. Unused allowances do not roll over. Stripe payment processing fees are separate. Booking requests require business confirmation.": {
-    "es": "Los precios se anunciarán antes del lanzamiento de pagos. Los límites se reinician cada mes en UTC y no se acumulan. Las comisiones de Stripe son aparte. Las reservas requieren confirmación.",
-    "ro": "Prețurile vor fi anunțate înainte de lansarea plăților. Limitele se resetează lunar în UTC și nu se reportează. Comisioanele Stripe sunt separate. Programările necesită confirmare."
-  },
   "Email me a sign-in link": {
     "es": "Enviarme un enlace de acceso",
     "ro": "Trimite-mi un link de autentificare"
@@ -2670,5 +2662,9 @@
   "Start free with one calculator and seven enquiries per month. No card required. Upgrade when you need more calculators or features.": {
     "es": "Empieza gratis con una calculadora y siete consultas al mes. No necesitas tarjeta. Mejora tu plan cuando necesites más calculadoras o funciones.",
     "ro": "Începe gratuit cu un calculator și șapte solicitări pe lună. Nu ai nevoie de card. Alege un plan plătit când ai nevoie de mai multe calculatoare sau funcții."
+  },
+  "Prices are in EUR and billed monthly. Lead allowances reset on the first day of each month in UTC. Unused allowances do not roll over. Stripe payment processing fees are separate. Booking requests require business confirmation.": {
+    "es": "Los precios están en EUR y se facturan mensualmente. Los límites de solicitudes se restablecen el primer día de cada mes en UTC. Las solicitudes no utilizadas no se acumulan. Las comisiones de procesamiento de Stripe son independientes. Las solicitudes de reserva requieren confirmación del negocio.",
+    "ro": "Prețurile sunt în EUR și se facturează lunar. Limitele de solicitări se resetează în prima zi a fiecărei luni, în UTC. Solicitările neutilizate nu se reportează. Comisioanele de procesare Stripe sunt separate. Cererile de programare necesită confirmarea afacerii."
   }
 }

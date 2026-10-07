@@ -8,8 +8,9 @@ The repository is source-visible for evaluation and authorized collaboration. It
 
 | Feature                                            | Free     | Basic    | Premium  | Business |
 | -------------------------------------------------- | -------- | -------- | -------- | -------- |
+| Monthly subscription                               | Free     | €19      | €39      | €99      |
 | Active calculators                                 | 1        | 1        | 5        | 25       |
-| Enquiries per calendar month, UTC                  | 7        | 50       | 1,000    | 10,000   |
+| Enquiries per calendar month, UTC                  | 7        | 100      | 1,000    | 10,000   |
 | 15 industry templates, question and pricing editor | Included | Included | Included | Included |
 | Hosted calculator and website embed                | Included | Included | Included | Included |
 | Lead pipeline and owner notifications              | Included | Included | Included | Included |
@@ -20,7 +21,7 @@ The repository is source-visible for evaluation and authorized collaboration. It
 | Booking requests and owner confirmation            | —        | —        | —        | Included |
 | Customer deposits through Stripe Connect           | —        | —        | —        | Included |
 
-New accounts start on the permanent Free plan without a card. Subscription prices are centralized in `lib/plans.ts`; calculator and enquiry limits are enforced transactionally in the database. Changes to limits must update the database functions as well. Paid subscription prices remain unset pending owner approval. Free does not require Stripe; paid checkout requires matching configured Stripe prices. Provider fees apply.
+New accounts start on the permanent Free plan without a card. Subscription prices are centralized in `lib/plans.ts`; calculator and enquiry limits are enforced transactionally in the database. Changes to limits must update the database functions as well. Free does not require Stripe; paid checkout requires matching configured Stripe prices. Provider fees apply.
 
 Archives retain historical leads while freeing calculator slots. Following a downgrade, the oldest unarchived calculators remain publicly available within the new limit. Expired or inactive paid subscriptions return to Free with its limits and platform branding. Saved calculators and historical leads are retained. Monthly usage is shared across plan changes and resets on the first day of each month in UTC.
 

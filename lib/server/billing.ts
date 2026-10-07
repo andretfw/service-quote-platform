@@ -1,6 +1,6 @@
 import "server-only";
 import Stripe from "stripe";
-import { isPaidPlanId, paidPlanIds, pricingApproved, type PaidPlanId } from "@/lib/plans";
+import { isPaidPlanId, paidPlanIds, plans, type PaidPlanId } from "@/lib/plans";
 import { getStripeEnv } from "./env";
 import { HttpError } from "./http";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -14,11 +14,23 @@ export const priceId = (plan: PaidPlanId) => {
 };
 export const billingConfigured = () =>
   Boolean(
-    pricingApproved() &&
-      process.env.STRIPE_SECRET_KEY &&
-      process.env.STRIPE_BILLING_WEBHOOK_SECRET &&
-      paidPlanIds.every((plan) => process.env[`STRIPE_PRICE_${plan.toUpperCase()}`]),
+    process.env.STRIPE_SECRET_KEY?.trim() &&
+      process.env.STRIPE_BILLING_WEBHOOK_SECRET?.trim() &&
+      paidPlanIds.every((plan) => process.env[`STRIPE_PRICE_${plan.toUpperCase()}`]?.trim()),
   );
+
+export function assertSubscriptionPrice(price: Stripe.Price, plan: PaidPlanId) {
+  if (
+    !price.active ||
+    price.currency !== "eur" ||
+    price.unit_amount !== plans[plan].monthlyEur * 100 ||
+    price.billing_scheme !== "per_unit" ||
+    price.recurring?.interval !== "month" ||
+    price.recurring.interval_count !== 1 ||
+    price.recurring.usage_type !== "licensed"
+  )
+    throw new HttpError(503, "Subscription price does not match the published plan");
+}
 
 export async function syncSubscription(subscriptionId: string) {
   const observedAt = new Date().toISOString();

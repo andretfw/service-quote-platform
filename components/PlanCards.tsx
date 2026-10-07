@@ -40,14 +40,8 @@ export default function PlanCards({
             <span className="eyebrow">{t(plan.name)}</span>
             <p className="plan-description">{t(descriptions[id])}</p>
             <div className="plan-price">
-              {plan.monthlyEur === null ? (
-                <span>{t("Pricing coming soon")}</span>
-              ) : (
-                <>
-                  <strong>€{plan.monthlyEur}</strong>
-                  <span>{t("/ month")}</span>
-                </>
-              )}
+              <strong>€{plan.monthlyEur}</strong>
+              <span>{t("/ month")}</span>
             </div>
             <div className="plan-allowance">
               <strong>

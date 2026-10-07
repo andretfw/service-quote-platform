@@ -1,9 +1,13 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { plans } from "@/lib/plans";
 import { assertSameOrigin, HttpError, parseJson, publicApiError } from "@/lib/server/http";
 import { requireWorkspace } from "@/lib/server/workspace";
-import { billingConfigured, billingStripe, priceId } from "@/lib/server/billing";
+import {
+  assertSubscriptionPrice,
+  billingConfigured,
+  billingStripe,
+  priceId,
+} from "@/lib/server/billing";
 import { getAppUrl } from "@/lib/server/env";
 import { assertRateLimit } from "@/lib/server/rate-limit";
 
@@ -45,18 +49,8 @@ export async function POST(request: Request) {
     });
     if (subscriptions.data.some((s) => !["canceled", "incomplete_expired"].includes(s.status)))
       throw new HttpError(409, "Manage your existing subscription in the billing portal");
-    const approvedPrice = plans[plan].monthlyEur;
-    if (approvedPrice === null)
-      throw new HttpError(503, "Subscription pricing is not available yet");
     const price = await stripe.prices.retrieve(priceId(plan));
-    if (
-      !price.active ||
-      price.currency !== "eur" ||
-      price.unit_amount !== approvedPrice * 100 ||
-      price.recurring?.interval !== "month" ||
-      price.recurring.interval_count !== 1
-    )
-      throw new HttpError(503, "Subscription price does not match the published plan");
+    assertSubscriptionPrice(price, plan);
     const { data: reservationData, error: reservationError } = await workspace.db.rpc(
       "reserve_subscription_checkout",
       { p_organization_id: workspace.organizationId, p_plan: plan },

@@ -16,12 +16,12 @@ export async function POST(request: Request) {
     if (!accountId) {
       const account = await stripe.accounts.create(
         {
-          type: "express",
+          type: "standard",
           email: workspace.user.email,
           capabilities: { card_payments: { requested: true }, transfers: { requested: true } },
           metadata: { organization_id: workspace.organizationId },
         },
-        { idempotencyKey: `merchant:${workspace.organizationId}` },
+        { idempotencyKey: `merchant-standard:${workspace.organizationId}` },
       );
       accountId = account.id;
       const { error } = await workspace.db

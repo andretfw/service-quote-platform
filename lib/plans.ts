@@ -12,9 +12,9 @@ export const plans = {
   },
   basic: {
     name: "Basic",
-    monthlyEur: null as number | null,
+    monthlyEur: 19,
     calculators: 1,
-    monthlyLeads: 50,
+    monthlyLeads: 100,
     branding: false,
     exports: false,
     followUps: false,
@@ -23,7 +23,7 @@ export const plans = {
   },
   premium: {
     name: "Premium",
-    monthlyEur: null as number | null,
+    monthlyEur: 39,
     calculators: 5,
     monthlyLeads: 1000,
     branding: true,
@@ -34,7 +34,7 @@ export const plans = {
   },
   business: {
     name: "Business",
-    monthlyEur: null as number | null,
+    monthlyEur: 99,
     calculators: 25,
     monthlyLeads: 10000,
     branding: true,
@@ -75,11 +75,3 @@ export function effectivePlan(subscription: SubscriptionState | null, now = Date
   }
   return "free";
 }
-
-export const pricingApproved = () =>
-  paidPlanIds.every(
-    (id) =>
-      typeof plans[id].monthlyEur === "number" &&
-      Number.isFinite(plans[id].monthlyEur) &&
-      plans[id].monthlyEur! > 0,
-  );

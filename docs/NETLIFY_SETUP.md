@@ -5,7 +5,7 @@ The repository contains the application and Netlify configuration. Production ac
 ## 1. Supabase
 
 1. Create one Supabase project for the entire platform. Businesses share the database with isolated organization-owned rows; do not create a paid project for every customer.
-2. Apply every file in `supabase/migrations` in numeric order using the Supabase SQL editor or migration tooling. On an existing installation, apply only unapplied files. Migration 004 backfills current-month enquiry usage. Migration 007 introduces permanent Free access, one active calculator and seven monthly enquiries; paid limits are retained.
+2. Apply every file in `supabase/migrations` in numeric order using the Supabase SQL editor or migration tooling. On an existing installation, apply only unapplied files. Migration 004 backfills current-month enquiry usage. Migration 007 introduces permanent Free access, one active calculator and seven monthly enquiries. Migration 008 restores Basic to 100 monthly enquiries.
 3. Copy the project URL, publishable key and server-only service-role key into Netlify environment variables.
 4. In Authentication → URL Configuration, set Site URL to the final HTTPS application address and add the exact `https://YOUR_APP.netlify.app/auth/callback` redirect. Configure localhost separately for development. Do not broadly allow untrusted preview origins.
 5. Configure custom SMTP for magic links, such as Resend SMTP. The built-in sender is restricted and unsuitable for customer sign-ins. Verify its sender domain and raise the authentication email rate limit to suit expected signups. Disable email link tracking so authentication links remain intact.
@@ -13,7 +13,7 @@ The repository contains the application and Netlify configuration. Production ac
 
 ## 2. Stripe subscriptions
 
-1. Start in Stripe test mode. After the owner approves subscription pricing, set the approved amounts in `lib/plans.ts` and create matching recurring monthly EUR prices for Basic, Premium and Business. Do not use metered, annual or multi-item prices. The server rejects prices that differ from the published plans.
+1. Start in Stripe test mode. Create recurring monthly EUR prices matching `lib/plans.ts`: Basic €19, Premium €39 and Business €99. Use licensed, per-unit prices. Do not use metered, annual or multi-item prices. The server rejects prices that differ from the published plans.
 2. Set `STRIPE_SECRET_KEY` and the three price IDs in `STRIPE_PRICE_BASIC`, `STRIPE_PRICE_PREMIUM`, `STRIPE_PRICE_BUSINESS`.
 3. Add an account webhook endpoint `https://YOUR_APP.netlify.app/api/billing/webhook`. Subscribe to `customer.subscription.created`, `customer.subscription.updated`, `customer.subscription.deleted`, `customer.subscription.paused`, `customer.subscription.resumed`, `invoice.paid`, `invoice.payment_failed`, and `invoice.payment_action_required`. Set its signing secret as `STRIPE_BILLING_WEBHOOK_SECRET`.
 4. Enable the Stripe billing portal: payment-method changes, invoice history, cancellation at period end, and updates between exactly the three configured products/prices. Configure proration/payment collection deliberately. Enable Stripe's option limiting customers to one subscription and redirect existing subscribers to `/billing` as an additional safeguard.
@@ -22,11 +22,11 @@ The repository contains the application and Netlify configuration. Production ac
 
 ## 3. Stripe customer deposits
 
-1. Enable Stripe Connect and configure Express onboarding for your platform and supported merchant countries. Set a connected-account webhook endpoint `https://YOUR_APP.netlify.app/api/stripe/webhook`, listening to `checkout.session.completed` and `checkout.session.expired` from connected accounts. Set its signing secret as `STRIPE_CONNECT_WEBHOOK_SECRET`.
+1. Enable Stripe Connect and configure Standard onboarding for your platform and supported merchant countries. Set a connected-account webhook endpoint `https://YOUR_APP.netlify.app/api/stripe/webhook`, listening to `checkout.session.completed` and `checkout.session.expired` from connected accounts. Set its signing secret as `STRIPE_CONNECT_WEBHOOK_SECRET`.
 2. If migrating earlier platform-owned deposits, retain the old endpoint signing secret in `STRIPE_WEBHOOK_SECRET` until their events are reconciled. Existing pending payments without a new reservation must be reconciled before a replacement session is created.
 3. A Business subscriber opens My calculators → Connect Stripe account and supplies its own verification and payout details. The platform never supplies identity documents on the merchant's behalf.
 4. In the calculator editor, enable deposits and set the percentage. The business account must have both charges and payouts enabled before checkout succeeds.
-5. Deposits are direct charges on the connected business account. Subscription revenue goes to the platform account. Test fees, refunds, dispute responsibility and connected-account reporting in Stripe. No platform application fee is currently added to deposits. Currency options are EUR, USD, GBP, RON, CAD and AUD; Stripe minimums and account availability still apply.
+5. New deposit accounts are Standard accounts, with Stripe collecting direct-charge fees from the business. Existing connected accounts retain their type; review any earlier Express accounts separately before launch because their fee responsibility differs and their type cannot be changed in place. Subscription revenue goes to the platform account. Test fees, refunds, dispute responsibility and connected-account reporting in Stripe. No platform application fee is currently added to deposits. Currency options are EUR, USD, GBP, RON, CAD and AUD; Stripe minimums and account availability still apply.
 6. Checkout reservations serialize retries. Paid sessions cannot be replaced; expired sessions are reconciled before another checkout is issued. Provider/database failures fail closed. An abandoned reservation with no recorded session may need provider reconciliation rather than assuming no charge occurred.
 
 ## 4. Email and scheduled processing

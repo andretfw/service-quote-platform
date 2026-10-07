@@ -97,7 +97,7 @@ test("migrations enforce workspace isolation, billing access, limits, revision l
       "select public.sync_billing_subscription($1,'cus_a','sub_a','basic','active',now()+interval '30 days',false,now()-interval '1 second')",
       [a],
     );
-    await db.query("update public.workspace_usage set leads=49 where organization_id=$1", [a]);
+    await db.query("update public.workspace_usage set leads=99 where organization_id=$1", [a]);
     await capture(calculator, "f".repeat(64));
     await assert.rejects(() => capture(calculator, "g".repeat(64)), /Monthly lead limit/);
     assert.equal(
@@ -107,7 +107,7 @@ test("migrations enforce workspace isolation, billing access, limits, revision l
           [a],
         )
       ).rows[0].leads,
-      50,
+      100,
     );
     await db.query(
       "select public.sync_billing_subscription($1,'cus_a','sub_a','premium','active',now()+interval '30 days',false,now())",
