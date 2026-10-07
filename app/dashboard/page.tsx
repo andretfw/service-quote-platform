@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { publicSupabaseConfigured } from "@/lib/server/env";
+import { pageWorkspace } from "@/lib/server/page-workspace";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
@@ -44,18 +43,20 @@ const quotedValueDisplay = (totals: Map<string, number>) => {
 };
 
 export default async function DashboardPage() {
-  if (!publicSupabaseConfigured()) redirect("/login");
-
+  const workspace = await pageWorkspace();
   const supabase = await createSupabaseServerClient();
-  const {
-    data: { user },
-    error: userError,
-  } = await supabase.auth.getUser();
-  if (userError || !user) redirect("/login");
-
+  const { data: calculators, error: calculatorError } = await workspace.db
+    .from("calculators")
+    .select("id")
+    .eq("organization_id", workspace.organizationId);
+  if (calculatorError) throw new Error("Unable to load business calculators");
   const { data, error } = await supabase
     .from("submissions")
     .select("id,lead_name,template_slug,quote,status,created_at")
+    .in(
+      "calculator_id",
+      calculators.map((calculator) => calculator.id),
+    )
     .order("created_at", { ascending: false })
     .limit(100);
 
@@ -92,12 +93,27 @@ export default async function DashboardPage() {
         <Link className="brand" href="/">
           Service Quote
         </Link>
+        <Link href="/billing">Subscription</Link>
+        <Link href="/workspace">My calculators</Link>
         <Link className="btn" href="/calculators">
           New calculator
         </Link>
       </div>
 
       <h1>Dashboard</h1>
+      {!submissions.length && (
+        <div className="card">
+          <h2>Start receiving quote requests</h2>
+          <p>
+            Choose an industry template, enter your prices and save your calculator. Share its link
+            with customers or add it to your website. Customer requests appear here and in your
+            leads list.
+          </p>
+          <Link className="btn" href="/calculators">
+            Create your first calculator
+          </Link>
+        </div>
+      )}
       <div className="grid">
         {stats.map((stat) => (
           <div className="card" key={stat.label}>

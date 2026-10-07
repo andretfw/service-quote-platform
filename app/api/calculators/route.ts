@@ -1,7 +1,8 @@
 import { randomBytes } from "node:crypto";
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { requireWorkspace, requireFeature } from "@/lib/server/workspace";
+import { assertCalculatorFeatures } from "@/lib/server/calculator-settings";
 import { databaseConfigured, publicSupabaseConfigured } from "@/lib/server/env";
 import { assertSameOrigin, HttpError, parseJson, publicApiError } from "@/lib/server/http";
 import { assertRateLimit } from "@/lib/server/rate-limit";
@@ -16,17 +17,6 @@ const slugify = (value: string) =>
     .replace(/^-+|-+$/g, "")
     .slice(0, 48) || "calculator";
 
-async function getOrCreateOrganization(userId: string, email: string | undefined) {
-  const db = createAdminClient();
-  const workspaceName = email ? `${email.split("@")[0]}'s workspace` : "My workspace";
-  const { data: organizationId, error } = await db.rpc("get_or_create_default_organization", {
-    p_user_id: userId,
-    p_workspace_name: workspaceName,
-  });
-  if (error) throw error;
-  return organizationId;
-}
-
 export async function POST(request: Request) {
   try {
     assertSameOrigin(request);
@@ -36,16 +26,11 @@ export async function POST(request: Request) {
       throw new HttpError(503, "Calculator persistence is not configured");
     }
 
-    const supabase = await createSupabaseServerClient();
-    const {
-      data: { user },
-      error: userError,
-    } = await supabase.auth.getUser();
-
-    if (userError || !user) throw new HttpError(401, "Sign in before saving a calculator");
-
-    const body = await parseJson(request, createCalculatorRequestSchema);
-    const organizationId = await getOrCreateOrganization(user.id, user.email);
+    const workspace = await requireWorkspace();
+    requireFeature(workspace.plan);
+    const body = await parseJson(request, createCalculatorRequestSchema, 256 * 1024);
+    assertCalculatorFeatures(body.template, workspace.plan);
+    const organizationId = workspace.organizationId;
     const db = createAdminClient();
     const publicId = `${slugify(body.template.name)}-${randomBytes(6).toString("hex")}`;
 
@@ -62,7 +47,11 @@ export async function POST(request: Request) {
       },
     );
 
-    if (createError) throw createError;
+    if (createError) {
+      if (createError.code === "P0001")
+        throw new HttpError(402, "Calculator limit reached; upgrade your plan");
+      throw createError;
+    }
 
     return NextResponse.json({
       ok: true,

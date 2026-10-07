@@ -5,6 +5,8 @@ import type { Database } from "@/lib/supabase/database.types";
 
 export type AuthorizedSubmission = {
   id: string;
+  calculatorId: string;
+  leadEmail: string | null;
   quote: { subtotal: number; currency: string };
   status: string;
 };
@@ -16,7 +18,7 @@ export async function getAuthorizedSubmission(
 ): Promise<AuthorizedSubmission | null> {
   const { data, error } = await db
     .from("submissions")
-    .select("id,quote,status")
+    .select("id,calculator_id,quote,status,lead_email")
     .eq("id", submissionId)
     .eq("access_token_hash", hashAccessToken(accessToken))
     .maybeSingle();
@@ -31,6 +33,8 @@ export async function getAuthorizedSubmission(
 
   return {
     id: data.id,
+    calculatorId: data.calculator_id,
+    leadEmail: data.lead_email,
     quote: { subtotal, currency },
     status: data.status,
   };

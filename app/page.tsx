@@ -7,6 +7,7 @@ export default function Home() {
       <nav className="nav">
         <div className="brand">Service Quote</div>
         <div className="row">
+          <Link href="/pricing">Pricing</Link>
           <Link href="/calculators">Templates</Link>
           <Link className="btn" href="/dashboard">
             Dashboard

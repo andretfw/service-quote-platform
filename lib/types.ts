@@ -27,13 +27,31 @@ export type Question = {
 
 export type PricingRule =
   | { kind: "base"; amount: number }
-  | { kind: "number"; field: string; perUnit: number; minUnits?: number; maxUnits?: number }
+  | {
+      kind: "number";
+      field: string;
+      perUnit: number;
+      when?: Condition[];
+      minUnits?: number;
+      maxUnits?: number;
+    }
   | { kind: "choice"; field: string; map: Record<string, number> }
   | { kind: "multiselect"; field: string; map: Record<string, number> }
   | { kind: "conditional"; when: Condition[]; amount: number }
   | { kind: "multiplier"; field: string; map: Record<string, number> };
 
+export type CalculatorSettings = {
+  businessName?: string;
+  accentColor?: string;
+  bookingRequests?: boolean;
+  deposits?: boolean;
+  followUps?: boolean;
+  depositPercent?: number;
+  taxRatePct?: number;
+};
+
 export type QuoteTemplate = {
+  settings?: CalculatorSettings;
   slug: string;
   name: string;
   industry: string;
@@ -54,6 +72,11 @@ export type PublicQuoteConfig = {
   currency: string;
   questions: Question[];
   canCaptureLeads: boolean;
+  businessName?: string;
+  accentColor?: string;
+  canRequestBooking?: boolean;
+  canPayDeposit?: boolean;
+  canFollowUp?: boolean;
 };
 
 export type QuoteResult = {

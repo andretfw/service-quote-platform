@@ -1,23 +1,26 @@
+import LeadStatus from "@/components/LeadStatus";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { publicSupabaseConfigured } from "@/lib/server/env";
+import { pageWorkspace } from "@/lib/server/page-workspace";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
 
 export default async function LeadsPage() {
-  if (!publicSupabaseConfigured()) redirect("/login");
-
+  const workspace = await pageWorkspace();
   const supabase = await createSupabaseServerClient();
-  const {
-    data: { user },
-    error: userError,
-  } = await supabase.auth.getUser();
-  if (userError || !user) redirect("/login");
+  const { data: calculators, error: calculatorError } = await workspace.db
+    .from("calculators")
+    .select("id")
+    .eq("organization_id", workspace.organizationId);
+  if (calculatorError) throw new Error("Unable to load business calculators");
 
   const { data, error } = await supabase
     .from("submissions")
     .select("id,lead_name,lead_email,lead_phone,template_slug,status,follow_up_count,created_at")
+    .in(
+      "calculator_id",
+      calculators.map((calculator) => calculator.id),
+    )
     .order("created_at", { ascending: false })
     .limit(250);
 
@@ -32,6 +35,10 @@ export default async function LeadsPage() {
         </Link>
       </div>
       <h1>Lead pipeline</h1>
+      <div className="row">
+        <Link href="/api/leads/export">Export CSV (Premium / Business)</Link>
+        <Link href="/bookings">Booking requests</Link>
+      </div>
       <p className="muted">
         Follow-ups stop automatically when a lead reaches booked, won or lost.
       </p>
@@ -54,7 +61,7 @@ export default async function LeadsPage() {
                 <td>{lead.lead_email || lead.lead_phone || "—"}</td>
                 <td>{lead.template_slug || "Custom"}</td>
                 <td>
-                  <span className="pill">{lead.status}</span>
+                  <LeadStatus id={lead.id} status={lead.status} />
                 </td>
                 <td>{lead.follow_up_count}</td>
               </tr>

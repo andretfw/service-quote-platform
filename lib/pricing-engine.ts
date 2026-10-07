@@ -150,7 +150,9 @@ export const calculateQuote = (template: QuoteTemplate, answers: Answers): Quote
         add("Base price", rule.amount);
         break;
       case "number": {
+        if (!conditionsMatch(rule.when, effectiveAnswers)) break;
         const parsed = parseFiniteNumber(effectiveAnswers[rule.field]);
+        if (parsed === null) break;
         const rawUnits = parsed ?? 0;
         const units = Math.min(
           rule.maxUnits ?? Number.POSITIVE_INFINITY,
@@ -189,7 +191,13 @@ export const calculateQuote = (template: QuoteTemplate, answers: Answers): Quote
   }
 
   const minimum = template.minPrice ?? 0;
-  const subtotal = Math.round(Math.max(minimum, total) * 100) / 100;
+  const taxRate = template.settings?.taxRatePct ?? 0;
+  if (!Number.isFinite(taxRate) || taxRate < 0 || taxRate > 100)
+    throw new Error("Invalid tax rate");
+  const base = Math.max(minimum, total);
+  const tax = Math.round(base * taxRate) / 100;
+  if (tax > 0) breakdown.push({ label: `Tax (${taxRate}%)`, amount: tax });
+  const subtotal = Math.round((base + tax) * 100) / 100;
   const rangePct = template.rangePct ?? 0.08;
 
   if (!Number.isFinite(rangePct) || rangePct < 0 || rangePct >= 1) {

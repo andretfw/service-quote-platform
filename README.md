@@ -1,193 +1,81 @@
 # Service Quote Platform
 
-A source-visible, production-oriented foundation for a configurable **quote → lead → booking → deposit** SaaS for service businesses.
+A monthly SaaS for service businesses: publish a price estimator, capture enquiries, manage leads, request bookings and collect deposits into the business's connected Stripe account.
 
-The product is intentionally narrow. It sits in front of an existing CRM or spreadsheet instead of forcing a small business into another all-in-one operating system.
+The repository is source-visible for evaluation and authorized collaboration. It is not open source. See [LICENSE](./LICENSE).
 
-> **License:** this repository is public for product evaluation and engineering review. It is **not open source**. See [LICENSE](./LICENSE).
+## Plans
 
-## Product status
+| Feature                                            | Basic    | Premium  | Business |
+| -------------------------------------------------- | -------- | -------- | -------- |
+| Active calculators                                 | 1        | 5        | 25       |
+| Enquiries per calendar month, UTC                  | 100      | 1,000    | 10,000   |
+| 15 industry templates, question and pricing editor | Included | Included | Included |
+| Hosted calculator and website embed                | Included | Included | Included |
+| Lead pipeline and owner notifications              | Included | Included | Included |
+| Business name and brand color                      | —        | Included | Included |
+| CSV lead exports                                   | —        | Included | Included |
+| Optional customer email follow-ups and unsubscribe | —        | Included | Included |
+| Booking requests and owner confirmation            | —        | —        | Included |
+| Customer deposits through Stripe Connect           | —        | —        | Included |
 
-Implemented and reviewable today:
+New accounts receive a 14-day Basic trial without a card. Subscription prices are centralized in `lib/plans.ts`; calculator and enquiry limits are also enforced transactionally in the database. Changes to limits must update the database functions as well. Changing prices requires new matching Stripe prices and environment IDs. Subscription prices are unset and paid checkout is disabled pending owner approval. Provider fees apply.
 
-- Schema-driven multi-step quote flows
-- 15 bundled service-business templates
-- Deterministic rule-based pricing with no `eval` or user-authored executable code
-- Conditional questions, required fields, numeric bounds and option validation
-- Hosted quote pages plus iframe/JavaScript embeds
-- Public form configuration separated from private pricing rules
-- Server-side quote recalculation before lead persistence
-- Demo templates that never persist visitor contact details
-- Authenticated calculator creation with versioned configuration storage
-- Supabase persistence with explicit Row Level Security policies
-- Database-backed API rate limiting
-- High-entropy customer access tokens for post-submission actions
-- Transactional booking requests
-- Stripe Checkout deposits derived from persisted server-side quote data
-- Signature-verified Stripe webhooks with stored amount/currency/reference checks
-- Resend follow-ups with concurrency claims and idempotency keys
-- Magic-link authentication using the current Next.js 16 Supabase SSR proxy pattern
-- Typed Supabase table/RPC contracts
-- Core pricing tests and CI workflows
+Archives retain historical leads while freeing calculator slots. Following a downgrade, the oldest unarchived calculators remain publicly available within the new limit. Inactive subscriptions cannot capture enquiries or use paid customer actions; historical leads remain accessible to their workspace owner.
 
-Not represented as complete:
+Painting, cleaning, tiling, landscaping, roofing, HVAC, moving, pressure washing, auto detailing, handyman, flooring, windows, fencing, pest control and photography are included. Template rates are examples: every business must set its own prices, units, service area and tax rate before publishing.
 
-- Real-time merchant calendar availability
-- Customer photo/file uploads
-- Merchant-specific tax/VAT logic
-- Organization-specific transactional email branding/legal copy
-- Full calculator revision/editor UX after initial creation
-- CRM integrations
+## What is implemented
 
-## Templates
+- Configurable questions, option labels, conditional visibility, numeric rates, option adjustments, multipliers, fixed and conditional charges.
+- Immutable calculator revisions and optimistic edit conflicts.
+- Validated server-side estimates; private pricing rules never reach the public widget.
+- Explicit contact consent; customer reminders require a separate opt-in and include signed unsubscribe links.
+- Row Level Security, authenticated workspace authorization, bounded request bodies and database rate limits.
+- Monthly subscription Checkout, billing portal, webhook synchronization and enforced feature access.
+- Durable checkout reservations, payment amount/currency/reference checks and connected-account verification.
+- Transactional booking requests, cancellation and confirmation; leads stop receiving reminders after booking or closure.
+- Transactional notification outbox and a Netlify scheduled worker with provider timeouts and retry claims.
+- CSV formula injection protection, tested migrations and reproducible CI.
 
-Painting, Cleaning, Tiling, Landscaping, Roofing, HVAC, Moving, Pressure Washing, Auto Detailing, Handyman, Flooring, Windows, Fencing, Pest Control and Photography.
+Booking is a request for a preferred time, not real-time calendar availability. Photo uploads, calendar synchronization, CRM integrations and automatic jurisdiction-specific tax calculations are outside the plans above. The configurable estimate tax percentage is a merchant input. Platform subscription tax, business registration, legal documents and payment-provider approvals require the operator's actual details.
 
-**The bundled prices are illustrative demo defaults.** A merchant must configure its own pricing, taxes, service areas, terms and availability before using a calculator with customers.
+## Development
 
-## Trust boundaries
-
-```text
-Customer browser / embedded iframe
-        │
-        │  public questions only — pricing rules are never serialized
-        │
-        ├── POST /api/public/calculate
-        │       ├── rate limit
-        │       ├── request validation
-        │       └── server-side calculation from canonical rules
-        │
-        └── POST /api/public/submit
-                ├── rate limit
-                ├── request validation
-                ├── server-side recalculation
-                ├── lead + quote snapshot
-                └── one high-entropy customer access token
-                         │
-                         ├── booking request (transactional)
-                         └── Stripe deposit session
-                                  └── signature-verified webhook
-```
-
-Core guarantees:
-
-1. Browser-provided totals are never trusted.
-2. Customer-facing pages never receive merchant pricing rules.
-3. Deposit amounts come from the persisted quote, not request parameters.
-4. Submission IDs alone do not authorize customer actions.
-5. Supabase service-role and Stripe secret keys are server-only.
-6. Browser Supabase access is read-only through RLS; privileged mutations use narrow server routes.
-7. Payment state changes only from verified Stripe webhook events.
-8. Public endpoints use database-backed rate limits when the database is configured.
-
-See [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) and [SECURITY.md](./SECURITY.md).
-
-## Local development
-
-Requirements:
-
-- Node.js 24.21+ (24.x Active LTS)
-- npm
-- A Supabase project for persistence/auth features
+Use Node.js 24.21.0 and npm 11.21.0.
 
 ```bash
 cp .env.example .env.local
 npm ci
-npm run check
 npm run dev
 ```
 
-Open `http://localhost:3000/q/painting` for a no-database demo flow.
+The bundled `/q/painting` demo works without a database and never stores visitor contact details. Account-backed features need Supabase and all migrations.
 
-### Environment variables
+```bash
+npm run check
+npm run build
+npm run config:check
+```
 
-| Variable                               | Purpose                                                         |
-| -------------------------------------- | --------------------------------------------------------------- |
-| `NEXT_PUBLIC_APP_URL`                  | Canonical application origin                                    |
-| `NEXT_PUBLIC_SUPABASE_URL`             | Supabase project URL                                            |
-| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Browser-safe Supabase publishable key                           |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY`        | Legacy fallback for older Supabase projects                     |
-| `SUPABASE_SERVICE_ROLE_KEY`            | Server-only administrative database key                         |
-| `RESEND_API_KEY`                       | Follow-up email provider key                                    |
-| `RESEND_FROM`                          | Verified sender identity                                        |
-| `STRIPE_SECRET_KEY`                    | Server-side Stripe API key                                      |
-| `STRIPE_WEBHOOK_SECRET`                | Stripe webhook signing secret                                   |
-| `CRON_SECRET`                          | Bearer secret for the follow-up worker                          |
-| `RATE_LIMIT_SECRET`                    | Salt used when hashing client addresses for API rate-limit keys |
-| `DEPOSIT_PERCENT`                      | Server-side deposit percentage; defaults to `20`                |
+The test suite executes all migrations against embedded PostgreSQL and verifies account isolation, plan access, lead limits, checkout reservations, archive/downgrade behavior, version conflicts and transactional bookings. External provider operations need separate staging verification. `config:check` reports missing variables without displaying their values; it does not prove that credentials or provider configuration are valid.
 
-Never expose the service-role key, Stripe secret, webhook secret, cron secret or rate-limit secret with a `NEXT_PUBLIC_` prefix.
+## Deployment
 
-## Database
+Use [docs/NETLIFY_SETUP.md](./docs/NETLIFY_SETUP.md) for the Netlify, Supabase, Stripe and email setup.
 
-Apply [`supabase/migrations/001_initial.sql`](./supabase/migrations/001_initial.sql) with the Supabase CLI or SQL editor.
+All migrations in `supabase/migrations` must be applied in filename order. Do not rerun already-applied migrations on an existing database. Keep secrets in provider environment settings, never in GitHub. Supabase browser clients have organization-scoped read access; mutations run through authenticated server routes or signature-verified webhooks.
 
-The migration creates:
-
-- organizations and memberships
-- calculators and append-only calculator versions
-- submissions
-- bookings
-- payments
-- API rate-limit state
-- narrow RPCs for transactional workspace creation, calculator creation and booking requests
-
-All business-facing tables use RLS. Authenticated browser clients have read access only to rows belonging to their organization. Product mutations run through server routes after authorization.
-
-## Embedding
-
-After a merchant creates a calculator, use its generated public ID:
+After saving a calculator, copy its generated link or embed code from the editor:
 
 ```html
 <script
   async
-  src="https://YOUR_DOMAIN/embed.js"
-  data-service-quote="YOUR_PUBLIC_CALCULATOR_ID"
+  src="https://YOUR_APP.netlify.app/embed.js"
+  data-service-quote="PUBLIC_CALCULATOR_ID"
 ></script>
 ```
 
-Or:
+A custom application domain is optional. Resend sender-domain verification is a separate email requirement.
 
-```html
-<iframe
-  src="https://YOUR_DOMAIN/embed/YOUR_PUBLIC_CALCULATOR_ID"
-  title="Instant quote"
-  style="width:100%;min-height:640px;border:0"
-></iframe>
-```
-
-Bundled template IDs such as `painting` remain demos and do not collect lead PII.
-
-## Quality commands
-
-```bash
-npm run format:check
-npm run lint
-npm run typecheck
-npm test
-npm run build
-```
-
-`npm run check` runs formatting, linting, type checking and tests together.
-
-## Production checklist
-
-Before taking real merchant traffic:
-
-- Set strong production secrets and rotate them through the hosting provider.
-- Configure Supabase backups and test restores.
-- Configure Stripe webhooks against the production domain.
-- Configure a verified Resend sender/domain.
-- Add platform/WAF bot controls in addition to application rate limits.
-- Restrict embed origins per merchant if your commercial plan requires it.
-- Add private object storage before enabling customer photo uploads.
-- Integrate a calendar provider before promising authoritative availability.
-- Add organization-specific email templates, consent and legal/unsubscribe requirements.
-- Add centralized error monitoring, audit events and webhook delivery observability.
-- Implement tax/VAT behavior appropriate to each merchant jurisdiction.
-
-The repository deliberately does not claim controls that are not implemented.
-
-## Repository policy
-
-The repository is source-visible for evaluation, security review and authorized collaboration. Copying, rehosting, rebranding, reselling or using it to operate a competing service is not permitted without written authorization from the copyright holder.
+See [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) and [SECURITY.md](./SECURITY.md) for the trust boundaries.

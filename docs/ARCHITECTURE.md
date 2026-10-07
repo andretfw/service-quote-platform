@@ -57,3 +57,17 @@ The scheduler selects due rows, then performs a conditional claim before sending
 `public/embed.js` creates an iframe hosted on the application origin. This keeps the merchant website isolated from the application runtime and prevents host-page JavaScript from directly accessing quote state because of the browser same-origin policy.
 
 The `/embed/*` CSP permits framing. Other application pages set `frame-ancestors 'none'` and `X-Frame-Options: DENY`.
+
+## Subscriptions and limits
+
+The authenticated workspace is resolved from the verified Supabase session and membership. Billing actions require the owner role. Feature access is computed from the persisted Stripe subscription and paid-period expiry, with a 14-day Basic trial only when no subscription exists.
+
+Canonical Stripe subscriptions are matched against the workspace customer and configured price IDs. The database locks workspace state during synchronization and rejects an older observation. Public calculator lookup applies archive and downgrade limits; submission capture locks the workspace and increments the monthly UTC counter in the same transaction as the lead insert. Failed quota checks roll back the increment.
+
+Subscription checkout reservations serialize conflicting plan checkouts and supply stable provider idempotency keys. Deposit reservations serialize customer retries separately. A deposit session can be replaced only after its canonical Stripe state is expired and the database records are reconciled. Webhook payment checks include the connected account as well as amount, currency and submission reference.
+
+## Notification delivery
+
+A database trigger queues owner notifications in a private outbox as part of lead persistence. A Netlify scheduled function invokes the authenticated worker every 15 minutes. Claims are conditional; provider calls have explicit timeouts and stable idempotency keys. Unprocessed claims become retryable. This is retry-oriented delivery, not an exactly-once guarantee.
+
+Customer reminder consent is stored separately from permission to answer an enquiry. Signed unsubscribe tokens expire, and unsubscribe atomically clears consent and future scheduling. A message already handed to the provider may still arrive after unsubscribe.
