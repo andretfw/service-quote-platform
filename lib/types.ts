@@ -27,7 +27,14 @@ export type Question = {
 
 export type PricingRule =
   | { kind: "base"; amount: number }
-  | { kind: "number"; field: string; perUnit: number; minUnits?: number; maxUnits?: number }
+  | {
+      kind: "number";
+      field: string;
+      perUnit: number;
+      when?: Condition[];
+      minUnits?: number;
+      maxUnits?: number;
+    }
   | { kind: "choice"; field: string; map: Record<string, number> }
   | { kind: "multiselect"; field: string; map: Record<string, number> }
   | { kind: "conditional"; when: Condition[]; amount: number }

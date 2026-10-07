@@ -124,6 +124,7 @@ const pricingRuleSchema = z.discriminatedUnion("kind", [
       kind: z.literal("number"),
       field: z.string().min(1).max(100),
       perUnit: z.number().nonnegative().finite(),
+      when: z.array(conditionSchema).max(20).optional(),
       minUnits: z.number().finite().optional(),
       maxUnits: z.number().finite().optional(),
     })
@@ -349,6 +350,9 @@ export const quoteTemplateSchema = quoteTemplateBaseSchema.superRefine((template
 
   template.rules.forEach((rule, ruleIndex) => {
     if (rule.kind === "number") {
+      rule.when?.forEach((condition, conditionIndex) => {
+        validateCondition(condition, ["rules", ruleIndex, "when", conditionIndex]);
+      });
       const question = questions.get(rule.field);
       if (!question) {
         ctx.addIssue({

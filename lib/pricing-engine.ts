@@ -150,7 +150,9 @@ export const calculateQuote = (template: QuoteTemplate, answers: Answers): Quote
         add("Base price", rule.amount);
         break;
       case "number": {
+        if (!conditionsMatch(rule.when, effectiveAnswers)) break;
         const parsed = parseFiniteNumber(effectiveAnswers[rule.field]);
+        if (parsed === null) break;
         const rawUnits = parsed ?? 0;
         const units = Math.min(
           rule.maxUnits ?? Number.POSITIVE_INFINITY,

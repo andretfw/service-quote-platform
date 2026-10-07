@@ -357,6 +357,12 @@ export function PricingEditor({
           value={rule.perUnit}
           onChange={(perUnit) => onChange({ ...rule, perUnit })}
         />
+        <h4>Only apply this rate when</h4>
+        <ConditionsEditor
+          conditions={rule.when ?? []}
+          questions={questions}
+          onChange={(when) => onChange({ ...rule, when })}
+        />
         {(["minUnits", "maxUnits"] as const).map((key) => (
           <label className="editor-field" key={key}>
             {key === "minUnits"

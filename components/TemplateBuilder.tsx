@@ -54,7 +54,8 @@ export default function TemplateBuilder({
         .filter(
           (rule) =>
             !(
-              rule.kind === "conditional" &&
+              "when" in rule &&
+              rule.when &&
               rule.when.some(
                 (c) =>
                   c.field === question.id && c.op !== "truthy" && !values.includes(String(c.value)),
@@ -85,7 +86,7 @@ export default function TemplateBuilder({
       rules: t.rules.filter(
         (rule) =>
           !("field" in rule && rule.field === id) &&
-          !(rule.kind === "conditional" && rule.when.some((c) => c.field === id)),
+          !("when" in rule && rule.when && rule.when.some((c) => c.field === id)),
       ),
     }));
   }
@@ -212,23 +213,62 @@ export default function TemplateBuilder({
           />
         </div>
         <p className="muted">
-          Use your actual rates and clearly label measurement units. The tax rate is your business
-          setting, not automatic tax advice.
+          Template prices are examples. Replace every rate with your own pricing before sharing.
+          Changing currency or measurement labels does not convert rates. State what is included in
+          your description and help text.
         </p>
         <p className="muted">
           Saving applies your current plan features; unavailable branding and customer actions will
           be removed.
         </p>
         <h3>Questions</h3>
-        {template.questions.map((question) => (
-          <QuestionEditor
-            key={question.id}
-            question={question}
-            questions={template.questions}
-            onChange={updateQuestion}
-            onOptionsChange={updateOptions}
-            onRemove={() => removeQuestion(question.id)}
-          />
+        {template.questions.map((question, index) => (
+          <div key={question.id}>
+            <div className="row">
+              <button
+                type="button"
+                className="btn secondary"
+                disabled={index === 0}
+                onClick={() =>
+                  setTemplate((t) => {
+                    const questions = [...t.questions];
+                    [questions[index - 1], questions[index]] = [
+                      questions[index],
+                      questions[index - 1],
+                    ];
+                    return { ...t, questions };
+                  })
+                }
+              >
+                Move up
+              </button>
+              <button
+                type="button"
+                className="btn secondary"
+                disabled={index === template.questions.length - 1}
+                onClick={() =>
+                  setTemplate((t) => {
+                    const questions = [...t.questions];
+                    [questions[index + 1], questions[index]] = [
+                      questions[index],
+                      questions[index + 1],
+                    ];
+                    return { ...t, questions };
+                  })
+                }
+              >
+                Move down
+              </button>
+            </div>
+            <QuestionEditor
+              key={question.id}
+              question={question}
+              questions={template.questions}
+              onChange={updateQuestion}
+              onOptionsChange={updateOptions}
+              onRemove={() => removeQuestion(question.id)}
+            />
+          </div>
         ))}
         <div className="row">
           <label>
@@ -248,6 +288,25 @@ export default function TemplateBuilder({
           </button>
         </div>
         <h3>Pricing</h3>
+        <p className="muted">
+          Fixed amounts are added once. Quantity rates are charged per unit. Multipliers affect the
+          whole estimate; use conditional quantity rates for service-specific pricing.
+        </p>
+        {template.questions.some((q) => q.type === "number") && (
+          <button
+            type="button"
+            className="btn secondary"
+            onClick={() => {
+              const question = template.questions.find((q) => q.type === "number")!;
+              setTemplate((t) => ({
+                ...t,
+                rules: [...t.rules, { kind: "number", field: question.id, perUnit: 0 }],
+              }));
+            }}
+          >
+            Add quantity rate
+          </button>
+        )}
         {template.rules.map((rule, index) => (
           <div className="editor-section" key={index}>
             <PricingEditor
@@ -271,6 +330,32 @@ export default function TemplateBuilder({
             </button>
           </div>
         ))}
+        {(["choice", "multiselect"] as const).map(
+          (kind) =>
+            template.questions.some((q) => q.type === kind) && (
+              <button
+                key={kind}
+                className="btn secondary"
+                type="button"
+                onClick={() => {
+                  const question = template.questions.find((q) => q.type === kind)!;
+                  setTemplate((t) => ({
+                    ...t,
+                    rules: [
+                      ...t.rules,
+                      {
+                        kind,
+                        field: question.id,
+                        map: Object.fromEntries(question.options!.map((o) => [o.value, 0])),
+                      },
+                    ],
+                  }));
+                }}
+              >
+                Add {kind === "choice" ? "option" : "extras"} prices
+              </button>
+            ),
+        )}
         <button
           className="btn secondary"
           type="button"
