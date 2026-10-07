@@ -268,7 +268,7 @@ button:disabled {
 .notice {
   padding: 12px;
   border-radius: 10px;
-  background: #eef2ff;
+  background: var(--accent-soft);
 }
 .table {
   display: block;
@@ -305,8 +305,12 @@ button:disabled {
 
 :root {
   color: #1e293b;
-  background: #f5f6fa;
-  --accent: #4f46e5;
+  background: #f6f8f7;
+  --accent: #0f766e;
+  --accent-strong: #115e59;
+  --accent-soft: #ecf7f3;
+  --accent-border: #14877b;
+  --accent-focus: #5eb5a5;
 }
 body {
   line-height: 1.5;
@@ -341,12 +345,12 @@ select {
 button:focus-visible,
 a:focus-visible,
 summary:focus-visible {
-  outline: 3px solid #a5b4fc;
+  outline: 3px solid var(--accent-focus);
   outline-offset: 3px;
 }
 .card {
   border-radius: 16px;
-  border-color: #e5e7ef;
+  border-color: #e2e8e5;
   box-shadow: 0 2px 8px #0f172a04;
 }
 .btn {
@@ -363,16 +367,16 @@ summary:focus-visible {
 .btn.secondary {
   background: #fff;
   color: #334155;
-  border-color: #dce0e9;
+  border-color: #d9e2df;
 }
 .field {
   padding: 11px 12px;
   border-radius: 8px;
-  border-color: #dce0e9;
+  border-color: #d9e2df;
   min-height: 44px;
 }
 .field:focus {
-  outline: 2px solid #a5b4fc;
+  outline: 2px solid var(--accent-focus);
 }
 .app-layout {
   display: grid;
@@ -387,7 +391,7 @@ summary:focus-visible {
   flex-direction: column;
   padding: 30px 18px;
   background: #fff;
-  border-right: 1px solid #e5e7ef;
+  border-right: 1px solid #e2e8e5;
 }
 .app-sidebar .brand {
   display: flex;
@@ -428,12 +432,12 @@ summary:focus-visible {
   color: #64748b;
 }
 .sidebar-link.active {
-  background: #eef2ff;
-  color: #4338ca;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
   font-weight: 650;
 }
 .sidebar-link:hover {
-  background: #f5f6fa;
+  background: #f6f8f7;
 }
 .sidebar-link span {
   font-size: 20px;
@@ -460,7 +464,7 @@ summary:focus-visible {
   z-index: 5;
 }
 .language-select {
-  border: 1px solid #e5e7ef;
+  border: 1px solid #e2e8e5;
   border-radius: 8px;
   padding: 7px 10px;
   color: #475569;
@@ -494,7 +498,7 @@ summary:focus-visible {
   grid-template-columns: repeat(5, minmax(0, 1fr));
   margin: 28px 0;
   background: #fff;
-  border: 1px solid #e5e7ef;
+  border: 1px solid #e2e8e5;
   border-radius: 12px;
   padding: 6px;
   gap: 4px;
@@ -517,18 +521,18 @@ summary:focus-visible {
   height: 23px;
   display: inline-grid;
   place-items: center;
-  border: 1px solid #dce0e9;
+  border: 1px solid #d9e2df;
   border-radius: 50%;
   flex-shrink: 0;
 }
 .builder-steps button.active {
-  background: #eef2ff;
-  color: #4338ca;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
 }
 .builder-steps button.active span {
-  background: #4f46e5;
+  background: var(--accent);
   color: #fff;
-  border-color: #4f46e5;
+  border-color: var(--accent);
 }
 .editor-card {
   min-width: 0;
@@ -555,7 +559,7 @@ summary:focus-visible {
 .segmented {
   display: inline-flex;
   border-radius: 8px;
-  border: 1px solid #e5e7ef;
+  border: 1px solid #e2e8e5;
   background: #fff;
   padding: 3px;
 }
@@ -570,8 +574,8 @@ summary:focus-visible {
 }
 .segmented button.active,
 .segmented button:hover {
-  background: #eef2ff;
-  color: #4338ca;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
 }
 .save-state {
   border-radius: 6px;
@@ -601,7 +605,7 @@ summary:focus-visible {
   gap: 16px;
 }
 .language-options {
-  border: 1px solid #e5e7ef;
+  border: 1px solid #e2e8e5;
   border-radius: 9px;
   display: flex;
   flex-wrap: wrap;
@@ -614,14 +618,14 @@ summary:focus-visible {
 }
 .rate-card {
   padding: 16px 0;
-  border-bottom: 1px solid #e5e7ef;
+  border-bottom: 1px solid #e2e8e5;
 }
 .rate-card h3 {
   margin-top: 0;
 }
 .advanced-panel {
   background: #f8fafc;
-  border: 1px solid #e5e7ef;
+  border: 1px solid #e2e8e5;
   padding: 12px 14px;
   border-radius: 8px;
   margin: 18px 0;
@@ -633,7 +637,7 @@ summary {
   padding: 5px 0;
 }
 .question-card {
-  border: 1px solid #e5e7ef;
+  border: 1px solid #e2e8e5;
   border-radius: 10px;
   margin: 12px 0;
 }
@@ -653,7 +657,7 @@ summary {
   border: 0;
   background: transparent;
   padding: 8px 0;
-  color: #4f46e5;
+  color: var(--accent);
   font-size: 12px;
   cursor: pointer;
 }
@@ -661,7 +665,7 @@ summary {
   color: #b91c1c;
 }
 .builder-footer {
-  border-top: 1px solid #e5e7ef;
+  border-top: 1px solid #e2e8e5;
   padding-top: 20px;
   margin-top: 28px;
   display: flex;
@@ -673,7 +677,7 @@ summary {
 .share-url {
   display: block;
   overflow-wrap: anywhere;
-  color: #4f46e5;
+  color: var(--accent);
   margin: 10px 0 18px;
 }
 .quote-language {
@@ -698,20 +702,20 @@ summary {
 .option {
   padding: 15px;
   border-radius: 10px;
-  border-color: #e5e7ef;
+  border-color: #e2e8e5;
   color: #334155;
 }
 .option.selected {
   border-color: var(--brand-color, var(--accent));
-  background: #eef2ff;
+  background: var(--accent-soft);
 }
 .price {
   font-size: clamp(28px, 3.4vw, 42px);
   overflow-wrap: anywhere;
 }
 .pill {
-  background: #eef2ff;
-  color: #4338ca;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
   font-size: 12px;
   font-weight: 500;
 }
@@ -747,14 +751,14 @@ summary {
   padding: 28px;
 }
 .plan-card.featured {
-  border: 2px solid #6366f1;
+  border: 2px solid var(--accent-border);
 }
 .plan-badge {
   position: absolute;
   top: -15px;
   left: 22px;
   color: #fff;
-  background: #4f46e5;
+  background: var(--accent);
   border-radius: 8px;
   font-size: 12px;
   padding: 5px 12px;
@@ -781,8 +785,8 @@ summary {
   display: grid;
   gap: 4px;
   padding: 18px 0;
-  border-top: 1px solid #e5e7ef;
-  border-bottom: 1px solid #e5e7ef;
+  border-top: 1px solid #e2e8e5;
+  border-bottom: 1px solid #e2e8e5;
   font-size: 14px;
 }
 .plan-allowance span {
@@ -802,7 +806,7 @@ summary {
   margin-bottom: 13px;
 }
 .feature-list li > span {
-  color: #4f46e5;
+  color: var(--accent);
 }
 .plan-card .btn,
 .plan-card .btn + div {
@@ -867,7 +871,7 @@ summary {
     height: auto;
     padding: 20px 16px 10px;
     border-right: 0;
-    border-bottom: 1px solid #e5e7ef;
+    border-bottom: 1px solid #e2e8e5;
   }
   .app-sidebar nav {
     display: flex;
@@ -933,8 +937,8 @@ summary {
   font-size: 12px;
 }
 .status-new {
-  background: #eef2ff;
-  color: #4338ca;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
 }
 .status-contacted {
   background: #fffbeb;
@@ -953,10 +957,10 @@ summary {
   font-weight: 600;
 }
 .lead-name:hover {
-  color: #4f46e5;
+  color: var(--accent);
 }
 .welcome-card {
-  background: linear-gradient(110deg, #eef2ff, #fff);
+  background: linear-gradient(110deg, var(--accent-soft), #fff);
   max-width: 850px;
 }
 body:has(.app-layout) .global-language {

@@ -648,7 +648,7 @@ export default function TemplateBuilder({
                     {t("Brand color")}
                     <input
                       type="color"
-                      value={settings.accentColor ?? "#4f46e5"}
+                      value={settings.accentColor ?? "#0f766e"}
                       onChange={(e) => changeSettings({ accentColor: e.target.value })}
                     />
                   </label>
