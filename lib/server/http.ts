@@ -1,6 +1,7 @@
 import "server-only";
 import { z, type ZodType } from "zod";
 import { QuoteValidationError } from "@/lib/pricing-engine";
+import { getAppUrl } from "./env";
 
 const DEFAULT_MAX_BYTES = 64 * 1024;
 
@@ -86,12 +87,7 @@ export const assertSameOrigin = (request: Request): void => {
 
   let requestOrigin: string;
   try {
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL?.trim();
-    const url = new URL(appUrl || request.url);
-    if (!["http:", "https:"].includes(url.protocol) || url.username || url.password) {
-      throw new Error("Invalid application origin");
-    }
-    requestOrigin = url.origin;
+    requestOrigin = getAppUrl(new URL(request.url).origin);
   } catch {
     throw new HttpError(400, "Invalid request URL");
   }
