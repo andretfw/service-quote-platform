@@ -81,13 +81,22 @@ export default function BookingCalendar({
               key={key}
               className={`calendar-day ${key.slice(0, 7) !== month ? "outside" : ""} ${selected === key ? "selected" : ""}`}
               aria-pressed={selected === key}
-              aria-label={`${key}, ${items.length} ${t("bookings")}`}
+              aria-label={`${key}, ${items.length} ${t(items.length === 1 ? "booking" : "bookings")}${unavailable.length ? `, ${t("Unavailable")}` : ""}`}
               onClick={() => setSelected(key)}
             >
               <strong>{day.getUTCDate()}</strong>
-              <span>{items.length ? `${items.length} ${t("bookings")}` : ""}</span>
+              {items.length > 0 && (
+                <span>
+                  {items.length}{" "}
+                  <span className="calendar-count-label">
+                    {t(items.length === 1 ? "booking" : "bookings")}
+                  </span>
+                </span>
+              )}
               {unavailable.length > 0 && (
-                <span className="calendar-block-dot">{t("Unavailable")}</span>
+                <span className="calendar-block-dot" aria-hidden="true">
+                  <span className="calendar-block-label">{t("Unavailable")}</span>
+                </span>
               )}
             </button>
           );

@@ -34,6 +34,7 @@ export default function BookingStatus({
       });
       const data = (await response.json()) as { error?: string };
       if (!response.ok) throw new Error(data.error ?? "Could not update booking");
+      setEditing(false);
       router.refresh();
     } catch (error) {
       setError(error instanceof Error ? error.message : "Could not update booking");

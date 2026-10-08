@@ -1510,6 +1510,16 @@ body:has(.app-layout) .global-language {
   .calendar-day span {
     font-size: 9px;
   }
+  .calendar-day .calendar-count-label,
+  .calendar-day .calendar-block-label {
+    display: none;
+  }
+  .calendar-day .calendar-block-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #8a3e1b;
+  }
   .calendar-heading h2 {
     font-size: 18px;
     order: -1;

@@ -3602,5 +3602,9 @@
   "New-enquiry delivery, a sample test and delivery status are included on Premium and Business. Your business owns its automation account and any separate provider costs. Native CRM sync and historical lead imports are not included. Business supports optional Google Calendar and Outlook connections in Booking calendar.": {
     "es": "Premium y Business incluyen la entrega de nuevas consultas, una prueba de ejemplo y el estado de entrega. Tu negocio administra su cuenta de automatización y los costes del proveedor. No se incluye la sincronización nativa con CRM ni la importación de consultas anteriores. Business permite conexiones opcionales con Google Calendar y Outlook en Calendario de reservas.",
     "ro": "Premium și Business includ trimiterea solicitărilor noi, un test demonstrativ și starea livrării. Afacerea ta deține contul de automatizare și suportă costurile separate ale furnizorului. Sincronizarea CRM nativă și importarea solicitărilor anterioare nu sunt incluse. Business permite conexiuni opționale Google Calendar și Outlook în Calendar de programări."
+  },
+  "booking": {
+    "es": "reserva",
+    "ro": "programare"
   }
 }
