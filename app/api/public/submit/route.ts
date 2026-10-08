@@ -1,3 +1,4 @@
+import { locales } from "@/lib/i18n";
 import { attemptLeadNotification } from "@/lib/server/notifications";
 import { NextResponse } from "next/server";
 import { calculateQuote, toPublicQuoteResult } from "@/lib/pricing-engine";
@@ -31,7 +32,14 @@ export async function POST(request: Request) {
       p_calculator_id: resolved.calculatorId,
       p_template_slug: resolved.template.slug,
       p_answers: body.answers as Json,
-      p_quote: quote as unknown as Json,
+      p_quote: {
+        ...quote,
+        locale: (resolved.template.settings?.languages ?? [...locales]).includes(
+          body.locale ?? "en",
+        )
+          ? (body.locale ?? "en")
+          : (resolved.template.settings?.locale ?? "en"),
+      } as unknown as Json,
       p_name: body.lead.name,
       p_email: body.lead.email || null,
       p_phone: body.lead.phone || null,

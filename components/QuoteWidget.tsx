@@ -1,5 +1,11 @@
 "use client";
+import BrandLogo from "@/components/BrandLogo";
+import { Text, LocalizedInput } from "@/components/Language";
 
+import { LanguageProvider, LanguageSelect, useLanguage } from "./Language";
+import { localizeConfig } from "@/lib/localization";
+import { locales, type Locale } from "@/lib/i18n";
+import { units } from "@/lib/units";
 import Image from "next/image";
 import CustomerActions from "./CustomerActions";
 import type { CSSProperties } from "react";
@@ -30,13 +36,13 @@ function questionInput(
 ) {
   if (question.type === "number") {
     return (
-      <input
+      <LocalizedInput
         aria-label={question.label}
         className="field"
         type="number"
         min={question.min}
         max={question.max}
-        step={question.step ?? 1}
+        step={question.unit ? "any" : (question.step ?? 1)}
         value={typeof value === "number" ? value : ""}
         onChange={(event) =>
           onChange(event.target.value === "" ? null : Number(event.target.value))
@@ -47,7 +53,7 @@ function questionInput(
 
   if (question.type === "text" || question.type === "postcode") {
     return (
-      <input
+      <LocalizedInput
         aria-label={question.label}
         className="field"
         value={typeof value === "string" ? value : ""}
@@ -68,7 +74,7 @@ function questionInput(
             aria-pressed={value === option.value}
             onClick={() => onChange(option.value)}
           >
-            {option.label}
+            <Text>{option.label}</Text>
           </button>
         ))}
       </div>
@@ -94,8 +100,8 @@ function questionInput(
               )
             }
           >
-            {active ? "✓ " : ""}
-            {option.label}
+            <Text>{active ? "✓ " : ""}</Text>
+            <Text>{option.label}</Text>
           </button>
         );
       })}
@@ -109,18 +115,8 @@ const hasAnswer = (value: AnswerValue | undefined): boolean =>
   value !== "" &&
   !(Array.isArray(value) && value.length === 0);
 
-const formatMoney = (amount: number, currency: string) =>
-  new Intl.NumberFormat(undefined, {
-    style: "currency",
-    currency,
-    maximumFractionDigits: 0,
-  }).format(amount);
-
-export default function QuoteWidget({
-  config,
-  compact = false,
-  previewTemplate,
-}: QuoteWidgetProps) {
+function QuoteExperience({ config, compact = false, previewTemplate }: QuoteWidgetProps) {
+  const { locale, t } = useLanguage();
   const [answers, setAnswers] = useState<Answers>({});
   const [index, setIndex] = useState(0);
   const [result, setResult] = useState<PublicQuoteResult | null>(null);
@@ -177,6 +173,7 @@ export default function QuoteWidget({
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
+          locale,
           template: config.publicId,
           answers,
           lead,
@@ -184,8 +181,12 @@ export default function QuoteWidget({
           followUpConsent,
         }),
       });
-      const data = (await response.json()) as SubmissionReceipt & { error?: string };
+      const data = (await response.json()) as SubmissionReceipt & {
+        error?: string;
+        estimate?: PublicQuoteResult;
+      };
       if (!response.ok) throw new Error(data.error || "Could not save your request");
+      if (data.estimate) setResult(data.estimate);
       setReceipt(data);
     } catch (requestError) {
       setError(
@@ -203,6 +204,11 @@ export default function QuoteWidget({
         style={{ "--brand-color": config.accentColor } as CSSProperties}
         aria-live="polite"
       >
+        {config.showPlatformBrand && (
+          <div className="platform-brand">
+            <BrandLogo />
+          </div>
+        )}
         {config.logoDataUrl && (
           <Image
             src={config.logoDataUrl}
@@ -214,32 +220,59 @@ export default function QuoteWidget({
           />
         )}
         {config.businessName && <p className="brand">{config.businessName}</p>}
-        <span className="pill">Instant estimate</span>
-        <h2 className="result-title">Your estimated range</h2>
+        <span className="pill">
+          <Text>{"Instant estimate"}</Text>
+        </span>
+        <h2 className="result-title">
+          <Text>{"Your estimated range"}</Text>
+        </h2>
         <div className="price">
-          {formatMoney(result.low, result.currency)}–{formatMoney(result.high, result.currency)}
+          {new Intl.NumberFormat(locale, {
+            style: "currency",
+            currency: result.currency,
+            maximumFractionDigits: 0,
+          }).format(result.low)}
+          –
+          {new Intl.NumberFormat(locale, {
+            style: "currency",
+            currency: result.currency,
+            maximumFractionDigits: 0,
+          }).format(result.high)}
         </div>
         <p className="muted">
-          This is a preliminary estimate. Final pricing can change after the business confirms
-          scope, measurements and site conditions.
+          <Text>
+            {
+              "This is a preliminary estimate. Final pricing can change after the business confirms scope, measurements and site conditions."
+            }
+          </Text>
         </p>
 
-        {error && <p className="error-message">{error}</p>}
+        {error && (
+          <p className="error-message">
+            {t(/^[a-z0-9_]+: /i.test(error) ? "Please check your answers and try again." : error)}
+          </p>
+        )}
 
         {isPreview || !config.canCaptureLeads ? (
           <div className="success-panel">
-            <strong>{isPreview ? "Preview mode" : "Template demo"}</strong>
+            <strong>
+              <Text>{isPreview ? "Preview mode" : "Template demo"}</Text>
+            </strong>
             <p className="muted">
-              {isPreview
-                ? "No lead is created while you preview an unsaved calculator."
-                : "This calculator is currently accepting estimates only. Contact the business directly for a quote request."}
+              <Text>
+                {isPreview
+                  ? "No lead is created while you preview an unsaved calculator."
+                  : "This calculator is currently accepting estimates only. Contact the business directly for a quote request."}
+              </Text>
             </p>
           </div>
         ) : !receipt ? (
           <>
-            <h3>Get this estimate and request an exact quote</h3>
+            <h3>
+              <Text>{"Get this estimate and request an exact quote"}</Text>
+            </h3>
             <div className="options">
-              <input
+              <LocalizedInput
                 aria-label="Your name"
                 className="field"
                 placeholder="Name"
@@ -247,7 +280,7 @@ export default function QuoteWidget({
                 value={lead.name}
                 onChange={(event) => setLead({ ...lead, name: event.target.value })}
               />
-              <input
+              <LocalizedInput
                 className="field"
                 aria-label="Your email"
                 placeholder="Email"
@@ -256,7 +289,7 @@ export default function QuoteWidget({
                 value={lead.email}
                 onChange={(event) => setLead({ ...lead, email: event.target.value })}
               />
-              <input
+              <LocalizedInput
                 className="field"
                 aria-label="Your phone"
                 placeholder="Phone"
@@ -265,22 +298,25 @@ export default function QuoteWidget({
                 onChange={(event) => setLead({ ...lead, phone: event.target.value })}
               />
               <label className="check-label">
-                <input
+                <LocalizedInput
                   type="checkbox"
                   checked={contactConsent}
                   onChange={(e) => setContactConsent(e.target.checked)}
                 />
-                I agree that this business may contact me about this request.
+                <Text>{"I agree that this business may contact me about this request."}</Text>
               </label>
               {config.canFollowUp && (
                 <label className="check-label">
-                  <input
+                  <LocalizedInput
                     type="checkbox"
                     checked={followUpConsent}
                     onChange={(e) => setFollowUpConsent(e.target.checked)}
                   />
-                  Send me optional email reminders about this estimate. I can unsubscribe at any
-                  time.
+                  <Text>
+                    {
+                      "Send me optional email reminders about this estimate. I can unsubscribe at any time."
+                    }
+                  </Text>
                 </label>
               )}
               <button
@@ -293,14 +329,18 @@ export default function QuoteWidget({
                 }
                 onClick={() => void submit()}
               >
-                {pending ? "Sending…" : "Request exact quote"}
+                <Text>{pending ? "Sending…" : "Request exact quote"}</Text>
               </button>
             </div>
           </>
         ) : (
           <div className="success-panel">
-            <strong>Request received.</strong>
-            <p className="muted">The business can now review your estimate and follow up.</p>
+            <strong>
+              <Text>{"Request received."}</Text>
+            </strong>
+            <p className="muted">
+              <Text>{"The business can now review your estimate and follow up."}</Text>
+            </p>
             {receipt.submissionId && receipt.accessToken && (
               <CustomerActions
                 submissionId={receipt.submissionId}
@@ -315,10 +355,20 @@ export default function QuoteWidget({
     );
   }
 
-  if (!current) return <div className="card">No questions configured.</div>;
+  if (!current)
+    return (
+      <div className="card">
+        <Text>{"No questions configured."}</Text>
+      </div>
+    );
 
   return (
     <div className="card" style={{ "--brand-color": config.accentColor } as CSSProperties}>
+      {config.showPlatformBrand && (
+        <div className="platform-brand">
+          <BrandLogo />
+        </div>
+      )}
       {config.logoDataUrl && (
         <Image
           src={config.logoDataUrl}
@@ -332,9 +382,15 @@ export default function QuoteWidget({
       {config.businessName && <p className="brand">{config.businessName}</p>}
       {!compact && (
         <>
-          <span className="pill">{config.industry}</span>
-          <h1 className="widget-title">{config.name}</h1>
-          <p className="muted">{config.description}</p>
+          <span className="pill">
+            <Text>{config.industry}</Text>
+          </span>
+          <h1 className="widget-title">
+            <Text>{config.name}</Text>
+          </h1>
+          <p className="muted">
+            <Text>{config.description}</Text>
+          </p>
         </>
       )}
 
@@ -343,18 +399,27 @@ export default function QuoteWidget({
       </div>
       <div className="row">
         <span className="muted">
-          Question {index + 1} of {questions.length}
+          {t("Question {current} of {total}", { current: index + 1, total: questions.length })}
         </span>
-        <span className="pill">Instant estimate</span>
+        <span className="pill">
+          <Text>{"Instant estimate"}</Text>
+        </span>
       </div>
 
-      <h2>{current.label}</h2>
+      <h2>
+        {current.label}
+        {current.unit && <span className="unit-tag">{units[current.unit].symbol}</span>}
+      </h2>
       {current.help && <p className="muted">{current.help}</p>}
       {questionInput(current, answers[current.id], (value) =>
         setAnswers((currentAnswers) => ({ ...currentAnswers, [current.id]: value })),
       )}
 
-      {error && <p className="error-message">{error}</p>}
+      {error && (
+        <p className="error-message">
+          {t(/^[a-z0-9_]+: /i.test(error) ? "Please check your answers and try again." : error)}
+        </p>
+      )}
 
       <div className="row action-row">
         <button
@@ -362,12 +427,43 @@ export default function QuoteWidget({
           disabled={index === 0 || pending}
           onClick={() => setIndex((currentIndex) => Math.max(0, currentIndex - 1))}
         >
-          Back
+          <Text>{"Back"}</Text>
         </button>
         <button className="btn" disabled={!canContinue || pending} onClick={next}>
-          {pending ? "Calculating…" : index === questions.length - 1 ? "See estimate" : "Continue"}
+          <Text>
+            {pending
+              ? "Calculating…"
+              : index === questions.length - 1
+                ? "See estimate"
+                : "Continue"}
+          </Text>
         </button>
       </div>
     </div>
+  );
+}
+
+export default function QuoteWidget(props: QuoteWidgetProps) {
+  const [locale, setLocale] = useState<Locale>(props.config.locale ?? "en");
+  const available = props.config.languages ?? locales;
+  const selected = available.includes(locale) ? locale : available[0];
+  const config = localizeConfig(props.config, selected);
+  return (
+    <LanguageProvider locale={selected}>
+      <div className="quote-experience" lang={selected}>
+        {available.length > 1 && (
+          <div className="quote-language">
+            <LanguageSelect
+              available={available}
+              value={selected}
+              onChange={(next) => {
+                if (available.includes(next)) setLocale(next);
+              }}
+            />
+          </div>
+        )}
+        <QuoteExperience {...props} config={config} />
+      </div>
+    </LanguageProvider>
   );
 }

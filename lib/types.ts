@@ -1,3 +1,6 @@
+import type { Locale } from "./i18n";
+import type { Unit } from "./units";
+export type Translation = { label: string; help?: string; options?: Record<string, string> };
 export type AnswerValue = string | number | boolean | string[] | null;
 export type Answers = Record<string, AnswerValue>;
 
@@ -23,6 +26,8 @@ export type Question = {
   step?: number;
   options?: Option[];
   showWhen?: Condition[];
+  unit?: Unit;
+  translations?: Partial<Record<Locale, Translation>>;
 };
 
 export type PricingRule =
@@ -41,6 +46,8 @@ export type PricingRule =
   | { kind: "multiplier"; field: string; map: Record<string, number> };
 
 export type CalculatorSettings = {
+  locale?: Locale;
+  languages?: Locale[];
   businessName?: string;
   accentColor?: string;
   logoDataUrl?: string;
@@ -52,6 +59,7 @@ export type CalculatorSettings = {
 };
 
 export type QuoteTemplate = {
+  translations?: Partial<Record<Locale, { name: string; description: string; industry: string }>>;
   settings?: CalculatorSettings;
   slug: string;
   name: string;
@@ -66,6 +74,9 @@ export type QuoteTemplate = {
 
 /** Safe to serialize to untrusted browsers. Never add pricing rules here. */
 export type PublicQuoteConfig = {
+  locale?: Locale;
+  languages?: Locale[];
+  translations?: QuoteTemplate["translations"];
   publicId: string;
   name: string;
   industry: string;
@@ -73,6 +84,7 @@ export type PublicQuoteConfig = {
   currency: string;
   questions: Question[];
   canCaptureLeads: boolean;
+  showPlatformBrand?: boolean;
   businessName?: string;
   accentColor?: string;
   logoDataUrl?: string;

@@ -1,23 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { readFile, readdir } from "node:fs/promises";
-import { PGlite } from "@electric-sql/pglite";
+import { testDatabase } from "./helpers/database";
 
 test("migrations enforce workspace isolation, billing access, limits, revision locks and consent", async () => {
-  const db = new PGlite();
+  const db = await testDatabase();
   try {
-    await db.exec(
-      `create role anon; create role authenticated; create role service_role bypassrls; create schema auth; create table auth.users(id uuid primary key,email text); create function auth.uid() returns uuid language sql stable as $$ select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid $$;`,
-    );
-    for (const file of (await readdir("supabase/migrations"))
-      .filter((file) => file.endsWith(".sql"))
-      .sort()) {
-      const sql = (await readFile(`supabase/migrations/${file}`, "utf8")).replace(
-        "create extension if not exists pgcrypto;",
-        "",
-      );
-      await db.exec(sql);
-    }
     const userA = "11111111-1111-4111-8111-111111111111";
     const userB = "22222222-2222-4222-8222-222222222222";
     await db.query("insert into auth.users values ($1,'a@example.test'),($2,'b@example.test')", [
@@ -37,7 +24,7 @@ test("migrations enforce workspace isolation, billing access, limits, revision l
     assert.equal(
       (await db.query<{ plan: string }>("select public.workspace_plan($1) as plan", [a])).rows[0]
         .plan,
-      "basic",
+      "free",
     );
     const create = async (org: string, name: string) =>
       (
@@ -78,7 +65,7 @@ test("migrations enforce workspace isolation, billing access, limits, revision l
     assert.equal((await db.query("select * from public.notification_outbox")).rows.length, 1);
     await capture(other, "b".repeat(64));
     await db.query(
-      "insert into public.workspace_usage values ($1,date_trunc('month',now() at time zone 'UTC')::date,49) on conflict(organization_id,month) do update set leads=49",
+      "insert into public.workspace_usage values ($1,date_trunc('month',now() at time zone 'UTC')::date,6) on conflict(organization_id,month) do update set leads=6",
       [a],
     );
     await capture(calculator, "c".repeat(64));
@@ -90,14 +77,31 @@ test("migrations enforce workspace isolation, billing access, limits, revision l
           [a],
         )
       ).rows[0].leads,
-      50,
+      7,
     );
     await db.query("update public.organizations set stripe_customer_id='cus_a' where id=$1", [a]);
+    await db.query(
+      "select public.sync_billing_subscription($1,'cus_a','sub_a','basic','active',now()+interval '30 days',false,now()-interval '1 second')",
+      [a],
+    );
+    await db.query("update public.workspace_usage set leads=99 where organization_id=$1", [a]);
+    await capture(calculator, "f".repeat(64));
+    await assert.rejects(() => capture(calculator, "g".repeat(64)), /Monthly lead limit/);
+    assert.equal(
+      (
+        await db.query<{ leads: number }>(
+          "select leads from public.workspace_usage where organization_id=$1",
+          [a],
+        )
+      ).rows[0].leads,
+      100,
+    );
     await db.query(
       "select public.sync_billing_subscription($1,'cus_a','sub_a','premium','active',now()+interval '30 days',false,now())",
       [a],
     );
     await create(a, "calculator-premium");
+    for (let i = 0; i < 4; i++) await create(a, `calculator-premium-${i}`);
     await assert.rejects(
       () => db.query("select public.request_booking($1,now()+interval '2 days')", [submission]),
       /Booking requests are not enabled/,
@@ -259,7 +263,7 @@ test("migrations enforce workspace isolation, billing access, limits, revision l
       (
         await db.query<{ enabled: boolean }>(
           "select public.calculator_accepts_leads($1) as enabled",
-          [calculatorIds[1].id],
+          [calculatorIds[5].id],
         )
       ).rows[0].enabled,
       false,
@@ -269,7 +273,7 @@ test("migrations enforce workspace isolation, billing access, limits, revision l
       (
         await db.query<{ enabled: boolean }>(
           "select public.calculator_accepts_leads($1) as enabled",
-          [calculatorIds[1].id],
+          [calculatorIds[5].id],
         )
       ).rows[0].enabled,
       true,
@@ -290,9 +294,30 @@ test("migrations enforce workspace isolation, billing access, limits, revision l
     assert.equal(
       (await db.query<{ plan: string | null }>("select public.workspace_plan($1) as plan", [a]))
         .rows[0].plan,
-      null,
+      "free",
     );
-    await assert.rejects(() => capture(calculator, "d".repeat(64)), /Subscription required/);
+    await assert.rejects(() => capture(calculatorIds[1].id, "d".repeat(64)), /Monthly lead limit/);
+    await assert.rejects(
+      () => db.query("select public.reserve_subscription_checkout($1,'free')", [b]),
+      /Invalid subscription plan/,
+    );
+    await db.query(
+      "update public.workspace_usage set month=(date_trunc('month',now() at time zone 'UTC')-interval '1 month')::date,leads=7 where organization_id=$1",
+      [b],
+    );
+    const attempts = await Promise.allSettled(
+      Array.from({ length: 8 }, (_, i) => capture(other, String(i).repeat(64))),
+    );
+    assert.equal(attempts.filter((result) => result.status === "fulfilled").length, 7);
+    assert.equal(
+      (
+        await db.query<{ leads: number }>(
+          "select leads from public.workspace_usage where organization_id=$1 and month=date_trunc('month',now() at time zone 'UTC')::date",
+          [b],
+        )
+      ).rows[0].leads,
+      7,
+    );
     await assert.rejects(
       () => db.query("select public.set_lead_status($1,$2,'won')", [b, submission]),
       /Lead not found/,
@@ -302,7 +327,7 @@ test("migrations enforce workspace isolation, billing access, limits, revision l
     );
     await db.query("select set_config('request.jwt.claim.sub',$1,false)", [userA]);
     await db.exec("set role authenticated");
-    assert.equal((await db.query("select * from public.submissions")).rows.length, 2);
+    assert.equal((await db.query("select * from public.submissions")).rows.length, 3);
     assert.equal((await db.query("select * from public.billing_subscriptions")).rows.length, 1);
     assert.equal((await db.query("select * from public.notification_outbox")).rows.length, 0);
     await assert.rejects(

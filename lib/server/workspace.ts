@@ -55,11 +55,14 @@ export async function getEntitlement(organizationId: string) {
   return {
     organization: organization.data,
     subscription: subscription.data,
-    plan: effectivePlan(subscription.data, organization.data.trial_ends_at),
+    plan: effectivePlan(subscription.data),
   };
 }
 
-export function requireFeature(plan: ReturnType<typeof effectivePlan>, feature?: Feature) {
+export function requireFeature(
+  plan: ReturnType<typeof effectivePlan> | null | undefined,
+  feature?: Feature,
+) {
   if (!plan) throw new HttpError(402, "Choose an active subscription to continue");
   if (feature && !plans[plan][feature])
     throw new HttpError(403, "Upgrade your plan to use this feature");

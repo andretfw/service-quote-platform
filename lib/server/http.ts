@@ -67,6 +67,16 @@ export const publicApiError = (error: unknown): { status: number; message: strin
   if (error instanceof HttpError) return { status: error.status, message: error.message };
   if (error instanceof QuoteValidationError) return { status: 400, message: error.message };
   if (error instanceof z.ZodError) return { status: 400, message: "Invalid request" };
+  if (error && typeof error === "object" && "code" in error) {
+    if (error.code === "42501") return { status: 404, message: "Record not found" };
+    if (["23505", "40001", "P0001"].includes(String(error.code)))
+      return {
+        status: 409,
+        message: "This change conflicts with the current state. Refresh and try again.",
+      };
+    if (["22023", "22P02"].includes(String(error.code)))
+      return { status: 400, message: "Invalid request" };
+  }
   return { status: 500, message: "Request could not be completed" };
 };
 

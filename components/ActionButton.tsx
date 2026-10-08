@@ -1,4 +1,6 @@
 "use client";
+import { Text } from "@/components/Language";
+
 import { useState } from "react";
 
 export default function ActionButton({
@@ -35,11 +37,11 @@ export default function ActionButton({
   return (
     <div>
       <button className="btn" disabled={disabled || pending} onClick={() => void act()}>
-        {pending ? "Opening…" : children}
+        <Text>{pending ? "Opening…" : children}</Text>
       </button>
       {error && (
         <p className="error-message" role="alert">
-          {error}
+          <Text>{error}</Text>
         </p>
       )}
     </div>

@@ -1,4 +1,6 @@
 "use client";
+import { Text, LocalizedInput } from "@/components/Language";
+
 import { useState } from "react";
 
 export default function CustomerActions({
@@ -49,10 +51,12 @@ export default function CustomerActions({
     <div className="customer-actions">
       {bookings && !requested && (
         <>
-          <h3>Request a preferred time</h3>
+          <h3>
+            <Text>{"Request a preferred time"}</Text>
+          </h3>
           <label>
-            Your local date and time
-            <input
+            <Text>{"Your local date and time"}</Text>
+            <LocalizedInput
               className="field"
               type="datetime-local"
               value={startsAt}
@@ -60,29 +64,42 @@ export default function CustomerActions({
             />
           </label>
           <p className="muted">
-            This is a request, subject to the business availability. You can leave this blank and
-            let the business contact you.
+            <Text>
+              {
+                "This is a request, subject to the business availability. You can leave this blank and let the business contact you."
+              }
+            </Text>
           </p>
           <button className="btn" disabled={pending || !startsAt} onClick={() => void act("book")}>
-            Request booking
+            <Text>{"Request booking"}</Text>
           </button>
         </>
       )}
       {deposits && (
         <>
-          <h3>Pay a service deposit</h3>
+          <h3>
+            <Text>{"Pay a service deposit"}</Text>
+          </h3>
           <p className="muted">
-            Review the deposit amount on Stripe before paying. A deposit does not confirm a booking.
+            <Text>
+              {
+                "Review the deposit amount on Stripe before paying. A deposit does not confirm a booking."
+              }
+            </Text>
           </p>
           <button className="btn" disabled={pending} onClick={() => void act("create-checkout")}>
-            Review deposit
+            <Text>{"Review deposit"}</Text>
           </button>
         </>
       )}
-      {message && <p role="status">{message}</p>}
+      {message && (
+        <p role="status">
+          <Text>{message}</Text>
+        </p>
+      )}
       {error && (
         <p className="error-message" role="alert">
-          {error}
+          <Text>{error}</Text>
         </p>
       )}
     </div>

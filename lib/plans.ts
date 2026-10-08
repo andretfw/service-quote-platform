@@ -1,9 +1,22 @@
 export const plans = {
+  free: {
+    name: "Free",
+    monthlyEur: 0,
+    calculators: 1,
+    monthlyLeads: 7,
+    integrations: false,
+    branding: false,
+    exports: false,
+    followUps: false,
+    bookings: false,
+    deposits: false,
+  },
   basic: {
     name: "Basic",
-    monthlyEur: null as number | null,
-    calculators: 1,
-    monthlyLeads: 50,
+    monthlyEur: 9,
+    calculators: 5,
+    monthlyLeads: 100,
+    integrations: false,
     branding: false,
     exports: false,
     followUps: false,
@@ -12,9 +25,10 @@ export const plans = {
   },
   premium: {
     name: "Premium",
-    monthlyEur: null as number | null,
-    calculators: 5,
+    monthlyEur: 19,
+    calculators: 15,
     monthlyLeads: 1000,
+    integrations: true,
     branding: true,
     exports: true,
     followUps: true,
@@ -23,9 +37,10 @@ export const plans = {
   },
   business: {
     name: "Business",
-    monthlyEur: null as number | null,
-    calculators: 25,
-    monthlyLeads: 10000,
+    monthlyEur: 39,
+    calculators: 50,
+    monthlyLeads: 2000,
+    integrations: true,
     branding: true,
     exports: true,
     followUps: true,
@@ -35,7 +50,15 @@ export const plans = {
 } as const;
 
 export type PlanId = keyof typeof plans;
-export type Feature = "branding" | "exports" | "followUps" | "bookings" | "deposits";
+export type PaidPlanId = Exclude<PlanId, "free">;
+export const paidPlanIds = ["basic", "premium", "business"] as const;
+export type Feature =
+  | "branding"
+  | "exports"
+  | "followUps"
+  | "bookings"
+  | "deposits"
+  | "integrations";
 export const planIds = Object.keys(plans) as PlanId[];
 export const isPlanId = (value: unknown): value is PlanId =>
   typeof value === "string" && Object.hasOwn(plans, value);
@@ -46,27 +69,19 @@ export type SubscriptionState = {
   current_period_end: string | null;
 };
 
-export function effectivePlan(
-  subscription: SubscriptionState | null,
-  trialEndsAt: string,
-  now = Date.now(),
-): PlanId | null {
+export const isPaidPlanId = (value: unknown): value is PaidPlanId =>
+  isPlanId(value) && value !== "free";
+
+export function effectivePlan(subscription: SubscriptionState | null, now = Date.now()): PlanId {
   if (subscription) {
     const expires = Date.parse(subscription.current_period_end ?? "");
-    return isPlanId(subscription.plan) &&
+    if (
+      isPaidPlanId(subscription.plan) &&
       ["active", "trialing"].includes(subscription.status) &&
       Number.isFinite(expires) &&
       expires > now
-      ? subscription.plan
-      : null;
+    )
+      return subscription.plan;
   }
-  return Date.parse(trialEndsAt) > now ? "basic" : null;
+  return "free";
 }
-
-export const pricingApproved = () =>
-  planIds.every(
-    (id) =>
-      typeof plans[id].monthlyEur === "number" &&
-      Number.isFinite(plans[id].monthlyEur) &&
-      plans[id].monthlyEur! > 0,
-  );

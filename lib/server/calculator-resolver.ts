@@ -1,4 +1,6 @@
 import "server-only";
+import { locales } from "@/lib/i18n";
+import { prepareTemplate } from "@/lib/localization";
 import { getEntitlement } from "./workspace";
 import { plans, type PlanId } from "@/lib/plans";
 import { databaseConfigured } from "@/lib/server/env";
@@ -21,12 +23,16 @@ export function toPublicQuoteConfig(resolved: ResolvedCalculator): PublicQuoteCo
 
   return {
     publicId: resolved.publicId,
+    locale: template.settings?.locale,
+    languages: template.settings?.languages ?? [...locales],
+    translations: template.translations,
     name: template.name,
     industry: template.industry,
     description: template.description,
     currency: template.currency,
     questions: template.questions,
     canCaptureLeads: resolved.calculatorId !== null && Boolean(resolved.plan),
+    showPlatformBrand: resolved.plan === "free" || resolved.calculatorId === null,
     businessName:
       resolved.plan && plans[resolved.plan].branding ? template.settings?.businessName : undefined,
     accentColor:
@@ -51,7 +57,7 @@ export function toPublicQuoteConfig(resolved: ResolvedCalculator): PublicQuoteCo
 export async function resolveCalculator(publicId: string): Promise<ResolvedCalculator | null> {
   const bundled = getTemplate(publicId);
   if (bundled) {
-    return { publicId, calculatorId: null, template: bundled };
+    return { publicId, calculatorId: null, template: prepareTemplate(bundled, "en") };
   }
 
   if (!databaseConfigured()) return null;

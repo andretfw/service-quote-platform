@@ -6,27 +6,33 @@ The repository is source-visible for evaluation and authorized collaboration. It
 
 ## Plans
 
-| Feature                                            | Basic    | Premium  | Business |
-| -------------------------------------------------- | -------- | -------- | -------- |
-| Active calculators                                 | 1        | 5        | 25       |
-| Enquiries per calendar month, UTC                  | 50       | 1,000    | 10,000   |
-| 15 industry templates, question and pricing editor | Included | Included | Included |
-| Hosted calculator and website embed                | Included | Included | Included |
-| Lead pipeline and owner notifications              | Included | Included | Included |
-| Business logo, name and brand color                | —        | Included | Included |
-| CSV lead exports                                   | —        | Included | Included |
-| Optional customer email follow-ups and unsubscribe | —        | Included | Included |
-| Booking requests and owner confirmation            | —        | —        | Included |
-| Customer deposits through Stripe Connect           | —        | —        | Included |
+| Feature                                            | Free     | Basic    | Premium  | Business |
+| -------------------------------------------------- | -------- | -------- | -------- | -------- |
+| Monthly subscription                               | Free     | €9       | €19      | €39      |
+| Active calculators                                 | 1        | 5        | 15       | 50       |
+| Enquiries per calendar month, UTC                  | 7        | 100      | 1,000    | 2,000    |
+| 15 industry templates, question and pricing editor | Included | Included | Included | Included |
+| Hosted calculator and website embed                | Included | Included | Included | Included |
+| Lead pipeline and owner notifications              | Included | Included | Included | Included |
+| Service Quote logo on public calculators           | Included | —        | —        | —        |
+| Business logo, name and brand color                | —        | —        | Included | Included |
+| Zapier / Make new-enquiry automation               | —        | —        | Included | Included |
+| CSV lead exports                                   | —        | —        | Included | Included |
+| Optional customer email follow-ups and unsubscribe | —        | —        | Included | Included |
+| Booking requests and owner confirmation            | —        | —        | —        | Included |
+| Customer deposits through Stripe Connect           | —        | —        | —        | Included |
 
-New accounts receive a 14-day Basic trial without a card. Subscription prices are centralized in `lib/plans.ts`; calculator and enquiry limits are also enforced transactionally in the database. Changes to limits must update the database functions as well. Changing prices requires new matching Stripe prices and environment IDs. Subscription prices are unset and paid checkout is disabled pending owner approval. Provider fees apply.
+New accounts start on the permanent Free plan without a card. Subscription prices are centralized in `lib/plans.ts`; calculator and enquiry limits are enforced transactionally in the database. Changes to limits must update the database functions as well. Free does not require Stripe; paid checkout requires matching configured Stripe prices. Provider fees apply.
 
-Archives retain historical leads while freeing calculator slots. Following a downgrade, the oldest unarchived calculators remain publicly available within the new limit. Inactive subscriptions cannot capture enquiries or use paid customer actions; historical leads remain accessible to their workspace owner.
+Archives retain historical leads while freeing calculator slots. Following a downgrade, the oldest unarchived calculators remain publicly available within the new limit. Expired or inactive paid subscriptions return to Free with its limits and platform branding. Saved calculators and historical leads are retained. Monthly usage is shared across plan changes and resets on the first day of each month in UTC.
 
 Painting, cleaning, tiling, landscaping, roofing, HVAC, moving, pressure washing, auto detailing, handyman, flooring, windows, fencing, pest control and photography are included. Template rates are examples: every business must set its own prices, units, service area and tax rate before publishing.
 
 ## What is implemented
 
+- A five-step calculator editor with live desktop/mobile preview, language-specific wording and clear example-rate guidance.
+- English, Spanish and Romanian interfaces, customer questions and emails; per-calculator language selection.
+- Metric and imperial units with dimension-safe conversions of rates, bounds and conditional thresholds. Currency changes do not apply exchange rates.
 - Configurable questions, option labels, conditional visibility, numeric rates, option adjustments, multipliers, fixed and conditional charges.
 - Immutable calculator revisions and optimistic edit conflicts.
 - Validated server-side estimates; private pricing rules never reach the public widget.
@@ -36,9 +42,14 @@ Painting, cleaning, tiling, landscaping, roofing, HVAC, moving, pressure washing
 - Durable checkout reservations, payment amount/currency/reference checks and connected-account verification.
 - Transactional booking requests, cancellation and confirmation; leads stop receiving reminders after booking or closure.
 - Transactional notification outbox and a Netlify scheduled worker with provider timeouts and retry claims.
+- Customer reminders identify the business and estimate, direct replies to the workspace owner, and use exclusive database claims with consent and plan checks.
+- Searchable, paginated enquiry and booking lists; CSV exports fetch successive batches rather than relying on a single provider row limit.
+- Local-session sign-out from the business workspace.
 - CSV formula injection protection, tested migrations and reproducible CI.
 
-Booking is a request for a preferred time, not real-time calendar availability. Photo uploads, calendar synchronization, CRM integrations and automatic jurisdiction-specific tax calculations are outside the plans above. The configurable estimate tax percentage is a merchant input. Platform subscription tax, business registration, legal documents and payment-provider approvals require the operator's actual details.
+Booking is a request for a preferred time, not real-time calendar availability. Photo uploads, calendar synchronization, native CRM integrations and automatic jurisdiction-specific tax calculations are outside the plans above. The configurable estimate tax percentage is a merchant input. Platform subscription tax, business registration, legal documents and payment-provider approvals require the operator's actual details.
+
+Premium and Business can send new enquiries to one Zapier Catch Hook or Make custom webhook per workspace. The business chooses and configures its downstream tools. Failed deliveries retry up to five attempts; delivery is at least once and consumers should deduplicate using the event ID. Changing or pausing a connection cancels its pending deliveries. Existing enquiries are not backfilled. Integration URLs and delivery rows are server-only.
 
 ## Development
 

@@ -1,4 +1,6 @@
 "use client";
+import { Text, LocalizedInput } from "@/components/Language";
+
 import Image from "next/image";
 import { useState } from "react";
 
@@ -55,8 +57,8 @@ export default function LogoUpload({
   return (
     <div className="editor-section">
       <label className="editor-field">
-        Business logo
-        <input
+        <Text>{"Business logo"}</Text>
+        <LocalizedInput
           type="file"
           accept="image/png,image/jpeg,image/webp"
           disabled={busy}
@@ -68,8 +70,11 @@ export default function LogoUpload({
         />
       </label>
       <p className="muted">
-        PNG, JPEG or WebP, up to 2 MB. Your logo appears on the hosted calculator and website embed.
-        Save your calculator to publish it.
+        <Text>
+          {
+            "PNG, JPEG or WebP, up to 2 MB. Your logo appears on the hosted calculator and website embed. Save your calculator to publish it."
+          }
+        </Text>
       </p>
       {value && (
         <>
@@ -90,14 +95,18 @@ export default function LogoUpload({
               setError("");
             }}
           >
-            Remove logo
+            <Text>{"Remove logo"}</Text>
           </button>
         </>
       )}
-      {busy && <p role="status">Preparing logo…</p>}
+      {busy && (
+        <p role="status">
+          <Text>{"Preparing logo…"}</Text>
+        </p>
+      )}
       {error && (
         <p className="error-message" role="alert">
-          {error}
+          <Text>{error}</Text>
         </p>
       )}
     </div>
