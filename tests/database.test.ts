@@ -1,23 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { readFile, readdir } from "node:fs/promises";
-import { PGlite } from "@electric-sql/pglite";
+import { testDatabase } from "./helpers/database";
 
 test("migrations enforce workspace isolation, billing access, limits, revision locks and consent", async () => {
-  const db = new PGlite();
+  const db = await testDatabase();
   try {
-    await db.exec(
-      `create role anon; create role authenticated; create role service_role bypassrls; create schema auth; create table auth.users(id uuid primary key,email text); create function auth.uid() returns uuid language sql stable as $$ select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid $$;`,
-    );
-    for (const file of (await readdir("supabase/migrations"))
-      .filter((file) => file.endsWith(".sql"))
-      .sort()) {
-      const sql = (await readFile(`supabase/migrations/${file}`, "utf8")).replace(
-        "create extension if not exists pgcrypto;",
-        "",
-      );
-      await db.exec(sql);
-    }
     const userA = "11111111-1111-4111-8111-111111111111";
     const userB = "22222222-2222-4222-8222-222222222222";
     await db.query("insert into auth.users values ($1,'a@example.test'),($2,'b@example.test')", [
@@ -114,6 +101,7 @@ test("migrations enforce workspace isolation, billing access, limits, revision l
       [a],
     );
     await create(a, "calculator-premium");
+    for (let i = 0; i < 4; i++) await create(a, `calculator-premium-${i}`);
     await assert.rejects(
       () => db.query("select public.request_booking($1,now()+interval '2 days')", [submission]),
       /Booking requests are not enabled/,
@@ -275,7 +263,7 @@ test("migrations enforce workspace isolation, billing access, limits, revision l
       (
         await db.query<{ enabled: boolean }>(
           "select public.calculator_accepts_leads($1) as enabled",
-          [calculatorIds[1].id],
+          [calculatorIds[5].id],
         )
       ).rows[0].enabled,
       false,
@@ -285,7 +273,7 @@ test("migrations enforce workspace isolation, billing access, limits, revision l
       (
         await db.query<{ enabled: boolean }>(
           "select public.calculator_accepts_leads($1) as enabled",
-          [calculatorIds[1].id],
+          [calculatorIds[5].id],
         )
       ).rows[0].enabled,
       true,

@@ -4,6 +4,7 @@ export const plans = {
     monthlyEur: 0,
     calculators: 1,
     monthlyLeads: 7,
+    integrations: false,
     branding: false,
     exports: false,
     followUps: false,
@@ -12,9 +13,10 @@ export const plans = {
   },
   basic: {
     name: "Basic",
-    monthlyEur: 19,
-    calculators: 1,
+    monthlyEur: 9,
+    calculators: 5,
     monthlyLeads: 100,
+    integrations: false,
     branding: false,
     exports: false,
     followUps: false,
@@ -23,9 +25,10 @@ export const plans = {
   },
   premium: {
     name: "Premium",
-    monthlyEur: 39,
-    calculators: 5,
+    monthlyEur: 19,
+    calculators: 15,
     monthlyLeads: 1000,
+    integrations: true,
     branding: true,
     exports: true,
     followUps: true,
@@ -34,9 +37,10 @@ export const plans = {
   },
   business: {
     name: "Business",
-    monthlyEur: 99,
-    calculators: 25,
-    monthlyLeads: 10000,
+    monthlyEur: 39,
+    calculators: 50,
+    monthlyLeads: 2000,
+    integrations: true,
     branding: true,
     exports: true,
     followUps: true,
@@ -48,7 +52,13 @@ export const plans = {
 export type PlanId = keyof typeof plans;
 export type PaidPlanId = Exclude<PlanId, "free">;
 export const paidPlanIds = ["basic", "premium", "business"] as const;
-export type Feature = "branding" | "exports" | "followUps" | "bookings" | "deposits";
+export type Feature =
+  | "branding"
+  | "exports"
+  | "followUps"
+  | "bookings"
+  | "deposits"
+  | "integrations";
 export const planIds = Object.keys(plans) as PlanId[];
 export const isPlanId = (value: unknown): value is PlanId =>
   typeof value === "string" && Object.hasOwn(plans, value);

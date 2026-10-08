@@ -3,7 +3,7 @@ import { unsubscribeToken } from "@/lib/unsubscribe";
 import { getAppUrl } from "@/lib/server/env";
 import { customerCalculator } from "@/lib/server/customer-calculator";
 import { sendLeadNotifications } from "@/lib/server/notifications";
-import { timingSafeEqual } from "node:crypto";
+import { authorizedWorker } from "@/lib/server/cron";
 import { NextResponse } from "next/server";
 import { emailConfiguration, sendEmail } from "@/lib/server/email";
 import { escapeHtml } from "@/lib/server/security";
@@ -13,17 +13,8 @@ const FOLLOW_UP_DELAYS_DAYS = [3, 7, null] as const;
 const CLAIM_MINUTES = 10;
 const RETRY_MINUTES = 60;
 
-const secretsMatch = (provided: string | null, expected: string): boolean => {
-  if (!provided) return false;
-  const expectedHeader = `Bearer ${expected}`;
-  const left = Buffer.from(provided);
-  const right = Buffer.from(expectedHeader);
-  return left.length === right.length && timingSafeEqual(left, right);
-};
-
 export async function POST(request: Request) {
-  const cronSecret = process.env.CRON_SECRET?.trim();
-  if (!cronSecret || !secretsMatch(request.headers.get("authorization"), cronSecret)) {
+  if (!authorizedWorker(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

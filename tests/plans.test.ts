@@ -77,7 +77,7 @@ test("unsubscribe token is scoped, signed and expires", () => {
 test("published monthly plans use the selected EUR prices", () => {
   assert.deepEqual(
     paidPlanIds.map((id) => plans[id].monthlyEur),
-    [19, 39, 99],
+    [9, 19, 39],
   );
   assert.equal(plans.free.monthlyEur, 0);
 });

@@ -71,3 +71,11 @@ Subscription checkout reservations serialize conflicting plan checkouts and supp
 A database trigger queues owner notifications in a private outbox as part of lead persistence. A new enquiry attempts immediate delivery after persistence. A Netlify scheduled function invokes the authenticated worker every 15 minutes to retry pending notifications and process consented customer reminders. Claims are conditional; provider calls have explicit timeouts and stable idempotency keys. Unprocessed claims become retryable. This is retry-oriented delivery, not an exactly-once guarantee.
 
 Customer reminder consent is stored separately from permission to answer an enquiry. Signed unsubscribe tokens expire, and unsubscribe atomically clears consent and future scheduling. A message already handed to the provider may still arrive after unsubscribe.
+
+## Lead automation
+
+Premium and Business owners can configure one Zapier Catch Hook or Make custom webhook per workspace. The endpoint is private and restricted to supported HTTPS provider hosts and paths; redirects, credentials, ports and query strings are rejected. Customer browsers never receive the endpoint.
+
+A submission trigger queues the delivery in the same transaction as the enquiry. A separate Netlify worker runs every five minutes, claims one due event at a time, rechecks the current plan and connection revision, and posts only contact details, answers, calculator display metadata and the public estimate range. Access tokens, private pricing rules and quote breakdowns are excluded. HTTP responses are reduced to their status code rather than stored.
+
+Claims use unique lease tokens and expire after five minutes. Failed requests retry up to five attempts; receivers should deduplicate by event ID. Pausing or replacing a connection cancels queued deliveries. A request already handed to a provider can still complete. There is no historical backfill or native two-way CRM synchronization.

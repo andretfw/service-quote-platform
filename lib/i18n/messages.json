@@ -2666,5 +2666,633 @@
   "Prices are in EUR and billed monthly. Lead allowances reset on the first day of each month in UTC. Unused allowances do not roll over. Stripe payment processing fees are separate. Booking requests require business confirmation.": {
     "es": "Los precios están en EUR y se facturan mensualmente. Los límites de solicitudes se restablecen el primer día de cada mes en UTC. Las solicitudes no utilizadas no se acumulan. Las comisiones de procesamiento de Stripe son independientes. Las solicitudes de reserva requieren confirmación del negocio.",
     "ro": "Prețurile sunt în EUR și se facturează lunar. Limitele de solicitări se resetează în prima zi a fiecărei luni, în UTC. Solicitările neutilizate nu se reportează. Comisioanele de procesare Stripe sunt separate. Cererile de programare necesită confirmarea afacerii."
+  },
+  "Product": {
+    "es": "Producto",
+    "ro": "Produs"
+  },
+  "Integrations": {
+    "es": "Integraciones",
+    "ro": "Integrări"
+  },
+  "Help": {
+    "es": "Ayuda",
+    "ro": "Ajutor"
+  },
+  "Connections": {
+    "es": "Conexiones",
+    "ro": "Conexiuni"
+  },
+  "Skip to content": {
+    "es": "Ir al contenido",
+    "ro": "Mergi la conținut"
+  },
+  "Close menu": {
+    "es": "Cerrar menú",
+    "ro": "Închide meniul"
+  },
+  "Menu": {
+    "es": "Menú",
+    "ro": "Meniu"
+  },
+  "Main navigation": {
+    "es": "Navegación principal",
+    "ro": "Navigare principală"
+  },
+  "Simple estimates. Better conversations.": {
+    "es": "Estimaciones sencillas. Mejores conversaciones.",
+    "ro": "Estimări simple. Discuții mai bune."
+  },
+  "Footer navigation": {
+    "es": "Navegación del pie de página",
+    "ro": "Navigare în subsol"
+  },
+  "Estimates help start a conversation. Your business confirms the final scope and price.": {
+    "es": "Las estimaciones ayudan a iniciar una conversación. Tu negocio confirma el alcance y el precio final.",
+    "ro": "Estimările ajută la începerea unei discuții. Firma ta confirmă lucrările și prețul final."
+  },
+  "Do I need a website?": {
+    "es": "¿Necesito una página web?",
+    "ro": "Am nevoie de un site?"
+  },
+  "No. Share your hosted calculator link in messages, emails or your social profile. If you have a website, add the embed code from the editor.": {
+    "es": "No. Comparte el enlace de tu calculadora en mensajes, correos o tu perfil social. Si tienes una web, añade el código de inserción del editor.",
+    "ro": "Nu. Distribuie linkul calculatorului în mesaje, e-mailuri sau pe profilul social. Dacă ai un site, adaugă codul de integrare din editor."
+  },
+  "Do my customers need an account?": {
+    "es": "¿Mis clientes necesitan una cuenta?",
+    "ro": "Clienții mei au nevoie de cont?"
+  },
+  "No. Customers answer your questions, see an estimate and send an enquiry without signing in.": {
+    "es": "No. Los clientes responden a tus preguntas, ven una estimación y envían una solicitud sin iniciar sesión.",
+    "ro": "Nu. Clienții răspund la întrebări, văd o estimare și trimit o solicitare fără autentificare."
+  },
+  "Is the Free plan a trial?": {
+    "es": "¿El plan gratuito es una prueba?",
+    "ro": "Planul gratuit este o perioadă de probă?"
+  },
+  "No. Free includes one active calculator and seven enquiries per calendar month, with no card required. All 15 templates are included.": {
+    "es": "No. El plan gratuito incluye una calculadora activa y siete solicitudes por mes natural, sin tarjeta. Incluye las 15 plantillas.",
+    "ro": "Nu. Planul gratuit include un calculator activ și șapte solicitări pe lună calendaristică, fără card. Toate cele 15 șabloane sunt incluse."
+  },
+  "What counts as an enquiry?": {
+    "es": "¿Qué cuenta como una solicitud?",
+    "ro": "Ce se consideră o solicitare?"
+  },
+  "An enquiry is a successfully saved customer request. Previewing a demo or viewing an estimate does not use your enquiry allowance. The allowance is shared across your workspace calculators.": {
+    "es": "Una solicitud es una petición de cliente guardada correctamente. Probar una demo o ver una estimación no consume el límite. El límite se comparte entre las calculadoras de tu espacio.",
+    "ro": "O solicitare este o cerere a clientului salvată cu succes. Vizualizarea unei demonstrații sau a unei estimări nu consumă limita. Limita este comună calculatoarelor din spațiul tău."
+  },
+  "Can I change the questions and prices?": {
+    "es": "¿Puedo cambiar las preguntas y los precios?",
+    "ro": "Pot modifica întrebările și prețurile?"
+  },
+  "Yes. Edit questions, answer options, rates, extra charges and your estimate tax percentage. Template prices are examples, so replace them with your own before sharing.": {
+    "es": "Sí. Edita preguntas, opciones, tarifas, cargos adicionales y el porcentaje de impuestos de la estimación. Los precios de las plantillas son ejemplos: sustitúyelos por los tuyos antes de compartir.",
+    "ro": "Da. Modifică întrebările, opțiunile, tarifele, costurile suplimentare și procentul de taxă al estimării. Prețurile din șabloane sunt exemple: înlocuiește-le cu ale tale înainte de distribuire."
+  },
+  "Does it support European measurements and languages?": {
+    "es": "¿Admite medidas e idiomas europeos?",
+    "ro": "Acceptă unități de măsură și limbi europene?"
+  },
+  "Yes. Use metric or imperial measurements, including metres, centimetres and square metres. English, Spanish and Romanian are available. Choose your currency separately; changing currency does not convert prices.": {
+    "es": "Sí. Usa medidas métricas o imperiales, incluidos metros, centímetros y metros cuadrados. Están disponibles inglés, español y rumano. Elige la moneda por separado; cambiarla no convierte los precios.",
+    "ro": "Da. Folosește unități metrice sau imperiale, inclusiv metri, centimetri și metri pătrați. Sunt disponibile engleza, spaniola și româna. Alege moneda separat; schimbarea monedei nu convertește prețurile."
+  },
+  "Which websites can I embed it in?": {
+    "es": "¿En qué páginas web puedo insertarlo?",
+    "ro": "Pe ce site-uri îl pot integra?"
+  },
+  "Use a website block that accepts a script or iframe, including compatible WordPress, Wix, Squarespace, Webflow and Shopify pages. Your website plan must allow custom embeds. A hosted link works without an embed.": {
+    "es": "Usa un bloque que acepte scripts o iframe, como en páginas compatibles de WordPress, Wix, Squarespace, Webflow y Shopify. Tu plan web debe permitir inserciones personalizadas. El enlace alojado funciona sin inserción.",
+    "ro": "Folosește un bloc care acceptă script sau iframe, inclusiv pe pagini compatibile WordPress, Wix, Squarespace, Webflow și Shopify. Planul site-ului trebuie să permită cod personalizat. Linkul găzduit funcționează și fără integrare."
+  },
+  "Can I connect my spreadsheet or CRM?": {
+    "es": "¿Puedo conectar mi hoja de cálculo o CRM?",
+    "ro": "Pot conecta foaia de calcul sau CRM-ul?"
+  },
+  "Premium and Business can send new enquiries through a Zapier or Make webhook. Set up your destination app inside that tool. This is an automation connection, not a native CRM sync. The automation provider may charge separately.": {
+    "es": "Premium y Business pueden enviar nuevas solicitudes mediante un webhook de Zapier o Make. Configura la aplicación de destino allí. Es una conexión de automatización, no una sincronización nativa de CRM. El proveedor puede cobrar por separado.",
+    "ro": "Premium și Business pot trimite solicitările noi printr-un webhook Zapier sau Make. Configurează aplicația destinație în acel instrument. Este o conexiune de automatizare, nu o sincronizare CRM nativă. Furnizorul poate avea costuri separate."
+  },
+  "Are bookings confirmed automatically?": {
+    "es": "¿Las reservas se confirman automáticamente?",
+    "ro": "Programările se confirmă automat?"
+  },
+  "No. Business customers can request a preferred date and time. You review and confirm the request. Calendar availability and calendar sync are not included.": {
+    "es": "No. Los clientes del plan Business pueden solicitar una fecha y hora. Tú revisas y confirmas la petición. No se incluyen disponibilidad ni sincronización del calendario.",
+    "ro": "Nu. Clienții firmelor cu plan Business pot solicita o dată și o oră preferate. Tu verifici și confirmi cererea. Disponibilitatea și sincronizarea calendarului nu sunt incluse."
+  },
+  "Who receives customer deposits?": {
+    "es": "¿Quién recibe los anticipos de los clientes?",
+    "ro": "Cine primește avansurile clienților?"
+  },
+  "Your business receives deposits through its own connected Stripe account on Business. Deposits are optional and need Stripe setup. Stripe fees are separate from your subscription.": {
+    "es": "Tu negocio recibe anticipos mediante su propia cuenta Stripe conectada en Business. Son opcionales y requieren configurar Stripe. Sus comisiones son independientes de la suscripción.",
+    "ro": "Firma ta primește avansurile în propriul cont Stripe conectat, pe planul Business. Avansurile sunt opționale și necesită configurarea Stripe. Comisioanele Stripe sunt separate de abonament."
+  },
+  "What happens when I reach a limit or downgrade?": {
+    "es": "¿Qué ocurre si alcanzo un límite o cambio a un plan inferior?",
+    "ro": "Ce se întâmplă dacă ating limita sau trec la un plan inferior?"
+  },
+  "New enquiries stop at your monthly allowance. Upgrade to accept more. Enquiries reset on the first day of each month in UTC. After a downgrade, saved data stays and the oldest active calculators remain available within your plan limit.": {
+    "es": "Las nuevas solicitudes se detienen al alcanzar el límite mensual. Amplía el plan para aceptar más. El límite se reinicia el primer día del mes en UTC. Al bajar de plan, tus datos se conservan y las calculadoras activas más antiguas siguen disponibles dentro del nuevo límite.",
+    "ro": "Solicitările noi se opresc la limita lunară. Treci la un plan superior pentru mai multe. Limita se resetează în prima zi a lunii, în UTC. La trecerea la un plan inferior, datele se păstrează, iar cele mai vechi calculatoare active rămân disponibile în limita planului."
+  },
+  "Who gets emails?": {
+    "es": "¿Quién recibe los correos?",
+    "ro": "Cine primește e-mailurile?"
+  },
+  "The business owner gets new-enquiry alerts. Premium and Business can also enable reminders to customers who opt in. The platform sends these emails; connecting your own sender is not a workspace feature.": {
+    "es": "El propietario recibe avisos de nuevas solicitudes. Premium y Business también pueden activar recordatorios para clientes que dan su consentimiento. La plataforma envía los correos; no se conecta un remitente propio por espacio.",
+    "ro": "Proprietarul firmei primește notificări pentru solicitările noi. Premium și Business pot activa și mementouri pentru clienții care își dau acordul. Platforma trimite e-mailurile; conectarea unui expeditor propriu nu este o funcție a spațiului de lucru."
+  },
+  "Find your service": {
+    "es": "Encuentra tu servicio",
+    "ro": "Găsește serviciul tău"
+  },
+  "Search templates": {
+    "es": "Buscar plantillas",
+    "ro": "Caută șabloane"
+  },
+  "Service category": {
+    "es": "Categoría de servicio",
+    "ro": "Categoria serviciului"
+  },
+  "All services": {
+    "es": "Todos los servicios",
+    "ro": "Toate serviciile"
+  },
+  "Home and property": {
+    "es": "Hogar e inmuebles",
+    "ro": "Locuințe și proprietăți"
+  },
+  "Specialist services": {
+    "es": "Servicios especializados",
+    "ro": "Servicii specializate"
+  },
+  "{count} templates": {
+    "es": "{count} plantillas",
+    "ro": "{count} șabloane"
+  },
+  "Try demo": {
+    "es": "Probar demo",
+    "ro": "Încearcă demonstrația"
+  },
+  "No matching templates. Try another service or clear your search.": {
+    "es": "No hay plantillas coincidentes. Prueba otro servicio o borra la búsqueda.",
+    "ro": "Nu există șabloane potrivite. Încearcă alt serviciu sau șterge căutarea."
+  },
+  "Sample sent. Check your automation tool to map the fields.": {
+    "es": "Muestra enviada. Revisa tu herramienta de automatización para asignar los campos.",
+    "ro": "Exemplul a fost trimis. Verifică instrumentul de automatizare pentru a asocia câmpurile."
+  },
+  "Connection saved. Changes apply to new enquiries.": {
+    "es": "Conexión guardada. Los cambios se aplican a nuevas solicitudes.",
+    "ro": "Conexiunea a fost salvată. Modificările se aplică solicitărilor noi."
+  },
+  "New enquiry automation": {
+    "es": "Automatización de nuevas solicitudes",
+    "ro": "Automatizarea solicitărilor noi"
+  },
+  "Connect Zapier or Make": {
+    "es": "Conectar Zapier o Make",
+    "ro": "Conectează Zapier sau Make"
+  },
+  "Send new enquiries, contact details, answers and estimates to one automation workflow. Delivery normally starts within five minutes.": {
+    "es": "Envía solicitudes nuevas, datos de contacto, respuestas y estimaciones a un flujo de automatización. El envío suele comenzar en cinco minutos.",
+    "ro": "Trimite solicitările noi, datele de contact, răspunsurile și estimările către un flux de automatizare. Trimiterea începe de obicei în cinci minute."
+  },
+  "Available on Premium and Business.": {
+    "es": "Disponible en Premium y Business.",
+    "ro": "Disponibil pe Premium și Business."
+  },
+  "Compare plans": {
+    "es": "Comparar planes",
+    "ro": "Compară planurile"
+  },
+  "Only the workspace owner can manage connections": {
+    "es": "Solo el propietario del espacio puede gestionar conexiones",
+    "ro": "Doar proprietarul spațiului poate administra conexiunile"
+  },
+  "Webhook URL": {
+    "es": "URL del webhook",
+    "ro": "URL webhook"
+  },
+  "Send new enquiries automatically": {
+    "es": "Enviar nuevas solicitudes automáticamente",
+    "ro": "Trimite automat solicitările noi"
+  },
+  "The URL can grant access to your automation. Keep it private. Saving changes cancels pending deliveries for the previous connection.": {
+    "es": "La URL puede dar acceso a tu automatización. Mantenla privada. Guardar cambios cancela los envíos pendientes de la conexión anterior.",
+    "ro": "URL-ul poate oferi acces la automatizare. Păstrează-l privat. Salvarea modificărilor anulează trimiterile în așteptare ale conexiunii anterioare."
+  },
+  "Working…": {
+    "es": "Procesando…",
+    "ro": "Se procesează…"
+  },
+  "Save connection": {
+    "es": "Guardar conexión",
+    "ro": "Salvează conexiunea"
+  },
+  "Send sample": {
+    "es": "Enviar muestra",
+    "ro": "Trimite un exemplu"
+  },
+  "Pause connection": {
+    "es": "Pausar conexión",
+    "ro": "Suspendă conexiunea"
+  },
+  "Lead dashboard": {
+    "es": "Panel de solicitudes",
+    "ro": "Panou de solicitări"
+  },
+  "Everything in Free": {
+    "es": "Todo lo incluido en Gratis",
+    "ro": "Tot ce include planul Gratuit"
+  },
+  "Everything in Basic": {
+    "es": "Todo lo incluido en Basic",
+    "ro": "Tot ce include Basic"
+  },
+  "Zapier and Make connections": {
+    "es": "Conexiones con Zapier y Make",
+    "ro": "Conexiuni Zapier și Make"
+  },
+  "Everything in Premium": {
+    "es": "Todo lo incluido en Premium",
+    "ro": "Tot ce include Premium"
+  },
+  "Included in every plan": {
+    "es": "Incluido en todos los planes",
+    "ro": "Inclus în toate planurile"
+  },
+  "Custom questions, rates and estimate tax": {
+    "es": "Preguntas, tarifas e impuestos de estimación personalizados",
+    "ro": "Întrebări, tarife și taxe de estimare personalizate"
+  },
+  "Your services, your prices": {
+    "es": "Tus servicios, tus precios",
+    "ro": "Serviciile tale, prețurile tale"
+  },
+  "Start with a trade template. Adjust questions, measurements, rates and extras in a guided editor.": {
+    "es": "Empieza con una plantilla de tu sector. Ajusta preguntas, medidas, tarifas y extras en un editor guiado.",
+    "ro": "Pornește de la un șablon pentru domeniul tău. Modifică întrebările, măsurătorile, tarifele și suplimentele într-un editor ghidat."
+  },
+  "An estimate before a conversation": {
+    "es": "Una estimación antes de conversar",
+    "ro": "O estimare înainte de discuție"
+  },
+  "Customers answer a few questions and see a price range. You receive their request and confirm the final details.": {
+    "es": "Los clientes responden unas preguntas y ven un rango de precio. Tú recibes su solicitud y confirmas los detalles finales.",
+    "ro": "Clienții răspund la câteva întrebări și văd un interval de preț. Tu primești solicitarea și confirmi detaliile finale."
+  },
+  "Every enquiry in one place": {
+    "es": "Todas las solicitudes en un solo lugar",
+    "ro": "Toate solicitările într-un singur loc"
+  },
+  "Review answers, track lead status and respond from your dashboard. Add reminders or booking requests when you need them.": {
+    "es": "Revisa respuestas, sigue el estado de las solicitudes y responde desde tu panel. Añade recordatorios o solicitudes de reserva cuando los necesites.",
+    "ro": "Verifică răspunsurile, urmărește starea solicitărilor și răspunde din panou. Adaugă mementouri sau cereri de programare când ai nevoie."
+  },
+  "For independent service businesses": {
+    "es": "Para negocios de servicios independientes",
+    "ro": "Pentru firme independente de servicii"
+  },
+  "Less back-and-forth. More ready-to-talk customers.": {
+    "es": "Menos mensajes de ida y vuelta. Más clientes listos para hablar.",
+    "ro": "Mai puține mesaje repetitive. Mai mulți clienți pregătiți să discute."
+  },
+  "Give customers an instant estimate based on your prices, collect the job details and follow every enquiry in one simple workspace.": {
+    "es": "Ofrece una estimación instantánea con tus precios, recoge los detalles del trabajo y sigue cada solicitud en un espacio sencillo.",
+    "ro": "Oferă clienților o estimare instantanee pe baza prețurilor tale, colectează detaliile lucrării și urmărește fiecare solicitare într-un spațiu simplu."
+  },
+  "Create your free calculator": {
+    "es": "Crea tu calculadora gratuita",
+    "ro": "Creează calculatorul gratuit"
+  },
+  "Explore templates": {
+    "es": "Explorar plantillas",
+    "ro": "Explorează șabloanele"
+  },
+  "No card required · All 15 templates · English, Español, Română": {
+    "es": "Sin tarjeta · Las 15 plantillas · English, Español, Română",
+    "ro": "Fără card · Toate cele 15 șabloane · English, Español, Română"
+  },
+  "Try the customer experience": {
+    "es": "Prueba la experiencia del cliente",
+    "ro": "Încearcă experiența clientului"
+  },
+  "Working demo": {
+    "es": "Demo funcional",
+    "ro": "Demonstrație funcțională"
+  },
+  "Demo prices only. Contact details are not saved.": {
+    "es": "Precios de demostración. Los datos de contacto no se guardan.",
+    "ro": "Doar prețuri demonstrative. Datele de contact nu se salvează."
+  },
+  "A clear path from estimate to enquiry": {
+    "es": "Un camino claro de la estimación a la solicitud",
+    "ro": "Un drum clar de la estimare la solicitare"
+  },
+  "Built around the work you already do.": {
+    "es": "Pensado para el trabajo que ya haces.",
+    "ro": "Creat pentru munca pe care o faci deja."
+  },
+  "For painting, cleaning, home improvement and other services where the price depends on the job.": {
+    "es": "Para pintura, limpieza, reformas y otros servicios cuyo precio depende del trabajo.",
+    "ro": "Pentru zugrăveli, curățenie, renovări și alte servicii unde prețul depinde de lucrare."
+  },
+  "Start with your trade": {
+    "es": "Empieza con tu sector",
+    "ro": "Începe cu domeniul tău"
+  },
+  "Useful templates. Your own rules.": {
+    "es": "Plantillas útiles. Tus propias reglas.",
+    "ro": "Șabloane utile. Regulile tale."
+  },
+  "Browse all 15 templates": {
+    "es": "Ver las 15 plantillas",
+    "ro": "Vezi toate cele 15 șabloane"
+  },
+  "Works with your business": {
+    "es": "Se adapta a tu negocio",
+    "ro": "Se potrivește firmei tale"
+  },
+  "On your website. In your workflow.": {
+    "es": "En tu web. En tu flujo de trabajo.",
+    "ro": "Pe site-ul tău. În fluxul tău de lucru."
+  },
+  "Use a hosted link or website embed on every plan. Premium and Business add Zapier or Make connections for new enquiries. Business adds optional Stripe deposits.": {
+    "es": "Usa un enlace alojado o una inserción web en cualquier plan. Premium y Business añaden conexiones con Zapier o Make para nuevas solicitudes. Business añade anticipos opcionales con Stripe.",
+    "ro": "Folosește un link găzduit sau integrarea în site pe orice plan. Premium și Business adaugă conexiuni Zapier sau Make pentru solicitări noi. Business adaugă avansuri opționale prin Stripe."
+  },
+  "Explore integrations": {
+    "es": "Explorar integraciones",
+    "ro": "Explorează integrările"
+  },
+  "Make it familiar to your customers.": {
+    "es": "Haz que tus clientes se sientan en casa.",
+    "ro": "Oferă clienților o experiență familiară."
+  },
+  "Choose metric or imperial units and edit your wording in English, Spanish and Romanian. Premium and Business also let you add your logo, business name and colours.": {
+    "es": "Elige unidades métricas o imperiales y edita los textos en inglés, español y rumano. Premium y Business permiten añadir tu logotipo, nombre y colores.",
+    "ro": "Alege unități metrice sau imperiale și modifică textele în engleză, spaniolă și română. Premium și Business permit adăugarea siglei, numelui firmei și culorilor."
+  },
+  "A few things you might be wondering.": {
+    "es": "Algunas dudas que puedes tener.",
+    "ro": "Câteva întrebări pe care le-ai putea avea."
+  },
+  "All questions and setup guides": {
+    "es": "Todas las preguntas y guías de configuración",
+    "ro": "Toate întrebările și ghidurile de configurare"
+  },
+  "Start with one service. Grow from there.": {
+    "es": "Empieza con un servicio. Crece desde ahí.",
+    "ro": "Începe cu un serviciu. Dezvoltă-te de acolo."
+  },
+  "One calculator and seven enquiries each month, free. Paid plans start at €9 per month.": {
+    "es": "Una calculadora y siete solicitudes al mes, gratis. Los planes de pago empiezan en 9 € al mes.",
+    "ro": "Un calculator și șapte solicitări pe lună, gratuit. Planurile plătite încep de la 9 € pe lună."
+  },
+  "Room to grow": {
+    "es": "Espacio para crecer",
+    "ro": "Loc pentru dezvoltare"
+  },
+  "Simple plans for real service businesses.": {
+    "es": "Planes sencillos para negocios de servicios reales.",
+    "ro": "Planuri simple pentru firme reale de servicii."
+  },
+  "Start free. Get more calculators as you grow. Choose branding and automation when they help your business.": {
+    "es": "Empieza gratis. Consigue más calculadoras a medida que creces. Elige marca y automatización cuando aporten valor a tu negocio.",
+    "ro": "Începe gratuit. Adaugă calculatoare pe măsură ce crești. Alege personalizarea și automatizarea când îți ajută firma."
+  },
+  "Questions before you choose?": {
+    "es": "¿Dudas antes de elegir?",
+    "ro": "Întrebări înainte să alegi?"
+  },
+  "Choose a template": {
+    "es": "Elige una plantilla",
+    "ro": "Alege un șablon"
+  },
+  "Find your service and try its demo. Open Customize to create your own version.": {
+    "es": "Encuentra tu servicio y prueba su demo. Abre Personalizar para crear tu versión.",
+    "ro": "Găsește serviciul tău și încearcă demonstrația. Deschide Personalizează pentru a crea propria versiune."
+  },
+  "Browse templates": {
+    "es": "Ver plantillas",
+    "ro": "Vezi șabloanele"
+  },
+  "Set your prices": {
+    "es": "Fija tus precios",
+    "ro": "Stabilește prețurile"
+  },
+  "Work through the five editor steps. Set units and currency, edit questions and rates, then test small and large jobs in the preview.": {
+    "es": "Sigue los cinco pasos del editor. Configura unidades y moneda, edita preguntas y tarifas y prueba trabajos pequeños y grandes en la vista previa.",
+    "ro": "Parcurge cei cinci pași ai editorului. Stabilește unitățile și moneda, modifică întrebările și tarifele, apoi testează lucrări mici și mari în previzualizare."
+  },
+  "Publish and share": {
+    "es": "Publica y comparte",
+    "ro": "Publică și distribuie"
+  },
+  "Save your calculator. Copy its public link or embed code from the Share panel. Open the link on your phone before sending it to customers.": {
+    "es": "Guarda tu calculadora. Copia el enlace público o el código de inserción del panel Compartir. Abre el enlace en tu móvil antes de enviarlo a clientes.",
+    "ro": "Salvează calculatorul. Copiază linkul public sau codul de integrare din panoul Distribuie. Deschide linkul pe telefon înainte să-l trimiți clienților."
+  },
+  "Open workspace": {
+    "es": "Abrir espacio de trabajo",
+    "ro": "Deschide spațiul de lucru"
+  },
+  "Respond to enquiries": {
+    "es": "Responde a las solicitudes",
+    "ro": "Răspunde solicitărilor"
+  },
+  "Open the lead dashboard to see the customer's answers and estimate. Contact them to confirm scope, availability and the final price.": {
+    "es": "Abre el panel de solicitudes para ver las respuestas y la estimación del cliente. Contáctalo para confirmar el alcance, la disponibilidad y el precio final.",
+    "ro": "Deschide panoul de solicitări pentru a vedea răspunsurile și estimarea clientului. Contactează-l pentru a confirma lucrările, disponibilitatea și prețul final."
+  },
+  "Getting started": {
+    "es": "Primeros pasos",
+    "ro": "Primii pași"
+  },
+  "Your first calculator, step by step.": {
+    "es": "Tu primera calculadora, paso a paso.",
+    "ro": "Primul tău calculator, pas cu pas."
+  },
+  "Start small: one service, your real prices and a test enquiry before you share it.": {
+    "es": "Empieza con un servicio, tus precios reales y una solicitud de prueba antes de compartirlo.",
+    "ro": "Începe simplu: un serviciu, prețurile tale reale și o solicitare de test înainte de distribuire."
+  },
+  "Frequently asked questions": {
+    "es": "Preguntas frecuentes",
+    "ro": "Întrebări frecvente"
+  },
+  "Clear answers about setup, plans and what your customers see.": {
+    "es": "Respuestas claras sobre configuración, planes y lo que ven tus clientes.",
+    "ro": "Răspunsuri clare despre configurare, planuri și ce văd clienții tăi."
+  },
+  "All templates, every plan": {
+    "es": "Todas las plantillas en cada plan",
+    "ro": "Toate șabloanele, pe orice plan"
+  },
+  "Start with your service. Make it yours.": {
+    "es": "Empieza con tu servicio. Hazlo tuyo.",
+    "ro": "Începe cu serviciul tău. Personalizează-l."
+  },
+  "Try a working demo, then customize the questions, measurements and pricing for your business. Example rates are a starting point, not market prices.": {
+    "es": "Prueba una demo funcional y personaliza preguntas, medidas y precios para tu negocio. Las tarifas de ejemplo son un punto de partida, no precios de mercado.",
+    "ro": "Încearcă o demonstrație funcțională, apoi personalizează întrebările, măsurătorile și prețurile firmei tale. Tarifele de exemplu sunt un punct de pornire, nu prețuri de piață."
+  },
+  "Your website": {
+    "es": "Tu página web",
+    "ro": "Site-ul tău"
+  },
+  "Every plan": {
+    "es": "Todos los planes",
+    "ro": "Orice plan"
+  },
+  "Add your calculator to a page that supports script or iframe embeds, or share a hosted link. No website plugin is required.": {
+    "es": "Añade la calculadora a una página que admita scripts o iframe, o comparte un enlace alojado. No necesitas un complemento web.",
+    "ro": "Adaugă calculatorul pe o pagină care acceptă script sau iframe ori distribuie linkul găzduit. Nu este necesar un plugin pentru site."
+  },
+  "Read the setup guide": {
+    "es": "Leer la guía de configuración",
+    "ro": "Citește ghidul de configurare"
+  },
+  "Zapier & Make": {
+    "es": "Zapier y Make",
+    "ro": "Zapier și Make"
+  },
+  "Premium & Business": {
+    "es": "Premium y Business",
+    "ro": "Premium și Business"
+  },
+  "Send new enquiries to your automation workflow. From there, choose a spreadsheet, CRM or team notification app. One active connection per workspace.": {
+    "es": "Envía solicitudes nuevas a tu flujo de automatización. Desde allí, elige una hoja de cálculo, CRM o avisos al equipo. Una conexión activa por espacio de trabajo.",
+    "ro": "Trimite solicitările noi către fluxul de automatizare. De acolo, alege o foaie de calcul, un CRM sau o aplicație de notificare a echipei. O conexiune activă pe spațiu de lucru."
+  },
+  "Set up automation": {
+    "es": "Configurar automatización",
+    "ro": "Configurează automatizarea"
+  },
+  "Stripe": {
+    "es": "Stripe",
+    "ro": "Stripe"
+  },
+  "Connect your business's Stripe account to collect optional customer deposits. Your business completes Stripe verification and receives the payments.": {
+    "es": "Conecta la cuenta Stripe de tu negocio para cobrar anticipos opcionales. Tu negocio completa la verificación de Stripe y recibe los pagos.",
+    "ro": "Conectează contul Stripe al firmei pentru a colecta avansuri opționale. Firma ta finalizează verificarea Stripe și primește plățile."
+  },
+  "Download your leads as a spreadsheet and import them into compatible business tools. CSV export is a manual transfer, not an automatic sync.": {
+    "es": "Descarga las solicitudes como hoja de cálculo e impórtalas en herramientas compatibles. La exportación CSV es una transferencia manual, no una sincronización automática.",
+    "ro": "Descarcă solicitările într-o foaie de calcul și importă-le în instrumente compatibile. Exportul CSV este un transfer manual, nu o sincronizare automată."
+  },
+  "Open your leads": {
+    "es": "Abrir tus solicitudes",
+    "ro": "Deschide solicitările"
+  },
+  "Fits your workflow": {
+    "es": "Se adapta a tu flujo",
+    "ro": "Se potrivește fluxului tău de lucru"
+  },
+  "Keep the tools you already use.": {
+    "es": "Conserva las herramientas que ya usas.",
+    "ro": "Păstrează instrumentele pe care le folosești deja."
+  },
+  "Put your calculator on your website, send enquiries to an automation tool and collect deposits with Stripe. Choose only the connections your business needs.": {
+    "es": "Pon tu calculadora en tu web, envía solicitudes a una herramienta de automatización y cobra anticipos con Stripe. Elige solo las conexiones que necesite tu negocio.",
+    "ro": "Pune calculatorul pe site, trimite solicitările către un instrument de automatizare și colectează avansuri prin Stripe. Alege doar conexiunile de care firma ta are nevoie."
+  },
+  "New enquiry → your workflow": {
+    "es": "Nueva solicitud → tu flujo de trabajo",
+    "ro": "Solicitare nouă → fluxul tău de lucru"
+  },
+  "For example: save each enquiry to Google Sheets.": {
+    "es": "Por ejemplo: guarda cada solicitud en Google Sheets.",
+    "ro": "De exemplu: salvează fiecare solicitare în Google Sheets."
+  },
+  "Create a Catch Hook in Zapier or a custom webhook in Make. Paste that URL into Connections, send a sample and map the contact details, answers and estimate to your chosen app.": {
+    "es": "Crea un Catch Hook en Zapier o un webhook personalizado en Make. Pega la URL en Conexiones, envía una muestra y asigna los datos de contacto, las respuestas y la estimación a tu aplicación.",
+    "ro": "Creează un Catch Hook în Zapier sau un webhook personalizat în Make. Inserează URL-ul în Conexiuni, trimite un exemplu și asociază datele de contact, răspunsurile și estimarea cu aplicația aleasă."
+  },
+  "What is included?": {
+    "es": "¿Qué está incluido?",
+    "ro": "Ce este inclus?"
+  },
+  "New-enquiry delivery, a sample test and delivery status are included on Premium and Business. Your business owns its automation account and any separate provider costs. Native CRM sync, calendar sync and historical lead imports are not included.": {
+    "es": "Premium y Business incluyen envío de solicitudes nuevas, una prueba y estado de entrega. Tu negocio gestiona su cuenta de automatización y los costes del proveedor. No se incluyen sincronización nativa de CRM, calendario ni importación de solicitudes anteriores.",
+    "ro": "Premium și Business includ trimiterea solicitărilor noi, un test și starea livrării. Firma ta gestionează contul de automatizare și costurile separate ale furnizorului. Sincronizarea CRM nativă, sincronizarea calendarului și importul solicitărilor vechi nu sunt incluse."
+  },
+  "Open connections": {
+    "es": "Abrir conexiones",
+    "ro": "Deschide conexiunile"
+  },
+  "Keep your leads moving into the tools you already use.": {
+    "es": "Lleva tus solicitudes a las herramientas que ya usas.",
+    "ro": "Trimite solicitările către instrumentele pe care le folosești deja."
+  },
+  "Set it up in three steps": {
+    "es": "Configúralo en tres pasos",
+    "ro": "Configurează în trei pași"
+  },
+  "Create a Catch Hook in Zapier or a custom webhook in Make. Copy its HTTPS URL.": {
+    "es": "Crea un Catch Hook en Zapier o un webhook personalizado en Make. Copia su URL HTTPS.",
+    "ro": "Creează un Catch Hook în Zapier sau un webhook personalizat în Make. Copiază URL-ul HTTPS."
+  },
+  "Paste the URL here and save. Send a sample while your automation tool is listening.": {
+    "es": "Pega la URL aquí y guarda. Envía una muestra mientras tu herramienta de automatización espera datos.",
+    "ro": "Inserează URL-ul aici și salvează. Trimite un exemplu cât timp instrumentul de automatizare așteaptă date."
+  },
+  "Map the sample fields to your spreadsheet or CRM, turn on that workflow and enable automatic delivery here.": {
+    "es": "Asigna los campos de la muestra a tu hoja de cálculo o CRM, activa ese flujo y habilita el envío automático aquí.",
+    "ro": "Asociază câmpurile exemplului cu foaia de calcul sau CRM-ul, activează acel flux și pornește trimiterea automată aici."
+  },
+  "Your automation account may have its own fees. Existing leads are not imported. Deliveries can repeat after a retry; use the event ID to avoid duplicates.": {
+    "es": "Tu cuenta de automatización puede tener sus propias tarifas. Las solicitudes anteriores no se importan. Los envíos pueden repetirse al reintentar; usa el ID del evento para evitar duplicados.",
+    "ro": "Contul de automatizare poate avea costuri proprii. Solicitările existente nu sunt importate. Livrările se pot repeta la reîncercare; folosește ID-ul evenimentului pentru a evita duplicatele."
+  },
+  "Recent deliveries": {
+    "es": "Envíos recientes",
+    "ro": "Trimiteri recente"
+  },
+  "No deliveries yet. Enable your connection, then submit a new enquiry to a saved calculator.": {
+    "es": "Aún no hay envíos. Activa la conexión y envía una nueva solicitud a una calculadora guardada.",
+    "ro": "Nu există încă trimiteri. Activează conexiunea, apoi trimite o solicitare nouă către un calculator salvat."
+  },
+  "Delivered": {
+    "es": "Entregado",
+    "ro": "Livrat"
+  },
+  "Failed": {
+    "es": "Fallido",
+    "ro": "Eșuat"
+  },
+  "Cancelled": {
+    "es": "Cancelado",
+    "ro": "Anulat"
+  },
+  "Pending": {
+    "es": "Pendiente",
+    "ro": "În așteptare"
+  },
+  "attempts": {
+    "es": "intentos",
+    "ro": "încercări"
+  },
+  "Failed requests retry up to five attempts. Check your automation tool if a delivery fails. A delivered event means the tool accepted it, not that every downstream step completed.": {
+    "es": "Los envíos fallidos se reintentan hasta cinco veces. Revisa tu herramienta si un envío falla. Entregado significa que la herramienta lo aceptó, no que se completaron todos los pasos posteriores.",
+    "ro": "Trimiterile nereușite se reîncearcă până la cinci încercări. Verifică instrumentul dacă o trimitere eșuează. Livrat înseamnă că instrumentul a acceptat evenimentul, nu că toți pașii ulteriori s-au finalizat."
+  },
+  "Use a Zapier Catch Hook or Make custom webhook URL": {
+    "es": "Usa una URL de Catch Hook de Zapier o de webhook personalizado de Make",
+    "ro": "Folosește un URL Catch Hook Zapier sau un webhook personalizat Make"
+  },
+  "Save a connection before testing": {
+    "es": "Guarda una conexión antes de probar",
+    "ro": "Salvează o conexiune înainte de testare"
+  },
+  "Your automation tool did not accept the sample. Check its webhook settings.": {
+    "es": "Tu herramienta no aceptó la muestra. Revisa la configuración del webhook.",
+    "ro": "Instrumentul nu a acceptat exemplul. Verifică setările webhook-ului."
   }
 }

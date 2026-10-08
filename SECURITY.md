@@ -46,8 +46,16 @@ Do not include real customer PII, live credentials or full access tokens in a re
 
 - Public quote, lead, booking, checkout and login endpoints use database-backed fixed-window rate limits.
 - Client addresses are hashed with `RATE_LIMIT_SECRET` before storage.
-- Scheduled follow-up execution requires `CRON_SECRET`.
+- Scheduled follow-up and integration execution require `CRON_SECRET`.
 - Follow-up workers claim due rows before sending and use Resend idempotency keys.
+
+### Lead integrations
+
+- Only authenticated workspace owners can save or test a connection. Automatic delivery requires Premium or Business.
+- Integration destinations are allowlisted HTTPS Zapier and Make webhook addresses; redirects and arbitrary hosts are rejected.
+- Endpoint URLs and delivery rows are protected with RLS, with access restricted to server-side administrative operations.
+- Enquiry creation and delivery queueing are atomic. Workers use leases, current entitlements and connection revisions before sending.
+- Delivery payloads exclude customer access tokens and internal pricing details. Sample tests contain synthetic customer data.
 
 ## Deployment requirements
 

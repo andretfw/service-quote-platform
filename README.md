@@ -8,14 +8,15 @@ The repository is source-visible for evaluation and authorized collaboration. It
 
 | Feature                                            | Free     | Basic    | Premium  | Business |
 | -------------------------------------------------- | -------- | -------- | -------- | -------- |
-| Monthly subscription                               | Free     | €19      | €39      | €99      |
-| Active calculators                                 | 1        | 1        | 5        | 25       |
-| Enquiries per calendar month, UTC                  | 7        | 100      | 1,000    | 10,000   |
+| Monthly subscription                               | Free     | €9       | €19      | €39      |
+| Active calculators                                 | 1        | 5        | 15       | 50       |
+| Enquiries per calendar month, UTC                  | 7        | 100      | 1,000    | 2,000    |
 | 15 industry templates, question and pricing editor | Included | Included | Included | Included |
 | Hosted calculator and website embed                | Included | Included | Included | Included |
 | Lead pipeline and owner notifications              | Included | Included | Included | Included |
 | Service Quote logo on public calculators           | Included | —        | —        | —        |
 | Business logo, name and brand color                | —        | —        | Included | Included |
+| Zapier / Make new-enquiry automation               | —        | —        | Included | Included |
 | CSV lead exports                                   | —        | —        | Included | Included |
 | Optional customer email follow-ups and unsubscribe | —        | —        | Included | Included |
 | Booking requests and owner confirmation            | —        | —        | —        | Included |
@@ -43,7 +44,9 @@ Painting, cleaning, tiling, landscaping, roofing, HVAC, moving, pressure washing
 - Transactional notification outbox and a Netlify scheduled worker with provider timeouts and retry claims.
 - CSV formula injection protection, tested migrations and reproducible CI.
 
-Booking is a request for a preferred time, not real-time calendar availability. Photo uploads, calendar synchronization, CRM integrations and automatic jurisdiction-specific tax calculations are outside the plans above. The configurable estimate tax percentage is a merchant input. Platform subscription tax, business registration, legal documents and payment-provider approvals require the operator's actual details.
+Booking is a request for a preferred time, not real-time calendar availability. Photo uploads, calendar synchronization, native CRM integrations and automatic jurisdiction-specific tax calculations are outside the plans above. The configurable estimate tax percentage is a merchant input. Platform subscription tax, business registration, legal documents and payment-provider approvals require the operator's actual details.
+
+Premium and Business can send new enquiries to one Zapier Catch Hook or Make custom webhook per workspace. The business chooses and configures its downstream tools. Failed deliveries retry up to five attempts; delivery is at least once and consumers should deduplicate using the event ID. Changing or pausing a connection cancels its pending deliveries. Existing enquiries are not backfilled. Integration URLs and delivery rows are server-only.
 
 ## Development
 

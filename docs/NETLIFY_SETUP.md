@@ -5,7 +5,7 @@ The repository contains the application and Netlify configuration. Production ac
 ## 1. Supabase
 
 1. Create one Supabase project for the entire platform. Businesses share the database with isolated organization-owned rows; do not create a paid project for every customer.
-2. Apply every file in `supabase/migrations` in numeric order using the Supabase SQL editor or migration tooling. On an existing installation, apply only unapplied files. Migration 004 backfills current-month enquiry usage. Migration 007 introduces permanent Free access, one active calculator and seven monthly enquiries. Migration 008 restores Basic to 100 monthly enquiries.
+2. Apply every file in `supabase/migrations` in numeric order using the Supabase SQL editor or migration tooling. On an existing installation, apply only unapplied files. Migration 004 backfills current-month enquiry usage. Migration 007 introduces permanent Free access, one active calculator and seven monthly enquiries. Migration 008 restores Basic to 100 monthly enquiries. Migration 009 sets active calculator limits to 1/5/15/50 and enquiry limits to 7/100/1,000/2,000. Migration 010 adds optional lead automation connections.
 3. Copy the project URL, publishable key and server-only service-role key into Netlify environment variables.
 4. In Authentication → URL Configuration, set Site URL to the final HTTPS application address and add the exact `https://YOUR_APP.netlify.app/auth/callback` redirect. Configure localhost separately for development. Do not broadly allow untrusted preview origins.
 5. Configure custom SMTP for magic links, such as Resend SMTP. The built-in sender is restricted and unsuitable for customer sign-ins. Verify its sender domain and raise the authentication email rate limit to suit expected signups. Disable email link tracking so authentication links remain intact.
@@ -13,7 +13,7 @@ The repository contains the application and Netlify configuration. Production ac
 
 ## 2. Stripe subscriptions
 
-1. Start in Stripe test mode. Create recurring monthly EUR prices matching `lib/plans.ts`: Basic €19, Premium €39 and Business €99. Use licensed, per-unit prices. Do not use metered, annual or multi-item prices. The server rejects prices that differ from the published plans.
+1. Start in Stripe test mode. Create recurring monthly EUR prices matching `lib/plans.ts`: Basic €9, Premium €19 and Business €39. Use licensed, per-unit prices. Do not use metered, annual or multi-item prices. The server rejects prices that differ from the published plans.
 2. Set `STRIPE_SECRET_KEY` and the three price IDs in `STRIPE_PRICE_BASIC`, `STRIPE_PRICE_PREMIUM`, `STRIPE_PRICE_BUSINESS`.
 3. Add an account webhook endpoint `https://YOUR_APP.netlify.app/api/billing/webhook`. Subscribe to `customer.subscription.created`, `customer.subscription.updated`, `customer.subscription.deleted`, `customer.subscription.paused`, `customer.subscription.resumed`, `invoice.paid`, `invoice.payment_failed`, and `invoice.payment_action_required`. Set its signing secret as `STRIPE_BILLING_WEBHOOK_SECRET`.
 4. Enable the Stripe billing portal: payment-method changes, invoice history, cancellation at period end, and updates between exactly the three configured products/prices. Configure proration/payment collection deliberately. Enable Stripe's option limiting customers to one subscription and redirect existing subscribers to `/billing` as an additional safeguard.
@@ -65,3 +65,9 @@ These account-level checks have not been performed merely by committing the code
 Set `EMAIL_PROVIDER=gmail`, `GMAIL_USER` to a dedicated Gmail address, and `GMAIL_APP_PASSWORD` to that account’s app password. Store the password as a secret in Netlify’s production Functions environment. Keep `CRON_SECRET` for queued delivery; customer reminders also require `UNSUBSCRIBE_SECRET`. Redeploy after changing variables. The sender is the connected Gmail account, and Resend is bypassed. Test alerts to a different recipient before launch.
 
 Gmail has account sending limits and may temporarily block sending. SMTP does not offer Resend’s idempotency guarantee: a provider acceptance followed by a lost connection or database update failure can result in a duplicate on retry. The outbox lease prevents concurrent workers from sending the same alert. This transport does not change Supabase login email configuration.
+
+## Lead automation connections
+
+Apply migration 010 before opening Connections. The separate `integrations` scheduled function uses `CRON_SECRET`, `NEXT_PUBLIC_APP_URL` (or Netlify's `URL`) and the server-only Supabase variables. It does not depend on the email provider. Netlify scheduled execution runs in production; use a signed request to the internal worker in staging.
+
+Premium and Business workspace owners configure their own Zapier Catch Hook or Make custom webhook and choose their downstream actions. Zapier webhooks require a paid Zapier plan; Make allowances depend on the business's account. No platform-wide Zapier or Make subscription is required. Test with sample data, then a new enquiry from a saved calculator. Check both the delivery history and the destination workflow, including retries, pausing and downgrades, before enabling real customer traffic.
