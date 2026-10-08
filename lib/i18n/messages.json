@@ -3362,5 +3362,249 @@
   "This change conflicts with the current state. Refresh and try again.": {
     "es": "Este cambio entra en conflicto con el estado actual. Actualiza la página e inténtalo de nuevo.",
     "ro": "Această modificare nu este compatibilă cu starea actuală. Reîncarcă pagina și încearcă din nou."
+  },
+  "Previous month": {
+    "es": "Mes anterior",
+    "ro": "Luna anterioară"
+  },
+  "Next month": {
+    "es": "Mes siguiente",
+    "ro": "Luna următoare"
+  },
+  "Business time zone": {
+    "es": "Zona horaria del negocio",
+    "ro": "Fusul orar al afacerii"
+  },
+  "Booking calendar": {
+    "es": "Calendario de reservas",
+    "ro": "Calendar de programări"
+  },
+  "No bookings or blocked time.": {
+    "es": "No hay reservas ni horarios bloqueados.",
+    "ro": "Nu există programări sau perioade blocate."
+  },
+  "Requests need confirmation. Only confirmed bookings reserve time.": {
+    "es": "Las solicitudes necesitan confirmación. Solo las reservas confirmadas reservan el horario.",
+    "ro": "Solicitările necesită confirmare. Doar programările confirmate rezervă intervalul."
+  },
+  "Changes saved.": {
+    "es": "Cambios guardados.",
+    "ro": "Modificări salvate."
+  },
+  "Availability settings": {
+    "es": "Configuración de disponibilidad",
+    "ro": "Setări de disponibilitate"
+  },
+  "Use the internal calendar without connecting another account.": {
+    "es": "Usa el calendario interno sin conectar otra cuenta.",
+    "ro": "Folosește calendarul intern fără să conectezi alt cont."
+  },
+  "Default service duration (minutes)": {
+    "es": "Duración predeterminada del servicio (minutos)",
+    "ro": "Durata implicită a serviciului (minute)"
+  },
+  "Working days": {
+    "es": "Días laborables",
+    "ro": "Zile de lucru"
+  },
+  "Opening time": {
+    "es": "Hora de apertura",
+    "ro": "Ora de deschidere"
+  },
+  "Closing time": {
+    "es": "Hora de cierre",
+    "ro": "Ora de închidere"
+  },
+  "Accept requests only within working hours": {
+    "es": "Aceptar solicitudes solo durante el horario laboral",
+    "ro": "Acceptă solicitări doar în timpul programului de lucru"
+  },
+  "Save availability": {
+    "es": "Guardar disponibilidad",
+    "ro": "Salvează disponibilitatea"
+  },
+  "Block unavailable time": {
+    "es": "Bloquear horarios no disponibles",
+    "ro": "Blochează perioadele indisponibile"
+  },
+  "Enter dates in your device time zone. The calendar displays the business time zone.": {
+    "es": "Introduce las fechas en la zona horaria de tu dispositivo. El calendario muestra la zona horaria del negocio.",
+    "ro": "Introdu datele în fusul orar al dispozitivului. Calendarul afișează fusul orar al afacerii."
+  },
+  "Start": {
+    "es": "Inicio",
+    "ro": "Început"
+  },
+  "End": {
+    "es": "Fin",
+    "ro": "Sfârșit"
+  },
+  "Label": {
+    "es": "Etiqueta",
+    "ro": "Etichetă"
+  },
+  "Block time": {
+    "es": "Bloquear horario",
+    "ro": "Blochează intervalul"
+  },
+  "Connected calendars": {
+    "es": "Calendarios conectados",
+    "ro": "Calendare conectate"
+  },
+  "Confirmed bookings are added to your primary calendar. Changes and cancellations are sent automatically. External busy times are checked before a request or confirmation.": {
+    "es": "Las reservas confirmadas se añaden a tu calendario principal. Los cambios y cancelaciones se envían automáticamente. Se comprueban los horarios ocupados externos antes de una solicitud o confirmación.",
+    "ro": "Programările confirmate sunt adăugate în calendarul principal. Modificările și anulările sunt trimise automat. Intervalele ocupate externe sunt verificate înaintea unei solicitări sau confirmări."
+  },
+  "Edit bookings here. Edits made in Google or Outlook do not change the booking in this dashboard.": {
+    "es": "Edita las reservas aquí. Los cambios en Google u Outlook no modifican la reserva en este panel.",
+    "ro": "Editează programările aici. Modificările din Google sau Outlook nu schimbă programarea din acest panou."
+  },
+  "Google Calendar": {
+    "es": "Google Calendar",
+    "ro": "Google Calendar"
+  },
+  "Outlook Calendar": {
+    "es": "Calendario de Outlook",
+    "ro": "Calendar Outlook"
+  },
+  "Calendar connection is awaiting platform setup.": {
+    "es": "La conexión del calendario está pendiente de la configuración de la plataforma.",
+    "ro": "Conexiunea calendarului așteaptă configurarea platformei."
+  },
+  "Connected": {
+    "es": "Conectado",
+    "ro": "Conectat"
+  },
+  "Reconnect": {
+    "es": "Volver a conectar",
+    "ro": "Reconectează"
+  },
+  "Connect": {
+    "es": "Conectar",
+    "ro": "Conectează"
+  },
+  "Retry failed sync": {
+    "es": "Reintentar sincronizaciones fallidas",
+    "ro": "Reîncearcă sincronizările eșuate"
+  },
+  "Disconnect": {
+    "es": "Desconectar",
+    "ro": "Deconectează"
+  },
+  "Disconnecting stops synchronization. Existing events remain in the external calendar.": {
+    "es": "Al desconectar se detiene la sincronización. Los eventos existentes permanecen en el calendario externo.",
+    "ro": "Deconectarea oprește sincronizarea. Evenimentele existente rămân în calendarul extern."
+  },
+  "Reschedule": {
+    "es": "Reprogramar",
+    "ro": "Reprogramează"
+  },
+  "New start time": {
+    "es": "Nueva hora de inicio",
+    "ro": "Noua oră de început"
+  },
+  "Duration (minutes)": {
+    "es": "Duración (minutos)",
+    "ro": "Durată (minute)"
+  },
+  "Save new time": {
+    "es": "Guardar nuevo horario",
+    "ro": "Salvează noul interval"
+  },
+  "Available on Business.": {
+    "es": "Disponible en Business.",
+    "ro": "Disponibil în Business."
+  },
+  "Unable to load booking calendar": {
+    "es": "No se pudo cargar el calendario de reservas",
+    "ro": "Calendarul de programări nu a putut fi încărcat"
+  },
+  "Unable to load calendar sync status": {
+    "es": "No se pudo cargar el estado de sincronización",
+    "ro": "Starea sincronizării calendarului nu a putut fi încărcată"
+  },
+  "Manage your schedule here, with or without an external calendar.": {
+    "es": "Gestiona tu agenda aquí, con o sin un calendario externo.",
+    "ro": "Gestionează programul aici, cu sau fără un calendar extern."
+  },
+  "Booking history": {
+    "es": "Historial de reservas",
+    "ro": "Istoricul programărilor"
+  },
+  "Calendar connected. Confirmed bookings are queued for synchronization.": {
+    "es": "Calendario conectado. Las reservas confirmadas están en cola para sincronizarse.",
+    "ro": "Calendar conectat. Programările confirmate sunt în așteptarea sincronizării."
+  },
+  "Calendar connection failed. Try again and grant calendar access.": {
+    "es": "Falló la conexión del calendario. Inténtalo de nuevo y concede acceso al calendario.",
+    "ro": "Conectarea calendarului a eșuat. Încearcă din nou și acordă acces la calendar."
+  },
+  "Too many blocked periods to display completely. Narrow your schedule before adding more.": {
+    "es": "Hay demasiados periodos bloqueados para mostrarlos todos. Reduce los bloqueos antes de añadir más.",
+    "ro": "Sunt prea multe perioade blocate pentru a le afișa complet. Redu numărul lor înainte de a adăuga altele."
+  },
+  "Internal booking calendar and availability": {
+    "es": "Calendario interno de reservas y disponibilidad",
+    "ro": "Calendar intern de programări și disponibilitate"
+  },
+  "Google Calendar and Outlook connections (setup required)": {
+    "es": "Conexiones con Google Calendar y Outlook (requieren configuración)",
+    "ro": "Conexiuni Google Calendar și Outlook (necesită configurare)"
+  },
+  "No. Business customers request a time and you confirm it. Business includes an internal booking calendar, working hours and blocked periods. Optional Google Calendar and Outlook connections add confirmed bookings and check external busy times. Provider setup is required.": {
+    "es": "No. Los clientes de Business solicitan un horario y tú lo confirmas. Business incluye un calendario interno, horario laboral y periodos bloqueados. Las conexiones opcionales con Google Calendar y Outlook añaden reservas confirmadas y comprueban horarios ocupados externos. Se requiere configurar los proveedores.",
+    "ro": "Nu. Clienții Business solicită un interval, iar tu îl confirmi. Business include un calendar intern, program de lucru și perioade blocate. Conexiunile opționale Google Calendar și Outlook adaugă programări confirmate și verifică intervalele ocupate externe. Furnizorii trebuie configurați."
+  },
+  "Native CRM sync and historical lead imports are not included. Business supports optional Google Calendar and Outlook connections in Booking calendar.": {
+    "es": "No se incluye la sincronización nativa con CRM ni la importación de consultas anteriores. Business permite conexiones opcionales con Google Calendar y Outlook en Calendario de reservas.",
+    "ro": "Sincronizarea CRM nativă și importarea solicitărilor anterioare nu sunt incluse. Business permite conexiuni opționale Google Calendar și Outlook în Calendar de programări."
+  },
+  "This time is unavailable. Choose another time.": {
+    "es": "Este horario no está disponible. Elige otro.",
+    "ro": "Acest interval nu este disponibil. Alege altul."
+  },
+  "Outside business working hours": {
+    "es": "Fuera del horario laboral del negocio",
+    "ro": "În afara programului de lucru al afacerii"
+  },
+  "This time is unavailable": {
+    "es": "Este horario no está disponible",
+    "ro": "Acest interval nu este disponibil"
+  },
+  "This block overlaps a confirmed booking": {
+    "es": "Este bloqueo coincide con una reserva confirmada",
+    "ro": "Această perioadă se suprapune cu o programare confirmată"
+  },
+  "Reconnect your calendar and try again": {
+    "es": "Vuelve a conectar tu calendario e inténtalo de nuevo",
+    "ro": "Reconectează calendarul și încearcă din nou"
+  },
+  "Calendar connections are not configured": {
+    "es": "Las conexiones de calendario no están configuradas",
+    "ro": "Conexiunile de calendar nu sunt configurate"
+  },
+  "Unable to check calendar availability. Reconnect and try again.": {
+    "es": "No se pudo comprobar la disponibilidad del calendario. Vuelve a conectarlo e inténtalo de nuevo.",
+    "ro": "Disponibilitatea calendarului nu a putut fi verificată. Reconectează-l și încearcă din nou."
+  },
+  "Invalid booking time": {
+    "es": "Horario de reserva no válido",
+    "ro": "Interval de programare invalid"
+  },
+  "Calendar contains too many events to verify this range": {
+    "es": "El calendario contiene demasiados eventos para comprobar este intervalo",
+    "ro": "Calendarul conține prea multe evenimente pentru a verifica acest interval"
+  },
+  "bookings": {
+    "es": "reservas",
+    "ro": "programări"
+  },
+  "New-enquiry delivery, a sample test and delivery status are included on Premium and Business. Your business owns its automation account and any separate provider costs. Native CRM sync and historical lead imports are not included. Business supports optional Google Calendar and Outlook connections in Booking calendar.": {
+    "es": "Premium y Business incluyen la entrega de nuevas consultas, una prueba de ejemplo y el estado de entrega. Tu negocio administra su cuenta de automatización y los costes del proveedor. No se incluye la sincronización nativa con CRM ni la importación de consultas anteriores. Business permite conexiones opcionales con Google Calendar y Outlook en Calendario de reservas.",
+    "ro": "Premium și Business includ trimiterea solicitărilor noi, un test demonstrativ și starea livrării. Afacerea ta deține contul de automatizare și suportă costurile separate ale furnizorului. Sincronizarea CRM nativă și importarea solicitărilor anterioare nu sunt incluse. Business permite conexiuni opționale Google Calendar și Outlook în Calendar de programări."
+  },
+  "booking": {
+    "es": "reserva",
+    "ro": "programare"
   }
 }

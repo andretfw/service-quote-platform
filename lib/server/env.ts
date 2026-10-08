@@ -41,7 +41,10 @@ export const getStripeEnv = () => ({
 });
 
 export const getAppUrl = (fallbackOrigin: string): string => {
-  const configured = process.env.NEXT_PUBLIC_APP_URL?.trim() || process.env.URL?.trim();
+  const configured =
+    process.env.SERVICE_QUOTE_DEPLOYMENT_ORIGIN?.trim() ||
+    process.env.NEXT_PUBLIC_APP_URL?.trim() ||
+    process.env.URL?.trim();
   if (!configured && process.env.NODE_ENV === "production")
     throw new Error("NEXT_PUBLIC_APP_URL is required in production");
   const url = new URL(configured || fallbackOrigin);

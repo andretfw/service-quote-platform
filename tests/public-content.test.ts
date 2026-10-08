@@ -9,6 +9,10 @@ const files = [
   "components/TemplateGallery.tsx",
   "components/ConnectionSettings.tsx",
   "components/PlanCards.tsx",
+  "components/BookingCalendar.tsx",
+  "components/CalendarSettings.tsx",
+  "components/BookingStatus.tsx",
+  "app/calendar/page.tsx",
   "app/page.tsx",
   "app/pricing/page.tsx",
   "app/help/page.tsx",
@@ -18,7 +22,15 @@ const files = [
 ];
 test("public pages, guides and connections have complete Spanish and Romanian wording", async () => {
   const dictionary = messages as Record<string, { es: string; ro: string }>;
-  const excluded = new Set(["POST", "PUT", "UTC", "Unable to load connections"]);
+  const excluded = new Set([
+    "POST",
+    "PUT",
+    "UTC",
+    "Unable to load connections",
+    "DELETE",
+    "PATCH",
+    "Europe/Bucharest",
+  ]);
   for (const file of files) {
     const source = ts.createSourceFile(
       file,

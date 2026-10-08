@@ -34,7 +34,7 @@ export const faqs = [
   ],
   [
     "Are bookings confirmed automatically?",
-    "No. Business customers can request a preferred date and time. You review and confirm the request. Calendar availability and calendar sync are not included.",
+    "No. Business customers request a time and you confirm it. Business includes an internal booking calendar, working hours and blocked periods. Optional Google Calendar and Outlook connections add confirmed bookings and check external busy times. Provider setup is required.",
   ],
   [
     "Who receives customer deposits?",

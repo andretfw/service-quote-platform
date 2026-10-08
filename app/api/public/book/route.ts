@@ -1,7 +1,12 @@
+import {
+  scheduleSettings,
+  assertExternalAvailability,
+  calendarApiError,
+} from "@/lib/server/calendar";
 import { customerCalculator } from "@/lib/server/customer-calculator";
 import { NextResponse } from "next/server";
 import { databaseConfigured } from "@/lib/server/env";
-import { HttpError, parseJson, publicApiError } from "@/lib/server/http";
+import { HttpError, parseJson } from "@/lib/server/http";
 import { assertRateLimit } from "@/lib/server/rate-limit";
 import { bookingRequestSchema } from "@/lib/server/schemas";
 import { getAuthorizedSubmission } from "@/lib/server/submission-access";
@@ -24,7 +29,13 @@ export async function POST(request: Request) {
     const db = createAdminClient();
     const submission = await getAuthorizedSubmission(db, body.submissionId, body.accessToken);
     if (!submission) throw new HttpError(404, "Submission not found");
-    await customerCalculator(submission.calculatorId, "bookings");
+    const calculator = await customerCalculator(submission.calculatorId, "bookings");
+    const schedule = await scheduleSettings(calculator.organizationId!);
+    await assertExternalAvailability(
+      calculator.organizationId!,
+      startsAt.toISOString(),
+      new Date(startsAt.getTime() + schedule.duration_minutes * 60000).toISOString(),
+    );
     if (["booked", "won", "lost"].includes(submission.status)) {
       throw new HttpError(409, "This submission can no longer be booked");
     }
@@ -41,7 +52,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ ok: true, bookingId });
   } catch (error) {
-    const { status, message } = publicApiError(error);
+    const { status, message } = calendarApiError(error);
     return NextResponse.json({ error: message }, { status });
   }
 }

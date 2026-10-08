@@ -289,6 +289,7 @@ export type Database = {
           id: string;
           submission_id: string;
           starts_at: string;
+          ends_at: string;
           status: string;
           created_at: string;
         },
@@ -296,6 +297,7 @@ export type Database = {
           id?: string;
           submission_id: string;
           starts_at: string;
+          ends_at: string;
           status?: string;
           created_at?: string;
         },
@@ -303,8 +305,105 @@ export type Database = {
           id?: string;
           submission_id?: string;
           starts_at?: string;
+          ends_at?: string;
           status?: string;
           created_at?: string;
+        }
+      >;
+      booking_settings: Table<
+        {
+          organization_id: string;
+          timezone: string;
+          duration_minutes: number;
+          weekdays: number[];
+          opens_at: string;
+          closes_at: string;
+          enforce_hours: boolean;
+        },
+        {
+          organization_id: string;
+          timezone: string;
+          duration_minutes: number;
+          weekdays: number[];
+          opens_at: string;
+          closes_at: string;
+          enforce_hours: boolean;
+        },
+        {
+          timezone?: string;
+          duration_minutes?: number;
+          weekdays?: number[];
+          opens_at?: string;
+          closes_at?: string;
+          enforce_hours?: boolean;
+        }
+      >;
+      calendar_blocks: Table<
+        { id: string; organization_id: string; starts_at: string; ends_at: string; label: string },
+        { id?: string; organization_id: string; starts_at: string; ends_at: string; label: string },
+        { label?: string }
+      >;
+      calendar_connections: Table<
+        {
+          organization_id: string;
+          provider: string;
+          refresh_token: string;
+          revision: string;
+          connected_at: string;
+        },
+        {
+          organization_id: string;
+          provider: string;
+          refresh_token: string;
+          revision?: string;
+          connected_at?: string;
+        },
+        { refresh_token?: string; revision?: string }
+      >;
+      calendar_oauth_states: Table<
+        {
+          id: string;
+          organization_id: string;
+          user_id: string;
+          provider: string;
+          verifier: string;
+          expires_at: string;
+        },
+        {
+          id: string;
+          organization_id: string;
+          user_id: string;
+          provider: string;
+          verifier: string;
+          expires_at: string;
+        },
+        { expires_at?: string }
+      >;
+      calendar_deliveries: Table<
+        {
+          organization_id: string;
+          provider: string;
+          booking_id: string;
+          revision: string;
+          connection_revision: string;
+          external_id: string | null;
+          status: string;
+          attempts: number;
+          next_attempt_at: string;
+          claim_token: string | null;
+        },
+        {
+          organization_id: string;
+          provider: string;
+          booking_id: string;
+          connection_revision: string;
+        },
+        {
+          external_id?: string | null;
+          status?: string;
+          attempts?: number;
+          next_attempt_at?: string;
+          claim_token?: string | null;
         }
       >;
       payments: Table<
@@ -452,6 +551,23 @@ export type Database = {
       };
       get_or_create_default_organization: {
         Args: { p_user_id: string; p_workspace_name: string };
+        Returns: string;
+      };
+      workspace_calendar: {
+        Args: { p_org: string; p_from: string; p_until: string };
+        Returns: Json;
+      };
+      reschedule_booking: {
+        Args: { p_org: string; p_id: string; p_start: string; p_end: string };
+        Returns: undefined;
+      };
+      assert_booking_slot: {
+        Args: { p_org: string; p_start: string; p_end: string; p_ignore?: string };
+        Returns: undefined;
+      };
+      claim_calendar_deliveries: { Args: { p_limit: number }; Returns: Json };
+      create_calendar_block: {
+        Args: { p_org: string; p_start: string; p_end: string; p_label: string };
         Returns: string;
       };
       request_booking: {

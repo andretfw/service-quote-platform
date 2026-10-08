@@ -20,6 +20,8 @@ The repository is source-visible for evaluation and authorized collaboration. It
 | CSV lead exports                                   | —        | —        | Included | Included |
 | Optional customer email follow-ups and unsubscribe | —        | —        | Included | Included |
 | Booking requests and owner confirmation            | —        | —        | —        | Included |
+| Internal booking calendar and availability         | —        | —        | —        | Included |
+| Optional Google Calendar / Outlook connection      | —        | —        | —        | Included |
 | Customer deposits through Stripe Connect           | —        | —        | —        | Included |
 
 New accounts start on the permanent Free plan without a card. Subscription prices are centralized in `lib/plans.ts`; calculator and enquiry limits are enforced transactionally in the database. Changes to limits must update the database functions as well. Free does not require Stripe; paid checkout requires matching configured Stripe prices. Provider fees apply.
@@ -43,11 +45,11 @@ Painting, cleaning, tiling, landscaping, roofing, HVAC, moving, pressure washing
 - Transactional booking requests, cancellation and confirmation; leads stop receiving reminders after booking or closure.
 - Transactional notification outbox and a Netlify scheduled worker with provider timeouts and retry claims.
 - Customer reminders identify the business and estimate, direct replies to the workspace owner, and use exclusive database claims with consent and plan checks.
-- Searchable, paginated enquiry and booking lists; CSV exports fetch successive batches rather than relying on a single provider row limit.
+- Searchable, paginated enquiry and booking lists; CSV exports fetch successive batches rather than relying on a single provider row limit and include answers JSON, calculator/service IDs, estimate range, currency and subtotal.
 - Local-session sign-out from the business workspace.
 - CSV formula injection protection, tested migrations and reproducible CI.
 
-Booking is a request for a preferred time, not real-time calendar availability. Photo uploads, calendar synchronization, native CRM integrations and automatic jurisdiction-specific tax calculations are outside the plans above. The configurable estimate tax percentage is a merchant input. Platform subscription tax, business registration, legal documents and payment-provider approvals require the operator's actual details.
+Booking requests need business confirmation. Business includes a monthly booking calendar, rescheduling, service duration, working hours and blocked periods; no external account is needed. Confirmed bookings reserve time transactionally. Optional Google Calendar and Outlook connections check external busy events before requests/confirmation and queue confirmed bookings, reschedules and cancellations to the primary calendar. External edits do not update dashboard bookings, and provider races cannot be prevented atomically. Connections require platform OAuth configuration and staging verification; they are not certified live by code tests. Photo uploads, native CRM integrations and automatic jurisdiction-specific tax calculations are outside the plans above. The configurable estimate tax percentage is a merchant input. Platform subscription tax, business registration, legal documents and payment-provider approvals require the operator's actual details.
 
 Premium and Business can send new enquiries to one Zapier Catch Hook or Make custom webhook per workspace. The business chooses and configures its downstream tools. Failed deliveries retry up to five attempts; delivery is at least once and consumers should deduplicate using the event ID. Changing or pausing a connection cancels its pending deliveries. Existing enquiries are not backfilled. Integration URLs and delivery rows are server-only.
 

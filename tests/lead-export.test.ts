@@ -12,6 +12,10 @@ test("CSV export traverses server row caps without duplicates and preserves form
     lead_phone: "+40123",
     status: "new",
     created_at: "2026-01-01T10:00:00+00:00",
+    calculator_id: "owned-calculator",
+    template_slug: "painting",
+    answers: { area: 100, notes: 'quote, with "comma"' },
+    quote: { low: 414, high: 486, currency: "USD", subtotal: 450 },
   }));
   let requests = 0;
   t.mock.method(globalThis, "fetch", async (input: string | URL | Request) => {
@@ -39,6 +43,8 @@ test("CSV export traverses server row caps without duplicates and preserves form
   assert.equal(new Set(lines.slice(1).map((line) => line.split(",")[0])).size, rows.length);
   assert.ok(lines[1].includes("'=IMPORTXML"));
   assert.ok(lines[1].includes("'+40123"));
+  assert.ok(lines[1].includes('"414","486","USD","450"'));
+  assert.ok(lines[1].includes('""area"":100'));
   assert.ok(lines.at(-1)?.includes("Client 1206"));
 });
 
@@ -75,6 +81,9 @@ test("empty workspace exports a header without loading another workspace", async
     auth: { persistSession: false },
   });
   const text = await new Response(await leadExport(db, [], new AbortController().signal)).text();
-  assert.equal(text, '"ID","Name","Email","Phone","Status","Created"\r\n');
+  assert.equal(
+    text,
+    '"ID","Name","Email","Phone","Status","Created","Calculator ID","Service","Estimate low","Estimate high","Currency","Subtotal","Answers JSON"\r\n',
+  );
   assert.equal(mock.mock.callCount(), 0);
 });

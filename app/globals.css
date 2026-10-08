@@ -1425,3 +1425,104 @@ body:has(.app-layout) .global-language {
   align-items: center;
   margin-top: 1rem;
 }
+
+.calendar-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+  margin-top: 1rem;
+}
+.calendar-weekday {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.calendar-day {
+  min-height: 84px;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid #dce5e1;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+  cursor: pointer;
+  min-width: 0;
+}
+.calendar-day span {
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+.calendar-day.outside {
+  background: #f7f9f8;
+  color: #66736c;
+}
+.calendar-day.selected {
+  outline: 2px solid #0f766e;
+  background: #f0fdfa;
+}
+.calendar-block-dot {
+  color: #8a3e1b;
+}
+.calendar-agenda {
+  margin-top: 1.5rem;
+}
+.calendar-settings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.calendar-settings label {
+  display: block;
+  margin: 0.8rem 0;
+}
+.calendar-settings fieldset {
+  min-width: 0;
+  border: 1px solid #dce5e1;
+  border-radius: 8px;
+}
+.calendar-provider,
+.calendar-block-row {
+  padding: 1rem 0;
+  border-top: 1px solid #dce5e1;
+}
+.calendar-block-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+@media (max-width: 480px) {
+  .calendar-day {
+    min-height: 66px;
+    padding: 4px;
+  }
+  .calendar-day span {
+    font-size: 9px;
+  }
+  .calendar-day .calendar-count-label,
+  .calendar-day .calendar-block-label {
+    display: none;
+  }
+  .calendar-day .calendar-block-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #8a3e1b;
+  }
+  .calendar-heading h2 {
+    font-size: 18px;
+    order: -1;
+    flex-basis: 100%;
+  }
+}

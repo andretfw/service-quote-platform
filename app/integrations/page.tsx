@@ -90,7 +90,8 @@ export default function IntegrationsPage() {
             <Text>
               New-enquiry delivery, a sample test and delivery status are included on Premium and
               Business. Your business owns its automation account and any separate provider costs.
-              Native CRM sync, calendar sync and historical lead imports are not included.
+              Native CRM sync and historical lead imports are not included. Business supports
+              optional Google Calendar and Outlook connections in Booking calendar.
             </Text>
           </p>
           <Link className="btn secondary" href="/connections">

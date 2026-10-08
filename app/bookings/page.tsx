@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { scheduleSettings } from "@/lib/server/calendar";
 import { uiLocale } from "@/lib/server/locale";
 import { translate } from "@/lib/i18n";
 import ResultsPagination from "@/components/ResultsPagination";
@@ -21,11 +23,12 @@ export default async function BookingsPage({
     : "";
   const locale = await uiLocale();
   const t = (source: string) => translate(source, locale);
-  await pageWorkspace();
+  const workspace = await pageWorkspace();
+  const settings = await scheduleSettings(workspace.organizationId);
   const db = await createSupabaseServerClient();
   let query = db
     .from("bookings")
-    .select("id,submission_id,starts_at,status", { count: "exact" })
+    .select("id,submission_id,starts_at,ends_at,status", { count: "exact" })
     .order("starts_at")
     .order("id");
   if (status) query = query.eq("status", status);
@@ -48,9 +51,15 @@ export default async function BookingsPage({
         <p className="muted">
           <Text>
             {
-              "Times below are shown in UTC. Confirm availability with the customer before accepting."
+              "Times use the business time zone. Confirm availability with the customer before accepting."
             }
           </Text>
+        </p>
+        <p>
+          {settings.timezone} ·{" "}
+          <Link className="text-link" href="/calendar">
+            <Text>Open booking calendar</Text>
+          </Link>
         </p>
         <form className="lead-filters" action="/bookings" method="get">
           <label>
@@ -74,11 +83,20 @@ export default async function BookingsPage({
             <div className="card" key={booking.id}>
               <h2>{lead?.lead_name ?? "Customer"}</h2>
               <p>
-                {new Date(booking.starts_at).toISOString().replace("T", " ").slice(0, 16)}{" "}
-                <Text>{"UTC"}</Text>
+                {new Intl.DateTimeFormat(locale, {
+                  timeZone: settings.timezone,
+                  dateStyle: "medium",
+                  timeStyle: "short",
+                }).format(new Date(booking.starts_at))}{" "}
+                {settings.timezone}
               </p>
               <p>{lead?.lead_email ?? lead?.lead_phone}</p>
-              <BookingStatus id={booking.id} status={booking.status} />
+              <BookingStatus
+                id={booking.id}
+                status={booking.status}
+                startsAt={booking.starts_at}
+                endsAt={booking.ends_at}
+              />
             </div>
           );
         })}

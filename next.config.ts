@@ -12,6 +12,15 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Netlify preview metadata exists at build time, not in the function runtime.
+  // Embed only the public deployment URL so requests and redirects use that exact origin.
+  env: {
+    SERVICE_QUOTE_DEPLOYMENT_ORIGIN: ["deploy-preview", "branch-deploy"].includes(
+      process.env.CONTEXT ?? "",
+    )
+      ? (process.env.DEPLOY_PRIME_URL?.trim() ?? "")
+      : "",
+  },
   headers: async () => [
     {
       source: "/:path*",
