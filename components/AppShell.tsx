@@ -10,6 +10,7 @@ const items = [
   ["/leads", "Lead pipeline", "↗"],
   ["/workspace", "My calculators", "▦"],
   ["/bookings", "Booking requests", "▤"],
+  ["/calendar", "Booking calendar", "▦"],
   ["/connections", "Connections", "⇄"],
   ["/help", "Help", "?"],
   ["/billing", "Subscription", "◇"],

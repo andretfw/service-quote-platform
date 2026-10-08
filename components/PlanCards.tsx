@@ -45,6 +45,8 @@ export default function PlanCards({
               ? [
                   "Everything in Premium",
                   "Booking requests with business confirmation",
+                  "Internal booking calendar and availability",
+                  "Google Calendar and Outlook connections (setup required)",
                   "Deposits through your connected Stripe account",
                 ]
               : []),

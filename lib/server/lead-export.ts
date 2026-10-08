@@ -3,6 +3,14 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/lib/supabase/database.types";
 import { csvRow } from "@/lib/csv";
 
+function estimateValue(quote: unknown, key: string): string | number {
+  if (!quote || typeof quote !== "object") return "";
+  const value = (quote as Record<string, unknown>)[key];
+  return typeof value === "string" || (typeof value === "number" && Number.isFinite(value))
+    ? value
+    : "";
+}
+
 export async function leadExport(
   db: SupabaseClient<Database>,
   calculatorIds: string[],
@@ -13,7 +21,9 @@ export async function leadExport(
   const load = async (cursor?: Cursor) => {
     let query = db
       .from("submissions")
-      .select("id,lead_name,lead_email,lead_phone,status,created_at")
+      .select(
+        "id,lead_name,lead_email,lead_phone,status,created_at,calculator_id,template_slug,answers,quote",
+      )
       .in("calculator_id", calculatorIds)
       .lte("created_at", snapshot)
       .order("created_at", { ascending: false })
@@ -35,7 +45,25 @@ export async function leadExport(
     async pull(controller) {
       try {
         if (signal.aborted || cancelled) throw new Error("Export cancelled");
-        const rows = header ? [csvRow(["ID", "Name", "Email", "Phone", "Status", "Created"])] : [];
+        const rows = header
+          ? [
+              csvRow([
+                "ID",
+                "Name",
+                "Email",
+                "Phone",
+                "Status",
+                "Created",
+                "Calculator ID",
+                "Service",
+                "Estimate low",
+                "Estimate high",
+                "Currency",
+                "Subtotal",
+                "Answers JSON",
+              ]),
+            ]
+          : [];
         header = false;
         rows.push(
           ...batch.map((lead) =>
@@ -46,6 +74,13 @@ export async function leadExport(
               lead.lead_phone,
               lead.status,
               lead.created_at,
+              lead.calculator_id,
+              lead.template_slug,
+              estimateValue(lead.quote, "low"),
+              estimateValue(lead.quote, "high"),
+              estimateValue(lead.quote, "currency"),
+              estimateValue(lead.quote, "subtotal"),
+              JSON.stringify(lead.answers ?? {}),
             ]),
           ),
         );
