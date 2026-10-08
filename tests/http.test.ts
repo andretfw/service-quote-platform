@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { z } from "zod";
-import { parseJson, HttpError, assertSameOrigin } from "../lib/server/http";
+import { parseJson, publicApiError, HttpError, assertSameOrigin } from "../lib/server/http";
 
 test("streamed bodies stop at the byte limit without trusting Content-Length", async () => {
   let canceled = false;
@@ -38,4 +38,18 @@ test("JSON parsing rejects malformed input and cross-origin authenticated mutati
       ),
     HttpError,
   );
+});
+
+test("database authorization and conflicts return useful client errors without leaking internal details", () => {
+  assert.equal(
+    publicApiError({ code: "42501", message: "private workspace identifier" }).status,
+    404,
+  );
+  for (const code of ["23505", "40001", "P0001"])
+    assert.equal(publicApiError({ code }).status, 409);
+  for (const code of ["22023", "22P02"]) assert.equal(publicApiError({ code }).status, 400);
+  assert.deepEqual(publicApiError({ code: "XX000", message: "private credentials" }), {
+    status: 500,
+    message: "Request could not be completed",
+  });
 });

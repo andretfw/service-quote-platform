@@ -1,4 +1,4 @@
-import { csvRow } from "@/lib/csv";
+import { leadExport } from "@/lib/server/lead-export";
 import { requireWorkspace, requireFeature } from "@/lib/server/workspace";
 import { publicApiError } from "@/lib/server/http";
 import { assertRateLimit } from "@/lib/server/rate-limit";
@@ -16,30 +16,12 @@ export async function GET(request: Request) {
       .select("id")
       .eq("organization_id", workspace.organizationId);
     if (calculatorError) throw calculatorError;
-    const { data, error } = await supabase
-      .from("submissions")
-      .select("id,lead_name,lead_email,lead_phone,status,created_at")
-      .in(
-        "calculator_id",
-        calculators.map((calculator) => calculator.id),
-      )
-      .order("created_at", { ascending: false })
-      .limit(10000);
-    if (error) throw error;
-    const rows = [
-      csvRow(["ID", "Name", "Email", "Phone", "Status", "Created"]),
-      ...data.map((lead) =>
-        csvRow([
-          lead.id,
-          lead.lead_name,
-          lead.lead_email,
-          lead.lead_phone,
-          lead.status,
-          lead.created_at,
-        ]),
-      ),
-    ];
-    return new Response(rows.join("\r\n"), {
+    const stream = await leadExport(
+      supabase,
+      calculators.map((calculator) => calculator.id),
+      request.signal,
+    );
+    return new Response(stream, {
       headers: {
         "content-type": "text/csv; charset=utf-8",
         "content-disposition": 'attachment; filename="leads.csv"',

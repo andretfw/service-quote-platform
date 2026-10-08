@@ -1,10 +1,10 @@
 import { units, inferredUnit } from "./units";
-import type { Locale } from "./i18n";
+import { translate, type Locale } from "./i18n";
 import { visibleQuestions } from "./pricing-engine";
 import type { Answers, Question } from "./types";
 
 export function formatEstimate(quote: unknown, locale: Locale = "en"): string {
-  if (!quote || typeof quote !== "object") return "Estimate unavailable";
+  if (!quote || typeof quote !== "object") return translate("Estimate unavailable", locale);
   const value = quote as Record<string, unknown>;
   if (
     typeof value.low !== "number" ||
@@ -15,7 +15,7 @@ export function formatEstimate(quote: unknown, locale: Locale = "en"): string {
     !Number.isFinite(value.high) ||
     typeof value.currency !== "string"
   )
-    return "Estimate unavailable";
+    return translate("Estimate unavailable", locale);
   try {
     const money = new Intl.NumberFormat(locale, {
       style: "currency",
@@ -24,7 +24,7 @@ export function formatEstimate(quote: unknown, locale: Locale = "en"): string {
     });
     return `${money.format(value.low)}–${money.format(value.high)}`;
   } catch {
-    return "Estimate unavailable";
+    return translate("Estimate unavailable", locale);
   }
 }
 

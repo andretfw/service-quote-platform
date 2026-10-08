@@ -181,8 +181,12 @@ function QuoteExperience({ config, compact = false, previewTemplate }: QuoteWidg
           followUpConsent,
         }),
       });
-      const data = (await response.json()) as SubmissionReceipt & { error?: string };
+      const data = (await response.json()) as SubmissionReceipt & {
+        error?: string;
+        estimate?: PublicQuoteResult;
+      };
       if (!response.ok) throw new Error(data.error || "Could not save your request");
+      if (data.estimate) setResult(data.estimate);
       setReceipt(data);
     } catch (requestError) {
       setError(

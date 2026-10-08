@@ -1,4 +1,5 @@
 "use client";
+import ActionButton from "./ActionButton";
 import BrandLogo from "@/components/BrandLogo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -51,6 +52,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
         </nav>
         <div className="sidebar-bottom">
           <LanguageSelect />
+          <ActionButton endpoint="/api/auth/signout">{t("Sign out")}</ActionButton>
           <Link href="/calculators" onClick={() => setOpen(false)}>
             {t("Templates")} →
           </Link>

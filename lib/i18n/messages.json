@@ -2951,10 +2951,6 @@
     "es": "Todas las solicitudes en un solo lugar",
     "ro": "Toate solicitările într-un singur loc"
   },
-  "Review answers, track lead status and respond from your dashboard. Add reminders or booking requests when you need them.": {
-    "es": "Revisa respuestas, sigue el estado de las solicitudes y responde desde tu panel. Añade recordatorios o solicitudes de reserva cuando los necesites.",
-    "ro": "Verifică răspunsurile, urmărește starea solicitărilor și răspunde din panou. Adaugă mementouri sau cereri de programare când ai nevoie."
-  },
   "For independent service businesses": {
     "es": "Para negocios de servicios independientes",
     "ro": "Pentru firme independente de servicii"
@@ -3294,5 +3290,77 @@
   "Your automation tool did not accept the sample. Check its webhook settings.": {
     "es": "Tu herramienta no aceptó la muestra. Revisa la configuración del webhook.",
     "ro": "Instrumentul nu a acceptat exemplul. Verifică setările webhook-ului."
+  },
+  "Review answers, track lead status and open your email app to contact customers. Add reminders or booking requests when you need them.": {
+    "es": "Revisa las respuestas, actualiza el estado de los contactos y abre tu aplicación de correo para contactar con los clientes. Añade recordatorios o solicitudes de reserva cuando los necesites.",
+    "ro": "Verifică răspunsurile, actualizează starea solicitărilor și deschide aplicația de e-mail pentru a contacta clienții. Adaugă mementouri sau cereri de rezervare când ai nevoie."
+  },
+  "Reply to the business to discuss your request.": {
+    "es": "Responde a la empresa para hablar sobre tu solicitud.",
+    "ro": "Răspunde firmei pentru a discuta solicitarea ta."
+  },
+  "Search customer names": {
+    "es": "Buscar nombres de clientes",
+    "ro": "Caută după numele clientului"
+  },
+  "All statuses": {
+    "es": "Todos los estados",
+    "ro": "Toate stările"
+  },
+  "Filter enquiries": {
+    "es": "Filtrar solicitudes",
+    "ro": "Filtrează solicitările"
+  },
+  "No matching enquiries.": {
+    "es": "No hay solicitudes que coincidan.",
+    "ro": "Nu există solicitări care corespund filtrelor."
+  },
+  "Enquiry pages": {
+    "es": "Páginas de solicitudes",
+    "ro": "Pagini de solicitări"
+  },
+  "{count} enquiries · Page {page} of {pages}": {
+    "es": "{count} solicitudes · Página {page} de {pages}",
+    "ro": "{count} solicitări · Pagina {page} din {pages}"
+  },
+  "Previous page": {
+    "es": "Página anterior",
+    "ro": "Pagina anterioară"
+  },
+  "Next page": {
+    "es": "Página siguiente",
+    "ro": "Pagina următoare"
+  },
+  "Sign out": {
+    "es": "Cerrar sesión",
+    "ro": "Deconectare"
+  },
+  "Unable to sign out. Please try again.": {
+    "es": "No se pudo cerrar la sesión. Inténtalo de nuevo.",
+    "ro": "Deconectarea nu a reușit. Încearcă din nou."
+  },
+  "Result pages": {
+    "es": "Páginas de resultados",
+    "ro": "Pagini de rezultate"
+  },
+  "Filter bookings": {
+    "es": "Filtrar reservas",
+    "ro": "Filtrează rezervările"
+  },
+  "{count} bookings · Page {page} of {pages}": {
+    "es": "{count} reservas · Página {page} de {pages}",
+    "ro": "{count} rezervări · Pagina {page} din {pages}"
+  },
+  "No matching bookings.": {
+    "es": "No hay reservas que coincidan.",
+    "ro": "Nu există rezervări care corespund filtrelor."
+  },
+  "Record not found": {
+    "es": "No se encontró el registro",
+    "ro": "Înregistrarea nu a fost găsită"
+  },
+  "This change conflicts with the current state. Refresh and try again.": {
+    "es": "Este cambio entra en conflicto con el estado actual. Actualiza la página e inténtalo de nuevo.",
+    "ro": "Această modificare nu este compatibilă cu starea actuală. Reîncarcă pagina și încearcă din nou."
   }
 }

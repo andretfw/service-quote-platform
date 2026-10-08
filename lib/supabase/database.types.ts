@@ -246,6 +246,7 @@ export type Database = {
           follow_up_count: number;
           follow_up_consent: boolean;
           next_follow_up_at: string | null;
+          follow_up_claim_token: string | null;
           created_at: string;
         },
         {
@@ -262,6 +263,7 @@ export type Database = {
           follow_up_count?: number;
           follow_up_consent?: boolean;
           next_follow_up_at?: string | null;
+          follow_up_claim_token?: string | null;
           created_at?: string;
         },
         {
@@ -278,6 +280,7 @@ export type Database = {
           follow_up_count?: number;
           follow_up_consent?: boolean;
           next_follow_up_at?: string | null;
+          follow_up_claim_token?: string | null;
           created_at?: string;
         }
       >;
@@ -347,6 +350,11 @@ export type Database = {
     };
     Views: Record<string, never>;
     Functions: {
+      claim_customer_reminders: { Args: { p_limit: number }; Returns: Json };
+      finish_customer_reminder: {
+        Args: { p_submission_id: string; p_claim_token: string; p_sent: boolean };
+        Returns: boolean;
+      };
       configure_workspace_integration: {
         Args: { p_organization_id: string; p_provider: string; p_url: string; p_enabled: boolean };
         Returns: undefined;

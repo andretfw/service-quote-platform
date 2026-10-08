@@ -17,7 +17,7 @@ const benefits = [
   ],
   [
     "Every enquiry in one place",
-    "Review answers, track lead status and respond from your dashboard. Add reminders or booking requests when you need them.",
+    "Review answers, track lead status and open your email app to contact customers. Add reminders or booking requests when you need them.",
   ],
 ] as const;
 export default function Home() {

@@ -42,6 +42,9 @@ Painting, cleaning, tiling, landscaping, roofing, HVAC, moving, pressure washing
 - Durable checkout reservations, payment amount/currency/reference checks and connected-account verification.
 - Transactional booking requests, cancellation and confirmation; leads stop receiving reminders after booking or closure.
 - Transactional notification outbox and a Netlify scheduled worker with provider timeouts and retry claims.
+- Customer reminders identify the business and estimate, direct replies to the workspace owner, and use exclusive database claims with consent and plan checks.
+- Searchable, paginated enquiry and booking lists; CSV exports fetch successive batches rather than relying on a single provider row limit.
+- Local-session sign-out from the business workspace.
 - CSV formula injection protection, tested migrations and reproducible CI.
 
 Booking is a request for a preferred time, not real-time calendar availability. Photo uploads, calendar synchronization, native CRM integrations and automatic jurisdiction-specific tax calculations are outside the plans above. The configurable estimate tax percentage is a merchant input. Platform subscription tax, business registration, legal documents and payment-provider approvals require the operator's actual details.

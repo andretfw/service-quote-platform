@@ -27,9 +27,9 @@ export default function DashboardOverview({ leads }: { leads: Lead[] }) {
       totals.set(quote.currency, (totals.get(quote.currency) ?? 0) + quote.subtotal);
   }
   const money = (amount: number, currency: string) =>
-    new Intl.NumberFormat(locale, { style: "currency", currency, maximumFractionDigits: 0 }).format(
-      amount,
-    );
+    new Intl.NumberFormat(locale, { style: "currency", currency, maximumFractionDigits: 0 })
+      .format(amount)
+      .replace(/[\u00a0\u202f]/g, " ");
   const totalEntries = [...totals.entries()];
   const stats = [
     {
